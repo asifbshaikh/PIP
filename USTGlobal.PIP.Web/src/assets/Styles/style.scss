@@ -1,0 +1,334 @@
+@import "_vars.scss";
+@import "_theme.scss";
+@import "_sidebar.scss";
+
+body .ui-button {
+  margin-right: 5px !important;
+}
+
+.btns-strip {
+  bottom: 0;
+  position: fixed;
+  padding-top: 10px;
+  display: flex;
+  border-radius: 4px;
+  margin-left: 42% !important;
+  background: transparent;
+  z-index: 999;
+  width: auto;
+}
+
+.steps-btn {
+  bottom: 0;
+  position: fixed;
+  padding-bottom: 5px;
+  display: flex;
+  margin-left: 29% !important;
+}
+
+body .ui-widget .ui-button {
+  font-family: $font !important;
+  font-size: $font-size !important;
+}
+
+.ui-table-caption {
+  background-color: #ffffff !important;
+  border: #dce6ea !important;
+}
+
+.ui-panel-titlebar {
+  background-color: $theme !important;
+  border: 1px solid $theme !important;
+}
+
+.tab .active {
+  background: $theme;
+}
+
+.ui-panel-content {
+  min-height: 87.48vh;
+  max-height: 87.48vh;
+}
+
+.btns-strip .ui-button {
+  min-width: 80px !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.steps-btn .ui-button {
+  min-width: 80px !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+ }
+.error {
+  color: $red;
+}
+
+.blue-success {
+  color: $theme;
+}
+.success {
+  color: green;
+}
+
+.ui-inputtext {
+  &.ui-widget {
+    font-size: $font-size !important;
+  }
+}
+
+.form-control:disabled {
+  background-color: $read-only-bg !important;
+}
+.ui-inputtext:disabled {
+  background-color: $read-only-bg !important;
+}
+.ui-inputtext:readonly {
+  background-color: $read-only-bg !important;
+}
+
+#capital-charges .input-box-readOnly {
+  background-color: $read-only-bg !important;
+}
+
+body .ui-dropdown .ui-dropdown-label {
+  height: 100%;
+  width: calc(100% - 20px);
+}
+
+body .ui-dropdown .ui-dropdown-trigger {
+  background-color: unset !important;
+}
+
+.info-icon {
+  margin-left: 4px;
+}
+
+.text-righrt {
+  text-align: right;
+}
+
+body .ui-table .ui-table-tbody > tr.ui-state-highlight {
+  background-color: $white;
+}
+
+body .ui-table .ui-table-tbody > tr:nth-child(even).ui-state-highlight {
+  background-color: $white;
+}
+
+body .ui-table .ui-table-tbody > tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+body .ui-table .ui-table-tbody > tr > td {
+  border-top: none;
+  border-bottom: none;
+  font-family: $font !important;
+}
+
+.ui-table-tbody {
+  border-bottom: 1px solid #c8c8c8;
+}
+
+.ui-button-text {
+  text-transform: uppercase;
+}
+
+.bg {
+  background: #f4f4f4;
+}
+
+.ui-button {
+  border: none;
+}
+
+.ui-table .ui-table-tbody > tr:focus {
+  outline: none;
+}
+
+body .ui-panel .ui-panel-content {
+  border: none;
+}
+
+body .ui-widget {
+  $font: "Raleway", sans-serif !important;
+}
+body .ui-table .ui-table-tbody > tr.ui-state-highlight {
+  color: #343a40 !important;
+}
+.ui-widget {
+  font-size: $font-size !important;
+  font-family: $font !important;
+}
+body .ui-inputtext {
+  font-size: $font-size !important;
+  font-family: $font !important;
+}
+
+body .ui-table .ui-table-caption {
+  border-bottom: 0 none;
+  color: #333333;
+  text-align: left;
+}
+.table thead th {
+  vertical-align: top;
+}
+.table tr td {
+  vertical-align: middle;
+  // padding: 0.25em 0.5em !important;
+}
+.ui-confirmdialog-message {
+  font-family: $font !important;
+}
+body p-multiselect.ng-dirty.ng-invalid > .ui-multiselect {
+  border: 2px solid $error;
+}
+body p-dropdown.ng-dirty.ng-invalid > .ui-dropdown {
+  border: 2px solid $error;
+  border-radius: 4px;
+}
+.required {
+  color: red;
+}
+body p-calendar.ng-dirty.ng-invalid > .ui-calendar > .ui-inputtext {
+  border: 2px solid $error !important;
+}
+.mandatory {
+  color: $mandatory !important;
+}
+.ui-calendar > .ui-button {
+  margin: 0 !important;
+  color: #ffffff !important;
+  background-color: $theme !important;
+  border: 1px solid #007ad9 !important;
+  font-size: 14px !important;
+  transition: background-color 0.2s, box-shadow 0.2s !important;
+}
+.dateInvalid {
+  .ui-calendar > .ui-inputtext {
+    border: 2px solid $error !important;
+  }
+  .ui-calendar > .ui-calendar-button {
+    border-top: 2px solid $error !important;
+    border-bottom: 2px solid $error !important;
+    border-right: 2px solid $error !important;
+  }
+}
+body .ui-table .ui-table-thead > tr > th {
+  padding: 0.11em 0.17em !important;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+
+body .ui-table .ui-table-summary {
+  background-color: white !important;
+  padding: 0.571em 1em;
+  text-align: center;
+}
+.exit-btn {
+  position: absolute !important;
+  transform: translateX(61em);
+  height: 28px;
+}
+ 
+.copy-btn {
+  white-space: nowrap;
+  position: absolute;
+  transform: translateX(35em);
+  bottom: 5px;
+  height: 28px;
+}
+.previous-btn {
+  transform: translateX(-100px);
+}
+.next-btn {
+  transform: translateX(11px);
+}
+.grey-bg {
+  border-radius: 4px;
+  border: 1px solid #a6a6a6 !important;
+}
+.pre-format {
+  white-space: pre !important;
+}
+body .ui-inputtext.ng-dirty.ng-invalid {
+  border: 2px solid $error !important;
+}
+.bottom-30 {
+  bottom: 28px !important;
+}
+.ui-contextmenu {
+  width: 80px !important;
+}
+body .ui-contextmenu {
+  border-radius: 6px;
+}
+body .ui-menuitem-link,
+body .ui-menubar .ui-menuitem-link,
+body .ui-tieredmenu .ui-menuitem-link,
+body .ui-contextmenu .ui-menuitem-link,
+body .ui-megamenu .ui-menuitem-link,
+body .ui-slidemenu .ui-menuitem-link {
+  border-radius: 6px !important;
+}
+body .ui-contextmenu .ui-menuitem.ui-menuitem-active > .ui-menuitem-link {
+  background-color: #005b9f !important;
+}
+.ui-contextmenu .ui-menuitem-link {
+  background-color: #009ee0;
+}
+.ui-contextmenu .ui-menuitem-text {
+  color: #ffffff !important;
+}
+body .ui-contextmenu .ui-menuitem.ui-menuitem-active > .ui-menuitem-link .ui-menuitem-text {
+  color: #ffffff;
+  text-decoration: none !important;
+}
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none !important;
+}
+.table-bordered {
+  border: none !important;
+}
+body .ui-widget-overlay {
+  background-color: #00000008 !important;
+}
+.ui-dialog .ui-dialog-titlebar {
+  text-align: center !important;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active {
+  background-color: #eff3f7 !important;
+}
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
+  max-width: 340px !important;
+} 
+.pointer {
+  cursor: pointer;
+}
+.overlay {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(241, 237, 237, 0.8);
+  z-index: 99999;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}

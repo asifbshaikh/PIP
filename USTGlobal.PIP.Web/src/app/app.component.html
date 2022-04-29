@@ -1,0 +1,46 @@
+<app-error-dialog></app-error-dialog>
+<p-toast [style]="{marginTop: '60px'}" position="top-right"></p-toast>
+<div class="login" [ngStyle]="{ 'backgroundImage': getBackgroundImageUrl(),position:absolute} 
+" id="login-pg" *ngIf="!isUserLoggedIn"></div>
+
+<main id="wrapper">
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <span class="logo text-center pull-left">PIP Sheets Online</span>
+        </div>
+        <div class="col-sm-6">
+          <img class="center" src="/assets/Images/logo.png" alt="UST Logo">
+        </div>
+        <div class="col-sm-3" id="logout" *ngIf="isUserLoggedIn">
+          <app-header></app-header>
+        </div>
+      </div>
+    </div>
+  </header>
+  <app-navmenu *ngIf="isUserLoggedIn" (isCollapsed)="isCollapsed($event)"></app-navmenu>
+  <div id="content" style="overflow: hidden;" [class.sideMenuExpanded]="expanded">
+    <div id="content-body">
+      <app-header1 *ngIf="isUserLoggedIn"></app-header1>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>
+<p-dialog [(visible)]="display" [modal]="true" id="session-timeout" class="modal-title">
+  <p-header>
+    <h4>{{'PUBLIC.SessionTimeout.title' | translate }}</h4>
+  </p-header>
+  <h5>{{'PUBLIC.SessionTimeout.message' | translate }}</h5>
+  <br>
+  {{idleState}}
+  <p-footer>
+    <button type="button" class="btn btn-default leftBtn"
+      (click)="logout()">{{'PUBLIC.SessionTimeout.secondaryButton' | translate }}</button>
+    <button type="button" class="btn btn-primary"
+      (click)="stay()">{{'PUBLIC.SessionTimeout.primaryButton' | translate }}</button>
+  </p-footer>
+</p-dialog>
+
+<confirm-dialog></confirm-dialog>
+<app-spinner></app-spinner>

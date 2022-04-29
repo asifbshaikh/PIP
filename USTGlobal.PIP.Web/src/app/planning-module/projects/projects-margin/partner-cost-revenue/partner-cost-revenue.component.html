@@ -1,0 +1,342 @@
+<div *ngIf="isDataAvailable" id="partner-cost-revenue">
+
+  <!-- partner cost -->
+  <form [formGroup]="partnerCostRevenueform" (ngSubmit)="onSave(partnerCostRevenueform.value)">
+    <p-table tableStyleClass="fixtable direct-exp" formArrayName="partnerCost"
+      [frozenColumns]="translationData.partnerCostColumns" [columns]="periodCols" [scrollable]="true"
+      scrollHeight="calc(50vh - 160px)" class="form-group table table-bordered table-sm p-t-5" cellspacing="0"
+      width="100%" frozenWidth="690px" [value]="partnerCostRevenueform.get('partnerCost')['controls']"
+      [(selection)]="selectedPartnerCost">
+      <ng-template pTemplate="caption">
+        <span class="p-r-5">{{ translationData.PartnerCostTitle }}</span>
+        <i pTooltip="{{ translationData.PartnerCostTitleTooltip }}"><img
+            src="/assets/icons/ic_info_outline_48px.svg"></i>
+        <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+      </ng-template>
+      <ng-template pTemplate="frozencolgroup" let-columns>
+        <colgroup>
+          <col style="width:40px">
+          <col style="width:180px">
+          <col style="width:180px">
+          <col style="width:80px">
+          <col style="width:100px">
+          <col style="width:110px">
+        </colgroup>
+      </ng-template>
+
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of periodCols" style="width:110px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="frozenheader" let-columns>
+        <tr>
+          <th class="text-center">
+            <p-tableHeaderCheckbox *ngIf="numberOfPCRows > 0" [disabled]="disableOtherFormControls"
+              (click)="onCheckboxSelect()">
+            </p-tableHeaderCheckbox>
+          </th>
+          <th>
+            <span> {{columns[0].header}} </span>
+            <i pTooltip="{{ translationData.PartnerCostMilestoneTooltip }}"><img
+                src="/assets/icons/ic_info_outline_48px.svg"></i>
+          </th>
+          <th>
+            {{columns[1].header}}
+            <span class="required">*</span>
+          </th>
+          <th>
+            {{columns[2].header}}
+          </th>
+          <th>
+            <span>{{columns[3].header}}</span>&nbsp;
+            <i pTooltip="{{ translationData.MarginTooltip }}"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+          </th>
+          <th>
+            {{columns[4].header}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of periodCols">
+            <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr *ngIf="!rowData.value.isDeleted" [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex"
+          [formGroupName]="rowIndex">
+          <td class="text-center">
+            <p-tableCheckbox [value]="rowData" [index]="rowIndex" [disabled]="disableOtherFormControls"
+              (click)="onCheckboxSelect()">
+            </p-tableCheckbox>
+          </td>
+          <td>
+            <p-dropdown appendTo="body" id="rowIndex" [style]="{'width':'100%'}" [options]="selectedMilestones"
+              (onChange)="onCostMilestoneSelected(rowIndex, $event.value); onPartnerCostValueChange(rowData);"
+              formControlName="selectedMilestoneItem">
+            </p-dropdown>
+          </td>
+          <td>
+            <input pInputText formControlName="description" type="text" pipRestrictInput="notAllowSpaceInBeginning"
+              (keyup)="onPartnerCostValueChange(rowData)">
+          </td>
+          <td>
+            <p-inputSwitch formControlName="setMargin"
+              (onChange)="onSetMarginChange(rowData , $event); onPartnerCostValueChange(rowData);">
+            </p-inputSwitch>
+          </td>
+          <td>
+            <input pInputText formControlName="marginPercent" style="width: 64px;" type="text"
+              (keyup)="onPartnerCostValueChange(rowData)" pipRestrictInput="decimalPrecisionTwo"
+              [ngClass]="{'disable-control': !rowData.value.setMargin}"><span style="margin: 2px;">%</span>
+          </td>
+          <td>
+            {{rowData.value.paidAmount | number:'1.2-2'| negativeValue }}
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr *ngIf="!rowData.value.isDeleted" [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex"
+          [formGroupName]="rowIndex">
+          <td *ngFor="let pCol of periodCols;let i = index">
+            <div formArrayName="partnerCostPeriodDetail">
+              <div [formGroupName]="i">
+                <input #periodinput id="{{rowIndex.toString() + 'a' + i.toString()}}" class="period-input" pInputText
+                  type="text" formControlName="cost" (keyup)="onCostChange(); onPartnerCostValueChange(rowData);"
+                  pipRestrictInput="negativeDecimalPrecisionTwo"
+                  (click)="onPartnerCostCellClick(false, rowData, $event, rowIndex)"
+                  (focus)="onPartnerCostCellClick(false, rowData, $event, rowIndex)">
+                <p-contextMenu *ngIf="pcIsCellActive" appendTo="body" [target]="periodinput"
+                  [model]="pcContextMenuItems">
+                </p-contextMenu>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template class="scrollable-footer" pTemplate="footer" let-columns>
+        <tr *ngIf='columns[0] && columns[0].field == "periods"'>
+          <td *ngFor="let pCol of periodCols;let i = index">
+            {{ partnerCostPeriodsTotal[i] | number:'1.2-2' | negativeValue }}
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="summary" let-columns>
+        <tr class="bottom-border" [ngStyle]="{'margin-top':periodCols.length > 8 ? '-9px' : '-9px' }"
+          style="position: absolute;margin-left: -13px;">
+          <td class="footer-summary" style="width: 580px;">
+            <span style="float: left;"> {{ translationData.TotalPartnerCost }}</span>
+          </td>
+          <td class="footer-summary text-left" style="min-width: 110px;height: 32px;">
+            {{ paidAmountTotal | number:'1.2-2' | negativeValue }}
+          </td>
+        </tr>
+        <tr style="margin-top: 20px;position: absolute;">
+          <td style="border: none" [attr.colspan]="colSpanSize">
+            <button pButton type="button" class="first pull-left ui-button-rounded ui-button-info" label="Add row"
+              (click)="onAddPartnerCostRow()" [disabled]="disableOtherFormControls || isSaveClicked"></button>
+            <button pButton type="button" *ngIf="selCostRow.length > 0"
+              class="first pull-left ui-button-rounded ui-button-danger" label="Delete row" (click)="onCostRowDelete()"
+              [disabled]="isSaveClicked"></button>
+            <button pButton type="button" *ngIf="selCostRow.length > 0"
+              class="first pull-left ui-button-rounded ui-button-info" label="Copy Selected"
+              (click)="onPartnerCostCopySelected()" [disabled]="isSaveClicked"></button>
+          </td>
+          <p-dialog header="{{'PartnerCostRevenue.DeleteDialogHeader' | translate}}" [(visible)]="display"
+            [draggable]="false" [style]="{width: '25vw'}" modal="true" [closable]="false">
+            <span
+              class="dialog-text">{{'PartnerCostRevenue.DeleteDialogContent' | translate}}<br>{{'PartnerCostRevenue.DeleteDialogContentbr' | translate}}</span><br>
+            <div style="padding: 1.5em;">
+              <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                (click)="display = false"></button>
+              <button type="button" label="{{'ButtonLables.delete' | translate}}" pButton class="delete-button"
+                (click)="onDeletePartnerCostRow(); display = false;"></button>
+            </div>
+          </p-dialog>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+            {{ 'GridEmptyMsg' | translate }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <!-- PARTNER REVENUE TABLE -->
+    <p-table tableStyleClass="fixtable direct-exp" [frozenColumns]="translationData.partnerRevenueColumns"
+      [columns]="periodCols" [scrollable]="true" scrollHeight="calc(50vh - 160px)"
+      class="form-group table table-bordered table-sm p-t-5" cellspacing="0" width="100%" frozenWidth="690px"
+      [value]="partnerCostRevenueform.get('partnerRevenue')['controls']" formArrayName="partnerRevenue"
+      [(selection)]="selectedPartnerRevenue">
+
+      <ng-template pTemplate="caption">
+        <span class="p-r-5">{{ translationData.PartnerRevenueTitle }}</span>
+        <i pTooltip="{{ translationData.PartnerRevenueTitleTooltip }}"><img
+            src="/assets/icons/ic_info_outline_48px.svg"></i>
+        <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+
+      </ng-template>
+      <ng-template pTemplate="frozencolgroup" let-columns>
+        <colgroup>
+          <col style="width:40px">
+          <col style="width:180px">
+          <col style="width:180px">
+          <col style="width:80px">
+          <col style="width:100px">
+          <col style="width:110px">
+        </colgroup>
+      </ng-template>
+
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of periodCols" style="width:110px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="frozenheader" let-columns>
+        <tr>
+          <th class="text-center">
+            <p-tableHeaderCheckbox *ngIf="numberOfPRRows > 0" [disabled]="disableOtherFormControls"
+              (click)="onCheckboxSelect()">
+            </p-tableHeaderCheckbox>
+          </th>
+          <th>
+            <span>
+              {{columns[0].header}}
+            </span>
+            <i pTooltip="{{ translationData.PartnerRevenueMilestoneTooltip }}"><img
+                src="/assets/icons/ic_info_outline_48px.svg"></i>
+          </th>
+          <th>
+            {{columns[1].header}}
+            <span class="required">*</span>
+          </th>
+          <th>
+            {{columns[2].header}}
+          </th>
+          <th>
+            {{columns[3].header}}
+          </th>
+          <th>
+            {{columns[4].header}}
+          </th>
+          <th *ngFor="let col of periodCols">
+            <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of periodCols">
+            <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr *ngIf="!rowData.value.isDeleted" [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex"
+          [formGroupName]="rowIndex" [ngClass]="{'disabled': rowData.value.setMargin}">
+          <td class="text-center">
+            <p-tableCheckbox [value]="rowData" [index]="rowIndex" *ngIf="!rowData.value.setMargin"
+              (click)="onCheckboxSelect()" [disabled]="disableOtherFormControls">
+            </p-tableCheckbox>
+          </td>
+          <td>
+            <p-dropdown appendTo="body" id="rowIndex" [style]="{'width':'100%'}" [options]="selectedMilestones"
+              (onChange)="onRevenueMilestoneSelected(rowIndex, $event.value)" formControlName="selectedMilestoneItem">
+            </p-dropdown>
+          </td>
+          <td>
+            <input pInputText type="text" formControlName="description" pipRestrictInput="notAllowSpaceInBeginning">
+          </td>
+          <td [ngClass]="{'disabled': !rowData.value.setMargin}">
+            <p-inputSwitch formControlName="setMargin">
+            </p-inputSwitch>
+          </td>
+          <td>
+            <input pInputText formControlName="marginPercent" type="text" [ngClass]="{'disable-control': rowData.value}"
+              pipRestrictInput="numeric" style="width: 64px;"><span style="margin: 2px;">%</span>
+          </td>
+          <td>
+            {{rowData.value.revenueAmount | number:'1.2-2' | negativeValue}}
+          </td>
+
+        </tr>
+      </ng-template>
+
+      <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr *ngIf="!rowData.value.isDeleted" [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex"
+          [formGroupName]="rowIndex" [ngClass]="{'disabled': rowData.value.setMargin}">
+          <td *ngFor="let pCol of periodCols;let i = index">
+            <div formArrayName="partnerRevenuePeriodDetail">
+              <div [formGroupName]="i">
+                <input #prperiodinput id="{{rowIndex.toString() + 'b' + i.toString()}}" pInputText type="text"
+                  formControlName="revenue" (click)="onCellClick(false, rowData, $event, rowIndex)"
+                  (focus)="onCellClick(false, rowData, $event, rowIndex)" (keyup)="onRevenueChange()"
+                  pipRestrictInput="negativeDecimalPrecisionTwo">
+                <p-contextMenu *ngIf="isCellActive" appendTo="body" [target]="prperiodinput" [model]="contextMenuItems">
+                </p-contextMenu>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template class="scrollable-footer" pTemplate="footer" let-columns>
+        <tr *ngIf='columns[0] && columns[0].field == "periods"'>
+          <td *ngFor="let pCol of periodCols;let i = index">
+            {{ partnerRevenuePeriodsTotal[i] | number:'1.2-2' | negativeValue }}
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="summary" let-columns>
+        <tr class="bottom-border" [ngStyle]="{'margin-top':periodCols.length > 8 ? '-9px' : '-9px' }"
+          style="position: absolute;margin-left: -13px;">
+          <td class="footer-summary pull-left" style="width: 580px;height: 32px;">
+            <span style="float: left;"> {{ translationData.TotalPartnerRevenue }}</span>
+          </td>
+          <td class="footer-summary text-left" style="min-width: 110px;height: 32px;">
+            {{ revenueAmountTotal | number:'1.2-2' | negativeValue }}
+          </td>
+        </tr>
+        <tr style="margin-top: 20px;position: absolute;">
+          <td style="border: none" [attr.colspan]="colSpanSize">
+            <button pButton type="button" class="first pull-left ui-button-rounded ui-button-info" label="Add row"
+              (click)="onAddPartnerRevenueRow()" [disabled]="disableOtherFormControls || isSaveClicked"></button>
+            <button pButton type="button" *ngIf="selRevenueRow.length > 0"
+              class="first pull-left ui-button-rounded ui-button-danger" label="Delete row"
+              (click)="onDeletePartnerRevenueRow()" [disabled]="isSaveClicked"></button>
+            <button pButton type="button" *ngIf="selRevenueRow.length > 0"
+              class="first pull-left ui-button-rounded ui-button-info" label="Copy Selected"
+              (click)="onPartnerRevenueCopySelected()" [disabled]="isSaveClicked"></button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+            {{ 'GridEmptyMsg' | translate }}
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+    <div class="p-grid">
+      <hr class="bottom-line">
+      <div class="p-sm-12 btns-strip">
+        <button [disabled]="!partnerCostRevenueform.valid || isSaveClicked" class="ui-button-rounded ui-button-success"
+          pButton type="submit" label="Save"> </button>
+      </div>
+    </div>
+  </form>
+</div>

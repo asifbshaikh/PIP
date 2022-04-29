@@ -1,0 +1,90 @@
+<div id="price-adjustment" [formGroup]="priceAdjustmentForm">
+  <div class="col-md-12">
+    <div class="row price-adjusment-header">
+      <div class="col-sm-4">
+        <span class="table-title">{{ 'PriceAdjustment.ColaTitle' | translate }}</span> <br><br>
+        <span class="table-title">{{ 'PriceAdjustment.PriceAdjustmentTitle' | translate }}</span>
+        <span [ngClass]="{error: 'message.type == error'}" class="pull-center"
+          *ngIf="priceAdjustmentForm.value.triggerDate">
+          ({{message.text}})
+        </span>
+
+      </div>
+      <div class="col-sm-7 sucsses m-t-30">
+        {{ 'PriceAdjustment.ColaOnLocation' | translate }}
+      </div>
+    </div>
+    <p-table #dt tableStyleClass="fixtable" [resizableColumns]="true" [scrollable]="true" frozenWidth="390px"
+      scrollHeight="calc(100vh - 350px)" class="form-group table  table-bordered table-sm" cellspacing="0" width="100%"
+      [value]="[0]" [frozenColumns]="priceAdjustmentCols" [columns]="locationCols" class="form-group">
+
+      <ng-template pTemplate="frozencolgroup" let-columns>
+        <colgroup>
+          <col style="width:206px">
+          <col style="width:194px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of locationCols" style="width:104px">
+        </colgroup>
+      </ng-template>
+
+      <ng-template pTemplate="frozenheader" let-columns>
+        <tr>
+          <th style="height: 52px;">
+            {{columns[1].header}}
+            <i pTooltip="set Date when Price Cola is triggered" tooltipPosition="top" class="info-icon"><img
+                src="/assets/icons/ic_info_outline_48px.svg"></i>
+          </th>
+          <th>
+            {{columns[2].header}}
+            <i pTooltip="Effective from first month of equal or greater Date." tooltipPosition="top"
+              class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let col of locationCols" style="height: 52px;">
+            <text-ellipsis>{{col.header}}</text-ellipsis>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="frozenbody" let-rowData let-columns="columns">
+        <tr>
+          <td style="white-space: nowrap;">
+            <p-calendar formControlName="triggerDate" (onSelect)="onTriggerDateSelect1()"
+              (onInput)="onTriggerDateSelect($event)" dateFormat="mm-dd-yy"
+              appendTo="body" placeholder="MM-DD-YYYY" [showOnFocus]="false" [showIcon]="true" [keepInvalid]="true"
+              [monthNavigator]="true" [yearNavigator]="true" yearRange="2018:2050" id="date-picker" [minDate]="minDate" [maxDate]="maxDate"
+              [class.dateInvalid]="dateError || dateErrorFlag"></p-calendar>
+            <br><span [class.required]="dateErrorFlag">{{dateValidationMsg}}</span>
+          </td>
+          <td>
+            {{ priceAdjustmentForm.value.effectiveDate | date:'MM/dd/yyyy' }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr>
+          <td class="location"
+            *ngFor="let locationPrice of priceAdjustmentForm.get('locationPriceList')['controls']; let i = index"
+            formArrayName="locationPriceList" style="height: 60px;">
+            <div [formGroupName]="i"><input pInputText formControlName="colaPercent" type="text"
+                pipRestrictInput="decimalPrecisionTwo"> %</div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="p-grid">
+    <hr class="bottom-line">
+    <div class="p-sm-12 btns-strip">
+      <button pButton [disabled]="!priceAdjustmentForm.valid || !isValid || isSaveClicked"
+      label="Save" class="ui-button-rounded ui-button-success" (click)="saveAdjustedPrice()"></button>
+    </div>
+  </div>
+</div>

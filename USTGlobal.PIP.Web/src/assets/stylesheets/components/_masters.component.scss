@@ -1,0 +1,79 @@
+#masters {
+  list-style: none;
+  .fixtable {
+    table-layout: auto !important;
+    white-space: nowrap !important;
+  }
+
+  .ui-button-icon-left {
+    color: black;
+  }
+
+  .ui-table-wrapper {
+    width: auto;
+    padding: 10px;
+    overflow-x: unset;
+    max-width: 100%;
+    white-space: nowrap;
+    background: white;
+  }
+
+  .ui-table {
+    display: grid;
+  }
+
+  .dynamic-headers {
+    text-align: center;
+    font-weight: bold;
+    border-right: 0px;
+    border-left: 0px;
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    border-left: 1px solid #c8c8c8;
+    border-right: 1px solid #c8c8c8;
+  }
+  min-height: 80vh;
+  max-height: 83vh;
+  overflow: scroll;
+
+  .td-white-space {
+    white-space: initial;
+  }
+  .active-label {
+    background-color: #12bd68;
+    color: #ffffff;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    height: 20px;
+    padding: 1px;
+    margin: 2px;
+  }
+  .in-active-label{
+    background-color: #d0d0d0;
+    color: #ffffff;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    height: 20px;
+    padding: 1px;
+    margin: 2px;
+  }
+}
+
+#holiday {
+  .holiday-heads {
+    font-weight: bold;
+    padding: 10px;
+    min-height: 75vh;
+    max-height: 75vh;
+    overflow: hidden !important;
+  }
+
+  .dropdown {
+    padding: 0.5% 14% !important;
+  }
+  .ui-table-wrapper {
+    max-height: 77vh;
+    overflow: auto;
+  }
+}

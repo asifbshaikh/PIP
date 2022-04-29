@@ -1,0 +1,43 @@
+<form [formGroup]="locationMasterFrom" id="masters">
+    <div>
+        <p-table class="form-group mb-10" [columns]="cols" [value]="locationMasterFrom.get('locationDTO')['controls']"
+            [(selection)]="selectedLocation" selectionMode="single" (onRowSelect)="onLocationSelected()"
+            formArrayName="locationDTO">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of cols">
+                        {{ col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <tr [formGroupName]="rowIndex" [pSelectableRow]="rowData">
+                    <td>
+                        {{rowData.value.locationName}}
+                    </td>
+                    <td>
+                        {{rowData.value.hoursPerDay}}
+                    </td>
+                    <td>
+                        {{rowData.value.hoursPerMonth}}
+                    </td>
+                    <td style="text-align: center;">
+                        <label *ngIf="rowData.value.isActive === true" class="active-label">Active</label>
+                        <label *ngIf="rowData.value.isActive !== true" class="in-active-label">Inactive</label>
+                    </td>
+                    <td>
+                        {{rowData.value.startDate | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td>
+                        {{rowData.value.endDate | date:'MM/dd/yyyy'}}
+                    </td>
+                    <td>
+                        {{rowData.value.comments}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</form>
+<app-add-new-location *ngIf="openDialog === true" [selectLocation]="location" (onLocationSave)="onSaved($event)">
+</app-add-new-location>

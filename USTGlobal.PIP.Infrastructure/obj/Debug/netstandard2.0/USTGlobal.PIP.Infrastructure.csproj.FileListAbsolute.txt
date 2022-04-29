@@ -1,0 +1,11 @@
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\bin\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.deps.json
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\bin\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.dll
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\bin\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.pdb
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\bin\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.dll
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\bin\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.pdb
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\obj\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.csprojAssemblyReference.cache
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\obj\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.AssemblyInfoInputs.cache
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\obj\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.AssemblyInfo.cs
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\obj\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.csproj.CopyComplete
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\obj\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.dll
+D:\workspace\pip\src\USTGlobal.PIP.Infrastructure\obj\Debug\netstandard2.0\USTGlobal.PIP.Infrastructure.pdb

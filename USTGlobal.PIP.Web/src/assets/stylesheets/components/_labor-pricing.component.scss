@@ -1,0 +1,93 @@
+#labor-pricing {
+  .set-margin-container > div {
+    height: 38px;
+  }
+  .ui-table-scrollable-wrapper {
+    position: relative;
+  }
+
+  .pricing-header {
+    background-color: $header;
+  }
+
+  .tbl-title {
+    border: none;
+    font-weight: 700;
+    color: #666666;
+    background-color: #ffffff;
+    font-size: $font-size;
+  }
+
+  .rate-header {
+    border: none;
+    border-radius: 4px 4px 0 0;
+    background: #f5f5f5;
+  }
+
+  .ui-dropdown {
+    width: 100%;
+    height: auto;
+    font-size: $font-size;
+    color: #111;
+    background: #fcfcfc;
+    border-radius: 4px;
+  }
+
+  .ui-inputtext {
+    font-size: $font-size !important;
+    // font-family: $font;
+    color: #111;
+    background: #fcfcfc;
+    border-radius: 4px;
+  }
+
+  .ui-table .ui-table-tfoot > tr > td {
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    color: #666666;
+  }
+
+  .short-column > .ui-inputtext {
+    width: 80px;
+  }
+
+  .amt-input {
+    width: 75px;
+  }
+
+  .overridden-higher {
+    border: 2px solid $error;
+    padding: calc(0.429em - 1px);
+  }
+  .overridden-lower {
+    border: 2px solid green;
+    padding: calc(0.429em - 1px);
+  }
+  .ui-dropdown-label {
+    max-width: 80%;
+  }
+  .ui-table-summary {
+    color: #1d1a1a;
+    border: 1px solid #c5c5c5;
+  }
+  .footer-summary {
+    border: 1px solid #c8c8c8;
+    background: #eeeeee 0% 0% no-repeat padding-box;
+  }
+  td {
+    height: 43px !important;
+  }
+  .ui-table-unfrozen-view {
+    .ui-table-scrollable-header {
+      overflow-y: scroll;
+    }
+    .ui-table-scrollable-body {
+      overflow-x: scroll;
+      overflow-y: scroll;
+    }
+    .ui-table-scrollable-footer .ui-table-scrollable-footer-box {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-right: 0px !important;
+    }
+  }
+}

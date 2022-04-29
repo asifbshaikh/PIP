@@ -1,0 +1,46 @@
+﻿<form *ngIf="isDataAvailable" [formGroup]="investmentViewForm">
+  <p-table class="form-group mb-10" id="investment-view" [value]="investmentViewData">
+    <ng-template pTemplate="header">
+      <tr>
+        <th colspan="2">
+          {{ 'ProjectSummary.investmentViewHeader'| translate}}
+        </th>
+        <th>
+          {{ 'ProjectSummary.USD' | translate}}
+        </th>
+        <th *ngIf="isCurrencyConverted">
+          {{currencySymbol}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+      <tr *ngIf="rowIndex == 1">
+        <td colspan="2">
+          <p-dropdown [disabled]="submitClick ? true : ((workflowFlag && checkRole) ? (dashboardId === 2 || dashboardId === 3 ||
+           (workflowFlag.isNotSubmitted && workflowFlag.checkedInOutBy !== loggedInUserId && checkRole.isEditor && !workflowFlag.isCheckedOut)
+           || workflowFlag.isApprovalPending || workflowFlag.isApproved) : true)" [options]="dropdownList"
+            [style]="{'width':'50%'}" formControlName="corporateTargetPercent"
+            (onChange)="changeOfDropDown($event.value)">
+          </p-dropdown>
+        </td>
+        <td></td>
+        <td *ngIf="isCurrencyConverted">
+        </td>
+      </tr>
+      <tr *ngIf="rowIndex != 1">
+        <td colspan="2" [class.align-table]="investmentViewData[rowIndex].field == 'netinvestment'">
+          {{rowIndex == 2 ? investmentViewData[rowIndex].label + ' ' + selectedCorporatePercent.value.code + '%' : rowData.label}}
+        </td>
+        <td>
+          {{(rowIndex === 0 ? rowData.value : '') | number: '1.2-2' | negativeValue}}
+          {{(rowIndex === 2 ? rowData.value : '') | number: '1.2-2' | negativeValue}}
+          {{(rowIndex === 3 ? rowData.value : '') | negativeValue}}
+        </td>
+        <td *ngIf="isCurrencyConverted">
+          {{(rowIndex === 2 ? convertedCurrency[1] : '') | number: '1.2-2' | negativeValue}}
+          {{(rowIndex === 3 ? convertedCurrency[2] : '') | negativeValue}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</form>

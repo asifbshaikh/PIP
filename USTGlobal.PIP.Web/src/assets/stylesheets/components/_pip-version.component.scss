@@ -1,0 +1,54 @@
+#pip-version {
+  .ui-table-wrapper {
+    margin-top: 10px !important;
+    min-height: calc(100vh - 130px) !important;
+  }
+  .ui-state-highlight {
+    background-color: $theme;
+  }
+
+  .version-name {
+    color: #00a9ee;
+  }
+
+  .version-name:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .ui-dialog .ui-dialog-titlebar {
+    border: 1px solid #ffffff !important;
+    background-color: #ffffff !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 0 none;
+  }
+  .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    margin: 0;
+    color: #c73e27 !important;
+    float: none;
+    font-size: 16px;
+  }
+  .ui-dialog .ui-dialog-content {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 0.571em 1em;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  .cancel-button {
+    background-color: #ffff;
+    color: #007ad9;
+    width: 40%;
+  }
+  .delete-button {
+    background-color: #00a9ee;
+    border: 1px solid;
+    width: 40%;
+    margin: 0px 40px;
+  }
+  .ui-table .ui-table-tbody > tr {
+    background-color: #ffffff;
+    color: #333333;
+    vertical-align: baseline;
+  }
+}

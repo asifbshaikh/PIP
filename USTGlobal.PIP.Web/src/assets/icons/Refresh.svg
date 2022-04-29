@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29" height="28" viewBox="0 0 29 28">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="29" height="28" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Secondary_Button" data-name="Secondary Button" clip-path="url(#clip-path)">
+    <g id="Rectangle_36" data-name="Rectangle 36" transform="translate(0.145)" fill="#fff" stroke="#ccc" stroke-width="1">
+      <rect width="28" height="28" rx="4" stroke="none"/>
+      <rect x="0.5" y="0.5" width="27" height="27" rx="3.5" fill="none"/>
+    </g>
+    <g id="refresh-button" transform="translate(7.579 5.91)">
+      <g id="loop">
+        <path id="Path_322" data-name="Path 322" d="M82.747,2.343V0L79.624,3.124l3.124,3.124V3.9A4.7,4.7,0,0,1,87.433,8.59a5.027,5.027,0,0,1-.547,2.187l1.171,1.171a6.981,6.981,0,0,0,.937-3.358A6.266,6.266,0,0,0,82.747,2.343Zm0,10.933A4.7,4.7,0,0,1,78.062,8.59,5.027,5.027,0,0,1,78.608,6.4L77.437,5.232A6.981,6.981,0,0,0,76.5,8.59a6.266,6.266,0,0,0,6.247,6.247V17.18l3.124-3.124-3.124-3.124Z" transform="translate(-76.5)" fill="#00a9ee"/>
+      </g>
+    </g>
+  </g>
+</svg>

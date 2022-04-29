@@ -1,0 +1,10 @@
+<svg id="approver_icon" data-name="approver icon" xmlns="http://www.w3.org/2000/svg" width="17.851" height="22" viewBox="0 0 17.851 22">
+  <g id="Group_899" data-name="Group 899" transform="translate(12246.851 -5499)">
+    <path id="Subtraction_4" data-name="Subtraction 4" d="M6.816,20.1H0V0H8.959V5.569h5.569v4.07a6.432,6.432,0,0,0-2.421-1.018V8.6h-.136a6.571,6.571,0,0,0-2.242,0H2.421v1.453H6.639A6.492,6.492,0,0,0,5.09,11.985H2.421v1.453H4.54A6.528,6.528,0,0,0,4.351,15c0,.125,0,.251.011.375H2.421v1.453h2.19a6.469,6.469,0,0,0,2.2,3.267ZM13.8,4.117h-3.39V.726L13.8,4.115Z" transform="translate(-12246.851 5499)" fill="#fff"/>
+    <path id="Path_2119" data-name="Path 2119" d="M-12261.464,5505.9l1.873,1.874,3.879-3.878" transform="translate(22.964 8.602)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/>
+    <g id="Ellipse_48" data-name="Ellipse 48" transform="translate(-12243 5507)" fill="none" stroke="#fff" stroke-width="1">
+      <circle cx="7" cy="7" r="7" stroke="none"/>
+      <circle cx="7" cy="7" r="6.5" fill="none"/>
+    </g>
+  </g>
+</svg>

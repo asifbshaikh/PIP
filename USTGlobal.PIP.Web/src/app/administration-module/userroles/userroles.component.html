@@ -1,0 +1,165 @@
+<div id="userRole">
+    <div class="col-sm-12 m-t-10 center">
+        <span class="dropdown-tittle">{{'Admin.account' | translate}}</span>
+        <p-dropdown [filter]="true" [options]="accounts" (onChange)="onAccountChange($event)"
+            [style]="{'width':'350px','height':'auto'}">
+        </p-dropdown>
+    </div>
+    <div class="m-3">
+        <p-card>
+            <div class="col-sm-12">
+                <div *ngIf="accountId > 0">
+                    <p-table #dt class="form-group p-b-20" [columns]="cols" [value]="selectedUsers" width="auto">
+                        <ng-template pTemplate="caption">
+                            <div class="p-t-5 row">
+                                <div class="col-md-4">
+                                    <span class="tbl-title" pTooltip="Assign new Roles to the Users"
+                                        style="color: #cc503b;;">{{'Admin.AddNewUser' | translate}}</span>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>UID - Name</th>
+                                <th>Editor</th>
+                                <th>Reviewer</th>
+                                <th>ReadOnly</th>
+                                <th>Action</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-userRole let-rowIndex="rowIndex">
+                            <tr *ngIf="users.length > 1 else Nousers">
+                                <td>
+                                    <p-dropdown [filter]="true" [(ngModel)]="selectedUser" [options]="users"
+                                        appendTo="body" (onChange)="onUIDChange($event.value)">
+                                    </p-dropdown>
+                                </td>
+                                <td>
+                                    <p-inputSwitch *ngIf="userRole.userId > 0" [(ngModel)]="userRole.isEditor"
+                                        (onChange)="userRole.isDisabled = !userRole.isDisabled">
+                                    </p-inputSwitch>
+                                </td>
+                                <td>
+                                    <p-inputSwitch *ngIf="userRole.userId > 0" [(ngModel)]="userRole.isReviewer"
+                                        (onChange)="userRole.isDisabled = !userRole.isDisabled">
+                                    </p-inputSwitch>
+                                </td>
+                                <td>
+                                    <p-inputSwitch *ngIf="userRole.userId > 0" [(ngModel)]="userRole.isReadOnly"
+                                        (onChange)="userRole.isDisabled = !userRole.isDisabled">
+                                    </p-inputSwitch>
+                                </td>
+                                <td>
+                                    <button *ngIf="userRole.userId > 0" id="{{rowIndex}}"
+                                        [disabled]="!userRole.isEditor && !userRole.isReadOnly && !userRole.isReviewer && !userRole.isDisabled"
+                                        pButton type="button" icon="pi pi-plus" (click)="onSave(userRole, true)"
+                                        pTooltip="Add"></button>
+                                </td>
+                            </tr>
+                            <ng-template pTemplate="body" #Nousers>
+                                <td></td>
+                                <td colspan="4" style="text-align: center;">
+                                    <span class="tbl-title">{{ 'Admin.RolePermissionEmptyMessage' | translate }}</span>
+                                </td>
+                                <td></td>
+                            </ng-template>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div *ngIf="accountId > 0">
+                    <p-table #dt class="form-group" [columns]="cols" [value]="selectedAccountUserRoles" [paginator]="true" [rows]="20"
+                        [rowsPerPageOptions]="[20,30,40]" [resizableColumns]="true" [scrollable]="true"
+                        [responsive]="true" [resizableColumns]="true" scrollHeight="calc(100vh - 349px)"
+                        columnResizeMode="expand" cellspacing="0"
+                        [globalFilterFields]="[ 'name', 'firstName', 'lastName', 'uid']">
+                        <ng-template pTemplate="caption">
+                            <div class="p-t-5 row">
+                                <div class="col-md-4 m-t-15">
+                                    <span class="tbl-title" pTooltip='Update existing Roles of the Users'
+                                        style="color: #cc503b;">{{'Admin.UpdateUser' | translate}}</span>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4 pull-right text-right">
+                                    <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                                    <input type="text" class="global-filter" pInputText placeholder="Search User"
+                                        (input)="dt.filterGlobal($event.target.value.trim(), 'contains')"
+                                        style="height : 31px; width:auto; margin:0 10px 4px 0">
+                                </div>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngFor="let col of cols">
+                                    {{ col.header}}
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-userRole let-rowIndex="rowIndex">
+                            <tr *ngIf="(userRole.isEditor || userRole.isReviewer || userRole.isReadOnly) || (!userRole.isEditor 
+                        && !userRole.isReviewer && !userRole.isReadOnly && userRole.isDisabled === true)">
+                                <td>
+                                    {{userRole.uid}}
+                                </td>
+                                <td>
+                                    {{userRole.firstName + ' '+ userRole.lastName }}
+                                </td>
+                                <td>
+                                    <p-inputSwitch [(ngModel)]="userRole.isEditor"
+                                        (onChange)="onEditorValueChange($event); userRole.isDisabled = true; userRole.isDataToBeSaved = true">
+                                    </p-inputSwitch>
+                                </td>
+                                <td>
+                                    <p-inputSwitch [(ngModel)]="userRole.isReviewer"
+                                        (onChange)="userRole.isDisabled = true; userRole.isDataToBeSaved = true">
+                                    </p-inputSwitch>
+                                </td>
+                                <td>
+                                    <p-inputSwitch [(ngModel)]="userRole.isReadOnly"
+                                        (onChange)="userRole.isDisabled = true; userRole.isDataToBeSaved = true">
+                                    </p-inputSwitch>
+                                </td>
+                                <td>
+                                    <button pButton type="button" id="{{rowIndex}}" [disabled]="!userRole.isDisabled"
+                                        type="button" icon="pi pi-save" (click)="onSaveRequest(userRole);"
+                                        pTooltip="Save"></button>
+                                    <button type="button" [ngClass]="{'disable' :userRole.isDataToBeSaved}"
+                                        [disabled]="userRole.isDataToBeSaved" (click)="onDeleteRequest(userRole)"
+                                        class="pi pi-trash icon-style"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer" let-userRole>
+                            <tr *ngIf="!doesUsersExist() && isDataSaved">
+                                <td colspan="6" style="text-align: center;">
+                                    <span class="tbl-title">{{ 'Admin.RolePermissionEmptyMessage' | translate }}</span>
+                                </td>
+                            </tr>
+
+                        </ng-template>
+                    </p-table>
+                    <p-confirmDialog #cddr class="p-b-20" id="logout-dialog" [(visible)]="showDeleteDialog"
+                        key="isDeleteRole">
+                        <p-footer>
+                            <button pButton type="button" label="NO, CANCEL" class="ui-button-secondary"
+                                (click)="cddr.reject()"></button>
+                            <button pButton type="button" label="YES, DELETE" class="ui-button-error"
+                                (click)="cddr.accept()"></button>
+                        </p-footer>
+                    </p-confirmDialog>
+                    <p-confirmDialog #cdsr class="p-b-20" id="logout-dialog" [(visible)]="showSaveDialog"
+                        key="isSaveRole">
+                        <p-footer>
+                            <button pButton type="button" label="NO, CANCEL" class="ui-button-secondary"
+                                (click)="cdsr.reject()"></button>
+                            <button pButton type="button" label="YES, SAVE" class="ui-button-success"
+                                (click)="cdsr.accept()"></button>
+                        </p-footer>
+                    </p-confirmDialog>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>

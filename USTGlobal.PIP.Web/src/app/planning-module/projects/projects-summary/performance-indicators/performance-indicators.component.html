@@ -1,0 +1,104 @@
+<form class="col-md-12" id="Performance-indicators" [formGroup]="keyPerformanceIndicatorForm"
+  *ngIf="keyPerformanceIndicatorForm">
+  <div style="padding-bottom: 1em;">
+    <span class="tittle-header">{{'KeyPerformanceIndicators.Title' | translate}}</span>
+    <span class="currency-value">Values in:
+      <b class="green currency-font">{{currencySymbol}}</b></span>
+  </div>
+  <p-table [columns]="cols" [scrollable]="true" [value]="[0]" scrollHeight="200px" selectionMode="single">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of cols">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr [pSelectableRow]="rowData">
+        <td>{{rows.OnshoreFTE}}</td>
+        <td [ngClass]="{'red': keyPerformanceIndicatorForm.value.onShoreFTEPercent < 0}">
+          {{keyPerformanceIndicatorForm.value.onShoreFTEPercent | number: '1.2-2' | negativeValue}} %
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData">
+        <td>{{rows.GrossMargin}}</td>
+        <td [ngClass]="{'red': keyPerformanceIndicatorForm.value.grossMarginPercent < 0}">
+          {{keyPerformanceIndicatorForm.value.grossMarginPercent | number: '1.2-2' | negativeValue}} %
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData">
+        <td>{{rows.Ebitda}}</td>
+        <td [ngClass]="{'red': keyPerformanceIndicatorForm.value.ebitdaPercent < 0}">
+          {{keyPerformanceIndicatorForm.value.ebitdaPercent | number: '1.2-2' | negativeValue}} %
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData" *ngFor="let row of keyPerformanceIndicatorForm.value.serviceLineRevenueList; let i = index">
+        <td *ngIf="i < 3">{{row.serviceLineName}} Revenue</td>
+        <td *ngIf="i < 3" [ngClass]="{'red': row.serviceLineRevenue < 0}">
+          {{row.serviceLineRevenue | number: '1.2-2' | negativeValue}}
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData" *ngIf="keyPerformanceIndicatorForm.value.serviceLineRevenueList.length > 3">
+        <td>
+          <b><span class="bold" (click)="onRevenueRowCollapse()">
+              <i [ngClass]="collapsedRevenue ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"
+                class="arrow"></i>
+              More Revenue Service Lines</span></b>
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData" *ngFor="let row of keyPerformanceIndicatorForm.value.serviceLineRevenueList; let i = index">
+        <td *ngIf="i > 2 && collapsedRevenue" class="group">{{row.serviceLineName}} Revenue</td>
+        <td *ngIf="i > 2 && collapsedRevenue" [ngClass]="{'red': row.serviceLineRevenue < 0}">
+          {{row.serviceLineRevenue | number: '1.2-2' | negativeValue}}
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData" *ngFor="let row of keyPerformanceIndicatorForm.value.serviceLineEbitdaPercentList let i = index">
+        <td *ngIf="i < 3">{{row.serviceLineName}} EBITDA % </td>
+        <td *ngIf="i < 3" [ngClass]="{'red': row.serviceLineEbitdaPercent < 0}">
+          {{row.serviceLineEbitdaPercent | number: '1.2-2' | negativeValue}} %
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData" *ngIf="keyPerformanceIndicatorForm.value.serviceLineEbitdaPercentList.length > 3">
+        <td>
+          <b><span class="bold" (click)="onEBITDARowCollapse()">
+              <i [ngClass]="collapsedEBITDA ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"
+                class="arrow"></i>
+              More EBITDA Service Lines</span></b>
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData" *ngFor="let row of keyPerformanceIndicatorForm.value.serviceLineEbitdaPercentList; let i = index">
+        <td *ngIf="i > 2 && collapsedEBITDA" class="group">{{row.serviceLineName}} EBITDA % </td>
+        <td *ngIf="i > 2 && collapsedEBITDA" [ngClass]="{'red': row.serviceLineEbitdaPercent < 0}">
+          {{row.serviceLineEbitdaPercent | number: '1.2-2' | negativeValue}} %
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData">
+        <td>{{rows.serviceLineBlendedTargetEbitda}}</td>
+        <td [ngClass]="{'red': keyPerformanceIndicatorForm.value.serviceLineBlendedTargetEbitda < 0}">
+          {{keyPerformanceIndicatorForm.value.serviceLineBlendedTargetEbitda | number: '1.2-2' | negativeValue}} %
+
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData">
+        <td>{{rows.Varience}}</td>
+        <td [ngClass]="{'red': keyPerformanceIndicatorForm.value.variancePercent < 0}">
+          {{keyPerformanceIndicatorForm.value.variancePercent | number: '1.2-2' | negativeValue}} %
+
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData">
+        <td>{{rows.CostContingency}}</td>
+        <td [ngClass]="{'red': keyPerformanceIndicatorForm.value.costContingencyPercent < 0}">
+          {{keyPerformanceIndicatorForm.value.costContingencyPercent | number: '1.2-2' | negativeValue}} %
+
+        </td>
+      </tr>
+      <tr [pSelectableRow]="rowData">
+        <td>{{rows.firstMonthPositiveCashFlow}}</td>
+        <td [ngClass]="{'red': keyPerformanceIndicatorForm.value.firstMonthPositiveCashFlow < 0}">
+          {{keyPerformanceIndicatorForm.value.firstMonthPositiveCashFlow}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</form>

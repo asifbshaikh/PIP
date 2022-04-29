@@ -1,0 +1,86 @@
+<div id="define-admin">
+  <div class="m-3">
+    <p-card>
+      <form [formGroup]="assignRoleForm">
+        <p-dialog header="{{'Admin.AssignRoleDialog' | translate}}" [(visible)]="display" [style]="{width: '30vw'}"
+          modal="true">
+          <div class="col-sm-12 p-grid m-t-20">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9"><span style="color: red;">{{errorMessege}}</span></div>
+            <div class="col-sm-3 m-t-5"><span class="right">{{cols[1].header}}<span style="color: red;">*</span></span>
+            </div>
+            <div class="col-sm-9 m-t-5"><input type="text" class="width uppercase" formControlName="uid"
+                pipRestrictInput="alphanumericSpaceNotAllowedInBeginning" (keyup)="onUIDInput()" pInputText>
+            </div>
+            <div class="col-sm-3 m-t-20"><span class="right">{{cols[0].header}}</span></div>
+            <div class="col-sm-9 m-t-20"><label class="label">{{assignRoleForm.value.name}}</label>
+            </div>
+            <div class="col-sm-3 m-t-10"><span class="right">{{cols[2].header}}</span></div>
+            <div class="col-sm-9 m-t-10"><label class="label">{{'Admin'}}</label></div>
+            <div class="col-sm-12 m-b-20 m-t-20 center">
+              <button pButton class="dialog-button" type="submit" [disabled]="!assignRoleForm.valid || !isValid"
+                label="{{'Admin.AssignButton' | translate}}" (click)="onAssignClick()"></button>
+            </div>
+          </div>
+        </p-dialog>
+      </form>
+      <div class="col-sm-12">
+        <span class="tittle">{{'Admin.defineAdmin' |translate}}</span>
+        <span>
+          <button class="button" pButton type=" submit" label="{{'Admin.AssignRole' | translate}}"
+            (click)="onAssignRoleClick()"></button>
+        </span>
+      </div>
+      <div class="col-sm-12 m-t-20">
+        <p-table class="form-group mb-10" [columns]="cols" [value]="adminList" [paginator]="true" [rows]="20"
+          [rowsPerPageOptions]="[20,30,40]" [responsive]="true" [resizableColumns]="true" columnResizeMode="expand"
+          scrollHeight="calc(100vh - 200px)" [scrollable]="true" sortField="name" [sortOrder]="1">
+          <ng-template pTemplate="header">
+            <tr>
+              <th [pSortableColumn]="'name'"> {{cols[0].header}}<p-sortIcon [field]="name">
+                </p-sortIcon>
+              </th>
+              <th> {{cols[1].header}} </th>
+              <th> {{cols[2].header}} </th>
+              <th> {{cols[3].header}} </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <tr>
+              <td class="td-white-space">
+                {{rowData.name}}
+              </td>
+              <td>
+                {{rowData.uid}}
+              </td>
+              <td>
+                {{rowData.roleName}}
+              </td>
+              <td>
+                <p-dialog header="{{'Admin.DeleteDialogHeader' | translate}}" [(visible)]="displayDelete"
+                  [style]="{width: '25vw'}" modal="true" [closable]="false" [draggable]="false"
+                  style="text-align: center;">
+                  <div style="padding: 1.5em;">
+                    <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                      (click)="displayDelete = false"></button>
+                    <button type="button" label="{{'Admin.delete' | translate}}" pButton class="delete-button"
+                      (click)="deleteRole(); displayDelete = false;"></button>
+                  </div>
+                </p-dialog>
+                <button type="button" (click)="onDeleteClick(rowData.userId)" class="pi pi-trash icon-style"></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="4" [ngStyle]="{'text-align': 'center'}">
+                {{ 'Admin.AdminEmptyMessage' | translate }}
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+    </p-card>
+  </div>
+</div>

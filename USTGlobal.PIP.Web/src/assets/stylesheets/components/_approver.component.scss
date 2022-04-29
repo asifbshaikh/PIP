@@ -1,0 +1,86 @@
+#approver {
+    .tittle-margin {
+        margin: 0px -5px;
+    }
+    .tittle {
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .filter {
+        float: right;
+        padding: 7px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .dropdown {
+        float: right;
+        padding: 3px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .right {
+        float: right;
+        padding: 3px;
+    }
+    .project-name {
+        color: #00a9ee;
+    }
+    .ui-table .ui-paginator-bottom {
+        position: fixed;
+        left: 75px;
+        width: calc(100% - 90px);
+        bottom: 2px;
+        border-top: 1px solid #c8c8c8 !important;
+    }
+    .ui-card-body {
+        padding: 1em;
+        min-height: 90vh;
+    }
+    .ui-table-scrollable-view {
+        min-height: 71vh;
+    }
+
+    .ui-dialog .ui-dialog-titlebar {
+        border: 1px solid #ffffff !important;
+        background-color: #ffffff !important;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        border-bottom: 0 none;
+    }
+    .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+        margin: 0;
+        color: #c73e27 !important;
+        float: none;
+        font-size: 16px;
+    }
+    .ui-table .ui-table-thead > tr > th {
+        border: 1px solid #c8c8c8;
+        font-weight: 700;
+        color: #ffffff;
+        height: 32px;
+        font-size: 12px;
+        background-color: #3599a8;
+    }
+    .ui-table .ui-table-thead > tr > td {
+        border: 1px solid #c8c8c8;
+        font-weight: 700;
+        color: #ffffff;
+        height: 32px;
+        font-size: 12px;
+        background-color: #3599a8;
+    }
+    .ui-table .ui-sortable-column .ui-sortable-column-icon {
+        color: #ffffff;
+    }
+    .ui-inputtext.ui-widget {
+        width: 100%;
+    }
+    .ui-table-scrollable-header-box {
+        overflow-y: scroll;
+        margin-right: 0 !important;
+    }
+    .ui-table-scrollable-body {
+        overflow-y: scroll;
+        border-bottom: 1px solid #c8c8c8 !important;
+    } 
+}

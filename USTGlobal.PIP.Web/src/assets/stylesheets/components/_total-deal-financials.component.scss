@@ -1,0 +1,56 @@
+#total-deal-Financials {
+    .ui-table-unfrozen-view {
+        .ui-table-scrollable-header,
+        .ui-table-scrollable-body {
+            overflow-y: scroll;
+        }
+    }
+    .ui-table-scrollable-header-box {
+        margin-right: 0px !important;
+    }
+    .ui-table-scrollable-body {
+        border-right: 0px solid #c8c8c8;
+    }
+    .currency-header {
+        background-color: transparent;
+        border: transparent;
+    }
+
+    .red {
+        color: #f55a41;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .header {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .ui-table .ui-table-thead > tr > th {
+        border: 1px solid #c8c8c8;
+        font-weight: 700;
+        color: #ffffff;
+        height: 28px;
+        font-size: 13px;
+        background-color: #3599a8;
+    }
+    .top-header {
+        background-color: white !important;
+        border: none !important;
+    }
+    .top-header-lable {
+        color: $green !important;
+        background: #adebce !important;
+        border: none !important;
+    }
+    .empty-header {
+        background: white !important;
+        border: none !important;
+    }
+    .group {
+        padding-left: 30px;
+    }
+    table tr.highlight {
+        background-color: #eaeaea !important
+     }
+}

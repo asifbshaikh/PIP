@@ -1,0 +1,148 @@
+<div id="approver">
+  <div class="m-3">
+    <p-card class="card-width">
+      <form>
+        <div class="col-sm-12 tittle-margin">
+          <span class="tittle">{{'Approver.ApproverTittle' |translate}}</span>
+          <span class="dropdown">
+            <p-dropdown [filter]="false" [options]="pipSheetStatusDropdown" (onChange)="onDropdownChange($event.value)"
+              [style]="{'width':'200px'}">
+            </p-dropdown>
+          </span>
+          <span class="filter">{{'ButtonLables.filter' |translate}} </span>
+          <span class="right">
+            <i pTooltip="{{ 'PROJECTS.ProjectTootip.AdvanceSearch' | translate }}" tooltipPosition="bottom"
+              class="header-icon m-r-10 pointer" (click)="onSearchFilters()"><img
+                src="/assets/icons/Advancesearch.svg"></i>
+          </span>
+        </div>
+        <div class="col-sm-12 p-grid">
+          <p-table #dt class="mb-10" [columns]="cols" [value]="approverList" [paginator]="true" [rows]="20"
+            [rowsPerPageOptions]="[20,30,40]" [responsive]="true" [resizableColumns]="true" columnResizeMode="expand"
+            scrollHeight="calc(100vh - 215px)" [scrollable]="true"
+            [globalFilterFields]="['sfProjectId', 'projectName', 'accountName','submissionDate','submittedBy', 'comments', 'pipSheetStatus', 'approverComments', 'approvedBy', 'approvedOn']">
+            <ng-template pTemplate="header">
+              <tr>
+                <th [pSortableColumn]="'sfProjectId'"> {{cols[0].header}}<p-sortIcon [field]="sfProjectId">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'projectName'"> {{cols[1].header}}<p-sortIcon [field]="projectName">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'accountName'"> {{cols[2].header}} <p-sortIcon [field]="accountName">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'submittedOn'"> {{cols[3].header}} <p-sortIcon [field]="submittedOn">
+                  </p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'submittedBy'"> {{cols[4].header}}<p-sortIcon [field]="submittedBy">
+                  </p-sortIcon>
+                </th>
+                <th> {{cols[5].header}} </th>
+                <th [pSortableColumn]="'pipSheetStatus'"> {{cols[6].header}} <p-sortIcon [field]="pipSheetStatus">
+                  </p-sortIcon>
+                </th>
+                <th> {{cols[7].header}} </th>
+                <th> {{cols[8].header}} </th>
+                <!-- <th [pSortableColumn]="'approvedOn'"> {{cols[9].header}} <p-sortIcon [field]="approvedOn">
+                  </p-sortIcon>
+                </th> -->
+              </tr>
+              <tr *ngIf="showSearch">
+                <td>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'sfProjectId', 'contains')"
+                    [value]="dt.filters['sfProjectId'] ? dt.filters['sfProjectId'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'projectName', 'contains')"
+                    [value]="dt.filters['projectName'] ? dt.filters['projectName'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'accountName', 'contains')"
+                    [value]="dt.filters['accountName'] ? dt.filters['accountName'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'submittedOn', 'contains')"
+                    [value]="dt.filters['submittedOn'] ? dt.filters['submittedOn'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'submittedBy', 'contains')"
+                    [value]="dt.filters['submittedBy'] ? dt.filters['submittedBy'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'comments', 'contains')"
+                    [value]="dt.filters['comments'] ? dt.filters['comments'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'pipSheetStatus', 'contains')"
+                    [value]="dt.filters['pipSheetStatus'] ? dt.filters['pipSheetStatus'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" placeholder="Filter by comments"
+                    (input)="dt.filter($event.target.value, 'approverComments', 'contains')"
+                    [value]="dt.filters['approverComments'] ? dt.filters['approverComments'].value.trim() : ''">
+                </td>
+                <td>
+                  <input pInputText type="text" placeholder="Filter by comments"
+                    (input)="dt.filter($event.target.value, 'resendComments', 'contains')"
+                    [value]="dt.filters['resendComments'] ? dt.filters['resendComments'].value.trim() : ''">
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+              <tr>
+                <td class="project-name">
+                  <a (click)="navigateToProject(rowData.projectId, rowData.pipSheetId, rowData.accountId)"
+                    [ngStyle]="{'cursor': 'pointer'}">
+                    {{rowData.sfProjectId }}
+                  </a>
+                </td>
+                <td>
+                  <text-ellipsis>{{rowData.projectName}}</text-ellipsis>
+                </td>
+                <td>
+                  <text-ellipsis>{{rowData.accountName}}</text-ellipsis>
+                </td>
+                <td>
+                  <text-ellipsis>{{rowData.submittedOn | date:'MM-dd-yyyy' }}</text-ellipsis>
+                </td>
+                <td>
+                  <text-ellipsis>{{rowData.submittedBy}}</text-ellipsis>
+                </td>
+                <td>
+                  <text-ellipsis>{{rowData.comments}}</text-ellipsis>
+                </td>
+                <td>
+                  <text-ellipsis>{{rowData.pipSheetStatus}}</text-ellipsis>
+                </td>
+                <td>
+                  <text-ellipsis style="font-size: 10px;">{{rowData.approverComments}}
+                    <br>
+                    {{rowData.approvedBy}} {{rowData.approvedOnString !== defaultDate ? '|' : ''}}
+                    {{rowData.approvedOnString !== defaultDate ? rowData.approvedOnString : ''}}
+                    {{rowData.approvedOnString !== defaultDate ? '(IST)' : ''}}
+                  </text-ellipsis>
+                </td>
+                <td>
+                  <text-ellipsis style="font-size: 10px;">{{rowData.resendComments}}
+                    <br>
+                    {{rowData.resendBy}} {{rowData.resendOnString !== defaultDate ? '|' : ''}}
+                    {{rowData.resendOnString !== defaultDate ? rowData.resendOnString : ''}}
+                    {{rowData.resendOnString !== defaultDate ? '(IST)' : ''}}
+                  </text-ellipsis>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="4" [ngStyle]="{'text-align': 'center'}">
+                  {{ 'Approver.ApproverEmptyMessage' | translate }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </form>
+    </p-card>
+  </div>
+</div>

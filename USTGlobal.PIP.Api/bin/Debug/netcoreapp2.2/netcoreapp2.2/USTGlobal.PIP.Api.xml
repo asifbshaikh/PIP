@@ -1,0 +1,1469 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>USTGlobal.PIP.Api</name>
+    </assembly>
+    <members>
+        <member name="T:USTGlobal.PIP.Api.BusinessRuleException">
+            <summary>
+            BusinessRuleException
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.BusinessRuleException.#ctor">
+            <summary>
+            Throw exception with out message
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.BusinessRuleException.#ctor(System.String)">
+            <summary>
+            Throw exception with simple message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.BusinessRuleException.#ctor(System.String,System.Object[])">
+            <summary>
+            Throw exception with message format and parameters
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.BusinessRuleException.#ctor(System.String,System.Exception)">
+            <summary>
+            Throw exception with simple message and inner exception
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.BusinessRuleException.#ctor(System.String,System.Exception,System.Object[])">
+            <summary>
+            Throw exception with message format and inner exception. Note that, the variable length params are always floating.
+            </summary>
+            <param name="format"></param>
+            <param name="innerException"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.BusinessRuleException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Custom exception constructor is used during exception serialization/deserialization
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.ClientException">
+            <summary>
+            CustomException
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.ClientException.#ctor">
+            <summary>
+            Throw exception with out message
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.ClientException.#ctor(System.String)">
+            <summary>
+            Throw exception with simple message
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.ClientException.#ctor(System.String,System.Object[])">
+            <summary>
+            Throw exception with message format and parameters
+            </summary>
+            <param name="format"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.ClientException.#ctor(System.String,System.Exception)">
+            <summary>
+            Throw exception with simple message and inner exception
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.ClientException.#ctor(System.String,System.Exception,System.Object[])">
+            <summary>
+            Throw exception with message format and inner exception. Note that, the variable length params are always floating.
+            </summary>
+            <param name="format"></param>
+            <param name="innerException"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.ClientException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Custom exception constructor is used during exception serialization/deserialization
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.AccountController">
+            <summary>
+            AccountController
+            </summary>
+        </member>
+        <member name="P:USTGlobal.PIP.Api.Controllers.AccountController.Configuration">
+            <summary>
+            IConfiguration
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AccountController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IUserService,Microsoft.Extensions.Configuration.IConfiguration,USTGlobal.PIP.ApplicationCore.Interfaces.IUploadExcelService,USTGlobal.PIP.ApplicationCore.Interfaces.IAdminService,USTGlobal.PIP.ApplicationCore.Interfaces.IAdminPipCheckinService,USTGlobal.PIP.ApplicationCore.Interfaces.IProjectHeaderService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            AccountController constructor
+            </summary>
+            <param name="userService"></param>
+            <param name="configuration"></param>
+            <param name="uploadExcelService"></param>
+            <param name="adminService"></param>
+            <param name="adminPipCheckinService"></param>
+            <param name="projectHeaderService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AccountController.GetAdmins(System.Int32)">
+            <summary>
+            Get Admin and Finance Approver Users based on AccountId
+            </summary>
+            <param name="accountId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AccountController.GetUsersAndRoles(System.Int32)">
+            <summary>
+            Get Editor, Reviewer and ReadOnly Users based on AccountId
+            </summary>
+            <param name="accountId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AccountController.GetAccountBasedProjects(System.Int32)">
+            <summary>
+            Get all Projects based on AccountId
+            </summary>
+            <param name="accountId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AccountController.GetUserRoleForAllAccounts">
+            <summary>
+            Get User Roles for all Accounts
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AccountController.GetAutoGeneratedProjectId(System.Int32,System.String)">
+            <summary>
+            Get Autogenerated ProjectId based on AccountId and AccountCode
+            </summary>
+            <param name="accountId"></param>
+            <param name="accountCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AccountController.GetProjectsByAccountId(System.Int32)">
+            <summary>
+            Get Projects with status as Not Submitted based on AccountId
+            </summary>
+            <param name="accountId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.AdminController">
+            <summary>
+            AdminController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IAdminService,USTGlobal.PIP.ApplicationCore.Interfaces.IAdminPipCheckinService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            AdminController constructor
+            </summary>
+            <param name="adminService"></param>
+            <param name="adminPipCheckinService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminController.SaveAdminRole(USTGlobal.PIP.ApplicationCore.DTOs.AdminRoleDTO)">
+            <summary>
+            Save Admin and Finance Approver Roles
+            </summary>
+            <param name="adminRoleDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminController.SaveFinancePOCRole(USTGlobal.PIP.ApplicationCore.DTOs.AdminRoleDTO)">
+            <summary>
+            Save finance approver roles
+            </summary>
+            <param name="adminRoleDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminController.SaveNonAdminRole(USTGlobal.PIP.ApplicationCore.DTOs.RoleManagementDTO)">
+            <summary>
+            Save Editor, Reviewer, ReadOnly Roles
+            </summary>
+            <param name="roleDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminController.getAllUsersAndAssociatedRoles">
+            <summary>
+            Get all Users and associated Roles based on AccountId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminController.SaveSharedPipRole(USTGlobal.PIP.ApplicationCore.DTOs.SharedPipRoleDTO)">
+            <summary>
+            Save Shared PIP Roles Editor and ReadOnly
+            </summary>
+            <param name="sharedPipRole"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminController.SaveCheckedInVersions(System.Collections.Generic.IList{USTGlobal.PIP.ApplicationCore.DTOs.CheckOutPipVersionDTO})">
+            <summary>
+            Check-In all Checked-Out PIP Versions
+            </summary>
+            <param name="checkInPipVersions"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.AdminMasterController">
+            <summary>
+            AdminMasterController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminMasterController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IAdminMasterService)">
+            <summary>
+            AdminMasterController constructor
+            </summary>
+            <param name="adminMasterService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminMasterController.GetLocations">
+            <summary>
+            Get Locations
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminMasterController.GetPastLocationVersions(System.Int32)">
+            <summary>
+            Get Past Location Versions based on LocationId
+            </summary>
+            <param name="locationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminMasterController.GetInactiveLocationVersion(System.Int32)">
+            <summary>
+            Get Inactive Location Versions
+            </summary>
+            <param name="locationId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminMasterController.SaveLocation(USTGlobal.PIP.ApplicationCore.DTOs.LocationDTO)">
+            <summary>
+            Save Location
+            </summary>
+            <param name="locationDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AdminMasterController.DiscardLocationVersion(System.Int32)">
+            <summary>
+            Delete Location Version based on LocationId
+            </summary>
+            <param name="locationId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.AuthController">
+            <summary>
+            AuthController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AuthController.#ctor(Microsoft.Extensions.Options.IOptions{USTGlobal.PIP.ApplicationCore.DTOs.AppSettings},USTGlobal.PIP.Api.Helpers.ITokenHelper,USTGlobal.PIP.ApplicationCore.Interfaces.IUserService)">
+            <summary>
+            AuthController Constructor
+            </summary>
+            <param name="config"></param>
+            <param name="tokenHelper"></param>
+            <param name="repoService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AuthController.Login(USTGlobal.PIP.ApplicationCore.DTOs.LoginDTO)">
+            <summary>
+            Login
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.AuthController.Logout">
+            <summary>
+            Logout
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.BaseController">
+            <summary>
+            BaseController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.BaseController.GetApiContext">
+            <summary>
+            GetApiContext
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.BaseController.GetUserName">
+            <summary>
+            GetUserName
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.CapitalChargeController">
+            <summary>
+            CapitalChargeController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.CapitalChargeController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.ICapitalChargeService,USTGlobal.PIP.ApplicationCore.Interfaces.ICapitalChargeWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            CapitalChargeController Constructor
+            </summary>
+            <param name="capitalChargeService"></param>
+            <param name="capitalChargeWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.CapitalChargeController.GetCapitalCharge(System.Int32)">
+            <summary>
+            Get Capital Charge data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns>An object containing capital charge</returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.CapitalChargeController.SaveCapitalCharge(USTGlobal.PIP.ApplicationCore.DTOs.CapitalChargeResultSetDTO)">
+            <summary>
+            Save Capital Charge data
+            </summary>
+            <param name="capitalCharge"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ClientPriceController">
+            <summary>
+            ClientPriceController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ClientPriceController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IClientPriceService,USTGlobal.PIP.ApplicationCore.Interfaces.IClientPriceWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            ClientPriceController Constructor
+            </summary>
+            <param name="clientPriceService"></param>
+            <param name="clientPriceWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ClientPriceController.GetClientPrice(System.Int32)">
+            <summary>
+            Get Client Price data based on PipsheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ClientPriceController.SaveClientPrice(USTGlobal.PIP.ApplicationCore.DTOs.ClientPriceMainDTO)">
+            <summary>
+            Save Client Price data
+            </summary>
+            <param name="clientPriceMainDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.CurrencyController">
+            <summary>
+            CurrencyController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.CurrencyController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IProjectHeaderService)">
+            <summary>
+            CurrencyController Constructor
+            </summary>
+            <param name="projectHeaderService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.CurrencyController.GetCurrencyConversionData(System.Int32)">
+            <summary>
+            Get Currency Conversion data based on CountryId
+            </summary>
+            <param name="countryId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.DashboardController">
+            <summary>
+            Dashboard Controller
+            </summary>
+        </member>
+        <member name="P:USTGlobal.PIP.Api.Controllers.DashboardController.Configuration">
+            <summary>
+            Configuration
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.DashboardController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            DashboardController Constructor
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.DashboardController.GetDashboardFile">
+            <summary>
+            Get Dashboard About Tool File
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.DashboardController.DoesFileExist(System.String)">
+            <summary>
+            Checks if File exists on url
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.EbitdaController">
+            <summary>
+            EbitdaController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.EbitdaController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IEbitdaService,USTGlobal.PIP.ApplicationCore.Interfaces.IEbitdaWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            EbitdaController Constructor
+            </summary>
+            <param name="ebitdaService"></param>
+            <param name="ebitdaWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.EbitdaController.GetEbitdaAndStandardOverhead(System.Int32)">
+            <summary>
+            Get Ebitda and Std. Overhead data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.EbitdaController.UpdateEbitda(System.Collections.Generic.List{USTGlobal.PIP.ApplicationCore.DTOs.EbitdaDTO})">
+            <summary>
+            Updates OverheadAmount and SharedSeatsUsePercent
+            </summary>
+            <param name="ebitdaData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ExpenseAndAssetController">
+            <summary>
+            ExpenseAndAssetController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ExpenseAndAssetController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IExpenseAndAssetService,USTGlobal.PIP.ApplicationCore.Interfaces.IExpensesAndAssetsWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            ExpenseAndAssetController Constructor
+            </summary>
+            <param name="expenseAndAssetService"></param>
+            <param name="expenseAndAssetsWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ExpenseAndAssetController.GetExpenseAndAsset(System.Int32)">
+            <summary>
+            Get Direct Expense and Asset data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ExpenseAndAssetController.SaveExpenseAndAssetData(USTGlobal.PIP.ApplicationCore.DTOs.ExpenseAndAssetDTO)">
+            <summary>
+            Save Direct Expense and Asset data
+            </summary>
+            <param name="expenseAndAssetDto"></param>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.FixBidAndMarginController">
+            <summary>
+            FixBidAndMarginController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.FixBidAndMarginController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IFixBidAndMarginService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            FixBidAndMarginController Constructor
+            </summary>
+            <param name="fixBidAndMarginService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.FixBidAndMarginController.CalculateAndSaveFixBidData(System.Int32)">
+            <summary>
+            Calculate, Get and Save Fix Bid and Margin Data
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.LaborPricingController">
+            <summary>
+            LaborPricingController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.LaborPricingController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.ILaborPricingService,USTGlobal.PIP.ApplicationCore.Interfaces.ILaborPricingWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            MarginController Constructor
+            </summary>
+            <param name="laborPricingService"></param>
+            <param name="laborPricingWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.LaborPricingController.GetLaborPricingData(System.Int32)">
+            <summary>
+            Get Labor pricing data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.LaborPricingController.SaveLaborPricingData(USTGlobal.PIP.ApplicationCore.DTOs.LaborPricingDTO)">
+            <summary>
+            Save Labor pricing data
+            </summary>
+            <param name="laborPricingDTO"></param>
+            /// <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.LaborPricingController.CalculateBackgroundFields(USTGlobal.PIP.ApplicationCore.DTOs.CalculateBackgroundFieldsDTO)">
+            <summary>
+            Calculate Background Fields (G13, G14, G15, G16)
+            </summary>
+            <param name="calculateDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.LogsController">
+            <summary>
+            LogsController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.LogsController.SaveLogs(USTGlobal.PIP.ApplicationCore.DTOs.LogsDTO)">
+            <summary>
+            SaveLogs
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.MasterController">
+            <summary>
+            MasterController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IMasterService)">
+            <summary>
+            MasterController constructor
+            </summary>
+            <param name="masterService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetMasterListNames">
+            <summary>
+            Get MasterList
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetMasters">
+            <summary>
+            Get Masters
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllServicePortfolios">
+            <summary>
+            Get All ServicePortfolios data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetServiceLineByPortfolio(System.Int32)">
+            <summary>
+            Get ServiceLine based on ServicePortfolioId
+            </summary>
+            <param name="servicePortfolioId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllServiceLines">
+            <summary>
+            Get All ServiceLines data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetProjectBillingByDeliveryId(System.Int32)">
+            <summary>
+            Get ProjectBillingType based on ProjectDeliveryTypeId
+            </summary>
+            <param name="projectDeliveryId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllProjectDeliveryData">
+            <summary>
+            Get All ProjectDeliveryType data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllProjectBillingData">
+            <summary>
+            Get All ProjectBillingType data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllContractingEntities">
+            <summary>
+            Get All ContractingEntities data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetLocations(System.Int32,System.Int32)">
+            <summary>
+            Get Locations based on ProjectId and PipSheetId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetMilestones">
+            <summary>
+            Get Milestones
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetMilestoneGroups">
+            <summary>
+            Get MilestoneGroups
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllMarkup">
+            <summary>
+            Get All SkillSets
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllResources">
+            <summary>
+            Get All Roles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetAllResourceGroups">
+            <summary>
+            Get All RoleGroups
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetCurrencyData">
+            <summary>
+            Get Currency Conversion data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.MasterController.GetCountries">
+            <summary>
+            Get Countires Master data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.OtherPriceAdjustmentController">
+            <summary>
+            OtherPriceAdjustmentController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.OtherPriceAdjustmentController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IOtherPriceAdjustmentService,USTGlobal.PIP.ApplicationCore.Interfaces.IOtherPriceAdjustmentWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            OtherPriceAdjustmentController Constructor
+            </summary>
+            <param name="otherPriceAdjustmentService"></param>
+            <param name="otherPriceAdjustmentWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.OtherPriceAdjustmentController.GetOtherPriceAdjustment(System.Int32)">
+            <summary>
+            Get Other Price Adjustment data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.OtherPriceAdjustmentController.SaveOtherPriceAdjustmentData(USTGlobal.PIP.ApplicationCore.DTOs.OtherPriceAdjustmentMainDTO)">
+            <summary>
+            Save OtherPriceAdjustment data
+            </summary>
+            <param name="otherPriceAdjustmentMainDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.PartnerCostAndRevenueController">
+            <summary>
+            PartnerCostAndRevenueController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PartnerCostAndRevenueController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IPartnerCostAndRevenueService,USTGlobal.PIP.ApplicationCore.Interfaces.IPartnerCostAndRevenueWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            PartnerCostAndRevenueController Constructor
+            </summary>
+            <param name="partnerCostAndRevenueService"></param>
+            <param name="partnerCostAndRevenueWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PartnerCostAndRevenueController.GetPartnerCostAndRevenue(System.Int32)">
+            <summary>
+            Get partner cost and Revenue data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PartnerCostAndRevenueController.SavePartnerCostAndRevenueData(USTGlobal.PIP.ApplicationCore.DTOs.PartnerCostAndRevenueDTO)">
+            <summary>
+            Save Partner cost and Revenue data
+            </summary>
+            <param name="partnerCostAndRevenueDTO"></param>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.PIPSheetCommentsController">
+            <summary>
+            PIPSheetCommentsController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PIPSheetCommentsController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IPIPSheetCommentService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService,USTGlobal.PIP.ApplicationCore.Interfaces.IPipSheetService)">
+            <summary>
+            PIPSheetCommentsController Constructor
+            </summary>
+            <param name="pipsheetCommentService"></param>
+            <param name="accountAuthService"></param>
+            <param name="pipsheetService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PIPSheetCommentsController.GetPIPSheetComments(System.Int32)">
+            <summary>
+            Get PIPSheet Comments
+            </summary>
+            <param name="pipsheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PIPSheetCommentsController.SavePIPSheetComment(USTGlobal.PIP.ApplicationCore.DTOs.PIPSheetCommentDTO)">
+            <summary>
+            Save PIPSheet Comments
+            </summary>
+            <param name="comment"></param>
+            <returns>comment id</returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PIPSheetCommentsController.DeletePIPSheetComment(System.Int32,System.Int32)">
+            <summary>
+            Delete PIPSheet Comment
+            </summary>
+            <param name="pipSheetCommentId"></param>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.PipSheetController">
+            <summary>
+            PIPSheetController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IPipSheetService,USTGlobal.PIP.ApplicationCore.Interfaces.IProjectControlWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IPipVersionService,USTGlobal.PIP.ApplicationCore.Interfaces.IReplicatePIPSheetService,USTGlobal.PIP.ApplicationCore.Interfaces.IProjectHeaderWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IResourcePlanningService,USTGlobal.PIP.ApplicationCore.Interfaces.ISharedService,USTGlobal.PIP.ApplicationCore.Interfaces.IUserService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            PipSheetController Constructor
+            </summary>
+            <param name="pipsheetService"></param>
+            <param name="projectControlWorkflowService"></param>
+            <param name="pipVersionService"></param>
+            <param name="replicatePIPSheetService"></param>
+            <param name="projectHeaderWorkflowService"></param>
+            <param name="resourcePlanningService"></param>
+            <param name="sharedService"></param>
+            <param name="userService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetSharedData(System.Int32)">
+            <summary>
+            GetSharedData
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetProjectControlData(System.Int32)">
+            <summary>
+            Get Project Control Data
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.SaveProjectControlData(USTGlobal.PIP.ApplicationCore.DTOs.ProjectControlDTO)">
+            <summary>
+            Save Project Control Data
+            </summary>
+            <param name="projectControlDTO"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.SubmitPIPSheet(USTGlobal.PIP.ApplicationCore.DTOs.PipSheetMainDTO)">
+            <summary>
+            Submit PIPSheet
+            </summary>
+            <param name="pipSheetMain"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetCurrencyConversionData(System.Int32)">
+            <summary>
+            Get currency conversion data based on PIPSheetId
+            </summary>
+            <param name="pipSheetId"></param>       
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.UpdatePIPSheetCheckIn(USTGlobal.PIP.ApplicationCore.DTOs.PipCheckInDTO)">
+            <summary>
+            Check In PIP Sheet
+            </summary>
+            <param name="pipCheckIn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetPIPSheetStatus(USTGlobal.PIP.ApplicationCore.DTOs.PipSheetMainDTO)">
+            <summary>
+            Get PipSheet status
+            </summary>
+            <param name="pipSheetMain"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetPipOverrides(System.Int32)">
+            <summary>
+            Get Pip Override Fields
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.CreateNewPipSheetVersion(USTGlobal.PIP.ApplicationCore.DTOs.VersionDTO)">
+            <summary>
+            Create new Pip Sheet Version
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.DeletePipSheet(System.Int32,System.Int32)">
+            <summary>
+            Delete PipSheet based on PipSheetId and ProjectId
+            </summary>
+            <param name="pipSheetId"></param>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetPipVersionSummaryDetails(System.Int32)">
+            <summary>
+            Get PipSheet Version details on Summary
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.ReplicatePIPSheet(USTGlobal.PIP.ApplicationCore.DTOs.ReplicatePIPSheetDTO)">
+            <summary>
+            Replicate PIPSheet
+            </summary>
+            <param name="replicatePIPSheet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetProjectLocations(System.Int32)">
+            <summary>
+            Get Locations based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetProjectMilestones(System.Int32)">
+            <summary>
+            Get Project Milestones based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PipSheetController.GetOverrideNotificationStatus(System.Int32)">
+            <summary>
+            Get Override Notification status based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.PriceAdjustmentYoyController">
+            <summary>
+            PriceAdjustmentYoyController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PriceAdjustmentYoyController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IPriceAdjustmentYoyService,USTGlobal.PIP.ApplicationCore.Interfaces.IColaWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            PriceAdjustmentYoyController Constructor
+            </summary>
+            <param name="priceAdjustmentYoyService"></param>
+            <param name="colaWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PriceAdjustmentYoyController.GetPriceAdjustmentYoy(System.Int32)">
+            <summary>
+            Get Price Adjustment YOY data
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.PriceAdjustmentYoyController.SavePriceAdjustmentYoyData(USTGlobal.PIP.ApplicationCore.DTOs.PriceAdjustmentDTO)">
+            <summary>
+            Save Price Adjustment YOY data
+            </summary>
+            <param name="priceAdjustmentDTO"></param>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ProjectController">
+            <summary>
+            ProjectController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IProjectService,USTGlobal.PIP.ApplicationCore.Interfaces.IAdminPipCheckinService,USTGlobal.PIP.ApplicationCore.Interfaces.IPipSheetService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            ProjectController Constructor
+            </summary>
+            <param name="projectService"></param>
+            <param name="adminPipCheckinService"></param>
+            <param name="pipsheetService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectController.GetProjectsList">
+            <summary>
+            Get Projects List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectController.GetCheckedOutVersions(System.Int32)">
+            <summary>
+            Get all Checked-Out PipSheet Versions based on ProjectId
+            </summary>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectController.GetHeader1Data(System.Int32,System.Int32)">
+            <summary>
+            Get Header Data based on ProjectId and PipSheetId
+            </summary>
+            <param name="projectId"></param>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectController.GetPIPSheetVersionData(System.Int32)">
+            <summary>
+            Get PipSheet version data based on ProjectId
+            </summary>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ProjectHeaderController">
+            <summary>
+            ProjectHeaderController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectHeaderController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IProjectHeaderService,USTGlobal.PIP.ApplicationCore.Interfaces.IProjectHeaderWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            ProjectHeaderController Constructor
+            </summary>
+            <param name="projectHeaderService"></param>
+            <param name="projectHeaderWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectHeaderController.GetProjectHeaderData(System.Int32,System.Int32)">
+            <summary>
+            Get Project Header data based on ProjectId and PipSheetId
+            </summary>
+            <param name="projectId"></param>
+            <param name="pipSheetId"></param>
+            <returns>Project header data</returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectHeaderController.SaveProjectHeaderData(USTGlobal.PIP.ApplicationCore.DTOs.ProjectHeaderDTO)">
+            <summary>
+            Save Project Header data
+            </summary>
+            <param name="projectHeader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectHeaderController.GetWorkflowStatusAccountRole(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get PipSheet WorkflowStatus And AccountSpecific Roles based on PipSheetId, AccountId and ProjectId
+            </summary>
+            <param name="pipSheetId"></param>
+            <param name="accountId"></param>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ProjectHeaderController.GetUserRoleForAllAccounts">
+            <summary>
+            Get user role for all accounts
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ReimbursementAndSalesController">
+            <summary>
+            ReimbursementAndSalesController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReimbursementAndSalesController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IReimbursementAndSalesService,USTGlobal.PIP.ApplicationCore.Interfaces.IReimbursementAndSalesWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            ReimbursementAndSales Constructor
+            </summary>
+            <param name="reimbursementAndSalesService"></param>
+            <param name="reimbursementAndSalesWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReimbursementAndSalesController.GetReimbursementAndSalesDetails(System.Int32)">
+            <summary>
+            Get Reimbursement And Sales data
+            </summary>
+            <param name="pipSheetId"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReimbursementAndSalesController.SaveReimbursementAndSalesDetails(USTGlobal.PIP.ApplicationCore.DTOs.ReimbursementAndSalesDTO)">
+            <summary>
+            Save Reimbursement And Sales data
+            </summary>
+            <param name="reimbursementAndSalesDTO"></param>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ReportController">
+            <summary>
+            ReportController
+            </summary>
+        </member>
+        <member name="P:USTGlobal.PIP.Api.Controllers.ReportController.configuration">
+            <summary>
+            IConfiguration
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReportController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IReportService,Microsoft.Extensions.Configuration.IConfiguration,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            ReportController Constructor
+            </summary>
+            <param name="reportService"></param>
+            <param name="configuration"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReportController.GetAccountBasedProjects(System.Collections.Generic.IList{USTGlobal.PIP.ApplicationCore.DTOs.AccountDTO})">
+            <summary>
+            Get Projects based on Accounts selected
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReportController.GetCustomReportKPIList">
+            <summary>
+            Get CustomReport KPI List
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReportController.GenerateProjectReport(USTGlobal.PIP.ApplicationCore.DTOs.ReportRequestDTO)">
+            <summary>
+            Generate Report based on Report Type
+            Report Type : 1 => Project Summary View Report, 2 => Project Detailed Level Report, 3 => Project Resource Level, 4 => Custom Report
+            </summary>
+            <param name="report"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ReportController.GetAuthorizedAccounts">
+            <summary>
+            Get Authorized Accounts
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ResourcePlanningController">
+            <summary>
+            ResourcePlanningController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ResourcePlanningController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IResourcePlanningService,USTGlobal.PIP.ApplicationCore.Interfaces.IResourcePlanningWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            ResourcePlanningController Constructor
+            </summary>
+            <param name="resourcePlanningService"></param>
+            <param name="resourcePlanningWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ResourcePlanningController.SaveResourcePlanningData(System.Collections.Generic.List{USTGlobal.PIP.ApplicationCore.DTOs.ResourcePlanningDTO})">
+            <summary>
+            Save ResourcePlanning Data
+            </summary>
+            <param name="resourcePlanningDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ResourcePlanningController.GetResourcePlanningData(System.Int32)">
+            <summary>
+            Get ResourcePlanning Data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.RiskManagementController">
+            <summary>
+            RiskManagementController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.RiskManagementController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IRiskManagementService,USTGlobal.PIP.ApplicationCore.Interfaces.IRiskManagementWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            RiskManagementController Constructor
+            </summary>
+            <param name="riskManagementService"></param>
+            <param name="riskManagementWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.RiskManagementController.GetRiskManagement(System.Int32)">
+            <summary>
+            Get Risk Management data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns>An object containing risk management data </returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.RiskManagementController.SaveRiskManagement(USTGlobal.PIP.ApplicationCore.DTOs.RiskManagementCalcDTO)">
+            <summary>
+            Save Risk Management data
+            </summary>
+            <param name="riskManagementCalcDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.SharePipController">
+            <summary>
+            SharePipController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SharePipController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.ISharePipService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            SharePipController Constructor
+            </summary>
+            <param name="sharePipService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SharePipController.GetSharedPipData(System.Int32)">
+            <summary>
+            Get Shared Pip data based on ProjectId
+            </summary>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SharePipController.DeleteSharedPipData(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Delete Share Pip Access of the PIP Version based on PipSheetId, RoleId, AccountId and UserId
+            </summary>
+            <param name="pipSheetId"></param>
+            <param name="roleId"></param>
+            <param name="accountId"></param>
+            <param name="sharedWithUserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SharePipController.UpdateSharedPipData(USTGlobal.PIP.ApplicationCore.DTOs.SharePipDTO)">
+            <summary>
+            Update Shared Pip Access
+            </summary>
+            <param name="sharedPip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SharePipController.SaveSharedPipData(System.Collections.Generic.List{USTGlobal.PIP.ApplicationCore.DTOs.SharePipDTO})">
+            <summary>
+            Save Shared Pip Access
+            </summary>
+            <param name="sharedPip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SharePipController.GetSharePipVersionData(System.Int32)">
+            <summary>
+            Get SharePip VersionData based on ProjectId
+            </summary>
+            <param name="projectId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.SummaryController">
+            <summary>
+            SummaryController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SummaryController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.ISummaryService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            SummaryController Constructor
+            </summary>
+            <param name="summaryService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SummaryController.GetBillingScheduleDetail(System.Int32)">
+            <summary>
+            Get Billing Schedule data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SummaryController.GetPLForecastData(System.Int32)">
+            <summary>
+            Get PL Forecast data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SummaryController.SavePLForecastData(System.Collections.Generic.IList{USTGlobal.PIP.ApplicationCore.DTOs.PLForecastDTO},System.Int32)">
+            <summary>
+            Save PL Forecast data on PipSheet Submit
+            </summary>
+            <param name="plForecastDTO"></param>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SummaryController.GetKeyPerformanceIndicatorsData(System.Int32)">
+            <summary>
+            Get Key Performance Indicators data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SummaryController.GetLocationWiseDetails(System.Int32)">
+            <summary>
+            Get Location Wise data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.SummaryController.GetTotalDealFinancials(System.Int32)">
+            <summary>
+            Get Total Deal Financials data based on PipSheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.UserController">
+            <summary>
+            UserController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IAdminService,USTGlobal.PIP.ApplicationCore.Interfaces.IApproverService,USTGlobal.PIP.ApplicationCore.Interfaces.IUserService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            UserController Constructor
+            </summary>
+            <param name="adminService"></param>
+            <param name="approverService"></param>
+            <param name="userService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.GetUserData">
+            <summary>
+            GetUserData
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.SaveUserData(USTGlobal.PIP.ApplicationCore.DTOs.UserDTO)">
+            <summary>
+            Save User Data
+            </summary>
+            <param name="userDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.GetReadOnlyUserList">
+            <summary>
+            Get ReadOnly Users list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.GetAdminUsers">
+            <summary>
+            Get Admin and Finance Approver Users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.DeleteUserRole(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Delete User Role based on UserId, AccountId
+            </summary>
+            <param name="userId"></param>
+            <param name="accountId"></param>
+            <param name="fromAdminScreen"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.AssignReadOnlyRoleForAllAccounts(System.Int32)">
+            <summary>
+            Assign ReadOnly Role for all Accounts for UserId
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.DeleteReadOnlyRoleForAllAccounts(System.Int32)">
+            <summary>
+            Delete ReadOnly Role for all accounts for UserId
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.GetApproversData">
+            <summary>
+            Get Approvers PipSheet data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.UserController.UploadMultipleUsersData">
+            <summary>
+            Save Multiple User Data
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.VacationAbsencesController">
+            <summary>
+            VacationAbsencesController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.VacationAbsencesController.#ctor(USTGlobal.PIP.ApplicationCore.Interfaces.IVacationAbsencesService,USTGlobal.PIP.ApplicationCore.Interfaces.IVacationAbsenceWorkflowService,USTGlobal.PIP.ApplicationCore.Interfaces.IAccountAuthService)">
+            <summary>
+            VacationAbsencesController Constructor
+            </summary>
+            <param name="vacationAbsencesService"></param>
+            <param name="vacationAbsenceWorkflowService"></param>
+            <param name="accountAuthService"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.VacationAbsencesController.GetVacationAbsences(System.Int32)">
+            <summary>
+            Get Vacation Absences data based on PipsheetId
+            </summary>
+            <param name="pipSheetId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.VacationAbsencesController.SaveVacationAbsencesData(USTGlobal.PIP.ApplicationCore.DTOs.VacationAbsencesParentDTO)">
+            <summary>
+            Save Vacation Absences data
+            </summary>
+            <param name="vacationAbsencesParentDTO"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Controllers.ValuesController">
+            <summary>
+            ValuesController
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ValuesController.Get">
+            <summary>
+            Get
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Controllers.ValuesController.Get(System.Int32)">
+            <summary>
+            Get
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Helpers.ITokenHelper">
+            <summary>
+            ITokenHelper
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Helpers.ITokenHelper.CreateClaims(USTGlobal.PIP.ApplicationCore.DTOs.UserRoleDTO)">
+            <summary>
+            CreateClaims
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Helpers.ITokenHelper.GetClaimsFromIdentity">
+            <summary>
+            GetClaimsFromIdentity
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Helpers.TokenHelper">
+            <summary>
+            TokenHelper
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Helpers.TokenHelper.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            TokenHelper Constructor
+            </summary>
+            <param name="contextAccessor"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Helpers.TokenHelper.CreateClaims(USTGlobal.PIP.ApplicationCore.DTOs.UserRoleDTO)">
+            <summary>
+            CreateClaims
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Helpers.TokenHelper.GetClaimsFromIdentity">
+            <summary>
+            GetClaimsFromIdentity
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Middleware.AuthorizeRolePermission">
+            <summary>
+            AuthorizeRolePermission
+            </summary>
+        </member>
+        <member name="P:USTGlobal.PIP.Api.Middleware.AuthorizeRolePermission.AuthorizeRoles">
+            <summary>
+            AuthorizeRoles string to get from controller
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Middleware.AuthorizeRolePermission.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
+            <summary>
+            OnAuthorization
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Middleware.AuthorizeRolePermission.GetUserRolesData(System.String)">
+            <summary>
+            GetUserRolesData
+            </summary>
+            <param name="emailId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Middleware.SerilogMiddleware">
+            <summary>
+            SerilogMiddleware
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Middleware.SerilogMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            SerilogMiddleware
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Middleware.SerilogMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invoke
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Program">
+            <summary>
+            Program
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Program.Main(System.String[])">
+            <summary>
+            Main
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Program.BuildWebHost(System.String[])">
+            <summary>
+            CreateWebHostBuilder
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.Startup">
+            <summary>
+            Startup
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:USTGlobal.PIP.Api.Startup.Configuration">
+            <summary>
+            IConfiguration
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            ConfigureServices
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            Configure
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Startup.AddRepos(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddRepos
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Startup.AddServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddServices
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Startup.AddHelpers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            AddHelpers
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.Startup.GetXmlCommentsPath">
+            <summary>
+            GetXmlCommentsPath
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:USTGlobal.PIP.Api.SwaggerDefault">
+            <summary>
+            SwaggerDefault
+            </summary>
+        </member>
+        <member name="M:USTGlobal.PIP.Api.SwaggerDefault.Apply(Microsoft.OpenApi.Models.OpenApiOperation,Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext)">
+            <summary>
+            Apply
+            </summary>
+            <param name="operation"></param>
+            <param name="context"></param>
+        </member>
+    </members>
+</doc>

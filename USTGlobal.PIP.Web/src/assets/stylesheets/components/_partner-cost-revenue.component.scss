@@ -1,0 +1,97 @@
+#partner-cost-revenue {
+  max-height: 70vh !important;
+  min-height: 69vh !important;
+  overflow: auto;
+
+  .disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+    // background-color: #e9ecef;
+  }
+  .disable-control {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: #e9ecef;
+  }
+  .ui-table-wrapper {
+    width: auto;
+    overflow-x: scroll;
+    max-width: 99%;
+    word-wrap: break-word;
+  }
+
+  .ui-inputtext {
+    width: 100%;
+  }
+
+  .table-footer > td {
+    color: #666666;
+    background-color: #eeeeee;
+  }
+
+  .ui-table .ui-table-thead > tr > th {
+    height: 39.2px;
+  }
+
+  .ui-inputtext.ng-invalid {
+    border: 2px solid $error;
+    border-radius: 4px;
+  }
+
+  .ui-table .ui-table-tfoot > tr > td {
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    color: #666666;
+    font-weight: 700;
+  }
+  .ui-table-scrollable-wrapper {
+    border: 1px solid #c5c5c5;
+  }
+  .footer-summary {
+    border-bottom: 1px solid #c8c8c8;
+    border-left: 1px solid #c8c8c8;
+    background: #eeeeee 0% 0% no-repeat padding-box;
+  }
+  .scrollable-part > .ui-table-scrollable-body {
+    margin-bottom: 7px !important;
+  }
+  .ui-table-summary {
+    background-color: #f4f4f4 !important;
+    color: #1d1a1a;
+    padding: 0.571em 1em;
+    text-align: center;
+    padding-bottom: 56px;
+    border: 1px solid #c5c5c5;
+  }
+  .ui-inputtext {
+    max-width: 200px !important;
+  }
+  .ui-table-unfrozen-view {
+    .ui-table-scrollable-header {
+      overflow-y: scroll;
+      .ui-table-scrollable-header-box {
+        margin-right: 0 !important;
+      }
+    }
+    .ui-table-scrollable-body {
+      overflow-x: scroll;
+      overflow-y: scroll;
+    }
+    .ui-table-scrollable-footer {
+      .ui-table-scrollable-footer-box {
+        overflow-y: scroll;
+        margin-right: 0px !important;
+        overflow-x: hidden;
+      }
+    }
+  }
+
+  #periodNote {
+    color: #c73e27;
+    font-weight: bold;
+  }
+  .ui-table-tbody > tr > td {
+    height: 43px !important;
+  }
+}

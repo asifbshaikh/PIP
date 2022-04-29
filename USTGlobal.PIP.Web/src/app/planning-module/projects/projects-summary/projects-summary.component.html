@@ -1,0 +1,19 @@
+<!-- <div *ngIf="isLoading" class="overlay">
+    <img id="spinnerImage" class="spinner" alt="Loading" src="assets/Images/loading-blue-bak.gif" />
+</div> -->
+<p-panel header="Project - Staff">
+    <div id="project-staff" class="stepBody jsFormContainer">
+        <pe-steps [(activeIndex)]="stepPageIndex" styleClass="steps-custom" *ngIf="stepLabels.length>0">
+            <pe-step [label]="stepLabels[0]">
+                <app-revised-summary *ngIf="stepPageIndex === 0"></app-revised-summary>
+            </pe-step>
+            <!-- 
+            <pe-step [label]="stepLabels[1]">
+                <app-resource-analysis *ngIf="stepPageIndex === 1"></app-resource-analysis>
+            </pe-step>
+            <pe-step [label]="stepLabels[2]">
+                <app-infographics *ngIf="stepPageIndex === 2"></app-infographics>
+            </pe-step> -->
+        </pe-steps>
+    </div>
+</p-panel>

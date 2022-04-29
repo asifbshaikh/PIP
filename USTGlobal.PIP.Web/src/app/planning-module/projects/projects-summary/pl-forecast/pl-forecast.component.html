@@ -1,0 +1,248 @@
+<form id="pl-forecast" [formGroup]="plForecastForm">
+    <div style="padding-bottom: 1em;">
+        <span class="tittle-header">{{ 'ProjectSummary.forecast'| translate}}</span>
+        <span style="margin-left: 2%;">Values in:
+            <b class="green currency-font">{{currencySymbol}}</b></span>
+    </div>
+    <p-table tableStyleClass="fixtable" class="form-group" [resizableColumns]="true" [scrollable]="true"
+        frozenWidth="310px" scrollHeight="calc(100vh - 450px)" class="form-group table  table-bordered table-sm"
+        cellspacing="0" [value]="plForecastForm.get('plForecastDTO')['controls']" width="auto"
+        formArrayName="plForecastDTO" [columns]="periodCols">
+        <ng-template pTemplate="frozencolgroup" let-columns>
+            <colgroup>
+                <col style="width:200px">
+                <col style="width:110px">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+                <col *ngFor="let col of periodCols">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="frozenheader" let-columns>
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+                <th style="height: 39px;">
+                    <text-ellipsis> {{ 'ProjectSummary.forecast'| translate}}</text-ellipsis>
+                </th>
+                <th>
+                    <text-ellipsis> {{'ProjectSummary.projectTotal'| translate}} </text-ellipsis>
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+                <ng-container *ngFor="let period of pPeriod; let i = index;">
+                    <th style="width: 150px;">
+                        <span class="pre-format">{{'Total\n' + period.year}}
+                            <span (click)="onExpandCollapseColumn(period.year, i)">
+                                <i [ngClass]="yearList[i].collapse ? 'fa fa-minus-circle' : 'fa fa-plus-circle'"
+                                    class="pointer p-l-5"></i>
+                            </span>
+                        </span>
+                    </th>
+                    <ng-container *ngFor="let period of periodCols">
+                        <th *ngIf="!period.header.includes(check_year) && yearList[i].collapse && period.header.includes(yearList[i].year)"
+                            style="width: 150px;">
+                            <span class="pre-format">{{period.header}}</span>
+                        </th>
+                    </ng-container>
+                </ng-container>
+            </tr>
+        </ng-template>
+
+        <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-rowIndex="rowIndex">
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}" class="bold"
+                *ngIf="rowIndex ===0 || rowIndex === 8 ||  rowIndex === 9 || rowIndex === 10 ||  rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 21">
+                <td>
+                    <span (click)="onExpandCollapse(rowIndex)">
+                        <i *ngIf="rowIndex === 0"
+                            [ngClass]="collapsedPriceClient ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"
+                            class="pointer"></i>
+                        <i *ngIf="rowIndex === 10"
+                            [ngClass]="collapsedProjectCost ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"
+                            class="pointer"></i>
+                        {{rowData.value.label }}</span>
+                </td>
+                <td [ngClass]="{'red': rowData.value.total < 0}">
+                    <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2' | negativeValue}}%</text-ellipsis>
+                    </span>
+                    <ng-template #elseBlock>
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2'| negativeValue}}</text-ellipsis>
+                    </ng-template>
+                </td>
+            </tr>
+
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                [formGroupName]="rowIndex" *ngIf="collapsedPriceClient && rowIndex < 8 && rowIndex > 0">
+                <td class="group">
+                    <span> {{rowData.value.label }}</span>
+                </td>
+
+                <td [ngClass]="{'red': rowData.value.total < 0}">
+                    <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2' | negativeValue}}%</text-ellipsis>
+                    </span>
+                    <ng-template #elseBlock>
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2'| negativeValue}}</text-ellipsis>
+                    </ng-template>
+                </td>
+            </tr>
+
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                [formGroupName]="rowIndex" *ngIf="collapsedProjectCost && rowIndex < 17 && rowIndex > 10">
+                <td class="group">
+                    <span> {{rowData.value.label }}</span>
+                </td>
+
+                <td [ngClass]="{'red': rowData.value.total < 0}">
+                    <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2' | negativeValue}}%</text-ellipsis>
+                    </span>
+                    <ng-template #elseBlock>
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2'| negativeValue}}</text-ellipsis>
+                    </ng-template>
+                </td>
+            </tr>
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                *ngIf="rowIndex === 19 || rowIndex === 22">
+                <td>
+                    <span> {{rowData.value.label }}</span>
+                </td>
+                <td [ngClass]="{'red': rowData.value.total < 0}">
+                    <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2' | negativeValue}}%</text-ellipsis>
+                    </span>
+                    <ng-template #elseBlock>
+                        <text-ellipsis>{{rowData.value.total | number: '1.2-2'| negativeValue}}</text-ellipsis>
+                    </ng-template>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                [formGroupName]="rowIndex" *ngIf="rowIndex == 0 "
+                [ngClass]="{'bold' : rowIndex === 0 || rowIndex === 8 || rowIndex === 9 || rowIndex === 10 || rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 21 }">
+                <ng-container *ngFor="let period of periodCols; let i = index">
+                    <td [ngClass]="{'red': rowData.value.plForecastPeriodDTO[i].price < 0}"
+                        *ngIf="!period.isCollapse || period.billingPeriodId == 0">
+                        <div class="bold" formArrayName="plForecastPeriodDTO">
+                            <div [formGroupName]="i">
+                                <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}%
+                                    </text-ellipsis>
+                                </span>
+                                <ng-template #elseBlock>
+                                    <text-ellipsis>
+
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}
+                                    </text-ellipsis>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+            </tr>
+
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                [formGroupName]="rowIndex" *ngIf="collapsedPriceClient && rowIndex < 8 &&  rowIndex > 0"
+                [ngClass]="{'bold' : rowIndex === 0 || rowIndex === 8 || rowIndex === 9 || rowIndex === 10 || rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 21 }">
+                <ng-container *ngFor="let period of periodCols; let i = index">
+                    <td [ngClass]="{'red': rowData.value.plForecastPeriodDTO[i].price < 0}"
+                        *ngIf="!period.isCollapse || period.billingPeriodId == 0">
+                        <div formArrayName="plForecastPeriodDTO">
+                            <div [formGroupName]="i">
+                                <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}%
+                                    </text-ellipsis>
+
+                                </span>
+                                <ng-template #elseBlock>
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}
+                                    </text-ellipsis>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+            </tr>
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                [formGroupName]="rowIndex" *ngIf="rowIndex > 7 && rowIndex < 11"
+                [ngClass]="{'bold' : rowIndex === 0 || rowIndex === 8 || rowIndex === 9 || rowIndex === 10 || rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 21 }">
+                <ng-container *ngFor="let period of periodCols; let i = index">
+                    <td [ngClass]="{'red': rowData.value.plForecastPeriodDTO[i].price < 0}"
+                        *ngIf="!period.isCollapse || period.billingPeriodId == 0">
+                        <div class="bold" formArrayName="plForecastPeriodDTO">
+                            <div [formGroupName]="i">
+                                <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}%
+                                    </text-ellipsis>
+
+                                </span>
+                                <ng-template #elseBlock>
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}
+                                    </text-ellipsis>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+            </tr>
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                [formGroupName]="rowIndex" *ngIf="collapsedProjectCost && rowIndex < 17 && rowIndex > 10"
+                [ngClass]="{'bold' : rowIndex === 0 || rowIndex === 8 || rowIndex === 9 || rowIndex === 10 || rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 21 }">
+                <ng-container *ngFor="let period of periodCols; let i = index">
+                    <td [ngClass]="{'red': rowData.value.plForecastPeriodDTO[i].price < 0}"
+                        *ngIf="!period.isCollapse || period.billingPeriodId == 0">
+                        <div formArrayName="plForecastPeriodDTO">
+                            <div [formGroupName]="i">
+                                <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}%
+                                    </text-ellipsis>
+
+                                </span>
+                                <ng-template #elseBlock>
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}
+                                    </text-ellipsis>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+            </tr>
+            <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}"
+                [formGroupName]="rowIndex" *ngIf="rowIndex > 16"
+                [ngClass]="{'bold' : rowIndex === 0 || rowIndex === 8 || rowIndex === 9 || rowIndex === 10 || rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 21 }">
+                <ng-container *ngFor="let period of periodCols; let i = index">
+                    <td [ngClass]="{'red': rowData.value.plForecastPeriodDTO[i].price < 0}"
+                        *ngIf="!period.isCollapse || period.billingPeriodId == 0">
+                        <div [ngClass]="{'bold' : rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 21}"
+                            formArrayName="plForecastPeriodDTO">
+                            <div [formGroupName]="i">
+                                <span *ngIf="rowIndex === 18 || rowIndex === 21; else elseBlock">
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}%
+                                    </text-ellipsis>
+
+                                </span>
+                                <ng-template #elseBlock>
+                                    <text-ellipsis>
+                                        {{rowData.value.plForecastPeriodDTO[i].price | number: '1.2-2' | negativeValue}}
+                                    </text-ellipsis>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+            </tr>
+        </ng-template>
+    </p-table>
+</form>

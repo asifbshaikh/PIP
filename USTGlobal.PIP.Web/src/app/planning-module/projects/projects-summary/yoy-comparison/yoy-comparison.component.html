@@ -1,0 +1,85 @@
+<div class="m-b-10">
+    <p class="header">{{ 'ProjectSummary.yearComparison'| translate }}</p>
+</div>
+<form [formGroup]="yoyComparisonForm">
+    <p-table tableStyleClass="fixtable" class="form-group" [resizableColumns]="true" [scrollable]="true"
+        frozenWidth="310px" scrollHeight="calc(100vh - 350px)" class="form-group table  table-bordered table-sm"
+        cellspacing="0" width="100%" [value]="yoyComparisonForm.get('summaryYoyDTO')['controls']"
+        formArrayName="summaryYoyDTO" [columns]="yearCols">
+
+        <ng-template pTemplate="frozencolgroup" let-columns>
+            <colgroup>
+                <col style="width:160px">
+                <col style="width:150px">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+                <col *ngFor="let col of yearCols" style="width:110px">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="frozenheader" let-columns>
+            <tr>
+                <th style="height: 39px;">
+                    {{ 'ProjectSummary.yoy'| translate}}
+                </th>
+                <th>
+                    {{'ProjectSummary.projectTotal'| translate}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let year of yearCols" style="height: 39px;">
+                    <span class="pre-format"> {{year.header}}
+                    </span>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-rowIndex="rowIndex">
+            <tr [formGroupName]="rowIndex">
+                <td *ngIf="rowIndex ===0">
+                    {{'ProjectSummary.totalEst' | translate}}
+                </td>
+                <td *ngIf="rowIndex ===1">
+                    {{'ProjectSummary.totalProjectCost' | translate}}
+                </td>
+                <td *ngIf="rowIndex ===2">
+                    {{'ProjectSummary.gpAmt' | translate}}
+                </td>
+                <td *ngIf="rowIndex ===3">
+                    {{'ProjectSummary.gpmEst' | translate}}
+                </td>
+                <td *ngIf="rowIndex ===4">
+                    {{'ProjectSummary.adjustedEbitda' | translate}}
+                </td>
+                <td *ngIf="rowIndex ===5">
+                    {{'ProjectSummary.adjustedEbitdaPercent' | translate}}
+                </td>
+                <td>
+                    <span *ngIf="rowIndex === 3 || rowIndex === 5; else elseBlock">
+                        {{rowData.value.total | number: '1.2-2' | negativeValue}} %</span>
+                    <ng-template #elseBlock>{{rowData.value.total | number: '1.2-2'| negativeValue }}</ng-template>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <tr [formGroupName]="rowIndex">
+                <td *ngFor="let year of yearCols; let i = index">
+                    <div formArrayName="summaryYoyPeriodList">
+                        <div [formGroupName]="i">
+                            <span *ngIf="rowIndex === 3 || rowIndex === 5; else elseBlock">
+                                {{rowData.value.summaryYoyPeriodList[i].price | number: '1.2-2' | negativeValue}} %
+                            </span>
+                            <ng-template #elseBlock>
+                                {{rowData.value.summaryYoyPeriodList[i].price | number: '1.2-2' | negativeValue}}
+                            </ng-template>
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</form>

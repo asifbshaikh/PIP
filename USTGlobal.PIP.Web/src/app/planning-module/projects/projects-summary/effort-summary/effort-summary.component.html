@@ -1,0 +1,26 @@
+<p-table class="form-group mb-10" [value]="effortSummaryData">
+  <ng-template pTemplate="header">
+    <tr>
+      <th colspan="2">
+        {{ 'ProjectSummary.effortSummaryHeader'| translate}}
+      </th>
+      <th>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData>
+    <tr>
+      <td colspan="2">
+        {{rowData.label}}
+      </td>
+      <td>
+        <span
+          *ngIf="rowData.label === 'Total Hours Staff Effort' || rowData.label === 'FTE(avg/mo.)' ; else elseBlock">{{rowData.value | number: '1.2-2' | negativeValue}}
+        </span>
+        <ng-template #elseBlock>
+          {{rowData.value}}
+        </ng-template>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

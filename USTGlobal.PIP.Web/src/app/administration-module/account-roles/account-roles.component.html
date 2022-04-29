@@ -1,0 +1,66 @@
+<div id="define-admin">
+  <p-table #dt [value]="userRoles" #dt [value]="projects" [paginator]="true" [rows]="20"
+    [rowsPerPageOptions]="[20,30,40]" [resizableColumns]="true" columnResizeMode="expand" [scrollable]="true"
+    scrollHeight="calc(100vh - 205px)" class="form-group table  table-bordered table-sm" cellspacing="0" width="100%"
+    [globalFilterFields]="['name', 'uid', 'account', 'roles']">
+    <ng-template pTemplate="colgroup" let-columns>
+      <colgroup>
+        <col style="width:20%">
+        <col style="width:15%">
+        <col style="width:30%">
+        <col style="width:35%">
+      </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th [pSortableColumn]="'firstName'">Name
+          <p-sortIcon [field]="firstName"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'uid'">UID
+          <p-sortIcon [field]="uid"></p-sortIcon>
+        </th>
+        <th [pSortableColumn]="'account'">Account
+          <p-sortIcon [field]="account"></p-sortIcon>
+
+        </th>
+        <th>Role</th>
+      </tr>
+      <tr>
+        <td>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'name', 'contains')"
+            [value]="dt.filters['name'] ? dt.filters['name'].value.trim() : ''">
+        </td>
+        <td>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'uid', 'contains')"
+            [value]="dt.filters['uid'] ? dt.filters['uid'].value.trim() : ''">
+        </td>
+        <td>
+          <p-dropdown appendTo="body" #st [filter]="true" [options]="accounts"
+            (onChange)="dt.filter($event.value.name, 'account', 'equals')"></p-dropdown>
+        </td>
+        <td>
+          <input pInputText type="text" (input)="dt.filter($event.target.value, 'roles', 'contains')"
+            [value]="dt.filters['roles'] ? dt.filters['roles'].value.trim() : ''">
+
+        </td>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-userRole let-rowIndex="rowIndex">
+      <tr>
+        <td>
+          <text-ellipsis>{{userRole.name }}</text-ellipsis>
+        </td>
+        <td>
+          {{userRole.uid}}
+        </td>
+        <td>
+          <text-ellipsis>{{ userRole.account }}</text-ellipsis>
+        </td>
+        <td>
+          {{ userRole.roles}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

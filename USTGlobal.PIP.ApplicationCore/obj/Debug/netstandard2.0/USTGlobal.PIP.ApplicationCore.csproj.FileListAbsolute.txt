@@ -1,0 +1,8 @@
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\bin\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.deps.json
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\bin\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.dll
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\bin\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.pdb
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\obj\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.csprojAssemblyReference.cache
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\obj\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.AssemblyInfoInputs.cache
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\obj\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.AssemblyInfo.cs
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\obj\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.dll
+D:\workspace\pip\src\USTGlobal.PIP.ApplicationCore\obj\Debug\netstandard2.0\USTGlobal.PIP.ApplicationCore.pdb

@@ -1,0 +1,25 @@
+<div id="override-notification">
+  <p *ngIf="clientPrice || vacationAbsence || riskManagement || ebitdaStdOverhead">
+    Due to Recent Changes, values in following Tabs needs to be corrected :<br><br>
+    <span *ngIf="vacationAbsence"><b>{{vacationAbsence}}</b><br>
+      Distribution of overridden values in <b>Lost Revenue</b>.<br>
+      <br></span>
+    <span *ngIf="clientPrice"><b>{{clientPrice}}</b><br>
+      Distribution of overridden values in <b>Invoice Schedule</b>.<br>
+      <br></span>
+    <span *ngIf="riskManagement"><b>{{riskManagement}}</b><br>
+      Distribution of overridden values in <b>Total Assessed Risk Overrun</b>.
+      <br><br></span>
+    <span *ngIf="ebitdaStdOverhead"><b>{{ebitdaStdOverhead}}</b><br>
+      Overriden value for Std Overhead Amt cannot be less than default amount..
+      <br><br></span>
+    Please revisit and correct the values.
+  </p>
+  <br />
+  <div style="text-align: center;">
+    <button type="button" (click)="closeNotificaltionDialog()"
+      style="width: 85px;background: #007ad9;color: #ffffff;border-radius: 5px;height: 30px;border: 1px;">
+      {{ "PROJECTS.DisplayCheckOut.button" | translate }}
+    </button>
+  </div>
+</div>

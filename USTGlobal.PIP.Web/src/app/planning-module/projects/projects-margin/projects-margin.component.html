@@ -1,0 +1,56 @@
+<div *ngIf="isLoading" class="overlay">
+    <img id="spinnerImage" class="spinner" alt="Loading" src="assets/Images/loading-blue-bak.gif" />
+</div>
+<p-panel *ngIf="isDataAvailable" header="Project - Margin">
+    <div id="project-margin" class="stepBody jsFormContainer">
+        <pe-steps [(activeIndex)]="stepPageIndex" styleClass="steps-custom">
+            <pe-step label={{stepLabels[0]}}>
+                <app-ebitda *ngIf="stepPageIndex === 0"></app-ebitda>
+            </pe-step>
+
+            <pe-step label={{stepLabels[1]}}>
+                <app-labor-pricing *ngIf="stepPageIndex === 1"></app-labor-pricing>
+            </pe-step>
+
+            <pe-step label={{stepLabels[2]}}>
+                <app-vacation-absenses *ngIf="stepPageIndex === 2"></app-vacation-absenses>
+            </pe-step>
+
+            <pe-step label={{stepLabels[3]}}>
+                <app-price-adjustment *ngIf="stepPageIndex === 3"> </app-price-adjustment>
+            </pe-step>
+
+            <pe-step label={{stepLabels[4]}}>
+                <expenses-and-assets *ngIf="stepPageIndex === 4"> </expenses-and-assets>
+            </pe-step>
+
+            <pe-step label={{stepLabels[5]}}>
+                <partner-cost-revenue *ngIf="stepPageIndex === 5"></partner-cost-revenue>
+            </pe-step>
+
+            <pe-step label={{stepLabels[6]}}>
+                <reimbursement-and-sales *ngIf="stepPageIndex === 6"></reimbursement-and-sales>
+            </pe-step>
+
+            <pe-step label={{stepLabels[7]}}>
+                <other-price-adjustment *ngIf="stepPageIndex === 7"></other-price-adjustment>
+            </pe-step>
+
+            <pe-step label={{stepLabels[8]}}>
+                <risk-management *ngIf="stepPageIndex === 8"></risk-management>
+            </pe-step>
+
+            <pe-step label={{stepLabels[9]}}>
+                <app-total-client-price *ngIf="stepPageIndex === 9"></app-total-client-price>
+            </pe-step>
+
+            <pe-step label={{stepLabels[10]}}>
+                <app-capital-charges *ngIf="stepPageIndex === 10"></app-capital-charges>
+            </pe-step>
+
+            <pe-step label={{stepLabels[11]}}>
+                <fixed-bid-and-margin-calc *ngIf="stepPageIndex === 11"></fixed-bid-and-margin-calc>
+            </pe-step>
+        </pe-steps>
+    </div>
+</p-panel>

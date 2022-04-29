@@ -1,0 +1,78 @@
+<div id="master">
+    <p-card>
+    <div class="row p-t-10">
+        <div class="col-md-4">
+            <ul class="custom-bread-crumb" style="list-style: none;">
+                <breadcrumb></breadcrumb>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <form>
+                <span class="text-center p-r-20 p-t-10"><b>Masters</b></span>
+                <p-dropdown [filter]="true" [options]="adminDropdownItems" (onChange)="onDropdownChange($event.value)"
+                    [style]="{'width':'255px'}">
+                </p-dropdown>
+                <span class="p-offset-4">
+                    <i *ngIf="masterId === 4"
+                        style="font-size: 2em;position: absolute;top: 11%; right: 8%; color: #30b9f1; background-color: #ffffff;"
+                        class="pi pi-plus" (click)="onAddNewMaster()"></i>
+                </span>
+
+            </form>
+        </div>
+    </div>
+    
+        <div>
+            <div class="m-b-20" *ngIf="masterId ===1">
+                <app-contracting-entity></app-contracting-entity>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===2">
+                <app-service-portfolio-group></app-service-portfolio-group>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===3">
+                <app-project-delivery-type></app-project-delivery-type>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===4">
+                <app-location-master [savedLocation]="savedLocation"></app-location-master>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===5">
+                <app-contractor-markup></app-contractor-markup>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===6">
+                <app-holidays></app-holidays>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===7">
+                <app-ebitda-seat-cost></app-ebitda-seat-cost>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===8">
+                <app-milestone></app-milestone>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===9">
+                <!-- <app-default-labels></app-default-labels> -->
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===10">
+                <app-direct-expense></app-direct-expense>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===11">
+                <app-basic-assets></app-basic-assets>
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===12">
+
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===13">
+
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===14">
+
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===15">
+
+            </div>
+            <div class="m-b-20" *ngIf="masterId ===16">
+
+            </div>
+        </div>
+    </p-card>
+    <app-add-new-location *ngIf="showDialog === true" [selectLocation]="location" (onLocationSave)="onSave($event)">
+    </app-add-new-location>
+</div>

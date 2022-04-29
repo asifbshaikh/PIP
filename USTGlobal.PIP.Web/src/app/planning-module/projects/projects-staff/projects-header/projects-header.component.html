@@ -1,0 +1,276 @@
+<p-toast position="top-center" closable="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"
+  [style]="{width: '55%', transform: 'translate(25px, 76px)'}" key="msgs">
+</p-toast>
+<form *ngIf="isDataAvailable" [formGroup]="projectHeader" (ngSubmit)="onSaveClick()" id="project-header"
+  style="height: 74vh;">
+  <div class="p-grid" style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7"
+        for="account name per sf">{{ 'ProjectHeader.fields.accountName' | translate }}<span
+          class="mandatory">*</span></label>
+    </div>
+    <div class="p-md-6 p-lg-3" [ngClass]="{'no-cursor' : this.versionNumber > 1}">
+      <p-dropdown [options]="accountNameEntities"
+        [ngClass]="{'disable' : (this.versionNumber > 1) || (!hasAccountLevelAccess && pipSheetIdCheck > 0) }"
+        [(ngModel)]="selectedAccountNameEntity" placeholder="--- select ---" formControlName="accountNameEntity"
+        (mouseover)="accountNameError()" (mouseout)="accountNameError()"
+        (onChange)="onAccountNameChange($event.value.id)" tooltipPosition="top" [pTooltip]="pShowToolTip"
+        id="form-control-dropdown"
+        [ngClass]="{'is-invalid':refPh.accountNameEntity.touched && refPh.accountNameEntity.errors}">
+      </p-dropdown>
+      <span class="accountName-tooltip">
+        <i class="p-sm-1 info-icon" pTooltip="{{'MESSAGES.Tooltip.AccountNameTooltipMessage.message' | translate }}"
+          tooltipPosition="top"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+      </span>
+    </div>
+    <div class="p-md-6 p-lg-2">
+      <label class="pull-right p-t-7"
+        for="service portfolio group">{{ 'ProjectHeader.fields.servicePortfolioGroup' | translate }}<span
+          class="mandatory">*</span></label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <p-dropdown [options]="servicePorfolios" [(ngModel)]="selectedPortfolioGroup"
+        formControlName="servicePortfolioGroup" class="form-control"
+        (onChange)="onServicePortfolioGroupchange($event.value)"></p-dropdown>
+    </div>
+  </div>
+  <div class="p-grid" style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7"
+        for="contracting entity">{{ 'ProjectHeader.fields.contractingEntity' | translate }}<span
+          class="mandatory">*</span></label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <p-dropdown [options]="contractingEntities" [(ngModel)]="selectedContractingEntity" placeholder="--- select ---"
+        formControlName="contractingEntity" (onChange)="setBeatTax($event.value.id, false, false)" class="form-control">
+      </p-dropdown>
+    </div>
+    <div class="p-md-6 p-lg-2">
+      <label class="pull-right p-t-7" for="service line">{{ 'ProjectHeader.fields.serviceLine' | translate }}<span
+          class="mandatory">*</span></label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <p-dropdown [options]="filteredServiceLines" [(ngModel)]="selectedServiceLine" placeholder="--- select ---"
+        formControlName="serviceLine" class="form-control"></p-dropdown>
+    </div>
+  </div>
+  <div class="p-grid" style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label
+        *ngIf="projectHeader.get('contractingEntity').value ? projectHeader.get('contractingEntity').value.id === contractingEntityId : true"
+        class="pull-right p-t-7" for="project id per sf">{{ 'ProjectHeader.fields.beatTax' | translate }}
+      </label>
+    </div>
+    <div class="p-md-6 p-lg-3 radio-btns">
+      <span
+        *ngIf="projectHeader.get('contractingEntity').value ? projectHeader.get('contractingEntity').value.id === contractingEntityId : true"
+        class="m-r-20">
+        <p-radioButton name="beatTax" [value]="false" label="Yes" formControlName="beatTax" inputId="beatTax1">
+        </p-radioButton>
+      </span>
+      <span
+        *ngIf="projectHeader.get('contractingEntity').value ? projectHeader.get('contractingEntity').value.id === contractingEntityId : true">
+        <p-radioButton name="beatTax" [value]="true" label="No" formControlName="beatTax" inputId="beatTax1">
+        </p-radioButton>
+      </span>
+    </div>
+    <!-- <div class="p-md-6 p-lg-3" *ngIf="isDummy">
+      <input type="text" pInputText formControlName="projectIdPerSf" class="form-control"
+      style="opacity: 1; background-color: #e9ecef; cursor:not-allowed;" />
+    </div> -->
+    <div class="p-md-6 p-lg-2">
+      <label class="pull-right p-t-7"
+        for="project delivery type">{{ 'ProjectHeader.fields.projectDeliveryType' | translate }}<span
+          class="mandatory">*</span>
+      </label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <p-dropdown [options]="deliveryTypes" [(ngModel)]="selectedDeliveryType" formControlName="projectDeliveryType"
+        (mouseover)="projectDeliveryTypeError()" (mouseout)="projectDeliveryTypeError()" tooltipPosition="top"
+        [pTooltip]="pShowToolTip" id="form-control-dropdown" [ngClass]="{
+      'is-invalid':
+      refPh.projectDeliveryType.touched &&
+      refPh.projectDeliveryType.errors
+    }" (onChange)="onDeliveryTypechange($event.value)"></p-dropdown>
+    </div>
+  </div>
+  <div class="p-grid" style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7" for="project id per sf">{{ 'ProjectHeader.fields.projectID' | translate }}<span
+          class="mandatory">*</span></label>
+    </div>
+    <div class="p-md-6 p-lg-3" *ngIf="!isDummy">
+      <input type="text" [class.disable-input]="this.versionNumber > 1" (mouseover)="projectIdError()"
+        (mouseout)="projectIdError()" tooltipPosition="right" [pTooltip]="pShowToolTip" pInputText
+        formControlName="projectIdPerSf" placeholder="XXXX-NNNN-NN-NN" class="form-control uppercase"
+        [readonly]="this.versionNumber > 1" />
+      <span [class.required]="refPh.projectIdPerSf.touched && refPh.projectIdPerSf.errors">{{idFormat}}</span>
+    </div>
+    <div class="p-md-6 p-lg-3" *ngIf="isDummy">
+      <input type="text" pInputText formControlName="projectIdPerSf" class="form-control"
+        style="opacity: 1; background-color: #e9ecef; cursor:not-allowed;" />
+    </div>
+
+    <div class="p-md-6 p-lg-2">
+      <label class="pull-right p-t-7"
+        for="sf billing type">{{ 'ProjectHeader.fields.projectBillingType' | translate }}<span
+          class="mandatory">*</span></label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <p-dropdown [options]="filteredBillingType" [(ngModel)]="selectedBillingType" placeholder="--- select ---"
+        formControlName="sfBillingType" (mouseover)="projectBillingTypeError()" (mouseout)="projectBillingTypeError()"
+        tooltipPosition="top" [pTooltip]="pShowToolTip" id="form-control-dropdown" [ngClass]="{
+        'is-invalid':
+        refPh.sfBillingType.touched && refPh.sfBillingType.errors
+      }"></p-dropdown>
+    </div>
+  </div>
+  <div class="p-grid" style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7"
+        for="project name per sf">{{ 'ProjectHeader.fields.projectName' | translate }}<span
+          class="mandatory">*</span></label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <input placeholder="Enter Project Name" type="text" [class.disable-input]="this.versionNumber > 1" pInputText
+        formControlName="projectNamePerSf" (mouseover)="projectNameError()" (mouseout)="projectNameError()"
+        tooltipPosition="right" [pTooltip]="pShowToolTip" class="form-control" [ngClass]="{
+        'is-invalid':
+        refPh.projectNamePerSf.touched && refPh.projectNamePerSf.errors
+      }" [readonly]="this.versionNumber > 1" />
+    </div>
+    <div class="p-md-6 p-lg-2">
+      <label class="pull-right p-t-7" for="Created by">{{ 'ProjectHeader.fields.createdBy' | translate }}</label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <input type="text" pInputText formControlName="pipsheetCreatedBy" placeholder="Author" class="form-control"
+        style="opacity: 1; background-color: #e9ecef; cursor:not-allowed;" />
+    </div>
+  </div>
+
+  <div class="p-grid" style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7"
+        for="delivery owner">{{ 'ProjectHeader.fields.deliveryOwner' | translate }}</label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <input placeholder="Enter Delivery Owner" type="text" pInputText formControlName="deliveryOwner"
+        class="form-control" />
+    </div>
+
+    <div class="p-md-6 p-lg-2">
+      <label class="pull-right p-t-7" for="submitted by">{{ 'ProjectHeader.fields.submittedBy' | translate }}</label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <input type="text" pInputText formControlName="submittedBy" placeholder="Author" class="form-control"
+        style="opacity: 1; background-color: #e9ecef; cursor:not-allowed;" />
+    </div>
+  </div>
+  <div class="p-grid" style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7"
+        for="Last updated by">{{ 'ProjectHeader.fields.lastUpdatedBy' | translate }}</label>
+    </div>
+    <div class="p-md-6 p-lg-3">
+      <input type="text" pInputText formControlName="lastUpdatedBy" placeholder="Author" class="form-control"
+        style="opacity: 1; background-color: #e9ecef; cursor:not-allowed;" />
+    </div>
+  </div>
+  <div *ngIf="resendComments && sProjectHeader.projectHeader.approverStatusId === 1" class="p-grid"
+    style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7"
+        for="Resend/Revise Comments">{{ 'ProjectHeader.fields.resendComments' | translate }}</label>
+    </div>
+    <div class="p-lg-6" style="padding-top: 15px;">
+      {{resendComments}}<br>
+      <span>
+        <b>From : </b>
+        {{resendBy}} {{ ' | ' }} {{resendOn | date:'MM-dd-yyyy hh:mm:ss'}} {{resendOn ? '(IST)' : ''}}
+      </span>
+    </div>
+  </div>
+  <div *ngIf="approverComments && sProjectHeader.projectHeader.approverStatusId === 2" class="p-grid"
+    style="margin: -0.5em 0 0 0;">
+    <div class="p-md-6 p-lg-3">
+      <label class="pull-right p-t-7"
+        for="Approver Comments">{{ 'ProjectHeader.fields.approverComments' | translate }}</label>
+    </div>
+    <div class="p-lg-6" style="padding-top: 15px;">
+      {{approverComments}}<br>
+      <span>
+        <b>From : </b>
+        {{approvedBy}} {{ ' | ' }} {{approvedOn | date:'MM-dd-yyyy hh:mm:ss'}} {{approvedOn ? '(IST)' : ''}}
+      </span>
+    </div>
+  </div>
+  <hr style="margin: 0rem;" />
+  <div class="p-grid" formGroupName="currencyControl" style="padding: 0px 9% 0 9%;">
+    <div class="p-md-2">
+      <span class="table-title">
+        {{ currency | translate }}
+      </span>
+    </div>
+    <div class="p-md-2 text-right">
+      <label>{{ "CurrencyControl.Region" | translate }} </label>
+    </div>
+    <div class="p-md-2" style="margin: -4px 0px 0px 0px;">
+      <p-dropdown [options]="countries" formControlName="country" (onChange)="onCountryChange($event.value)"
+        class="form-control form-control-dropdown" scrollHeight="125px">
+      </p-dropdown>
+    </div>
+    <div class="p-md-1  text-right">
+      <label>{{ "CurrencyControl.LocalCurrency" | translate }} </label>
+    </div>
+    <div class="p-md-2 grey-bg">
+      <label>{{
+    projectHeader.get('currencyControl')['controls'].symbol.value
+  }}</label>
+    </div>
+    <div class="p-md-1 text-right">
+      <label>
+        {{ "CurrencyControl.ONE" | translate }}
+        {{ "CurrencyControl.USD" | translate }} </label>
+    </div>
+    <div class="p-md-2 grey-bg ">
+      <label>{{
+      projectHeader.get('currencyControl')['controls'].usdToLocal.value
+      | number: "1.3-3"
+    }}
+        {{
+      projectHeader.get('currencyControl')['controls'].symbol.value
+    }}</label>
+    </div>
+    <div class="p-md-5"></div>
+    <div class="p-md-2 text-right">
+      <label>{{
+      projectHeader.get('currencyControl')['controls'].localToUSD.value
+      | number: "1.4-4"
+    }}
+        {{ "CurrencyControl.USD" | translate }} </label>
+    </div>
+    <div class="p-md-2 grey-bg ">
+      <label>
+        {{ "CurrencyControl.ONE" | translate }}
+        {{
+        projectHeader.get('currencyControl')['controls'].symbol.value
+      }}</label>
+    </div>
+    <div class="p-md-1 text-right">
+      <label>{{ "CurrencyControl.FactorUsed" | translate }} </label>
+    </div>
+    <div class="p-md-2 grey-bg ">
+      <label>{{
+        projectHeader.get('currencyControl')['controls'].factorUsed.value
+        | number: "1.3-3"
+      }}</label>
+    </div>
+  </div>
+  <div class="p-grid">
+    <hr class="bottom-line">
+    <div class="p-sm-12 btns-strip">
+      <button pButton type="button" (click)="onSaveClick()" class="ui-button-rounded ui-button-success"
+        [disabled]="!projectHeader.valid" label="Save"></button>
+    </div>
+  </div>
+</form>

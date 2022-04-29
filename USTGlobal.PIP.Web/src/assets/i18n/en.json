@@ -1,0 +1,2320 @@
+{
+  "PUBLIC": {
+    "Login": {
+      "pageTitle": "PIP Login",
+      "title": "Project Initiation Plan",
+      "desc": "This is a SSO login, just click login below and you will be logged in with your system credentials.",
+      "emailAddressPlaceHolder": "Email Address",
+      "passwordPlaceHolder": "Password",
+      "loginButton": "SSO Login"
+    },
+    "AccessDenied": {
+      "title": "Access denied",
+      "message": "You do not have permission to access the application. Please request administrator for access.",
+      "button": "OK"
+    },
+    "InActiveUser": {
+      "title": "Inactive User",
+      "message": "Inactive User, Please request administrator for activation.",
+      "button": "OK"
+    },
+    "SessionTimeout": {
+      "title": "Session Timeout",
+      "message": "Session about to expire",
+      "primaryButton": "CONTINUE SESSION",
+      "secondaryButton": "LOGOUT"
+    },
+    "FormDirty": {
+      "title": "Data Unsaved",
+      "message": "Kindly save data to continue",
+      "button": "OK"
+    }
+  },
+  "SHARED": {
+    "NAVIGATION": {
+      "Dashboard": "Dashboard",
+      "Projects": "Projects",
+      "Administration": "Administration"
+    },
+    "HEADER": {
+      "logoutConfirmation": {
+        "dialogTitle": "Logout",
+        "dialogMessage": "Do you want to exit the application?",
+        "primaryButton": "Yes",
+        "secondaryButton": "No"
+      },
+      "userMenu": {
+        "profileMenu": "Profile",
+        "helpMenu": "Help",
+        "logoutMenu": "Logout",
+        "userMessage": "Hi"
+      }
+    },
+    "HEADER1": {
+      "staff": "Staff",
+      "margin": "Margin",
+      "estimate": "Estimate",
+      "summary": "Summary",
+      "AccountName": "Account name",
+      "overrideColumns": [
+        {
+          "field": "overrideItem",
+          "header": "Override Item"
+        },
+        {
+          "field": "overrideValue",
+          "header": "Override Value"
+        },
+        {
+          "field": "defaultValue",
+          "header": "Default Value"
+        }
+      ],
+      "overrideEmptyMessage": "No overrides found for the PIPSheet."
+    },
+    "FOOTER": {
+      "poweredBy": "Powered By:",
+      "copyRight": "© Xpanxion",
+      "customerSupport": "Customer Support at",
+      "supportEmail": "test"
+    },
+    "NAVMENU": {
+      "AboutTool": "About the tool",
+      "Dashboard": "Dashboard",
+      "UserInfo": "User Info",
+      "MyPips": "My PIPs",
+      "DummyPips": "Dummy PIPs",
+      "Admin": "Admin",
+      "Approver": "Approver",
+      "Report": "Reports"
+    },
+    "WORKFLOWSTATUS": {
+      "NotSubmitted": "Not Submitted",
+      "Approved": "Approved",
+      "ApprovalPending": "Approval Pending"
+    }
+  },
+  "MESSAGES": {
+    "Dialog": {
+      "AuthFailedInvalidAuthResponse": {
+        "title": "Authentication Failed",
+        "message": "Authentication Failed for specified user. Please enter valid credentials and try again. If you still see same problem, contact customer support team.",
+        "primaryButton": "OK",
+        "secondaryButton": "",
+        "isShowSecondaryButton": "false",
+        "isLogoutOnPrimaryButton": "false"
+      }
+    },
+    "Tooltip": {
+      "CheckInTooltipMessage": {
+        "message": "Please select Check In for submitting the PIP Sheet"
+      },
+      "AccountNameTooltipMessage": {
+        "message": "For adding new Accounts, Please contact: PIPsupport@ust-global.com"
+      },
+      "LocationTooltipMessage": {
+        "message": "Select one or more Locations"
+      },
+      "ProjectIdTooltipMessage": {
+        "message": "Use the correct format i.e. XXXX-NNNN-NN-NN"
+      },
+      "DeliveryTypeTooltipMessage": {
+        "message": "Select required field"
+      },
+      "BillingTypeTooltipMessage": {
+        "message": "Select project delivery type first"
+      },
+      "ProjectNameTooltipMessage": {
+        "message": "Required field cannot be left blank"
+      },
+      "RequiredDropDownMessage": {
+        "message": "Select required field"
+      },
+      "FieldRequiredMessage": {
+        "message": "Field cannot be empty"
+      },
+      "LocationHoursPerMonthMessage": {
+        "message": "Should be between 1 and 300"
+      },
+      "LocationHoursPerDayMessage": {
+        "message": "Should be between 1 and 24"
+      },
+      "PercentError": {
+        "message": "Fees At Risk cannot be more than 100 percent"
+      },
+      "ProjectControlStartDateError": "Start date should be earlier than end date",
+      "ProjectControlEndDateError": "End date should be greater than start date",
+      "ReportStartDateRange": "Start Date should be between years 2018 and 2050",
+      "ReportEndDateRange": "End Date should be between years 2018 and 2050"
+    },
+    "Toastr": {
+      "Fatal": "Error occurred while processing your request. Please try again later or contact customer support team.",
+      "EmptyEmailAddress": "Please enter Email Address.",
+      "EmptyPassword": "Please enter Password."
+    },
+    "Error": {
+      "MonthYearFormatError": "Please enter the date in the format “MM-YYYY”",
+      "NoProjectError": "No Projects created for the Account"
+    }
+  },
+  "PROJECTS": {
+    "DisplayCheckOut": {
+      "title": "PIP Checked Out.",
+      "message": "PIP version is checked out by XXXXXX. Your access limited to Read Only.",
+      "button": "OK"
+    },
+    "Versions": {
+      "VersionColumns": [
+        {
+          "field": "versionNumber",
+          "header": "Version Number"
+        },
+        {
+          "field": "status",
+          "header": "Status"
+        },
+        {
+          "field": "modifiedOn",
+          "header": "Modified On"
+        },
+        {
+          "field": "modifiedBy",
+          "header": "Modified By"
+        },
+        {
+          "field": "userComments",
+          "header": "User Comments"
+        },
+        {
+          "field": "approverComments",
+          "header": "Approver Comments"
+        },
+        {
+          "field": "resenderComments",
+          "header": "Resend/Revise Comments"
+        }
+      ],
+      "versionEmptyMessage": "No version found for the PIPSheet."
+    },
+    "ProjectTootip": {
+      "AdvanceSearch": "Advance search",
+      "Refresh": "Refresh",
+      "CreateProject": "Create New PIP",
+      "CreateDummyProject": "Create Dummy PIP"
+    }
+  },
+  "PLANNING": {
+    "Staff": {
+      "Control": {
+        "format": "Format: MM-DD-YYYY",
+        "dateValidation": "Please enter the date in the format MM-DD-YYYY",
+        "LocationCoulmn": {
+          "field": "name",
+          "header": "Location"
+        },
+        "OverrideHoursPerMonthCoulmn": {
+          "field": "overridecodepermonth",
+          "header": "Override Hours/Month"
+        },
+        "OverrideHoursPerDayCoulmn": {
+          "field": "overridecodeperday",
+          "header": "Override Hours/Day"
+        },
+        "DefaultHoursPerMonthCoulmn": {
+          "field": "defaultcodepermonth",
+          "header": "Default Hours/Month"
+        },
+        "DefaultHoursPerDayCoulmn": {
+          "field": "defaultcodeperday",
+          "header": "Default Hours/Day"
+        },
+        "MilestoneColumns": [
+          {
+            "field": "index",
+            "header": "#"
+          },
+          {
+            "field": "value",
+            "header": "Milestone/ Phase/ Group"
+          },
+          {
+            "field": "customOverrides",
+            "header": "Custom Overrides"
+          },
+          {
+            "field": "invoiceAmount",
+            "header": "Invoice Amount"
+          },
+          {
+            "field": "milestoneMonth",
+            "header": "Milestone Month"
+          }
+        ],
+        "Tooltip": {
+          "PeriodMessage": "Periods"
+        }
+      },
+      "StaffSteps": [
+        "Project Header",
+        "Project Control",
+        "Resource Planning"
+      ],
+      "MarginSteps": [
+        "Std OH & Seat Cost",
+        "Labor Pricing",
+        "Vacation Absences",
+        "COLA",
+        "Direct Expenses and Assets",
+        "Partner Cost/Revenue",
+        "Reimbursable Exp & Discounts",
+        "Pricing Adjustments",
+        "Risk Management",
+        "Invoicing Schedule",
+        "Capital Charges",
+        "Fixed Bid & Margin Calc"
+      ],
+      "SummarySteps": [
+        "Revised Summary",
+        "Project Composition",
+        "Infographics"
+      ]
+    }
+  },
+  "ProjectControl": {
+    "DeleteDialogHeader": "Do you really want to Delete this Location?",
+    "DeleteDialogContent": "Deleting the Location will delete the resource",
+    "DeleteDialogContentbr": "from Resource Planning",
+    "ProjectControlTooltip": {
+      "DefaultHoursPerMonthPerDay": "Default Hrs for India & Manilla locations are 180/mo and 9/day. Default for all other locations are 172/mo, 8/day"
+    },
+    "OverrideLimits": {
+      "OverrideHoursPerMonthMinLimit": 1,
+      "OverrideHoursPerMonthMaxLimit": 300,
+      "OverrideHoursPerDayMinLimit": 1,
+      "OverrideHoursPerDayMaxLimit": 24
+    }
+  },
+  "ResourcePlanning": {
+    "TotalCostHours": "Total Cost Hours:",
+    "ResourcePlanningTitle": "Resource Planning",
+    "totalPeriods": "Total Periods :",
+    "frozenColumns": [
+      {
+        "field": "srNo",
+        "header": "Sr. No"
+      },
+      {
+        "field": "alias",
+        "header": "Alias"
+      },
+      {
+        "field": "phase",
+        "header": "Optional Phase/Grouping"
+      },
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "roleGroup",
+        "header": "Role Group"
+      },
+      {
+        "field": "ustRole",
+        "header": "UST Role"
+      },
+      {
+        "field": "grade",
+        "header": "Grade"
+      }
+    ],
+    "columns": [
+      {
+        "field": "oldRole",
+        "header": "Old Role"
+      },
+      {
+        "field": "clientRole",
+        "header": "Client Role"
+      },
+      {
+        "field": "contractorMarkup",
+        "header": "Markup"
+      },
+      {
+        "field": "totalHours",
+        "header": "Billed Hours"
+      },
+      {
+        "field": "totalFTE",
+        "header": "Total FTE"
+      }
+    ],
+    "technology": [
+      {
+        "label": "Angular",
+        "value": "angular"
+      },
+      {
+        "label": "Java",
+        "value": "java"
+      }
+    ]
+  },
+  "LaborPricing": {
+    "LaborPricingEmptyMessage": "No Resources added in Resource Planning.",
+    "TotalLaborRevenue": "Total Labor Revenue",
+    "SetMarginTitle": "Option to set Price for target Margin",
+    "SetMarginLabels": [
+      "Set Margin",
+      "Set Target for",
+      "Target Percent %"
+    ],
+    "FrozenColumns": [
+      {
+        "field": "srNo",
+        "header": "Sr. No"
+      },
+      {
+        "field": "alias",
+        "header": "Alias"
+      },
+      {
+        "field": "optionalPhase",
+        "header": "Optional Phase"
+      },
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "ustRole",
+        "header": "UST Role"
+      }
+    ],
+    "LaborPricingColumns": [
+      {
+        "field": "serviceLine",
+        "header": "Service Line"
+      },
+      {
+        "field": "gradeClientRole",
+        "header": "Grade - Client Role"
+      },
+      {
+        "field": "billableOrNonBillable",
+        "header": "Billable / Non Billable"
+      },
+      {
+        "field": "nonBillableCategory",
+        "header": "Non-Billable Category"
+      },
+      {
+        "field": "rate",
+        "header": "Applied Bill Rate"
+      },
+      {
+        "field": "cost",
+        "header": "Applied Cost Rate"
+      },
+      {
+        "field": "ratePerHour",
+        "header": "Standard Bill Rate"
+      },
+      {
+        "field": "year1CostPerHour",
+        "header": "Standard Cost Rate"
+      },
+      {
+        "field": "percentMargin",
+        "header": "% Margin"
+      },
+      {
+        "field": "totalCost",
+        "header": "Total Cost"
+      },
+      {
+        "field": "totalRevenue",
+        "header": "Total Revenue"
+      }
+    ],
+    "LaborPricingTitle": "Labor Pricing",
+    "LaborPricingTitleDeliveryRestrict": "Labor Pricing (Labor 'NOT' charged per transaction / unit / member / seat)",
+    "ColumnHeading": {
+      "IfSetMarginOn": "COST + Margin Pricing",
+      "IfSetMarginOff": "UST STD Default Rates"
+    },
+    "ColumnHeaderPopUpMessages": {
+      "Rate": "Overrides the default rate",
+      "Cost": "Overrides the std.cost - set of yr1 of project. Inflation is applied annually thereafter",
+      "RatePerHour": "Default Rate, which may be UST Corporate Defaults or Account Rate Cards or may be manually overridden",
+      "Yr1CostPerHour": "Labor cost for yr 1 of project. Inflation is applied",
+      "PercentMargin": "Margin per role"
+    }
+  },
+  "Ebitda": {
+    "EbitaHeaderTooltip": {
+      "RefUsd": "Default amt in USD",
+      "StdOverheadPerLocation": "Default amt",
+      "Overrides": "Overrides the default",
+      "OverheadAmt": "Overhead amount is a per period per employee charge covering cell phones, wireless cards and laptops.",
+      "EbitdaSeatCost": "Seat cost only charged to UST DEV locations offshore"
+    },
+    "EbitdaTitle": "Ebitda and Std. Overhead",
+    "EbitdaColumns": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "refUSD",
+        "header": "ref:USD"
+      },
+      {
+        "field": "standardOverhead",
+        "header": "Standard\n Overhead"
+      },
+      {
+        "field": "overrides",
+        "header": "Overrides"
+      },
+      {
+        "field": "overheadAmt",
+        "header": "Overhead Amt."
+      },
+      {
+        "field": "ebidtaSeatcost",
+        "header": "Ebitda SeatCost"
+      },
+      {
+        "field": "use",
+        "header": "Use %"
+      },
+      {
+        "field": "charges",
+        "header": "Charges"
+      }
+    ],
+    "ebitdaEmptyMessage": "No Location selected in Project Control.",
+    "OverrideLessThanRefUSDMsg": "Overriden value for Std Overhead Amt cannot be less than default amount"
+  },
+  "PartnerCostRevenue": {
+    "PartnerCostTitle": "Partner Cost",
+    "PartnerRevenueTitle": "Partner Revenue",
+    "DeleteDialogHeader": "Do you really want to Delete this Row ?",
+    "DeleteDialogContent": "Deleting the Row will delete the Copied",
+    "DeleteDialogContentbr": "Row From Partner Revenue",
+    "partnerCostColumns": [
+      {
+        "field": "milestone",
+        "header": "Milestone"
+      },
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "setMargin",
+        "header": "Set Margin"
+      },
+      {
+        "field": "marginPercent",
+        "header": "Margin %"
+      },
+      {
+        "field": "amtPaid",
+        "header": "Total Partner Cost"
+      }
+    ],
+    "partnerRevenueColumns": [
+      {
+        "field": "milestone",
+        "header": "Milestone"
+      },
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "setMargin",
+        "header": "Set Margin"
+      },
+      {
+        "field": "marginPercent",
+        "header": "Margin %"
+      },
+      {
+        "field": "revenueBilled",
+        "header": "Total Partner Revenue"
+      }
+    ],
+    "TotalPartnerCost": "Total Partner Cost",
+    "TotalPartnerRevenue": "Total Partner Revenue",
+    "partnerCostEmptyMessage": "No data found for partner cost",
+    "partnerRevenueEmptyMessage": "No data found for partner revenue",
+    "PartnerCostMilestoneTooltip": "A split-wise label can be used to associate partner costs to a phase or milestone or service-line",
+    "MarginTooltip": "Margin% must be greater than 0",
+    "PartnerRevenueMilestoneTooltip": "A split-wise label can be used to associate partner revenues to a phase or milestone or service-line",
+    "PartnerCostTitleTooltip": "Partner Cost to be paid by UST Global",
+    "PartnerRevenueTitleTooltip": "Partner Revenues to be billed by UST Global"
+  },
+  "CurrencyControl": {
+    "Region": "Billing Region -Currency ",
+    "LocalCurrency": "Local Currency",
+    "FactorUsed": "Factor Used",
+    "USD": "USD",
+    "ONE": 1
+  },
+  "VacationAbsences": {
+    "VacationAbsencesTitle": "Vacation Absences Allowance",
+    "VacationAbsencesColumns": [
+      {
+        "field": "vacationAbsences",
+        "header": "Vacation Abs."
+      },
+      {
+        "field": "percent",
+        "header": "Percent"
+      },
+      {
+        "field": "amount",
+        "header": "Amount"
+      },
+      {
+        "field": "lostRevenue",
+        "header": "Lost Revenue"
+      },
+      {
+        "field": "override",
+        "header": "Override"
+      },
+      {
+        "field": "totalLostRevenue",
+        "header": "Total Lost Revenue"
+      }
+    ],
+    "ColumnHeaderPopUpMessages": {
+      "amount": "Amount, unless percent is given, that cannot be billed. i.e Lost revenues",
+      "percent": "Percent expected that cannot be billed  - i.e lost revenues"
+    },
+    "vacationAbsenceSetMarginYesMessage": "Cost+Margin Pricing in Use, Vac/Abs ignored w/C+M% pricing",
+    "overrideDifferenceLabel": "Override Difference",
+    "overrideDifference": "(Values entered does not match the lost revenue)",
+    "percentAmountGreaterThanTotalRevenue": "Vac/Abs>100%",
+    "defaultMessage": "Ok"
+  },
+  "PriceAdjustment": {
+    "DateExceed": "Price Adjustments > 6 years are not Supported",
+    "PriceAdjustmentTitle": "COLA on Prices",
+    "ColaTitle": "Annual Price COLA",
+    "ColaOnLocation": "Set up the COLA factors for each location",
+    "PriceAdjustmentColumns": [
+      {
+        "field": "PriceAdjustment",
+        "header": "Annual Price COLA "
+      },
+      {
+        "field": "triggerDate",
+        "header": "Trigger Date"
+      },
+      {
+        "field": "effectiveDate",
+        "header": "Effective Date"
+      }
+    ],
+    "PriceAdjustmentTooltip": {
+      "TriggerDate": "Set Date when Price Cola is triggered",
+      "EffectiveDate": "Effective from first month of equal or greater Date."
+    }
+  },
+  "ExpensesAndAssets": {
+    "ExpensesAndAssetsTitle": "Direct Expenses",
+    "BasicAssetsTitle": "Basic Assets",
+    "AdditionalSoftwareOrHardwareTitle": "Additional Software Or Hardware",
+    "AssetPlanning": "Asset Planning",
+    "AssetMaxDayCharge": "max Day1 charge",
+    "TotalAssetCost": "Total Asset Cost",
+    "USTAssetsTitle": "UST Assets (From Asset Planning)",
+    "SubTotalExpenseTitle": "Sub Total Expense",
+    "ExpensesIncurredMessage": "Enter all other expenses incurred by Project (Including Reimbursements)",
+    "ExpensesAndAssetsColumns": [
+      {
+        "field": "defaultLabels",
+        "header": "Default Labels"
+      },
+      {
+        "field": "milestone",
+        "header": "Milestone"
+      },
+      {
+        "field": "reimbursable.exp",
+        "header": "Reimbursable Exp."
+      },
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "%ofrevenue",
+        "header": "% of Staff Revenue"
+      },
+      {
+        "field": "projectExpenses",
+        "header": "Project Expenses"
+      }
+    ],
+    "BasicAssets": [
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "costToProject",
+        "header": "Cost To Project"
+      },
+      {
+        "field": "count",
+        "header": "Count"
+      },
+      {
+        "field": "amount",
+        "header": "Amount"
+      }
+    ],
+    "AdditionalSoftwareOrHardware": [
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "unitCost",
+        "header": "Unit Cost"
+      },
+      {
+        "field": "count",
+        "header": "Count"
+      },
+      {
+        "field": "amount",
+        "header": "Amount"
+      }
+    ]
+  },
+  "ReimbursementAndSales": {
+    "ReimbursementTitle": "Reimbursement (Reimbursable Revenue)",
+    "SalesDiscountTitle": "Sales Discounts (Discount Revenue)",
+    "TotalReimbursement": "Total Reimbursement",
+    "TotalDiscounts": "Total discounts",
+    "ReimbursementColumns": [
+      {
+        "field": "milestone",
+        "header": "Milestone"
+      },
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "%ofDirectExpenses",
+        "header": "% of Direct Expenses"
+      },
+      {
+        "field": "reimbursedExpense",
+        "header": "Expense to Reimburse"
+      }
+    ],
+    "SalesDiscountColumns": [
+      {
+        "field": "milestone",
+        "header": "Milestone"
+      },
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "discount",
+        "header": "Discount given to client"
+      }
+    ],
+    "ReimbursementTooltip": "Expenses reimbursed are billed to the client by UST",
+    "SalesDiscountTooltip": "Enter discounts given to client's price",
+    "ReimbursementMilestoneTooltip": "A split-wise label can be used to associate reimbursements to a phase or milestone or service-line",
+    "SalesDiscountMilestoneTooltip": "A split-wise label can be used to associate these discounts to a phase or milestone or service-line",
+    "PercentOfDirectExpense": "% of Direct Expense must be greater than 0"
+  },
+  "SuccessMessage": {
+    "EbitdaSave": "Std OH & Seat Cost Saved Successfully!",
+    "LaborPricingSave": "Labor Pricing Saved Successfully!",
+    "PipSheetSave": "Project Control Saved Successfully!",
+    "ProjectSave": "Project Saved Successfully!",
+    "ProjectUpdated": "Project Updated Successfully!",
+    "ResourcePlanningSave": "Resource Planning Saved Successfully!",
+    "CurrencyUpdate": "Currency Updated Successfully!",
+    "vacationAbsenceSave": "Vacation Absence Saved Successfully!",
+    "PriceAdjustmentSave": "COLA Saved Successfully!",
+    "ExpensesAndAssets": "Direct Expenses and Assets Saved Successfully!",
+    "PartnerCostAndRevenue": "Partner Cost/Revenue Saved Successfully!",
+    "ReimbursementAndSales": "Reimbursable Exp & Discounts Saved Successfully!",
+    "OtherPriceAdjustment": "Pricing Adjustments Saved Successfully!",
+    "RiskManagement": "Risk Management Saved Successfully!",
+    "TotalClientPrice": "Invoicing Schedule Saved Successfully!",
+    "CapitalCharge": "Capital Charge Saved Successfully!",
+    "PipSheetSubmit": "PIP Sheet Submitted Successfully!",
+    "PipSheetApproved": "PIP Sheet Approved Successfully!",
+    "PipSheetResend": "PIP Sheet Resend Successfully!",
+    "PipSheetRevise": "PIP Sheet Sent for Revision Successfully!",
+    "AddNewLocation": "New Location Added Successfully!",
+    "DeleteLocation": "Location Deleted Successfully!",
+    "DeleteRole": "Role Deleted Successfully!",
+    "AssignRole": "Role Assigned Successfully!",
+    "AddNewUser": "User Added Successfully!",
+    "AddMultipleUser": "File Uploaded Successfully!",
+    "UpdateUser": "User Updated Successfully!",
+    "PipCheckIn": "PIP Checked In Successfully!",
+    "PIPSheetShare": "PIPSheet Shared Successfully!",
+    "NewVersion": "New Version Created Successfully!",
+    "DeletePipVersion": "Version Deleted Successfully!",
+    "DeleteProject": "Project Deleted Successfully!",
+    "SharePipDelete": "Share Access Deleted successfully!",
+    "SharePipUpdate": "Share Access Updated successfully!",
+    "SharePipSuccess": "Shared Successfully!",
+    "ReplicateSuccess": "New Version Created Successfully!",
+    "GenerateReport": "Report mailed successfully!"
+  },
+  "ErrorMessage": {
+    "PriceAdjustmentSave": "Unable to Save COLA.",
+    "EbitdaSave": "Unable to Save Std OH & Seat Cost.",
+    "LaborPricingSave": "Unable to Save Labor Pricing.",
+    "PipSheetSave": "Unable to Save Project Control.",
+    "ProjectSave": "Unable to Save Project.",
+    "ProjectExist": "Entered Project ID already exists. Please enter new unique Project ID. To make changes in existing PIP, please select the Project from Dashboard.",
+    "ProjectExistDummy": "Entered Project ID already exists. Please re-select the Account Name to generate new Project ID.",
+    "ProjectUpdated": "Unable to Update Project.",
+    "ProjectList": "Unable to load Project details.",
+    "ResourcePlanningSave": "Unable to Save Resource Planning.",
+    "CurrencyUpdate": "Unable to Update Currency.",
+    "vacationAbsenceSave": "Unable to save Vacation Absences.",
+    "DuplicateOverrideValue": "Duplicate override values are not allowed.",
+    "AlphanumericValue": "Only alphanumeric values are allowed.",
+    "ExpensesAndAssets": "Unable to Save Direct Expenses and Assets.",
+    "PartnerCostAndRevenue": "Unable to Save Partner Cost/Revenue.",
+    "ReimbursementAndSales": "Unable to Save Reimbursable Exp & Discounts.",
+    "OtherPriceAdjustment": "Unable to Save Pricing Adjustments.",
+    "RiskManagement": "Unable to Save Risk Management.",
+    "TotalClientPrice": "Unable to Save Invoicing Schedule.",
+    "CapitalCharge": "Unable to Save Capital Charge.",
+    "PipSheetSubmit": "Unable to Submit PIP Sheet.",
+    "PipSheetApproved": "Unable to Approve PIP Sheet.",
+    "PipSheetResend": "Unable to Resend PIP Sheet.",
+    "PipSheetRevise": "Unable to Send PIP Sheet for Revision.",
+    "AddNewLocation": "Unable to Add New Location.",
+    "UpdateUser": "Unable to Update User!",
+    "PipCheckIn": "Unable to Checked In PIP.",
+    "NewVersion": "Unable to Create New Version!",
+    "SharePipDelete": "Share Access deleted successfully!",
+    "SharePipUpdate": "Unable to update Share access!",
+    "SharePipErrorMsg": " One or more versions are already shared with one or more selected users",
+    "SelectRoleForAtLeastOneRoleAndUser": "Select atleast One Role and One User!",
+    "DuplicateProjectId": "Entered Project ID already exists. Please enter new unique Project ID.",
+    "GenerateReport": "No data found for the selected Start and End Date , Please select different Start and End Date again to generate report"
+  },
+  "FixedBidAndMarginCalc": {
+    "FixedBidTitle": "Fixed Bid and Margin Calc.",
+    "TargetMargin": "Target Margin",
+    "PriceUsing": "Priced using Cost + Margin",
+    "executionRisk": "Execution Risk - Fixed Bid contingency Revenue buffer",
+    "autoCalculated": "Calculated Automatically",
+    "margin": "Margin (before adjustments and discounts) is",
+    "riskMarginRevenues": "Risk/Margin Revenues Calc.",
+    "currentPrice": "Current price before Adj.",
+    "ebitda": "Ebitda",
+    "netRevenue": "Net Revenue",
+    "price": "Price",
+    "FixedBidColumns": [
+      {
+        "field": "description",
+        "header": "Description Items"
+      },
+      {
+        "field": "total",
+        "header": "Total"
+      }
+    ]
+  },
+  "OtherPriceAdjustment": {
+    "SetMontlyFeeAdjustment": "Set Monthly Fee Adjustment",
+    "FeeBeforeAdjustment": "Fee Before Adjustment",
+    "FeeAfterAdjustment": "Fee After Adjustment",
+    "OtherPriceAdjustmentTitle": "Revenue Adjustments (positive or negative)",
+    "TotalAdjustedRevenue": "Total Adjusted Revenue",
+    "AdjustmentEntry": "Adjustment Entry",
+    "SetMonthlyFee": "Set Monthly Fee",
+    "OtherPriceAdjustmentColumns": [
+      {
+        "field": "milestone",
+        "header": "Milestone"
+      },
+      {
+        "field": "description",
+        "header": "Description"
+      },
+      {
+        "field": "revenues",
+        "header": "Revenues"
+      }
+    ],
+    "OtherPriceAdjustmentMilestoneTooltip": "A split-wise label can be used to associate these revenue to a phase or milestone or service-line"
+  },
+  "RiskManagement": {
+    "directCost": "Direct Cost",
+    "overhead": "Overhead :",
+    "ustExpenses": "UST Expenses :",
+    "costSubTotal": "Cost Sub-Total :",
+    "costContingency": "Cost Contingency",
+    "executionRisk": "(Execution Risk)",
+    "automaticForFixedBid": "Automatic For Fixed Bid : ",
+    "totalAssessedPercent": "Total Assessed Percent :",
+    "override": "Override : ",
+    "amount": "Amount : ",
+    "percent": "Percent : ",
+    "feesAtRisk": "Fees At Risk",
+    "revenue": "Revenue =",
+    "totalAssessedRiskOverrun": "Total Assessed Risk Overrun :",
+    "AmountTooltip": "Either field: Risk amount, or Risk % can be used to input Execution Risk! Risk is included as a potential cost to the project, Risk can be offset with Margin Buffer amount The Percentege given is ignored if a Fixed Amt value is entered",
+    "TotalSubCostTooltip": "Sum of labor, Partner Adjustments, Discounts and expenses ",
+    "USTExpenseTooltip": "UST Expenses carried from Staff tab",
+    "overrideDifferenceLabel": "Override Difference"
+  },
+  "ProjectSummary": {
+    "ProjectSummaryTooltip": {
+      "Share": "Share"
+    },
+    "projectSummaryHeaders": "Project Summary",
+    "USD": "USD",
+    "yoy": "Year Over Year Comparison",
+    "INR": "INR",
+    "revenueTooltip": "Revenues after Vac/Abs allowance",
+    "sharePIPSheetTittle": "Share PIP sheet",
+    "link": "Link",
+    "grantAccess": "Grant Access to",
+    "uId": "UID",
+    "name": "Name",
+    "addNote": "Add a note for this PIP sheet",
+    "allowAccess": "Allow Access",
+    "editor": "Editor",
+    "readOnly": "Read Only",
+    "cancel": "Cancel",
+    "share": "Share",
+    "projectSummaryLabels": [
+      {
+        "field": "totalLaborRevenue",
+        "label": "Total Labor Revenues(net)"
+      },
+      {
+        "field": "vacationAbsence",
+        "label": "Vac/Absences"
+      },
+      {
+        "field": "totalPartnerRevenue",
+        "label": "Total Partner Revenue"
+      },
+      {
+        "field": "totalPartnerCost",
+        "label": "Total Partner Cost"
+      },
+      {
+        "field": "netPartnerRevenue",
+        "label": "Net Partner Revenue"
+      },
+      {
+        "field": "totalExpenseReimbursement",
+        "label": "Total Expense Reimbursements"
+      },
+      {
+        "field": "totalQualifyingDiscounts",
+        "label": "Total Qualifying Discounts"
+      },
+      {
+        "field": "riskOrMarginCalculation",
+        "label": "Risk/Margin Calculation"
+      },
+      {
+        "field": "totalOtherRevenue",
+        "label": "Total Other Revenues"
+      }
+    ],
+    "gpmMonitoringTitle": "GPM omitting Reimbursements",
+    "gpmMonitoringHeaders": {
+      "GP": "GP"
+    },
+    "gpmMonitoringLabels": [
+      {
+        "field": "totalClientPrice",
+        "label": "Total Client Price"
+      },
+      {
+        "field": "feesAtRisk",
+        "label": "Fees at Risk"
+      },
+      {
+        "field": "netEstimatedRevenue",
+        "label": "Net Estimated Revenues"
+      },
+      {
+        "field": "totalProjectCost",
+        "label": "Total Project Cost"
+      },
+      {
+        "field": "estimatedGrossProfit",
+        "label": "Estimated Gross Profit"
+      },
+      {
+        "field": "projectGPMPercent",
+        "label": "Project GPM %"
+      },
+      {
+        "field": "projectEBITDAPercent",
+        "label": "Project EBITDA %"
+      },
+      {
+        "field": "targetEBITDAPercent",
+        "label": "Service Line Blended Target EBITDA %"
+      },
+      {
+        "field": "variance",
+        "label": "Variance %"
+      }
+    ],
+    "totalDealFinancialHeaders": {
+      "totalDealFinancial": "Total Deal Financials",
+      "total": "Total"
+    },
+    "totalDealFinancialsLabels": [
+      {
+        "field": "totalClientPrice",
+        "label": "Total Client Price"
+      },
+      {
+        "field": "serviceFees",
+        "label": "Service Fees"
+      },
+      {
+        "field": "reimbursableExpenses",
+        "label": "Reimbursable Expenses"
+      },
+      {
+        "field": "partnerFees",
+        "label": "Partner Fees"
+      },
+      {
+        "field": "feesAtRisk",
+        "label": "Fee at Risk"
+      },
+      {
+        "field": "netEstimatedRevenue",
+        "label": "Net Revenues"
+      },
+      {
+        "field": "serviceFees",
+        "label": "Service Fees"
+      },
+      {
+        "field": "reimbursableExpenses",
+        "label": "Reimbursable Expenses"
+      },
+      {
+        "field": "partnerFees",
+        "label": "Partner Fees"
+      },
+      {
+        "field": "totalProjectCost",
+        "label": "Total Project Cost"
+      },
+      {
+        "field": "resourceCost",
+        "label": "Resource Cost"
+      },
+      {
+        "field": "directExpenseCost",
+        "label": "Direct Expense Cost"
+      },
+      {
+        "field": "partnerCost",
+        "label": "Partner Costs"
+      },
+      {
+        "field": "grossMargin",
+        "label": "Gross Margin $"
+      },
+      {
+        "field": "grossMarginPercent",
+        "label": "Gross Margin %"
+      },
+      {
+        "field": "partnerMargin",
+        "label": "Partner Margin %"
+      },
+      {
+        "field": "sgaCost",
+        "label": "SG & A Cost"
+      },
+      {
+        "field": "ebitda",
+        "label": "Project EBITDA$"
+      },
+      {
+        "field": "projectEbitda",
+        "label": "Project EBITDA%"
+      },
+      {
+        "field": "corporateVreticalOverhead",
+        "label": "Corporate / Vertical Overhead %"
+      },
+      {
+        "field": "ebitdaPercent",
+        "label": "Corporate EBITDA%"
+      },
+      {
+        "field": "beatTaxImpact",
+        "label": "Beat Tax Impact %"
+      },
+      {
+        "field": "contributionPercent",
+        "label": "Contribution %"
+      }
+    ],
+    "locationWiseDetailsLabels": [
+      {
+        "field": "resourceRevenue",
+        "label": "Resource Revenue"
+      },
+      {
+        "field": "resourceCost",
+        "label": "Resource Cost"
+      },
+      {
+        "field": "ebitdaPercent",
+        "label": "Resource EBITDA%"
+      },
+      {
+        "field": "avgCostRate",
+        "label": "Avg Cost Rate"
+      },
+      {
+        "field": "avgBillRate",
+        "label": "Avg Bill Rate"
+      },
+      {
+        "field": "totalFte",
+        "label": "Total FTE"
+      },
+      {
+        "field": "nbFte",
+        "label": "NB FTE"
+      },
+      {
+        "field": "ngCost",
+        "label": "NB Cost"
+      },
+      {
+        "field": "ngCostPercent",
+        "label": "NB Cost %"
+      }
+    ],
+    "plForeCastLabels": [
+      {
+        "field": "priceToClient",
+        "label": "Price To Client"
+      },
+      {
+        "field": "laborrevenues",
+        "label": "Staff Labor Revenues"
+      },
+      {
+        "field": "vac",
+        "label": "Vac/Abs."
+      },
+      {
+        "field": "partnerrevenues",
+        "label": "Partner Revenues"
+      },
+      {
+        "field": "revenuereimb",
+        "label": "Revenue Reimb."
+      },
+      {
+        "field": "discountsgiven",
+        "label": "Discounts Given"
+      },
+      {
+        "field": "margincalculation",
+        "label": "Margin Calculation"
+      },
+      {
+        "field": "priceadjust",
+        "label": "Price Adjustments"
+      },
+      {
+        "field": "fessrisk",
+        "label": "Fees at Risk"
+      },
+      {
+        "field": "estimatedrevenues",
+        "label": "Net Revenue"
+      },
+      {
+        "field": "totalprojectcost",
+        "label": "Total Project Cost"
+      },
+      {
+        "field": "coststaffing",
+        "label": "Cost Of Staffing"
+      },
+      {
+        "field": "inflation",
+        "label": "Inflation Only"
+      },
+      {
+        "field": "expenses",
+        "label": "Expenses+O.H"
+      },
+      {
+        "field": "contingency",
+        "label": "Contingency Cost"
+      },
+      {
+        "field": "partnercost",
+        "label": "Partner Cost"
+      },
+      {
+        "field": "capitalcharges",
+        "label": "Capital Charges"
+      },
+      {
+        "field": "gpamt",
+        "label": "Gross Margin"
+      },
+      {
+        "field": "gpmest",
+        "label": "Gross Margin%"
+      },
+      {
+        "field": "ebitdaseat",
+        "label": "Ebitda Seat Cost"
+      },
+      {
+        "field": "ebitda",
+        "label": "Adjusted EBITDA"
+      },
+      {
+        "field": "ebitdapercent",
+        "label": "Adjusted EBITDA%"
+      },
+      {
+        "field": "headcount",
+        "label": "Headcount total"
+      }
+    ],
+    "investmentViewHeader": "Investment View",
+    "investmentViewLabels": [
+      {
+        "field": "totalClientPrice",
+        "label": "US Dollar Equivalent Revenue"
+      },
+      {
+        "field": "standard",
+        "label": "Standard"
+      },
+      {
+        "field": "corporateTarget",
+        "label": "Corporate Target at"
+      },
+      {
+        "field": "netinvestment",
+        "label": "Net Investment"
+      }
+    ],
+    "investmentViewNoneNeeded": "none needed",
+    "effortSummaryHeader": "Effort Summary",
+    "mos": "mos.",
+    "wks": "wks.",
+    "effortSummaryLabels": [
+      {
+        "field": "startDate",
+        "label": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "label": "End Date"
+      },
+      {
+        "field": "projectduration",
+        "label": "Project Duration"
+      },
+      {
+        "field": "totalStaffHours",
+        "label": "Total Hours Staff Effort"
+      },
+      {
+        "field": "fteAvgPerMonth",
+        "label": "FTE(avg/mo.)"
+      }
+    ],
+    "billingDetails": "Cash Flow",
+    "projectTotals": "Total",
+    "blendedLabourCost/hr": "Blended Labor Cost/hr",
+    "blendedBillRate": "Blended Bill Rate",
+    "blendedBillRateTooltip": "labor rev/billable hrs.",
+    "ifstaffingonly": "if staffing only",
+    "billingColumns": [
+      {
+        "field": "invoiced",
+        "label": "Total Invoiced"
+      },
+      {
+        "field": "projectcost",
+        "label": "Project Cost"
+      },
+      {
+        "field": "netcashflow",
+        "label": "Net Cash Flow"
+      },
+      {
+        "field": "cumulativecashflow",
+        "label": "Cumulative Cash Flow"
+      }
+    ],
+    "forecast": "P&L Forecast By month",
+    "projectTotal": "Total",
+    "yearComparison": "Year over Year Comparison",
+    "totalEst": "Total Est. Rev",
+    "totalProjectCost": "Total Project Cost",
+    "gpAmt": "GP amt.",
+    "gpmEst": "GPM est",
+    "adjustedEbitda": "EBITDA",
+    "adjustedEbitdaPercent": "EBITDA%",
+    "confirmMessage": "Add optional comment for this version of sheet.",
+    "confirmMessageHeader": "Do you really want to Submit this sheet?",
+    "confirm1Message": "We are working on the automation of sending the sheet for approval, for now you can copy the below link for this sheet and share it with the approver.",
+    "confirmApproveMessageHeader": "Do you really want to Approve this sheet?",
+    "confirmResendMessageHeader": "Do you really want to Resend this sheet?",
+    "confirmReviseMessageHeader": "Do you really want to Revise this sheet?"
+  },
+  "CapitalCharges": {
+    "totalCostBeforeCapCharges": "Total Cost Before Cap Charges",
+    "finanDeptChargeBasedTermsOfPayment": "Finan. dept. charge based Terms of payment",
+    "paymentLag": "Payment Lag",
+    "capitalCharge": "Capital Charge",
+    "totalProjectCost": "Total Project Cost",
+    "capitalChargeTooltip": "No charge less than 30 days",
+    "paymentLagTooltip": "Number of days to match payment terms: \n- 30 is one month advance \n+30 is same as Net-30"
+  },
+  "TotalClientPrice": {
+    "TotalClientPriceTitle": "Total Client Price",
+    "descriptionItems": "Description Items",
+    "totalClientPrice": "Total Client Price:",
+    "invoicingSchedule": "Invoicing Schedule",
+    "cashInFlowView": "Cash-In Flow View",
+    "invoicePlan": "Invoice Schedule",
+    "totalInvoiced": "Total Invoiced",
+    "projectCost": "Project Cost",
+    "netCashFlow": "Net Cashflow",
+    "cumulativeCashFlow": "Cumulative Cash Flow"
+  },
+  "Masters": {
+    "startDate": "01/01/2019",
+    "LocationTitle": "Location",
+    "Location": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "hrs-day",
+        "header": "Hrs/Day"
+      },
+      {
+        "field": "hrs-month",
+        "header": "Hrs/Month"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "start-date",
+        "header": "Start Date"
+      },
+      {
+        "field": "end-date",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "PastLocationVersions": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "hrs-day",
+        "header": "Hrs/Day"
+      },
+      {
+        "field": "hrs-month",
+        "header": "Hrs/Month"
+      },
+      {
+        "field": "start-date",
+        "header": "Start Date"
+      },
+      {
+        "field": "end-date",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "ServicePortfolioGroup": [
+      {
+        "field": "servicePortfolioGrp",
+        "header": "Service Portfolio Group"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "ServiceLine": [
+      {
+        "field": "serviceLine",
+        "header": "ServiceLine"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "ContractingEntity": [
+      {
+        "field": "contractingEntityCode",
+        "header": "Contracting Entity Code"
+      },
+      {
+        "field": "contractingEntity",
+        "header": "Contracting Entity"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "Account": [
+      {
+        "field": "uId",
+        "header": "UID"
+      },
+      {
+        "field": "name",
+        "header": "Name"
+      },
+      {
+        "field": "editor",
+        "header": "Editor"
+      },
+      {
+        "field": "reviewer",
+        "header": "Reviewer"
+      },
+      {
+        "field": "readOnly",
+        "header": "Read Only"
+      },
+      {
+        "field": "action",
+        "header": "Action"
+      }
+    ],
+    "DeliveryType": [
+      {
+        "field": "deliveryType",
+        "header": "Delivery Type"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "BillingType": [
+      {
+        "field": "billingType",
+        "header": "Billing Type"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "EbitdaSeatCost": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "stdOverheadAmt",
+        "header": "Std. Overhead Amt"
+      },
+      {
+        "field": "ebitdaSeatCost",
+        "header": "Ebitda Seat Cost"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "Milestone": [
+      {
+        "field": "milestone",
+        "header": "Milestone"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "DefaultLabels": [
+      {
+        "field": "defaultLabels",
+        "header": "Default Labels"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "ContractorMarkup": [
+      {
+        "field": "Markup",
+        "header": "markup"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "DirectExpenses": [
+      {
+        "field": "directExpensesLabels",
+        "header": "Direct Expenses Labels"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "BasicAssets": [
+      {
+        "field": "basicAssets",
+        "header": "Basic Assets"
+      },
+      {
+        "field": "cost",
+        "header": "Cost"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "RoleGroupAndUSTRole": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "aceRole",
+        "header": "Ace Role"
+      },
+      {
+        "field": "grouping",
+        "header": "Grouping"
+      },
+      {
+        "field": "band",
+        "header": "Band"
+      },
+      {
+        "field": "rate",
+        "header": "Rate"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "CorpBillingRate": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "grouping",
+        "header": "Grouping"
+      },
+      {
+        "field": "rate",
+        "header": "Rate"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "Holidays": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "holidays",
+        "header": "Holiday"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "CurrencyConversion": [
+      {
+        "field": "regions",
+        "header": "Regions"
+      },
+      {
+        "field": "usdToLocal",
+        "header": "USD to Local"
+      },
+      {
+        "field": "localToUSD",
+        "header": "Local to USD"
+      },
+      {
+        "field": "symbol",
+        "header": "Symbol"
+      },
+      {
+        "field": "factors",
+        "header": "Factors"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "Inflation": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "inflationPercent",
+        "header": "Inflation Percent"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "Technology": [
+      {
+        "field": "location",
+        "header": "Location"
+      },
+      {
+        "field": "technology",
+        "header": "Technology"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ],
+    "GenericMaster": [
+      {
+        "field": "configName",
+        "header": "Config Name"
+      },
+      {
+        "field": "configValues",
+        "header": "Config Values"
+      },
+      {
+        "field": "active",
+        "header": "Active"
+      },
+      {
+        "field": "startDate",
+        "header": "Start Date"
+      },
+      {
+        "field": "endDate",
+        "header": "End Date"
+      },
+      {
+        "field": "comment",
+        "header": "Comment"
+      }
+    ]
+  },
+  "MasterDropdown": {
+    "masterDropdownItem": [
+      {
+        "label": "Contracting Entity",
+        "value": 1
+      },
+      {
+        "label": "Service Portfolio Group and Service Line",
+        "value": 2
+      },
+      {
+        "label": "Delivery Type and Billing Type",
+        "value": 3
+      },
+      {
+        "label": "Location and Hrs/Day or Month",
+        "value": 4
+      },
+      {
+        "label": "Contractor Markup",
+        "value": 5
+      },
+      {
+        "label": "Holidays",
+        "value": 6
+      },
+      {
+        "label": "Ebitda Seat Cost",
+        "value": 7
+      },
+      {
+        "label": "Milestone",
+        "value": 8
+      },
+      {
+        "label": "Default Labels",
+        "value": 9
+      },
+      {
+        "label": "Direct Expenses",
+        "value": 10
+      },
+      {
+        "label": "Basic Assets",
+        "value": 11
+      },
+      {
+        "label": "Role Group And UST Role",
+        "value": 12
+      },
+      {
+        "label": "Currency Conversion",
+        "value": 13
+      },
+      {
+        "label": "Generic Master",
+        "value": 14
+      },
+      {
+        "label": "Technology",
+        "value": 15
+      },
+      {
+        "label": "Corp Billing Rate",
+        "value": 17
+      }
+    ]
+  },
+  "MasterStatusFlag": {
+    "statusFlag": [
+      {
+        "label": "Not Submitted",
+        "value": 0
+      },
+      {
+        "label": "Approval Pending",
+        "value": 1
+      },
+      {
+        "label": "Approved",
+        "value": 2
+      },
+      {
+        "label": "Rejected",
+        "value": 3
+      },
+      {
+        "label": "Not Submitted",
+        "value": 4
+      }
+    ]
+  },
+  "AddNewLocation": {
+    "status": "Status:",
+    "location": "Location",
+    "hrsPerMonth": "Hrs/Month",
+    "hrsPerDay": "Hrs/Day",
+    "comment": "Comment",
+    "commentFromApprover": "Comment From the approver:",
+    "startDate": "Start Date:",
+    "activeVersion": "Active version",
+    "pastVersion": "Past version",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "ProjectHeader": {
+    "info": {
+      "projectDetail": "Project Details",
+      "accountName": "Account Name",
+      "projectName": "Project Name:",
+      "version": "Version:",
+      "duration": "Duration:",
+      "cost": "Cost:",
+      "versionId": "Version ID",
+      "projectId": "Project ID",
+      "source": "Source",
+      "destination": "Destination",
+      "chat": "Comment",
+      "send": "Send",
+      "currencyMsg": "Changing the currency will not convert the User Input values entered at different tabs. Only calculated values will be converted as per the currency selected."
+    },
+    "format": "Format: XXXX-NNNN-NN-NN",
+    "conversion": "Currency Conversion",
+    "fields": {
+      "accountName": "Account Name",
+      "contractingEntity": "Contracting Entity",
+      "projectID": "Project ID",
+      "newProjectID": "New Project ID",
+      "projectName": "Project Name",
+      "deliveryOwner": "Delivery Owner",
+      "lastUpdatedBy": "Last updated by",
+      "servicePortfolioGroup": "Service Portfolio Group",
+      "serviceLine": "Service Line",
+      "projectDeliveryType": "Project Delivery Type",
+      "projectBillingType": "Project Billing Type",
+      "createdBy": "Created By",
+      "submittedBy": "Submitted By",
+      "approverComments": "Approver Comments",
+      "resendComments": "Resend/Revise Comments",
+      "beatTaxComp": "BEAT Tax Compliance ",
+      "beatTax": "SOW signed by UST Global Singapore?"
+    }
+  },
+  "Admin": {
+    "masters": "Masters",
+    "roleAndPermission": "Role And Permission",
+    "addUser": "Add User",
+    "definePOC": "Define Finance POC",
+    "account": "Account",
+    "AddNewUser": "ADD NEW USER",
+    "AddMultipleUser": "Add Multiple User",
+    "AddMultipleUserEmptyMessage": "No records to display!",
+    "UpdateUser": "UPDATE USER",
+    "defineAdmin": "Define Admin",
+    "defineReadOnly": "Define Read Only",
+    "AssignRole": "ASSIGN ROLE",
+    "AssignRoleDialog": "Assign Role",
+    "AssignButton": "Assign",
+    "FinancePOCTittle": "Define Finance POC",
+    "PIPCheckInTitle": "PIP Check In",
+    "FinancePOCEmptyMessage": "No Finance Approver Assigned for this Account!",
+    "ReadOnlyEmptyMessage": "No Data Exists!",
+    "RolePermissionEmptyMessage": "No Role and Permission assigned for this Account!",
+    "AdminEmptyMessage": "No Admin Assigned!",
+    "addSingleUserTittle": "Add Single User",
+    "addMultiUserTittle": "Add Multiple User",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "uId": "UID",
+    "email": "Email",
+    "DeleteDialogHeader": "Do you really want to remove this Role?",
+    "DeleteEditRoleDialogHeader": "There might be PIP Sheets Checked Out by this User. Do you still want to remove this Role?",
+    "DeleteVersion": "Do you really want to remove this Version?",
+    "DeleteProject": "Do you really want to remove this Project?",
+    "CreateVersion": "Do you really want to create a new version?",
+    "DeleteSharePipAccess": "Do you really want to remove this Share Pip Access?",
+    "delete": "Yes , Delete",
+    "create": "Create",
+    "ReplicateExisting": "Replicate in Existing Project",
+    "ReplicateNew": "Replicate in New Project",
+    "ReplicateNewDummy": "Replicate in New Dummy Project",
+    "ReplicateExistingInMyPips": "Replicate in Existing Project My Pips",
+    "ReplicateNewInMyPips": "Replicate in New Project My Pips",
+    "ReplicateSame": "Do you really want to create a new copied version?",
+    "ReplicateCreate": "Do you want to Replicate in New Project?",
+    "VersionValidation": "Project already has 5 versions,new version cannot be created!",
+    "DefineFinancePOC": [
+      {
+        "field": "name",
+        "header": "Name"
+      },
+      {
+        "field": "uId",
+        "header": "UID"
+      },
+      {
+        "field": "role",
+        "header": "Role"
+      },
+      {
+        "field": "action",
+        "header": "Action"
+      }
+    ]
+  },
+  "Approver": {
+    "ApproverTittle": "PIP Sheet",
+    "ApproverLisColumns": [
+      {
+        "field": "sfProjectId",
+        "header": "Project ID"
+      },
+      {
+        "field": "projectName",
+        "header": "Project Name"
+      },
+      {
+        "field": "accountName",
+        "header": "Account Name"
+      },
+      {
+        "field": "submissionDate",
+        "header": "Submission Date"
+      },
+      {
+        "field": "submittedBy",
+        "header": "Submitted By"
+      },
+      {
+        "field": "userComment",
+        "header": "User Comment"
+      },
+      {
+        "field": "status",
+        "header": "Status"
+      },
+      {
+        "field": "approverComment",
+        "header": "Approver Comment"
+      },
+      {
+        "field": "resenderComment",
+        "header": "Resend/Revise Comment"
+      }
+    ],
+    "ApproverEmptyMessage": "No PIP Sheet Found!"
+  },
+  "PipSheetStatusDropdown": {
+    "statusFlag": [
+      {
+        "label": "Waiting For Approval",
+        "value": "Waiting for Approval"
+      },
+      {
+        "label": "All",
+        "value": 4
+      },
+      {
+        "label": "Approved",
+        "value": "Approved"
+      },
+      {
+        "label": "Not Submitted",
+        "value": "Not Submitted"
+      }
+    ]
+  },
+  "SharePIP": {
+    "ProjectID": "Project ID",
+    "GrantToAccess": "Grant Access To",
+    "Comments": "Comments",
+    "tableHeader": "Select Access for one or more versions",
+    "SharePIPColumns": [
+      {
+        "field": "versions",
+        "header": "Versions"
+      },
+      {
+        "field": "editor",
+        "header": "Editor"
+      },
+      {
+        "field": "readOnly",
+        "header": "Read Only"
+      }
+    ]
+  },
+  "SharePIPList": {
+    "SharePIPListColumns": [
+      {
+        "field": "sharedWithUserName",
+        "header": "Name"
+      },
+      {
+        "field": "uid",
+        "header": "UID"
+      },
+      {
+        "field": "version",
+        "header": "Versions"
+      },
+      {
+        "field": "access",
+        "header": "Access"
+      },
+      {
+        "field": "comments",
+        "header": "Comments"
+      },
+      {
+        "field": "action",
+        "header": "Action"
+      }
+    ]
+  },
+  "ButtonLables": {
+    "save": "Save",
+    "submit": "Submit",
+    "newVersion": "NEW VERSION",
+    "discardVersion": "DISCARD THE VERSION",
+    "setDate": "SET START DATE",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "filter": "Filter",
+    "createVersion": "Yes, Create",
+    "ok": "ok"
+  },
+  "AutoPopulatePeriodsMsg": "NOTE : Right Click on the period to repeat values",
+  "MilestoneMonthPattern": "FORMAT: MMM-YYYY",
+  "GridEmptyMsg": "No Data to Show here!",
+  "CopyLink": "Link Copied to Clipboard!",
+  "VERSION": "Version",
+  "Administration": {
+    "PipCheckIn": {
+      "tableHeader": "Displays the latest versions that are currently checked out",
+      "Labels": {
+        "Account": "Account",
+        "ProjectID": "Project ID"
+      },
+      "VersionColumns": [
+        {
+          "field": "versions",
+          "header": "Versions"
+        },
+        {
+          "field": "name",
+          "header": "Name"
+        },
+        {
+          "field": "uid",
+          "header": "UID"
+        }
+      ],
+      "ErrorMessage": {
+        "PipCheckInFail": "PIP CheckIn Failed"
+      },
+      "SuccessMessage": {
+        "PipCheckInSuccess": "PIP CheckIn Successfully"
+      },
+      "ValidationMessage": {
+        "NoVersionsCheckedOut": "No Versions Checked Out",
+        "NoProjectsAvailable": "No projects available for the selected account"
+      }
+    }
+  },
+  "Reports": {
+    "Account": "Account",
+    "Project": "Project",
+    "Kpi": "KPI's",
+    "Currency": "Currency",
+    "Usd": "USD",
+    "PipCurrency": "PIP Currency",
+    "StartDate": "Start Date",
+    "EndDate": "End Date",
+    "GanerateReport": "GENERATE REPORT",
+    "Navmenu": {
+      "CustomReport": "Key KPIs report – Role Level",
+      "SummaryView": "Key KPIs report – Project Level",
+      "DetailedLevel": "All KPIs report – Project Level",
+      "ResourceLevel": "All KPIs report – Role & Project Level"
+    },
+    "Tooltip": {
+      "CustomReportTooltip": "Key Role Level KPIs report with Multiple account -  Multiple project selection ; KPIs available are Bill Rate ,Cost Rate ,Labour Revenue, Labour Cost and FTE with Billable/Non Billable Tagging",
+      "SummaryViewTooltip": "Key Project Level KPIs report with Multiple account -  Multiple project selection; KPIs available are TCV, Total Project Cost ,GM and Project EBITDA .Report designed for project level forecasts",
+      "DetailedLevelTooltip": "Project Level All KPIs report with Single account -  Multiple project selection; All Project level KPIs are available in this report",
+      "ResourceLevelTooltip": "All KPIs report with Single account -  Single project selection; All Role and Project level KPIs are available in this report"
+    }
+  },
+  "Infographics": {
+    "Ebitda": {
+      "Title": "Rev, EBITDA% & Contribution%",
+      "Contributin": "Contributin%",
+      "Adjusted": "Adjusted EBITDA%"
+    },
+    "Revenue": {
+      "Title": "SL Revenue Share",
+      "Sl1": "SL 1",
+      "Sl2": "SL 2",
+      "Sl3": "SL 3"
+    },
+    "Location": {
+      "Title": "Location Wise Revenue & EBITDA%",
+      "Location": "Locatin",
+      "Ebitda": "Ebitda%"
+    }
+  },
+  "LocationWiseDetails": {
+    "Title": "Location Wise Details",
+    "LocationWiseDetailsColumns": [
+      {
+        "field": "locationWiseDetail",
+        "header": "Location Wise Details"
+      },
+      {
+        "field": "total",
+        "header": "Total"
+      }
+    ]
+  },
+  "KeyPerformanceIndicators": {
+    "Title": "Key Performance Indicators",
+    "PerformanceIndicatorsColumns": [
+      {
+        "field": "KeyPerformanceIndicator",
+        "header": "Key Performance Indicators"
+      },
+      {
+        "field": "pip",
+        "header": "PIP"
+      }
+    ],
+    "PerformanceIndicatorsRows": {
+      "OnshoreFTE": "Onshore FTE %",
+      "GrossMargin": "Gross Margin %",
+      "Ebitda": "EBITDA %",
+      "serviceLineBlendedTargetEbitda": "Service Line Blended Target Ebitda %",
+      "Varience": "Variance %",
+      "CostContingency": "Cost Contingency %",
+      "firstMonthPositiveCashFlow": "1st Month of Positive Cash Flow"
+    }
+  }
+}

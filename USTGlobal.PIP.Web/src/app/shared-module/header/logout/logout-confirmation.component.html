@@ -1,0 +1,10 @@
+﻿<p-dialog [(visible)]="displayModal" [modal]="true" id="logout-dialog" >
+    <p-header>
+        <h4 class="modal-title">{{'SHARED.HEADER.logoutConfirmation.dialogTitle' | translate }}</h4>
+    </p-header>
+    <p>{{'SHARED.HEADER.logoutConfirmation.dialogMessage' | translate }}</p>
+    <p-footer>
+        <button type="button" class="btn btn-default leftBtn" (click)="displayModal=false">{{'SHARED.HEADER.logoutConfirmation.secondaryButton' | translate }}</button>
+        <button type="button" class="btn btn-primary" (click)="closeAndInstructLogoutToParent()">{{'SHARED.HEADER.logoutConfirmation.primaryButton' | translate }}</button>
+    </p-footer>
+</p-dialog>

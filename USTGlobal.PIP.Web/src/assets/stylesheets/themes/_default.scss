@@ -1,0 +1,64 @@
+// -----------------------------------------------------------------------------
+// When having several themes, this file contains everything related to the
+// default one.
+// -----------------------------------------------------------------------------
+body .ui-button.ui-state-default.ui-button-info,
+body .ui-buttonset.ui-button-info > .ui-button.ui-state-default {
+  color: #ffffff;
+  background-color: #00a9ee;
+}
+.ui-state-default .ui-widget-content .ui-state-default {
+  color: $theme;
+  max-width: 20em;
+}
+.info-button {
+  & .ui-button-text {
+    color: white;
+  }
+}
+.pi :hover {
+  color: $backround_color;
+}
+body .ui-steps .ui-steps-item.ui-state-highlight .ui-steps-number {
+  background: $theme;
+  color: #ffffff;
+}
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+  background-color: $theme;
+}
+
+body .ui-dropdown-panel .ui-dropdown-items .ui-dropdown-item {
+  font-size: $font-size !important;
+  font-weight: 400;
+}
+.ui-widget.ui-widget-content {
+  border: none !important;
+}
+.bottom-line {
+  position: fixed;
+  bottom: 29px;
+  width: 93vw;
+}
+.ui-dropdown-panel .ui-state-highlight {
+  background-color: $theme !important;
+}
+// .ui-dropdown-panel {
+//   width: min-content;
+// }
+
+
+.ui-multiselect-item.ui-state-highlight {
+  color: #ffffff;
+  background-color: $theme !important;
+}
+
+.table-title {
+  font-weight: 600;
+  padding-right: 4px;
+}
+body .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+  background-color: $theme !important;
+}
+.ui-dropdown-filter-container {
+  width: auto;
+}

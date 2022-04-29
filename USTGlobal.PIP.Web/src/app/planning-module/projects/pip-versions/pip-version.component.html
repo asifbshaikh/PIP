@@ -1,0 +1,115 @@
+<div *ngIf="isDataAvailable" class="m-b-10 p-offset-11">
+    <button
+        *ngIf=" versionMainList.pipSheetVersionDTO ? versionMainList.pipSheetVersionDTO[0].hasAccountLevelAccess : false"
+        pButton tooltipPosition="bottom" class="ui-button-rounded ui-button-info m-b-10" label="Share PIP"
+        (click)="navigateToSharePipScreen()" style="margin-top: 10px;"></button>
+</div>
+<form *ngIf="isDataAvailable" id="pip-version">
+    <p-table tableStyleClass="fixtable" [value]="versionMainList.pipSheetVersionDTO" [columns]="versionCols"
+        class="form-group" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th>
+                    {{columns[0].header}}
+                </th>
+                <th *ngIf="!isDummy">
+                    {{columns[1].header}}
+                </th>
+                <th>
+                    {{columns[2].header}}
+                </th>
+                <th>
+                    {{columns[3].header}}
+                </th>
+                <th *ngIf="!isDummy">
+                    {{columns[4].header}}
+                </th>
+                <th *ngIf="!isDummy">
+                    {{columns[5].header}}
+                </th>
+                <th *ngIf="!isDummy">
+                    {{columns[6].header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+            <!-- below class condition will be change to highlight current version -->
+            <tr>
+                <td class="version-name">
+                    <div *ngIf="rowIndex >= 0">
+                        <!--Need to check on this-->
+                        <p-menu id="versionenu-{{i}}" #menu [popup]="true" [model]="versionMenuItems" appendTo="body"
+                            (onShow)="setVersionForShownVersionMenu(rowData)"></p-menu>
+                        <p-dialog header="{{'Admin.DeleteVersion' | translate}}" [(visible)]="displayDelete"
+                            [style]="{width: '25vw'}" modal="true" [closable]="false" [draggable]="false"
+                            style="text-align: center;">
+                            <div style="padding: 1.5em;">
+                                <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton
+                                    class="cancel-button" (click)="displayDelete = false"></button>
+                                <button type="button" label="{{'Admin.delete' | translate}}" pButton
+                                    class="delete-button"
+                                    (click)="deleteThisVersion(); displayDelete = false;"></button>
+                            </div>
+                        </p-dialog>
+                        <app-replicate *ngIf="replicate" [replicateType]="replicationTypeId"
+                            [replicateNew]="replicateNew" [replicateNewInMyPips]="replicateNewInMyPips"
+                            [replicateObj]="replicateObject" [versionId]="selectedVersionId"
+                            [replicateExisting]="replicateExisting" [replicateSame]="replicateSame"
+                            [selectedPipSheetId]="pipSheetId" (action)="replicationAction($event)"></app-replicate>
+                        <i class="pi pi-ellipsis-v pull-right" (click)="menu.toggle($event)"
+                            *ngIf="(returnRoleCheckForKebabMenu(rowData))" [ngStyle]="{'cursor': 'pointer'}"></i>
+                        <!-- <i *ngIf="!rowData.isCheckedOut && returnRoleCheckForCheckinCheckOutIcon && checkIfAnyVersionSubmitted()"
+                            [pTooltip]="getToolTipMessage(rowData.roleName, rowData.checkedInOutByName, rowData.checkedInOutBy)"
+                            class="pi pi-sign-out" style="font-size: 1.5em; float: right;"></i> -->
+                        <i *ngIf="!rowData.isCheckedOut && returnRoleCheckForCheckinCheckOutIcon && !checkIfAnyVersionSubmitted()"
+                            [pTooltip]="getToolTipMessage(rowData.roleName, rowData.checkedInOutByName, rowData.checkedInOutBy)"
+                            class="pi pi-sign-out" style="font-size: 1.5em; float: right;"></i>
+                    </div>
+                    <a (click)="navigateToPipSheet(rowData.projectId, rowData.pipSheetId, rowData.accountId)"
+                        style="cursor: pointer;">
+                        {{'Version' + ' ' + rowData.versionNumber}}
+                    </a>
+
+                </td>
+                <td *ngIf="!isDummy">
+                    {{rowData.status}}
+                </td>
+                <td>
+                    {{rowData.modifiedOn | date:'MM-dd-yyyy hh:mm:ss'}} {{rowData.modifiedOn ? '(IST)' : ''}}
+                </td>
+                <td>
+                    {{rowData.modifiedBy}}
+                </td>
+                <td *ngIf="!isDummy">
+                    <text-ellipsis>{{rowData.userComments}}</text-ellipsis>
+                </td>
+                <td *ngIf="!isDummy">
+                    <text-ellipsis style="font-size: 10px;">{{rowData.approverComments}}
+                        <br>
+                        {{rowData.approvedBy}} {{rowData.approvedOn ? '|' : ''}}
+                        {{rowData.approvedOn | date:'MM-dd hh:mm'}}
+                        {{rowData.approvedOn ? '(IST)' : ''}}
+                    </text-ellipsis>
+                </td>
+                <td *ngIf="!isDummy">
+                    <text-ellipsis style="font-size: 10px;">{{rowData.resendComments}}
+                        <br>
+                        {{rowData.resendBy}} {{ rowData.resendOn ? '|' : '' }}
+                        {{rowData.resendOn | date:'MM-dd hh:mm'}}
+                        {{rowData.resendOn ? '(IST)' : ''}}
+                    </text-ellipsis>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="4" [ngStyle]="{'text-align': 'center'}">
+                    {{ 'PROJECTS.Versions.versionEmptyMessage' | translate }}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorright" style="text-align: right" let-state>
+            {{(state.page * state.rows) + 1}}-{{state.rows * (state.page + 1)}} of {{state.totalRecords}} items
+        </ng-template>
+    </p-table>
+</form>

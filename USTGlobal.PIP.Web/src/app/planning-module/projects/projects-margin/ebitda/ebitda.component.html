@@ -1,0 +1,106 @@
+<div *ngIf="isDataAvailable" id="ebitda">
+  <div class="d-flex mt-2">
+    <!-- ebitda -->
+    <div class="col-md-12">
+      <div class="pb-2">
+        <span class="table-title">{{ 'Ebitda.EbitdaTitle' | translate }}</span>
+      </div>
+      <div>
+        <form [formGroup]="ebitdaForm">
+          <p-table tableStyleClass="fixtable ui-table-scrollable-header" styleClass="prime-table" [scrollable]="true"
+            scrollHeight="calc(100vh - 280px)" [columns]="ebitdaCols" class="form-group mb-10"
+            [value]="ebitdaForm.get('ebitdaStdOverhead')['controls']" formArrayName="ebitdaStdOverhead">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th>
+                  {{columns[0].header}}
+                </th>
+                <th>
+                  {{columns[1].header}}
+                  <i pTooltip="{{'Ebitda.EbitaHeaderTooltip.RefUsd' | translate }}" tooltipPosition="top"
+                    class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+                </th>
+                <th>
+                  <span style="width: 80%;"> {{columns[2].header}} </span>
+                  <i pTooltip="{{'Ebitda.EbitaHeaderTooltip.StdOverheadPerLocation' | translate }}"
+                    tooltipPosition="top" class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+                </th>
+                <th>
+                  {{columns[3].header}}
+                  <i pTooltip="{{'Ebitda.EbitaHeaderTooltip.Overrides' | translate }}" tooltipPosition="top"
+                    class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+                </th>
+                <th>
+                  {{columns[4].header}}
+                  <i pTooltip="{{'Ebitda.EbitaHeaderTooltip.OverheadAmt' | translate }}" tooltipPosition="top"
+                    class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+                </th>
+                <th>
+                  {{columns[5].header}}
+                  <i pTooltip="{{'Ebitda.EbitaHeaderTooltip.EbitdaSeatCost' | translate }}" tooltipPosition="top"
+                    class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+                </th>
+                <th>
+                  {{columns[6].header}}
+                </th>
+                <th>
+                  {{columns[7].header}}
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+              <tr [formGroupName]="rowIndex">
+                <td>
+                  {{ rowData.value.locationName }}
+                </td>
+                <td>
+                  {{ rowData.value.refUSD | number:'1.2-2'}}
+                </td>
+                <td>
+                  {{  rowData.value.refUSD | number:'1.2-2' }}
+                </td>
+                <td>
+                  <input pInputText type="text" formControlName="overrideValue" pipRestrictInput="decimalPrecisionTwo"
+                    (keyup)="onStdOverheadOverride(rowIndex)" (mouseover)="getOverrideNotificationErrorMsg(rowIndex)"
+                    (mouseout)="getOverrideNotificationErrorMsg(rowIndex)" tooltipPosition="top"
+                    [pTooltip]='pOverrideShowToolTip'>
+                </td>
+                <td>
+                  {{((rowData.value.isStdOverheadOverriden === true) ? rowData.value.overrideValue : rowData.value.refUSD) | number:'1.2-2'}}
+                </td>
+                <td>
+                  <div *ngIf="isEbidaSeatCostLocationAllowedToOverride(rowData.value.locationId)">
+                    {{ rowData.value.ebitdaSeatCost | number:'1.2-2' }}</div>
+                </td>
+                <td>
+                  <input *ngIf="isEbidaSeatCostLocationAllowedToOverride(rowData.value.locationId)" pInputText
+                    type="text" formControlName="sharedSeatsUsePercent" pipRestrictInput="decimalPrecisionTwo"
+                    (keyup)="updateCharges(rowIndex)">
+                </td>
+                <td>
+                  <span
+                    *ngIf="isEbidaSeatCostLocationAllowedToOverride(rowData.value.locationId)">{{ rowData.value.charges | number:'1.2-2' }}</span>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+                  {{ 'Ebitda.ebitdaEmptyMessage' | translate }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="p-grid">
+    <hr class="bottom-line">
+    <div class="p-sm-12 btns-strip">
+      <button pButton [disabled]="!ebitdaForm.valid || isSaveClicked" class="ui-button-rounded ui-button-success"
+        (click)="onSaveClick()" label="Save"></button>
+    </div>
+  </div>
+</div>

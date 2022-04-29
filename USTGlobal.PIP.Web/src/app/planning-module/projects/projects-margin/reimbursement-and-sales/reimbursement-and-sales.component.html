@@ -1,0 +1,341 @@
+<div *ngIf="isDataAvailable" id="reimbursements-and-sales">
+  <form [formGroup]="form" (ngSubmit)="onSave(form.value)">
+    <!--Reimbursement Table -->
+    <p-table tableStyleClass="fixtable fixtableAddOn" formArrayName="reimbursements" [frozenColumns]="reimbursementCols"
+      [columns]="periodCols" [scrollable]="true" frozenWidth="580px" scrollHeight="calc(50vh - 160px)"
+      class="form-group table  table-bordered table-sm" cellspacing="0" width="100%"
+      [value]="form.get('reimbursements')['controls']" [(selection)]="selectedReimbursement">
+      <ng-template pTemplate="caption">
+        <span class="table-title">{{'ReimbursementAndSales.ReimbursementTitle' | translate}}
+          <i pTooltip="{{'ReimbursementAndSales.ReimbursementTooltip' | translate}}"><img
+              src="/assets/icons/ic_info_outline_48px.svg"></i></span>
+        <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+      </ng-template>
+      <ng-template pTemplate="frozencolgroup" let-columns>
+        <colgroup>
+          <col style="width:40px">
+          <col style="width:180px">
+          <col style="width:180px">
+          <col style="width:90px">
+          <col style="width:90px">
+        </colgroup>
+      </ng-template>
+
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of periodCols" style="width:110px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="frozenheader" let-columns>
+        <tr>
+          <th class="text-center">
+            <p-tableHeaderCheckbox *ngIf="numberOfReimbursementRows > 0" (click)="onCheckboxSelect()"
+              [disabled]="disableOtherFormControls">
+            </p-tableHeaderCheckbox>
+          </th>
+          <th *ngFor="let col of reimbursementCols">
+            <div *ngIf="col.field == 'milestone'; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+              <i pTooltip="{{'ReimbursementAndSales.ReimbursementMilestoneTooltip' | translate}}"><img
+                  src="/assets/icons/ic_info_outline_48px.svg"></i>
+              <span class="required" *ngIf="col.header == 'Description'">*</span>
+            </ng-template>
+            <ng-template #elseBlock>
+              <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+              <span class="required" *ngIf="col.header == 'Description'">*</span>
+            </ng-template>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of periodCols">
+            <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr *ngIf="rowData.value.isDirectExpenseReimbursable" [pSelectableRow]="rowData"
+          [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+          <td>
+            <p-tableCheckbox [disabled]='true'></p-tableCheckbox>
+          </td>
+          <td>
+            <p-dropdown
+              [disabled]="((rowData.value.isDirectExpenseReimbursable == true) &&
+              (reimbursementAndDiscountData.reimbursements[rowIndex].isDirectExpenseMilestone !== false)) ? true : null"
+              appendTo="body" id="rowIndex" [options]="selectedMilestones"
+              (onChange)="onReimbursementMilestoneSelected(rowIndex, $event.value)"
+              formControlName="selectedMilestoneItem">
+            </p-dropdown>
+          </td>
+          <td>
+            <input [attr.disabled]="true" pInputText formControlName="description"
+              pipRestrictInput="notAllowSpaceInBeginning" />
+          </td>
+          <td class="percent">
+            <input pInputText formControlName="directExpensePercent"
+              (keyup)="onPercentDirectExpenseChange(rowIndex, $event.target.value)"
+              pipRestrictInput="decimalPrecisionTwoWithNaturalNumbers"
+              (mouseover)="getOverrideNotificationErrorMsg(rowIndex)"
+              (mouseout)="getOverrideNotificationErrorMsg(rowIndex)" tooltipPosition="top"
+              [pTooltip]='pPercentOfDirectExpenseShowToolTip' class="input-percent" /><span
+              style="margin: 2px;">%</span>
+          </td>
+          <td>
+            {{  rowData.value.reimbursedExpense | number:'1.2-2' | negativeValue}}
+          </td>
+        </tr>
+        <tr *ngIf="!rowData.value.isDeleted && !rowData.value.isDirectExpenseReimbursable" [pSelectableRow]="rowData"
+          [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+          <td class="text-center">
+            <p-tableCheckbox [value]="rowData" [index]="rowIndex" (click)="onCheckboxSelect()"
+              [disabled]="disableOtherFormControls || rowData.value.isDirectExpenseReimbursable === true ? true : false">
+            </p-tableCheckbox>
+          </td>
+          <td>
+            <p-dropdown appendTo="body" id="rowIndex" [options]="selectedMilestones"
+              (onChange)="onReimbursementMilestoneSelected(rowIndex, $event.value)"
+              formControlName="selectedMilestoneItem">
+            </p-dropdown>
+          </td>
+          <td>
+            <input pInputText formControlName="description" pipRestrictInput="notAllowSpaceInBeginning" />
+          </td>
+          <td class="percent">
+            <input [attr.disabled]="true" pInputText formControlName="directExpensePercent" class="input-percent"
+              pipRestrictInput="decimalPrecisionTwoWithNaturalNumbers" /><span style="margin: 2px;">%</span>
+          </td>
+          <td>
+            {{  rowData.value.reimbursedExpense | number:'1.2-2' | negativeValue }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="periodCols"
+        let-rowIndex="rowIndex">
+        <tr *ngIf="rowData.value.isDirectExpenseReimbursable" [pSelectableRow]="rowData"
+          [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+          <td *ngFor="let pCol of periodCols;let i = index">
+            <div formArrayName="reimbursementPeriods">
+              <div [formGroupName]="i">
+                <input #reimbursementPeriodInput id="{{rowIndex.toString() + 'a' + i.toString()}}" pInputText
+                  type="text" (focusout)="onExpenseChange()"
+                  [attr.disabled]="rowData.value.isDirectExpenseReimbursable == true ? true : null"
+                  (click)="onRreimbursementCellClick(false,$event,rowData,rowIndex)" formControlName="expense"
+                  [value]="rowData.value.reimbursementPeriods[i].expense | number:'1.2-2' | negativeValue">
+                <p-contextMenu [target]="reimbursementPeriodInput" appendTo="body"
+                  [model]="reimburmentContextMenuItems">
+                </p-contextMenu>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="!rowData.value.isDeleted && !rowData.value.isDirectExpenseReimbursable" [pSelectableRow]="rowData"
+          [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+          <td *ngFor="let pCol of periodCols;let i = index">
+            <div formArrayName="reimbursementPeriods">
+              <div [formGroupName]="i">
+                <input #reimbursementPeriodInput id="{{rowIndex.toString() + 'a' + i.toString()}}" pInputText
+                  type="text" (focusout)="onExpenseChange()"
+                  [attr.disabled]="rowData.value.isDirectExpenseReimbursable == true ? true : null"
+                  (click)="onRreimbursementCellClick(false,$event,rowData,rowIndex)" formControlName="expense"
+                  pipRestrictInput="negativeDecimalPrecisionTwo">
+                <p-contextMenu [target]="reimbursementPeriodInput" appendTo="body"
+                  [model]="reimburmentContextMenuItems">
+                </p-contextMenu>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template class="scrollable-footer" pTemplate="footer" let-columns>
+        <tr *ngIf='columns[0] && columns[0].field == "periods"'>
+          <td *ngFor="let pCol of periodCols;let i = index">
+            {{reimbursedPeriodTotals[i] | number:'1.2-2' | negativeValue}}
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="summary" let-columns>
+        <tr class="bottom-border" [ngStyle]="{'margin-top': '-7px' }" style="position: absolute;margin-left: -13px;">
+          <td class="footer-summary" style="width: 490px;">
+            <span class="pull-left">{{ 'ReimbursementAndSales.TotalReimbursement' | translate }}
+            </span>
+          </td>
+          <td class="footer-summary text-left" style="min-width: 91px; height: 32px;">
+            {{totalReimburesment | number:'1.2-2' | negativeValue}}
+          </td>
+        </tr>
+        <tr style="margin-top: 20px;position: absolute;">
+          <td style="border: none" [attr.colspan]="colSpanSize">
+            <button pButton type="button" class="first pull-left ui-button-rounded ui-button-info" label="Add row"
+              (click)="onReimbursementAddRow()" [disabled]="disableOtherFormControls || isSaveClicked"></button>
+            <button *ngIf="selReimbRow.length > 0" pButton type="button"
+              class="first pull-left ui-button-rounded ui-button-danger" label="Delete row"
+              (click)="onReimbursementSelectedRowDelete()" [disabled]="isSaveClicked"></button>
+            <button *ngIf="selReimbRow.length > 0" pButton type="button"
+              class="first pull-left ui-button-rounded ui-button-info" label="Copy Selected"
+              (click)="onReimbursementCopySelected()" [disabled]="isSaveClicked"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+            {{ 'GridEmptyMsg' | translate }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <!-- Sales Discount Table -->
+    <p-table tableStyleClass="fixtable" formArrayName="salesDiscounts" [frozenColumns]="salesDiscountCols"
+      [columns]="periodCols" [scrollable]="true" frozenWidth="580px" scrollHeight="calc(50vh - 160px)"
+      class="form-group table  table-bordered table-sm" cellspacing="0" width="100%"
+      [value]="form.get('salesDiscounts')['controls']" [(selection)]="selectedSalesDiscount">
+      <ng-template pTemplate="caption">
+        <span class="table-title">{{'ReimbursementAndSales.SalesDiscountTitle' | translate}}
+          <i pTooltip="{{'ReimbursementAndSales.SalesDiscountTooltip' | translate}}"><img
+              src="/assets/icons/ic_info_outline_48px.svg"></i>
+        </span>
+        <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+      </ng-template>
+      <ng-template pTemplate="frozencolgroup" let-columns>
+        <colgroup>
+          <col style="width:40px">
+          <col style="width:180px">
+          <col style="width:225px">
+          <col style="width:135px">
+
+        </colgroup>
+      </ng-template>
+
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of periodCols" style="width:110px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="frozenheader" let-columns>
+
+        <tr>
+          <th class="text-center">
+            <p-tableHeaderCheckbox *ngIf="numberOfSalesRows > 0" (click)="onCheckboxSelect()"
+              [disabled]="disableOtherFormControls">
+            </p-tableHeaderCheckbox>
+          </th>
+          <th *ngFor="let col of salesDiscountCols">
+            <div *ngIf="col.field == 'milestone'; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+              <i pTooltip="{{'ReimbursementAndSales.SalesDiscountMilestoneTooltip' | translate}}"><img
+                  src="/assets/icons/ic_info_outline_48px.svg"></i>
+              <span class="required" *ngIf="col.header == 'Description'">*</span>
+            </ng-template>
+            <ng-template #elseBlock>
+              <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+              <span class="required" *ngIf="col.header == 'Description'">*</span>
+            </ng-template>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of periodCols">
+            <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+        <tr *ngIf="!rowData.value.isDeleted" [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex"
+          [formGroupName]="rowIndex">
+          <td class="text-center">
+            <p-tableCheckbox [value]="rowData" [index]="rowIndex" (click)="onCheckboxSelect()"
+              [disabled]="disableOtherFormControls">
+            </p-tableCheckbox>
+          </td>
+          <td>
+            <p-dropdown appendTo="body" id="rowIndex" [options]="selectedMilestones"
+              (onChange)="onSalesDiscountMilestoneSelected(rowIndex, $event.value)"
+              formControlName="selectedMilestoneItem">
+            </p-dropdown>
+          </td>
+          <td>
+            <input pInputText formControlName="description" pipRestrictInput="notAllowSpaceInBeginning" />
+          </td>
+          <td>
+            ({{  rowData.value.discount | number:'1.2-2' }})
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="periodCols"
+        let-rowIndex="rowIndex">
+        <tr *ngIf="!rowData.value.isDeleted" [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex"
+          [formGroupName]="rowIndex">
+          <td *ngFor="let pCol of periodCols;let i = index">
+            <div formArrayName="salesDiscountPeriods">
+              <div [formGroupName]="i">
+                <input #periodSalesInput id="{{rowIndex.toString() + 'b' + i.toString()}}" pInputText type="text"
+                  (keyup)="onDiscountChange()" formControlName="discount"
+                  (click)="onSalesCellClick(false, $event,rowData,rowIndex)"
+                  (focusout)="onSalesCellClick(false,$event, rowData, rowIndex)" pipRestrictInput="decimalPrecisionTwo">
+                <p-contextMenu [target]="periodSalesInput" appendTo="body" [model]="salesContextMenuItems">
+                </p-contextMenu>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template class="scrollable-footer" pTemplate="footer" let-columns>
+        <tr *ngIf='columns[0] && columns[0].field == "periods"'>
+          <td *ngFor="let pCol of periodCols;let i = index">
+            ({{salesDiscountPeriodTotals[i] | number:'1.2-2'}})
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="summary" let-columns>
+        <tr class="bottom-border" [ngStyle]="{'margin-top': '-8.5px' }" style="position: absolute;margin-left: -13px;">
+          <td class="footer-summary" style="width: 445px;">
+            <span class="pull-left">{{ 'ReimbursementAndSales.TotalDiscounts' | translate }}
+            </span>
+          </td>
+          <td class="footer-summary text-left" style="min-width: 135px; height: 32px;">
+            ({{totalDiscount | number:'1.2-2'}})
+          </td>
+        </tr>
+        <tr style="margin-top: 20px;position: absolute;">
+          <td style="border: none" [attr.colspan]="colSpanSize">
+            <button pButton type="button" class="first pull-left ui-button-rounded ui-button-info" label="Add row"
+              (click)="onSalesDiscountAddRow()" [disabled]="disableOtherFormControls || isSaveClicked"></button>
+            <button *ngIf="selSalesRow.length > 0" pButton type="button"
+              class="first pull-left ui-button-rounded ui-button-danger" label="Delete row"
+              (click)="onSalesDiscountSelectedRowDelete()" [disabled]="isSaveClicked"></button>
+            <button *ngIf="selSalesRow.length > 0" pButton type="button"
+              class="first pull-left ui-button-rounded ui-button-info" label="Copy Selected"
+              (click)="onSalesDiscountCopySelected()" [disabled]="isSaveClicked"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+            {{ 'GridEmptyMsg' | translate }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <!-- save and exit buttons -->
+
+    <div class="p-grid">
+      <hr class="bottom-line">
+      <div class="p-sm-12 btns-strip">
+        <button [disabled]="!form.valid || isSaveClicked" class="ui-button-rounded ui-button-success" pButton
+          type="submit" label="Save">
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

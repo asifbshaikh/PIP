@@ -1,0 +1,18 @@
+#sidenav {
+  padding-right: 0px !important;
+  padding-left: 0px;
+  box-shadow: 0 0 3px 0 #535354;
+  height: 94vh;
+  box-shadow: 0 0 8px 0 #535354 !important;
+.ui-panelmenu .ui-panelmenu-content .ui-menuitem-text {
+    color: #003883!important;
+ }
+ 
+ & .ui-panelmenu .ui-panelmenu-header.ui-state-active > a {
+    border: 1px solid $theme !important;
+    background-color: $theme !important;
+    color: #ffffff;
+  }
+ 
+}
+

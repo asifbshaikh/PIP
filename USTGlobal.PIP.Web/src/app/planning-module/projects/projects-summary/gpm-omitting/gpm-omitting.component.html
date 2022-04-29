@@ -1,0 +1,39 @@
+<p-table class="form-group mb-10 border-none" [value]="grossProfitData" [rowHover]="true">
+  <ng-template pTemplate="header">
+    <tr>
+      <th colspan="2">
+        {{ 'ProjectSummary.gpmMonitoringHeaders.GP'| translate}}
+      </th>
+      <th>
+        {{ 'ProjectSummary.USD'| translate}}
+      </th>
+      <th *ngIf="isCurrencyConverted">
+        {{currencySymbol}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-rowIndex='rowIndex'>
+    <tr class="ui-selectable-row">
+      <td colspan="2">
+        {{rowData.label}}
+      </td>
+      <td *ngIf="rowData.label.indexOf('%') > -1">
+        {{rowData.value | number: '1.2-2' | negativeValue}}{{rowData.value ? '%' : ''}}
+      </td>
+      <td *ngIf="rowData.label.indexOf('%') < 0">
+        {{rowData.value | number: '1.2-2' | negativeValue}}
+      </td>
+      <td *ngIf="isCurrencyConverted">
+        {{(rowIndex === 0 ? convertedCurrency[0]: '') | number: '1.2-2' | negativeValue}}
+        {{(rowIndex === 1 ? convertedCurrency[1]: '') | number: '1.2-2' | negativeValue}}
+        {{(rowIndex === 2 ? convertedCurrency[2]: '') | number: '1.2-2' | negativeValue}}
+        {{(rowIndex === 3 ? convertedCurrency[3]: '') | number: '1.2-2' | negativeValue}}
+        {{(rowIndex === 4 ? convertedCurrency[4]: '') | number: '1.2-2' | negativeValue}}
+        {{(rowIndex === 5 ? convertedCurrency[5]: '') | number: '1.2-2' | negativeValue}}{{rowIndex === 5 && convertedCurrency[5] ? '%' : ''}}
+        {{(rowIndex === 6 ? convertedCurrency[6]: '') | number: '1.2-2' | negativeValue}}{{rowIndex === 6 && convertedCurrency[6] ? '%' : ''}}
+        {{(rowIndex === 7 ? convertedCurrency[7]: '') | number: '1.2-2' | negativeValue}}{{rowIndex === 7 && convertedCurrency[7] ? '%' : ''}}
+        {{(rowIndex === 8 ? convertedCurrency[8]: '') | number: '1.2-2' | negativeValue}}{{rowIndex === 8 && convertedCurrency[8] ? '%' : ''}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

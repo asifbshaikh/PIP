@@ -1,0 +1,203 @@
+<div
+  *ngIf="isDataAvailable && breadcrumbUrl !== '/dashboard' &&  breadcrumbUrl !== '/approver' &&  breadcrumbUrl !== '/administration/masters'  && breadcrumbUrl !== '/administration/addNewUser' && breadcrumbUrl !== '/administration/defineFinancePoc' && breadcrumbUrl !== '/administration/defineAdmin' &&  breadcrumbUrl !== '/administration'  &&  breadcrumbUrl !== '/projects'"
+  class="row" id="bread-crumb">
+  <div class="col-md-12 row"
+    *ngIf="router.url.match('Staff') || router.url.match('Margin') || router.url.match('Estimate') || router.url.match('Summary')"
+    id="header1">
+    <div class="col-md-4 p-t-15 m-r-0 m-l-0 tabs">
+      <p-tabMenu [model]="tabMenuItems" class="tab-menu m-t-15 text-center" [activeItem]="activeTabMenuItem" #tabData>
+      </p-tabMenu>
+    </div>
+    <div class="col-md-8" style="justify-content: flex-end;display: flex;">
+      <button type="button" class="ml-2 m-r-5 mt-2 info-button ui-button-rounded ui-button-info" style="height: 30px;"
+        pButton label="Overrides" (click)="onOverrideClick()"></button>
+      <ul class="col-md-3 m-r-0 m-t-5 m-l-0" class="account-name" style="margin-left: 5em;">
+        <li class=" m-t-5"><span class="p-r-5"> <b>Proj.ID:</b></span> <span class="uppercase">{{sfProjectId}}</span>
+        </li>
+        <li><span class="p-r-5"><b>TCV:</b></span> <span class="uppercase p-r-10">{{totalClientPrice ?
+          ((totalClientPrice > 0) ? (totalClientPrice | number:'1.2-2') :
+          totalClientPrice | number:'1.2-2' | negativeValue ) : '0.00' }} <b>|</b></span>
+          <span class="uppercase p-r-5"> <b>EBITDA%:</b></span> {{ebitdaPercent ?
+          ((ebitdaPercent > 0) ? (ebitdaPercent | number:'1.2-2')
+          :ebitdaPercent | number:'1.2-2' | negativeValue) : '0.00'}}
+        </li>
+      </ul>
+      <button type="button" class="ml-2 m-r-5 mt-2 info-button ui-button-rounded ui-button-info" pButton label="INFO"
+        (click)="op1.toggle($event);getInfoData()"></button>
+      <span class="ml-1 vl mr-1"></span>
+      <span style="display: block; text-align: right;" *ngIf="((router.url.match('Staff') || router.url.match('Margin') || router.url.match('Estimate')
+       || router.url.match('Summary')) && (pipSheetId > 0))">
+        <label class="p-t-15"> {{'CurrencyControl.LocalCurrency' | translate }} :
+          {{currency}}</label>
+      </span>
+      <span class="ml-1 vl mr-1"></span>
+      <button *ngIf="submitClick ? false : checkRole && workflowFlag ? (workflowFlag.isNotSubmitted && !workflowFlag.isCheckedOut
+      && loggedInUserId === workflowFlag.checkedInOutBy && checkRole.isEditor && dashboardId === 1) ||
+       (workflowFlag.isNotSubmitted && workflowFlag.isCheckedOut && checkRole.isEditor && dashboardId === 1) ||
+        (workflowFlag.isNotSubmitted && !workflowFlag.isCheckedOut && loggedInUserId === workflowFlag.checkedInOutBy
+        && checkRole.isEditor && pipSheetId > 0 && dashboardId === 1) : false" type="button"
+        class="ml-2 m-r-5 mt-2 warning-button ui-button-rounded ui-button-warning" style="height: 30px;" pButton
+        label="CHECK IN" (click)="onCheckInClick()"></button>
+      <span *ngIf="pipSheetId > 0" class="m-t-10">
+        <i pTooltip="{{ 'ProjectHeader.info.chat' | translate }}" tooltipPosition="bottom"
+          class="header-icon m-r-10 pointer" (click)="getPIPSheetComments('topright')"><img
+            src="/assets/icons/chat.svg"></i>
+      </span>
+    </div>
+    <p-dialog header="Comments : &nbsp;{{count}}" [(visible)]="displayPosition" [style]="{width: '30vw'}"
+      [maximizable]="true" [resizable]="false" [draggable]="true" minimizable="true"
+      minimizeIcon="pi pi-window-minimize">
+      <div #scroll class="chats">
+        <div *ngFor="let pipComment of pipsheetComments; let i = index">
+          <div class="received-chats">
+            <div [ngClass]="{ 'received-msg' : pipComment.userId !== loggedInUserId,
+                'outgoing-chats' : pipComment.userId === loggedInUserId }">
+              <div [ngClass]="{ 'received-msg-inbox' : pipComment.userId !== loggedInUserId,
+                  'outgoing-chats-msg' : pipComment.userId === loggedInUserId }">
+                <p>
+                  <span class="user">
+                    {{ pipComment.userName }}
+                  </span>
+                  <br>
+                  <span [class.deleted-msg]="pipComment.isDeleted" style="display: flex;word-break: break-all;">
+                    {{ pipComment.isDeleted ? 'This comment is being deleted' : pipComment.comment }}</span>
+                  <span *ngIf="(pipComment.userId === loggedInUserId && !pipComment.isDeleted) &&
+                   !((this.dashboardId === 1 || this.dashboardId === 2 ||  this.dashboardId === 3) &&
+                   (workflowFlag?.isApproved || isAnyVersionApproved))" class="pi pi-trash mandatory remove"
+                    (click)="deleteComment(pipComment.pipSheetCommentId, i, pipComment.projectId)">Remove</span></p>
+                <span class="time">{{pipComment.commentTimeStamp | date: 'short'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p-footer>
+        <span class="m-t-10" style="display: flex;">
+          <input #pipsheetComment type="text"
+            [disabled]="((this.dashboardId === 1 || this.dashboardId === 2 ||  this.dashboardId === 3) && (workflowFlag?.isApproved || isAnyVersionApproved))"
+            (keyup.enter)="SavePIPSheetComment(pipsheetComment)" pInputText class="form-control chat-input" />
+          <i pTooltip="{{ 'ProjectHeader.info.send' | translate }}" tooltipPosition="bottom" class="header-icon m-r-10"
+            (click)="SavePIPSheetComment(pipsheetComment)"><img src="/assets/icons/send.svg"></i>
+        </span>
+      </p-footer>
+    </p-dialog>
+    <p-dialog [(visible)]="displayOverride" [positionTop]="90" [positionLeft]="530" [style]="{width: '25vw'}"
+      [maximizable]="true" [resizable]="false" [draggable]="true" minimizable="true"
+      minimizeIcon="pi pi-window-minimize">
+      <p-table tableStyleClass="fixtable" [value]="overriddenItems" [columns]="overrideCols" class="form-group"
+        scrollHeight="calc(100vh - 350px)" [scrollable]="true">
+        <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+            <col style="width:50%">
+            <col style="width:25%">
+            <col style="width:25%">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th>
+              {{columns[0].header}}
+            </th>
+            <th>
+              {{columns[1].header}}
+            </th>
+            <th>
+              {{columns[2].header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr>
+            <td class="override-item">
+              <a (click)="navigateToTabIndex(rowData.tabIndex,rowData.stepIndex)" style="cursor: pointer;">
+                {{rowData.overrideItem}}
+              </a>
+            </td>
+            <td [ngClass]="{'green': rowData.isPositive , 'red': !rowData.isPositive}">
+              <text-ellipsis>
+                {{(rowData.overrideItem === "Holiday Option" || rowData.overrideItem === "Set Target Margin") ? rowData.overrideValue
+               : rowData.overrideValue | negativeValue }}
+              </text-ellipsis>
+            </td>
+            <td>
+              <text-ellipsis>
+                {{rowData.defaultValue}}
+              </text-ellipsis>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="4" [ngStyle]="{'text-align': 'center'}">
+              {{ 'SHARED.HEADER1.overrideEmptyMessage' | translate }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-dialog>
+  </div>
+  <p-overlayPanel #op1 class="info-pannel">
+    <label class="info-header p-l-30">
+      {{'ProjectHeader.info.projectDetail' | translate }}
+    </label>
+    <div class="p-grid">
+      <div class="p-md-6 text-right">
+        <label>
+          {{'ProjectHeader.info.accountName' | translate }}
+        </label>
+      </div>
+      <div class="p-md-6">
+        <label style="width: 100px; word-wrap: break-word;">
+          {{accountName}}
+        </label>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-md-6 text-right">
+        <label>
+          {{'ProjectHeader.info.projectName' | translate }}
+        </label>
+      </div>
+      <div class="p-md-6">
+        <label style="width: 100px; word-wrap: break-word;">
+          {{projectName}}
+        </label>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-md-6 text-right">
+        <label> {{'ProjectHeader.info.version' | translate }} </label>
+      </div>
+      <div class="p-md-6">
+        <label>
+          {{version}}
+        </label>
+      </div>
+    </div>
+
+    <div class="p-grid">
+      <div class="p-md-6 text-right">
+        <label> {{'ProjectHeader.info.duration' | translate }}</label>
+      </div>
+      <div class="p-md-6">
+        <label>
+          {{projectDuration}}
+        </label>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-md-6 text-right">
+        <label>
+          {{'ProjectHeader.info.cost' | translate }}
+        </label>
+      </div>
+      <div class="p-md-6">
+        <label>
+          {{totalProjectCost | number:'1.2-2' | negativeValue}}
+        </label>
+      </div>
+    </div>
+  </p-overlayPanel>
+</div>

@@ -1,0 +1,24 @@
+$darkBlue: #00204A;
+$blue: #005792;
+$lightBlue: #00D1FF;
+$babyBlue: #D9FAFF;
+$green: #00C9B1;
+$brightGreen: #ffffff;
+$orange: #FD5F00;
+$red: #E9290F;
+$error: #a80000;
+$yellow: #FFC300;
+$grey: #FAFBFF;
+$white: #ffffff;
+$theme: #00a9ee;
+$font: 'Raleway', sans-serif !important;
+$font-size: 12px;
+$read-only-bg: #e9ecef;
+$input-bg:#a9e6ff;
+$mandatory: #FE0000;
+@mixin smoothTrans {
+  -webkit-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+}
+

@@ -1,0 +1,18 @@
+#pip-table {
+    max-height: 83vh !important;
+    // min-height: 69vh !important;
+    overflow-y: scroll !important;
+  
+    .fixtable {
+      table-layout: auto !important;
+      white-space: nowrap !important;
+  }
+  .ui-table {
+      display: grid !important;
+  }
+  .table-footer > td {
+    color: #666666;
+    background-color: #EEEEEE;
+  }
+  }
+  

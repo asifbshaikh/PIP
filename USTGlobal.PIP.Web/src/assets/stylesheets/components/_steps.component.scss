@@ -1,0 +1,75 @@
+#steper {
+    margin-top: -15px;
+    .ui-steps-title {
+        padding-right: 10px;
+        padding-left: 35px;
+    }
+    .ui-steps-number {
+        top: 13px;
+    }
+
+    .ui-button {
+        position: absolute;
+        bottom: 10px;
+    }
+
+    #container {
+        width: auto;
+        height: 50px;
+    }
+
+    @media only screen and (min-width: 992px) {
+        #list-container {
+            width: calc(100% - 40px);
+            overflow: hidden;
+        }
+    }
+    @media only screen and (max-width: 992px) {
+        #list-container {
+            width: 600px;
+            overflow: hidden;
+            float: left;
+        }
+    }
+
+    .list {
+        // background:grey;
+        min-width: auto;
+        float: left;
+    }
+    #arrowR {
+        width: 20px;
+        float: right;
+        cursor: pointer;
+    }
+    #arrowL {
+        width: 20px;
+        float: left;
+        cursor: pointer;
+    }
+    .item {
+        // background:green;
+        width: auto;
+        height: 40px;
+        margin: 5px;
+        float: left;
+        position: relative;
+    }
+
+    .ui-steps-title {
+        font-size: $font-size;
+    }
+    .pi-chevron-left {
+        color: #737373;
+    }
+    .pi-chevron-right {
+        color: #737373;
+    }
+    hr {
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+}
+.hide {
+    visibility: hidden;
+}

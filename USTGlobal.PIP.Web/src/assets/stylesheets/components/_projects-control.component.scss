@@ -1,0 +1,204 @@
+#project-controls {
+  .vertical {
+    border-left: 1px solid black;
+    position: absolute;
+    left: 50%;
+  }
+  & .ui-table-scrollable-view {
+    margin: 20px;
+  }
+  & .ui-dropdown {
+    width: 100% !important;
+    height: 35px;
+  }
+  & .ui-multiselect-item {
+    width: 100px;
+  }
+  & .ui-multiselect-label-container {
+    width: 100%;
+  }
+  & .partition {
+    border-right: none;
+  }
+
+  & .ui-multiselect {
+    width: 100% !important;
+    height: auto;
+  }
+  & .ui-multiselect-filter-containe {
+    width: 100% !important;
+  }
+  & .ui-calendar {
+    width: 87% !important;
+  }
+
+  & .ui-multiselect-item {
+    border-bottom: 1px solid #f8f9fa;
+    width: 100%;
+  }
+  & .ui-multiselect-close {
+    top: 20% !important;
+  }
+  & .ui-multiselect-filter-container {
+    float: none;
+    width: 100%;
+  }
+  & .ui-chkbox-box {
+    height: 17px;
+  }
+
+  & .bg-primary {
+    color: #da6b6b;
+  }
+
+  & .ui-table-caption {
+    padding: 0px !important;
+  }
+
+  a.add-row-button {
+    color: #00a9ee;
+    cursor: pointer;
+  }
+  .select .form-control.is-invalid {
+    padding-right: 0px !important;
+    border: none;
+  }
+
+  .location-tooltip {
+    padding: 10px 0px;
+  }
+
+  .pi-info-circle {
+    padding-top: 3px;
+  }
+
+  .pip-project-control-grid-input {
+    width: 100%;
+    line-height: 1;
+  }
+  .show-periods {
+    text-align: center;
+    font-size: 10vh;
+  }
+  .periods {
+    text-align: center;
+  }
+  .ui-inputtext {
+    font-size: $font-size !important;
+    font-family: unset !important;
+    color: #111;
+    background: #fcfcfc;
+    font-weight: 400;
+  }
+  .ui-dropdown {
+    height: auto;
+    font-size: $font-size;
+    color: #111;
+    background: #fcfcfc;
+    border-radius: 4px;
+    font-weight: 400;
+  }
+
+  .p-sm-4 {
+    padding: 0.7rem !important;
+  }
+  .ui-table .ui-table-tbody > tr > td {
+    background-color: #fcfcfc;
+    border: 1px solid #70707033;
+    border-top: none;
+    border-bottom: none;
+    font-weight: 500;
+  }
+  .ui-table tr:last-child td {
+    border-bottom: 1px solid #70707033;
+  }
+  .ui-table .ui-table-thead > tr > th {
+    color: #000000;
+    background-color: #eeeeee;
+    font-weight: 600;
+  }
+  .calender-wrapper {
+    cursor: pointer;
+    position: relative;
+
+    i {
+      position: absolute;
+      right: 13%;
+      top: 3%;
+    }
+  }
+  .ui-button {
+    padding: 1px;
+  }
+  .ui-inputtext.ng-invalid {
+    border: 2px solid $error;
+    border-radius: 4px;
+  }
+  .milestoneNote {
+    position: relative;
+    top: 28px;
+    left: 12%;
+    color: #0c6b0d;
+    font-weight: bold;
+  }
+  .ui-dialog .ui-dialog-titlebar {
+    border: 1px solid #ffffff !important;
+    background-color: #ffffff !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 0 none;
+  }
+  .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    margin: 0;
+    color: #c73e27 !important;
+    float: none;
+    font-size: 16px;
+  }
+  .ui-dialog .ui-dialog-content {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 0.571em 1em;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  .dialog-text {
+    position: relative;
+    bottom: 10px;
+  }
+  .cancel-button {
+    background-color: #ffff;
+    color: #007ad9;
+    width: 30%;
+  }
+  .delete-button {
+    background-color: #f55a41;
+    border: 1px solid;
+    width: 30%;
+    margin: 0px 40px;
+  }
+  .milestone-dropdown {
+    min-width: 150px !important;
+  }
+
+  .ui-table-scrollable-header {
+    overflow-y: scroll;
+  }
+  .ui-table-scrollable-body {
+    overflow-y: scroll;
+  }
+  .ui-table-scrollable-header-box {
+    margin-right: 0px !important;
+  }
+}
+button.pi.pi-trash {
+  color: red;
+  background-color: #fcfcfc;
+  border: none;
+}
+i.pi.pi-calendar {
+  color: #a6a6a6;
+}
+.ui-button .btn-primary {
+  color: #fff;
+  background-color: #00a9ee;
+}

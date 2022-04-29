@@ -1,0 +1,42 @@
+#location-details {
+    .tittle-header {
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .currency-font {
+        font-size: 14px;
+    }
+    .currency-value {
+        float: right;
+        padding: 0 2em;
+        font-size: 12px;
+    }
+    .ui-table .ui-table-thead > tr > th {
+        border: 1px solid #c8c8c8;
+        font-weight: 700;
+        color: #ffffff;
+        height: 28px;
+        font-size: 13px;
+        background-color: #3599a8;
+    }
+
+    .red {
+        color: #f55a41;
+    }
+
+    .green {
+        color: #12bd68;
+    }
+    .bold {
+       font-weight: bold;
+    }
+    .ui-table-unfrozen-view {
+        .ui-table-scrollable-header,
+        .ui-table-scrollable-body {
+            overflow-y: scroll;
+        }
+    }
+    table tr.highlight {
+        background-color: #eaeaea !important;
+    }
+}

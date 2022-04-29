@@ -1,0 +1,296 @@
+[
+    {
+        "masterId": 1,
+        "masterName": "ServicePortfolioGroup",
+        "cols": [
+            {
+                "field": "Id",
+                "header": "Id",
+                "type": "nil"
+            },
+            {
+                "field": "PortfolioGroupName",
+                "header": "Portfolio Group",
+                "type": "text"
+            }
+        ],
+        "data": [
+            {
+                "Id": 1,
+                "PortfolioGroupName": "test group 1"
+            },
+            {
+                "Id": 2,
+                "PortfolioGroupName": "test group 2"
+            },
+            {
+                "Id": 3,
+                "PortfolioGroupName": "test group 3"
+            },
+            {
+                "Id": 4,
+                "PortfolioGroupName": "test group 4"
+            },
+            {
+                "Id": 5,
+                "PortfolioGroupName": "test group 5"
+            },
+            {
+                "Id": 6,
+                "PortfolioGroupName": "test group 6"
+            },
+            {
+                "Id": 7,
+                "PortfolioGroupName": "test group 7"
+            },
+            {
+                "Id": 8,
+                "PortfolioGroupName": "test group 8"
+            }
+        ],
+        "isEdit": false,
+        "isView": true,
+        "isCreate": false,
+        "isSelected": false
+    },
+    {
+        "masterId": 2,
+        "masterName": "ServiceLine",
+        "cols": [
+            {
+                "field": "Id",
+                "header": "Id",
+                "type": "nil"
+            },
+            {
+                "field": "PortfolioGroupName",
+                "header": "Portfolio Group",
+                "type": "text"
+            },
+            {
+                "field": "ServiceLineName",
+                "header": "Service Line",
+                "type": "text"
+            }
+        ],
+        "data": [
+            {
+                "Id": 1,
+                "PortfolioGroupName": "test group 1",
+                "ServiceLineName": "ServiceLineName1"
+            },
+            {
+                "Id": 2,
+                "PortfolioGroupName": "test group 2",
+                "ServiceLineName": "ServiceLineName2"
+            },
+            {
+                "Id": 3,
+                "PortfolioGroupName": "test group 3",
+                "ServiceLineName": "ServiceLineName3"
+            },
+            {
+                "Id": 4,
+                "PortfolioGroupName": "test group 4",
+                "ServiceLineName": "ServiceLineName4"
+            },
+            {
+                "Id": 5,
+                "PortfolioGroupName": "test group 5",
+                "ServiceLineName": "ServiceLineName5"
+            },
+            {
+                "Id": 6,
+                "PortfolioGroupName": "test group 6",
+                "ServiceLineName": "ServiceLineName6"
+            },
+            {
+                "Id": 7,
+                "PortfolioGroupName": "test group 7",
+                "ServiceLineName": "ServiceLineName7"
+            },
+            {
+                "Id": 8,
+                "PortfolioGroupName": "test group 8",
+                "ServiceLineName": "ServiceLineName8"
+            }
+        ],
+        "isEdit": false,
+        "isView": true,
+        "isCreate": true,
+        "isSelected": false
+    },
+    {
+        "masterId": 3,
+        "masterName": "Locations",
+        "cols": [
+            {
+                "field": "Id",
+                "header": "Id",
+                "type": "nil"
+            },
+            {
+                "field": "LocationName",
+                "header": "Location Name",
+                "type": "dropdown"
+            },
+            {
+                "field": "HoursPerMonth",
+                "header": "Hours / Month",
+                "type": "text"
+            },
+            {
+                "field": "HoursPerDay",
+                "header": "Hours / Day",
+                "type": "text"
+            }
+        ],
+        "data": [
+            {
+                "Id": 1,
+                "LocationName": "India",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            },
+            {
+                "Id": 2,
+                "LocationName": "Australia",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            },
+            {
+                "Id": 3,
+                "LocationName": "England",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            },
+            {
+                "Id": 4,
+                "LocationName": "Poland",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            },
+            {
+                "Id": 5,
+                "LocationName": "South Africa",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            },
+            {
+                "Id": 6,
+                "LocationName": "West Indies",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            },
+            {
+                "Id": 7,
+                "LocationName": "zimbabwe",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            },
+            {
+                "Id": 8,
+                "LocationName": "Kenya",
+                "HoursPerMonth": "25",
+                "HoursPerDay": "50"
+            }
+        ],
+        "isEdit": false,
+        "isView": true,
+        "isCreate": true,
+        "isSelected": false
+    },
+    {
+        "masterId": 6,
+        "masterName": "Holidays",
+        "cols": [
+            {
+                "field": "Id",
+                "header": "Id",
+                "type": "nil"
+            },
+            {
+                "field": "LocationID",
+                "header": "Location ID",
+                "type": "nil"
+            },
+            {
+                "field": "LocationName",
+                "header": "Location Name",
+                "type": "nil"
+            },
+            {
+                "field": "Date",
+                "header": "Date",
+                "type": "dropdown"
+            },
+            {
+                "field": "HolidayName",
+                "header": "Holiday Name",
+                "type": "text"
+            }
+        ],
+        "data": [
+            {
+                "Id": 1,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "1/1/2019",
+                "HolidayName": "Holi"
+            },
+            {
+                "Id": 2,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "2/1/2019",
+                "HolidayName": "Mahashivratri"
+            },
+            {
+                "Id": 3,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "3/1/2019",
+                "HolidayName": "Gudi padwa"
+            },
+            {
+                "Id": 4,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "4/1/2019",
+                "HolidayName": "Mahavir Jayanti"
+            },
+            {
+                "Id": 5,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "5/1/2019",
+                "HolidayName": "Ganesh Visarjan"
+            },
+            {
+                "Id": 6,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "6/1/2019",
+                "HolidayName": "Diwali"
+            },
+            {
+                "Id": 7,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "1/1/2019",
+                "HolidayName": "Ramzan ID"
+            },
+            {
+                "Id": 8,
+                "LocationID": 1,
+                "LocationName": "India",
+                "Date": "1/1/2019",
+                "HolidayName": "New Year"
+            }
+        ],
+        "isEdit": false,
+        "isView": true,
+        "isCreate": false,
+        "isSelected": false
+    }
+]

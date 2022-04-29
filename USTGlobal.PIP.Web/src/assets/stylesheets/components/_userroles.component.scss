@@ -1,0 +1,144 @@
+#userRole {
+  .dropdown-tittle {
+    font-size: 15px;
+    vertical-align: middle;
+    padding: 0 20px 0 0;
+    font-weight: bold;
+  }
+  .center {
+    text-align: center;
+  }
+
+  .tittle {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .button {
+    float: right;
+    border-radius: 5px;
+    background-color: #00a9ee;
+  }
+  .dialog-button {
+    border-radius: 5px;
+    background-color: #00a9ee;
+  }
+  .label {
+    width: 85%;
+    height: 30px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    border: 1px solid #a6a6a6;
+    padding: 5px;
+  }
+  .right {
+    float: right;
+    padding: 6px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .width {
+    width: 85%;
+  }
+  .icon-style {
+    font-size: 2em !important;
+    color: #f55b42 !important;
+    background-color: #ffffff;
+    vertical-align: bottom;
+  }
+  .disable {
+    opacity: 0.5;
+  }
+  .cancel-button {
+    background-color: #ffff;
+    color: #007ad9;
+    width: 40%;
+  }
+  .delete-button {
+    background-color: #00a9ee;
+    border: 1px solid;
+    width: 40%;
+    margin: 0px 40px;
+  }
+  .ui-inputtext.ng-invalid {
+    border: 2px solid $error;
+    border-radius: 4px;
+  }
+  .ui-table .ui-paginator-bottom {
+    position: fixed;
+    width: calc(100% - 90px);
+    left: 75px;
+    bottom: 2px;
+    border-top: 1px solid #c8c8c8 !important;
+  }
+  .ui-card-body {
+    padding: 1em;
+    min-height: 85vh;
+  }
+  .ui-table-scrollable-view {
+    min-height: 55vh;
+  }
+  .ui-card-body {
+    padding: 1em;
+    min-height: 84vh;
+  }
+  .ui-dialog .ui-dialog-titlebar {
+    border: 1px solid #ffffff !important;
+    background-color: #ffffff !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 0 none;
+  }
+  .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    margin: 0;
+    color: #c73e27 !important;
+    float: none;
+    font-size: 16px;
+  }
+  .ui-dialog .ui-dialog-content {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 0.571em 1em;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  .ui-table .ui-table-thead > tr > th {
+    border: 1px solid #c8c8c8;
+    font-weight: 700;
+    color: #ffffff;
+    height: 32px;
+    font-size: 13px;
+    background-color: #3599a8;
+  }
+  .ui-table .ui-sortable-column .ui-sortable-column-icon {
+    color: #ffffff;
+  }
+
+  .ui-dropdown {
+    max-width: -webkit-fill-available;
+  }
+
+  // dropdown word break
+  .ui-dropdown-label {
+    max-width: 95%;
+  }
+  // dropdown filter width
+  .ui-dropdown-filter-container {
+    max-width: 29em;
+  }
+  .ui-state-default .ui-widget-content .ui-state-default {
+    max-width: 28em;
+  }
+  .ui-table-scrollable-header-box {
+    overflow-y: scroll;
+    margin-right: 0 !important;
+  }
+  .ui-table-scrollable-body {
+    overflow-y: scroll;
+  }
+  .ui-dialog-footer {
+    margin-top: 3em !important;
+  }
+  // .ui-card-body {
+  //   background-color: #dce6ea !important;
+  // }
+}

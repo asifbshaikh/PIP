@@ -1,0 +1,286 @@
+<form [formGroup]="replicateForm" id="replicate">
+    <p-dialog header=" {{isDummy ? 'Replicate in New Dummy Project' : 'Replicate in New Project'}}"
+        [(visible)]="replicateNew" [style]="{width: '30vw'}" modal="true" [closable]="false" [draggable]="false"
+        style="text-align: center;">
+        <div class="p-md-12 header text-left">
+            <label class="p-offset-1"> {{'ProjectHeader.info.source' | translate }}
+            </label>
+        </div>
+        <div class="p-grid m-b-15">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{isDummy ? 'Dummy Project ID' : 'Project ID' }}
+                </label>
+            </div>
+            <div class="p-md-6 text-left inactive">
+                <label>
+                    {{replicateObj[0].sfProjectId}}
+                </label>
+            </div>
+        </div>
+        <div class="p-grid m-b-15">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{'ProjectHeader.info.versionId' | translate }}
+                </label>
+            </div>
+            <div class="p-md-6 text-left inactive">
+                <label>
+                    {{versionId}}
+                </label>
+            </div>
+        </div>
+        <div class="p-md-12 header text-left">
+            <label class="p-offset-1"> {{'ProjectHeader.info.destination' | translate }}
+            </label>
+        </div>
+        <div class="p-grid m-b-15">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{'ProjectHeader.info.accountName' | translate }}
+                    <span class="mandatory">*</span>
+                </label>
+            </div>
+            <div class="p-md-6 text-left">
+                <p-dropdown appendTo="body" [filter]="true" formControlName="accountName"
+                    (onChange)="onAccountNameChange($event.value.id)" [options]="accounts" [style]="{'width':'170px'}">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-grid m-b-15">
+            <div class="p-md-6 text-right">
+                <label for="project id per sf">
+                    {{ 'ProjectHeader.fields.newProjectID' | translate }}
+                    <span class="mandatory">*</span>
+                </label>
+            </div>
+            <div class="p-md-6 text-left" *ngIf="!isDummy">
+                <input type="text" tooltipPosition="right" pInputText placeholder="XXXX-NNNN-NN-NN"
+                    formControlName="projectId" class="form-control uppercase p-id" />
+                    <span [class.required]="refPh.projectId.touched && refPh.projectId.errors">{{idFormat}}</span>
+            </div>
+            <div class="p-md-6" *ngIf="isDummy">
+                <label class="dummy-project-id">
+                    {{replicateForm.value.dummyProjectId}}
+                </label>
+            </div>
+        </div>
+        <div class="p-grid m-b-15">
+          <div class="p-md-6 text-right">
+              <label>
+                  {{'ProjectHeader.info.projectName' | translate }}
+                  <span class="mandatory">*</span>
+              </label>
+          </div>
+          <div class="p-md-6 text-left">
+            <input type="text" pInputText placeholder="Enter Project Name"
+            formControlName="projectNamePerSf" class="form-control" />
+        </div>
+      </div>
+        <div style="padding-top: 3em;padding-bottom: 1.5em;">
+            <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                (click)="onCancelClick(); replicateNew = false; " style="width: 75px;"></button>
+
+            <button type="button" label="{{'Admin.create' | translate}}" pButton class="info-button"
+                (click)="replicateCreate = true;" [disabled]="!replicateForm.valid"></button>
+        </div>
+    </p-dialog>
+    <p-dialog header="{{'Admin.ReplicateNewInMyPips' | translate}}" [(visible)]="replicateNewInMyPips"
+        [style]="{width: '30vw'}" modal="true" [closable]="false" [draggable]="false" style="text-align: center;">
+        <div class="p-md-12 header text-left">
+            <label class="p-offset-1"> {{'ProjectHeader.info.source' | translate }}
+            </label>
+        </div>
+        <div class="p-grid m-b-15">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{isDummy ? 'Dummy Project ID' : 'Project ID' }}
+                </label>
+            </div>
+            <div class="p-md-6 text-left inactive">
+                <label>
+                    {{replicateObj[0].sfProjectId}}
+                </label>
+            </div>
+        </div>
+        <div class="p-grid m-b-15">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{'ProjectHeader.info.versionId' | translate }}
+                </label>
+            </div>
+            <div class="p-md-6 text-left inactive">
+                <label>
+                    {{versionId}}
+                </label>
+            </div>
+        </div>
+        <div class="p-md-12 header text-left">
+            <label class="p-offset-1"> {{'ProjectHeader.info.destination' | translate }}
+            </label>
+        </div>
+        <div class="p-grid">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{'ProjectHeader.info.accountName' | translate }}
+                    <span class="mandatory">*</span>
+                </label>
+            </div>
+            <div class="p-md-6 text-left">
+                <p-dropdown appendTo="body" [filter]="true" (onChange)="onAccountNameChange($event.value.id)"
+                    [options]="accounts" formControlName="accountName" [style]="{'width':'170px'}"></p-dropdown>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-md-6 text-right">
+                <label class="pull-right p-t-7"
+                    for="project id per sf">{{ 'ProjectHeader.fields.newProjectID' | translate }}<span
+                        class="mandatory">*</span></label>
+            </div>
+            <div class="p-md-6 text-left">
+                <input style="width: 70%;" type="text" pInputText placeholder="XXXX-NNNN-NN-NN"
+                    formControlName="projectId" class="form-control uppercase" />
+                    <span [class.required]="refPh.projectId.touched && refPh.projectId.errors">{{idFormat}}</span>
+            </div>
+        </div>
+        <div class="p-grid">
+          <div class="p-md-6 text-right">
+              <label class="pull-right p-t-7">
+                  {{'ProjectHeader.info.projectName' | translate }}
+                  <span class="mandatory">*</span>
+              </label>
+          </div>
+          <div class="p-md-6 text-left">
+            <input type="text" pInputText placeholder="Enter Project Name"
+            formControlName="projectNamePerSf" class="form-control"/>
+        </div>
+      </div>
+        <div style="padding-bottom: 1.5em; padding-top: 3em;">
+            <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                (click)="onCancelClick(); replicateNewInMyPips = false; " style="width: 75px;"></button>
+            <button type="button" label="{{'Admin.create' | translate}}" pButton class="info-button"
+                (click)="replicateCreate = true;" [disabled]="!replicateForm.valid"></button>
+        </div>
+    </p-dialog>
+    <p-dialog header="{{isDummy ? 'Replicate in Existing Project My Pips' : 'Replicate in Existing Project'}}"
+        [(visible)]="replicateExisting" [style]="{width: '30vw'}" modal="true" [closable]="false" [draggable]="false"
+        style="text-align: center;" [positionTop]="40">
+        <div class="p-md-12 header text-left">
+            <label class="p-offset-1"> {{'ProjectHeader.info.source' | translate }}
+            </label>
+        </div>
+        <div class="p-grid m-b-5">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{'ProjectHeader.info.accountName' | translate }}
+                </label>
+            </div>
+            <div class="p-md-6 text-left inactive">
+                <text-ellipsis>
+                    {{sourceAccountName}}
+                </text-ellipsis>
+            </div>
+        </div>
+        <div class="p-grid m-b-5">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{'ProjectHeader.info.projectId' | translate }}
+                </label>
+            </div>
+            <div class="p-md-6 text-left inactive">
+                <label>
+                    {{replicateObj[0].sfProjectId}}
+                </label>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-md-6 text-right">
+                <label> {{'ProjectHeader.info.versionId' | translate }} </label>
+            </div>
+            <div class="p-md-6 text-left inactive">
+                <label>
+                    {{versionId}}
+                </label>
+            </div>
+        </div>
+        <div class="p-md-12 header text-left">
+            <label class="p-offset-1"> {{'ProjectHeader.info.destination' | translate }}
+            </label>
+        </div>
+        <div class="p-grid m-b-5">
+            <div class="p-md-6 text-right">
+                <label>
+                    {{'ProjectHeader.info.accountName' | translate }}
+                    <span class="mandatory">*</span>
+                </label>
+            </div>
+            <div class="p-md-6 text-left">
+                <p-dropdown appendTo="body" [filter]="true" (onChange)="onAccountNameChange($event.value.id)"
+                    [options]="accounts" formControlName="accountName" [style]="{'width':'170px'}">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-grid m-b-5">
+            <div class="p-md-6 text-right">
+                <label class="pull-right p-t-7">Project ID<span class="mandatory">*</span></label>
+            </div>
+            <div class="p-md-6 text-left">
+                <p-dropdown appendTo="body" [filter]="true" [options]="accountBasedProjectList"
+                    (onChange)="onProjectListDropdownChange($event.value.id)" formControlName="dropdownProjectId"
+                    [style]="{'width':'170px'}" placeholder="--- select ---"></p-dropdown>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-md-6 text-right">
+                <label> {{'VERSION' | translate }}s </label>
+            </div>
+            <div class="p-md-6 text-left" *ngIf="selectedVersionList">
+                <label>
+                    <p *ngIf="selectedVersionList.pipSheetVersionDTO[0]"> Version
+                        {{selectedVersionList.pipSheetVersionDTO[0].versionNumber}}<br></p>
+                    <p *ngIf="selectedVersionList.pipSheetVersionDTO[1]"> Version
+                        {{selectedVersionList.pipSheetVersionDTO[1].versionNumber}}<br></p>
+                    <p *ngIf="selectedVersionList.pipSheetVersionDTO[2]"> Version
+                        {{selectedVersionList.pipSheetVersionDTO[2].versionNumber}}<br></p>
+                    <p *ngIf="selectedVersionList.pipSheetVersionDTO[3]"> Version
+                        {{selectedVersionList.pipSheetVersionDTO[3].versionNumber}}<br></p>
+                    <p *ngIf="selectedVersionList.pipSheetVersionDTO[4]"> Version
+                        {{selectedVersionList.pipSheetVersionDTO[4].versionNumber}}</p>
+                </label>
+            </div>
+        </div>
+        <div *ngIf="isInvalid === true"> <span
+                style="color: red; font-weight: bold;">{{'Admin.VersionValidation' | translate}}</span> </div>
+        <div style="padding-bottom: 1.5em; padding-top: 3em;">
+            <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                (click)="onCancelClick(); replicateExisting = false; " style="width: 75px;"></button>
+            <button type="button" label="{{'Admin.create' | translate}}" pButton class="info-button"
+                (click)=" replicateCreate = true;" [disabled]="(!replicateForm.valid) || (isInvalid === true)"></button>
+        </div>
+    </p-dialog>
+    <p-dialog header="{{'Admin.ReplicateSame' | translate}}" [(visible)]="replicateSame" [style]="{width: '25vw'}"
+        modal="true" [closable]="false" [draggable]="false" style="text-align: center;">
+        <div *ngIf="replicateObj.length > 4"> <span
+                style="color: red; font-weight: bold;">{{'Admin.VersionValidation' | translate}}</span> </div>
+        <div style="padding-bottom: 1.5em;padding-top: 3em;">
+            <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                (click)="onCancelClick();replicateSame = false"></button>
+            <button type="button" label="Yes" pButton class="delete-button" [disabled]="replicateObj.length > 4"
+                (click)="onCreateClick(replicateType); replicateSame = false;"></button>
+        </div>
+    </p-dialog>
+    <!-- TODO bind this dialog on crete new replicate -->
+    <p-dialog
+        header="{{replicateSame ? 'Do you want to Replicate in Same Project?' : replicateNew ? 'Do you want to Replicate in New Project?'
+    : replicateNew && isDummy ? 'Do you want to Replicate in New Dummy Project?' : replicateExisting ? 'Do you want to Replicate in Existing Project?'
+    : replicateNewInMyPips ? 'Do you want to Replicate in New Project My Pips?' : 'Do you want to Replicate in Existing Project My Pips?'}}"
+        [(visible)]="replicateCreate" [style]="{width: '25vw'}" modal="true" [closable]="false" [draggable]="false"
+        style="text-align: center;">
+        <div style="padding-bottom: 1.5em;padding-top: 3em;">
+            <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                (click)="replicateCreate = false"></button>
+            <button type="button" label="Yes" pButton class="delete-button" (click)="onCreateClick(replicateType);replicateCreate = false; replicateNew = false;
+            replicateNewInMyPips = false; replicateExisting = false;"></button>
+        </div>
+    </p-dialog>
+</form>

@@ -1,0 +1,88 @@
+#price-adjustment {
+  // .price-adjusment-header {
+  //   margin: 1em 0;
+  //   font-weight: 600;
+  //   padding-right: 4px;
+  // }
+  // .fixtable {
+  //   table-layout: auto !important;
+  //   white-space: nowrap !important;
+  // }
+
+  .ui-button-icon-left {
+    color: black;
+  }
+
+  // .ui-table-wrapper {
+  //   width: auto;
+  //   overflow-x: scroll;
+  //   max-width: 100%;
+  //   white-space: nowrap;
+  //   max-height: 60vh;
+  // }
+
+  // .ui-table {
+  //   display: grid;
+  // }
+  // .ui-inputtext {
+  //   font-size: $font-size !important;
+  //   color: #111;
+  //   background: #fcfcfc;
+  //   border-radius: 4px;
+  //   font-weight: 400;
+  // }
+  i.pi.pi-calendar {
+    color: #c8c8c8;
+  }
+  .pi-calendar:before {
+    content: "\e927";
+    color: #c8c8c8;
+  }
+
+  .ui-table .ui-table-tbody > tr > td {
+    background-color: #fcfcfc;
+    border: 1px solid #70707033;
+    border-top: none;
+    border-bottom: none;
+  }
+  .ui-table tr:last-child td {
+    border-bottom: 1px solid #70707033;
+  }
+  .ui-table .ui-table-thead > tr > th {
+    background-color: #f5f5f5;
+    text-align: left;
+    font: Bold 12px/24px Raleway;
+    letter-spacing: 0;
+    color: #000000;
+  }
+  .ui-table .ui-table-tfoot > tr > td {
+    color: #666666;
+    background-color: #fcfcfc;
+  }
+  #date-picker .ui-button {
+    background: #00a9ee !important;
+  }
+  #toolTip-icon {
+    height: 16px !important;
+    width: 16px !important;
+  }
+  .calendar-icon {
+    position: relative;
+    right: 13%;
+  }
+  .ui-calendar-button {
+    left: -1%;
+    padding: 1px;
+  }
+  .location {
+    & .ui-inputtext {
+      width: 60px !important;
+    }
+  }
+  .header {
+    vertical-align: initial;
+    border-top: none;
+    font-weight: 700;
+    white-space: pre;
+  }
+}

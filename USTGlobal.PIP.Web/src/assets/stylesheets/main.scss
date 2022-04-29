@@ -1,0 +1,96 @@
+@charset 'UTF-8';
+
+// 1. Configuration and helpers
+@import
+  'abstracts/variables',
+  'abstracts/functions',
+  'abstracts/mixins';
+
+// 2. Vendors
+@import
+  'vendors/normalize';
+
+// 3. Base stuff
+@import
+  'base/base',
+  'base/fonts',
+  'base/typography',
+  'base/helpers';
+
+// 4. Layout-related sections
+@import
+  'layout/header',
+  'layout/footer',
+  'layout/_pip-table';
+
+// 5. Components
+@import
+  'components/_app.component',
+  'components/_login.component',
+  'components/_breadcrumb.component',
+  'components/_projects.component',
+  'components/_navmenu.component',
+  'components/_administration.component',
+  'components/_dashboard.component',
+  'components/_master.component',
+  'components/_projects-staff.component',
+  'components/_projects-summary.component',
+  'components/_reports.component',
+  'components/_projects-header.component',
+  'components/_projects-control.component',
+  'components/_projects-margin.component',
+  'components/_resource-planning.component',
+  'components/_header1.component',
+  'components/_logout-confirmation.component',
+  'components/_steps.component',
+  'components/_labor-pricing.component',
+  'components/_header.component',
+  'components/_pip-version.component',
+  'components/_ebitda.component',
+  'components/_vacation-absenses.component',
+  'components/_price-adjustment.component',
+  'components/_expenses-and-assets.component',
+  'components/_partner-cost-revenue.component',
+  'components/_other-price-adjustment.component',
+  'components/_billing.component.scss',
+  'components/_effort-summary.component.scss',
+  'components/_gpm-omitting.component.scss',
+  'components/_investment-view.component.scss',
+  'components/_summary.component.scss',
+  'components/_pl-forecast.component.scss',
+  'components/_year-consumption.component.scss',
+  'components/_total-client-price.component.scss',
+  'components/_risk-management.component.scss',
+  'components/_masters.component.scss',
+  'components/administration.component',
+  'components/_capital-charges.component',
+  'components/_fixed-bid-and-margin-calc.component',
+  'components/_reimbursement-and-sales.component',
+  'components/_add-new-location.component',
+  'components/_define-finance-poc.component',
+  'components/_define-admin.component',
+  'components/_add-new-user.component',
+  'components/_approver.component',
+  'components/_userroles.component',
+  'components/_override-notification-dialog.component',
+  'components/_define-read-only.component',
+  'components/_account-roles.component',
+  'components/_shared-pip-list.component',
+  'components/_share-pip.component',
+  'components/_pip-check-in.component',
+  'components/_infographics.component',
+  'components/_revised-summary.component',
+  'components/total-deal-financials.component',
+  'components/_infographics.component',
+  'components/location-wise-details.component',
+  'components/_performance-indicators.component',
+  'components/_dialog.component.scss',
+  'components/_unauthorised.component.scss';
+
+// 6. Page-specific styles
+@import
+  'pages/home';
+
+// 7. Themes
+@import
+  'themes/_default';

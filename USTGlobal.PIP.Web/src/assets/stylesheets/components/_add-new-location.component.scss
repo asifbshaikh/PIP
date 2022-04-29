@@ -1,0 +1,160 @@
+#location-dialog {
+  .disable:hover {
+    cursor: not-allowed;
+  }
+  .disable:active {
+    pointer-events: none;
+  }
+  .textbox-align {
+    padding: 0.5rem !important;
+  }
+  .textbox-width {
+    width: 100%;
+    opacity: 1;
+  }
+  .label-align {
+    padding: 2px;
+    float: right;
+  }
+  .label {
+    float: right;
+  }
+  .dialog-button {
+    float: right;
+    min-width: 80px;
+    width: 100%;
+  }
+  .active-label {
+    background-color: #12bd68;
+    color: #ffffff;
+    border-radius: 10px;
+    width: 60%;
+    text-align: center;
+    height: 20px;
+    padding: 1px;
+    margin: 2px;
+  }
+  .in-active-label {
+    background-color: #d0d0d0;
+    color: #ffffff;
+    border-radius: 10px;
+    width: 60%;
+    text-align: center;
+    height: 20px;
+    padding: 1px;
+    margin: 2px;
+  }
+  .discard-button {
+    text-align: center;
+  }
+  .ui-dialog .ui-dialog-content {
+    background-color: #ffffff;
+    color: #333333;
+    border: 0px solid #c8c8c8 !important;
+    border-top: 1px solid #c8c8c8 !important;
+    padding: 0.571em 1em;
+    border-radius: inherit;
+  }
+  .ui-dialog .ui-dialog-titlebar {
+    border: 1px solid #ffffff !important;
+    background-color: #ffffff !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 0 none;
+  }
+
+  .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    margin: 0;
+    color: #c73e27 !important;
+    float: none;
+    font-size: 20px;
+  }
+
+  .ui-widget.ui-widget-content {
+    border: none !important;
+    border-radius: 15px;
+  }
+
+  .ui-dialog {
+    padding: 0;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7) !important;
+    background: white !important;
+  }
+  .ng-trigger
+    .ng-trigger-animation
+    .ng-tns-c1-6
+    .ui-dialog
+    .ui-widget
+    .ui-widget-content
+    .ui-corner-all
+    .ui-shadow
+    .ui-dialog-draggable
+    .ui-dialog-resizable
+    .ng-star-inserted {
+    width: 800px;
+    z-index: 1003;
+    left: 449px !important;
+    top: 96px !important;
+    transform: none;
+    opacity: 1;
+    position: absolute;
+  }
+  .ui-calendar.ui-calendar-w-btn input {
+    width: 60% !important;
+  }
+  .ui-button-icon-only .ui-button-text,
+  .ui-button-text-empty .ui-button-text {
+    padding: 0.25em !important;
+    background: #00a9ee;
+  }
+
+  .check {
+    font-size: 2em;
+    vertical-align: middle;
+    background: #00a9ee;
+    margin: 0px 4px 0px 0px;
+    position: relative;
+    right: 14px;
+    bottom: 2px;
+    color: white;
+    border-radius: 5px;
+  }
+  .times {
+    font-size: 2em;
+    vertical-align: middle;
+    background: #c73e27;
+    margin: 0px 4px 0px 0px;
+    position: relative;
+    right: 14px;
+    bottom: 2px;
+    color: white;
+    border-radius: 5px;
+  }
+  .approval-pending {
+    color: #f3ab3e;
+    font-weight: bold;
+    padding: 8px 0 0px 0px;
+  }
+  .approved {
+    color: #12bd68;
+    font-weight: bold;
+    padding: 8px 0 0px 0px;
+  }
+  .rejected {
+    color: #c73e27;
+    font-weight: bold;
+  }
+  .version-font {
+    color: #00a9ee;
+    font-weight: bold;
+  }
+}
+
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+  color: #948989 !important;
+}
+
+body .ui-datepicker table td.ui-datepicker-today > span {
+  background-color: #ffffff !important;
+  color: #333333;
+}

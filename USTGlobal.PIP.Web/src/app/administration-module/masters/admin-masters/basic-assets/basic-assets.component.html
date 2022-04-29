@@ -1,0 +1,36 @@
+<form [formGroup]="basicAssetsForm" id="masters">
+    <div>
+        <p-table class="form-group mb-10" [columns]="cols" [value]="basicAssetsForm.get('basicAssetDTO')['controls']"
+            formArrayName="basicAssetDTO">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th *ngFor="let col of cols">
+                        {{ col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <tr [formGroupName]="rowIndex">
+                    <td class="td-white-space">
+                        {{rowData.value.defaultLabel}}
+                    </td>
+                    <td>
+                        {{rowData.value.costToProject}}
+                    </td>
+                    <td>
+                        <p-inputSwitch></p-inputSwitch>
+                    </td>
+                    <td>
+                        {{'Masters.startDate' | translate}}
+                    </td>
+                    <td>
+                        {{rowData.value.endDate}}
+                    </td>
+                    <td>
+                        {{rowData.value.comments}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</form>

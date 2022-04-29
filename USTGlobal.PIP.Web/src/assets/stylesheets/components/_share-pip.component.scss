@@ -1,0 +1,45 @@
+#share-pip {
+    .ui-tabview-panels {
+        min-height: calc(100vh - 80px);
+    }
+    .bold {
+        font-weight: 700 !important;
+    }
+    .footer {
+        left: 45% !important;
+        position: absolute !important;
+        bottom: 60px !important;
+    }
+    .share-btn {
+        min-width: 90px;
+    }
+    .ui-table .ui-table-thead > tr > th {
+        border: 1px solid #c8c8c8;
+        font-weight: 700;
+        color: #ffffff;
+        height: 28px;
+        font-size: 13px;
+        background-color: #3599a8;
+    }
+    .ui-tabview-nav {
+        margin-left: 40% !important;
+    }
+    .grey-bg {
+        background-color: #e9ecef;
+        height: 34px;
+        width: 162px;
+    }
+    .ui-multiselect-label-container {
+        width: 225px !important;
+    }
+    .sharepip-title {
+        font-size: 14px;
+        font-weight: 700;
+    }
+    .ui-table-caption {
+        margin-bottom: 5px !important;
+    }
+    #ui-tabpanel-0-label {
+            width: 102px;
+    }
+}

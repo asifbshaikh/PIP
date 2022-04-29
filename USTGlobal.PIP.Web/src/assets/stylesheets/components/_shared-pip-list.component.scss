@@ -1,0 +1,33 @@
+#sharepip-list {
+    .disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.4;
+    }
+    .comment-textbox {
+        background-color: white !important;
+    }
+    .ui-table-scrollable-header-box {
+        overflow-y: scroll;
+        margin-right: 0 !important;
+        background: #dce6ea;
+    }
+    .ui-table-scrollable-body {
+        overflow-y: scroll;
+    }
+    .ui-table .ui-paginator-bottom {
+        border-top: 1px solid #c8c8c8 !important;
+        position: fixed;
+        left: 75px;
+        width: calc(100% - 90px);
+        bottom: 2px;
+    }
+    .drop-down {
+        & .ui-dropdown {
+            width: 100% !important;
+        }
+    }
+    .ui-inputtext.ui-widget {
+        width: 100%;
+    }
+}

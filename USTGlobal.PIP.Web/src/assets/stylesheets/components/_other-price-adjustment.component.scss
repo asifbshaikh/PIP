@@ -1,0 +1,79 @@
+#other-price-adjustment {
+  .ui-table-resizable .ui-table-tbody > tr > td {
+    overflow: visible;
+  }
+  .ui-table-resizable > .ui-table-wrapper {
+    overflow-x: visible;
+  }
+  .ui-inputtext {
+    width: 100% !important;
+  }
+  .ui-dropdown {
+    width: 100% !important;
+  }
+  .ui-inputtext.ng-invalid {
+    border: 2px solid $error;
+    border-radius: 4px;
+  }
+  .table-footer > td {
+    color: #666666;
+    background-color: #eeeeee;
+  }
+  .ui-inputtext {
+    max-width: 200px !important;
+  }
+  .hideScrollable {
+    width: 105.5vh;
+  }
+  .ui-table .ui-table-tfoot > tr > td {
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    color: #666666;
+    font-weight: 700;
+    padding-top: 4px;
+  }
+  .footer-summary {
+    border: 1px solid #c8c8c8;
+    background: #eeeeee 0% 0% no-repeat padding-box;
+  }
+  .scrollable-part > .ui-table-scrollable-body {
+    margin-bottom: 7px !important;
+  }
+  .ui-table-summary {
+    background-color: #f4f4f4 !important;
+    color: #1d1a1a;
+    border: 1px solid #c5c5c5;
+    padding: 0.571em 1em;
+    text-align: center;
+  }
+  .ui-table-unfrozen-view {
+    .ui-table-scrollable-header {
+      overflow-y: scroll;
+    }
+    .ui-table-scrollable-body {
+      overflow-x: scroll;
+      overflow-y: scroll;
+    }
+    .ui-table-scrollable-footer .ui-table-scrollable-footer-box {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-right: 0px !important;
+    }
+  }
+  .ui-table-scrollable-wrapper {
+    border: 1px solid #c5c5c5;
+  }
+  .ui-table-frozen-view .ui-table-scrollable-body {
+    padding-bottom: 15px !important;
+  }
+  #periodNote {
+    color: #c73e27;
+    font-weight: bold;
+  }
+  .grey-bg {
+    border: 1px solid #c8c8c8;
+    background: #eeeeee
+  }
+  // .ui-table-tbody > tr > td {
+  //   height: 43px !important;
+  // }
+}

@@ -1,0 +1,156 @@
+#expenses-and-assets {
+  max-height: 70vh !important;
+  min-height: 69vh !important;
+  overflow-y: scroll !important;
+
+  .ui-table-tbody > tr > td {
+    height: 43px !important;
+  }
+  .discription {
+    width: 100%;
+  }
+
+  .table-footer > td {
+    color: #666666;
+    background-color: #eeeeee;
+  }
+
+  .header-transperant {
+    border: 0;
+    background: white;
+  }
+
+  .header-bg {
+    font-weight: 600;
+    background: #f4f4f4;
+  }
+
+  .table-value {
+    font-weight: 600;
+    background: #f4f4f4;
+    text-align: right;
+  }
+
+  .ui-table .ui-table-tbody > tr > td {
+    background-color: #fcfcfc;
+    // border: 1px solid #70707033;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .ui-table tr:last-child td {
+    border-bottom: 1px solid #70707033;
+    padding-top: 6.5px !important;
+
+    .ui-table-scrollable-view {
+      padding-right: 2px;
+    }
+
+    .direct-exp {
+      & .ui-inputtext {
+        width: 100%;
+      }
+    }
+
+    .ui-table-scrollable-wrapper {
+      margin-bottom: 5px;
+    }
+  }
+  .ui-inputtext.ng-invalid {
+    border: 2px solid $error;
+    border-radius: 4px;
+  }
+  .periods {
+    width: 100% !important;
+  }
+  .description {
+    width: 100% !important;
+  }
+  .ui-inputtext {
+    width: 100% !important;
+  }
+  .ui-dropdown {
+    width: 100%;
+  }
+  .input-percent {
+    width: 80% !important;
+  }
+  .percent {
+    padding: 0 0 0 5px !important;
+  }
+  .expense-tittle {
+    position: relative;
+    right: 3.5%;
+    font-weight: bold;
+  }
+  .asset-tittle {
+    position: relative;
+    right: 3.5%;
+    top: 25px;
+    font-weight: bold;
+  }
+  .footer-summary {
+    border: 1px solid #c8c8c8;
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    color: #666666;
+  }
+  .ui-table .ui-table-tfoot > tr > td {
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    color: #666666;
+    font-weight: 700;
+    padding-top: 4.5px;
+  }
+  .ui-table-scrollable-body {
+    max-height: 35vh !important;
+  }
+  #additional-sw-hw {
+    .ui-table-scrollable-header {
+      overflow-y: scroll;
+      .ui-table-scrollable-header-box {
+        margin-right: 0 !important;
+      }
+    }
+    .ui-table-scrollable-body {
+      max-height: 15vh !important;
+      overflow-y: scroll;
+    }
+    .ui-table-scrollable-footer {
+      .ui-table-scrollable-footer-box {
+        margin-right: 0 !important;
+      }
+    }
+  }
+  .ui-inputtext {
+    max-width: 200px !important;
+  }
+  .ui-table-unfrozen-view {
+    .ui-table-scrollable-header {
+      overflow-y: scroll;
+      .ui-table-scrollable-header-box {
+        margin-right: 0 !important;
+      }
+    }
+    .ui-table-scrollable-footer {
+      .ui-table-scrollable-footer-box {
+        margin-right: 0px !important;
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
+    }
+    .ui-table-scrollable-body {
+      overflow-x: scroll;
+      overflow-y: scroll;
+    }
+  }
+  .ui-table-frozen-view {
+    border-right: 1px solid transparent;
+    .ui-table-scrollable-body {
+      padding-bottom: 14px !important;
+    }
+  }
+
+  #periodNote {
+    color: #c73e27;
+    font-weight: bold;
+  }
+}

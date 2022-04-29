@@ -1,0 +1,178 @@
+<div id="add-new-user">
+  <p-tabView class="tab-menu">
+    <p-tabPanel header="Add New User" [selected]="true" style="border: none;">
+      <div class="row" style="padding-top: 1em;">
+        <div class="col-md-4 align-card border-right">
+          <form [formGroup]="addUserFrom">
+            <div class="col-sm-12 p-grid">
+              <div class="col-sm-12 m-b-20 text-center"><span
+                  class="title">{{'Admin.addSingleUserTittle' | translate}}</span>
+              </div>
+              <div class="col-sm-4 m-t-20"><span class="label">{{'Admin.firstName' | translate}}<span
+                    style="color: red;">*</span></span></div>
+              <div class="col-sm-8 m-t-20"><input type="text" class="width" formControlName="firstName"
+                  pipRestrictInput="alphanumericSpaceNotAllowedInBeginning" pInputText></div>
+              <div class="col-sm-4 m-t-20"><span class="label">{{'Admin.lastName' | translate}}<span
+                    style="color: red;">*</span></span></div>
+              <div class="col-sm-8 m-t-20"><input type="text" class="width" formControlName="lastName"
+                  pipRestrictInput="alphanumericSpaceNotAllowedInBeginning" pInputText></div>
+              <div class="col-sm-4 m-t-20"><span class="label">{{'Admin.uId' | translate}}<span
+                    style="color: red;">*</span></span></div>
+              <div class="col-sm-8 m-t-20"><input type="text" class="width uppercase" formControlName="uid"
+                  (keyup)="validateUId()" pipRestrictInput="alphanumericSpaceNotAllowedInBeginning" pInputText></div>
+              <div class="col-sm-4" *ngIf="errorMessege"></div>
+              <div class="col-sm-8" *ngIf="errorMessege"><span style="color: red;">{{errorMessege}}</span></div>
+              <div class="col-sm-4 m-t-20"><span class="label">{{'Admin.email' | translate}}<span
+                    style="color: red;">*</span></span></div>
+              <div class="col-sm-8 m-t-20"><input type="text" class="width" formControlName="email" pInputText
+                  (keyup)="validateEmail()"></div>
+              <div class="col-sm-4" *ngIf="emailError"></div>
+              <div class="col-sm-8" *ngIf="emailError"><span style="color: red;">{{emailError}}</span></div>
+            </div>
+            <div class="col-sm-12 margin">
+              <button pButton type="submit" class="dialog-button" (click)="onAddUserClick()"
+                label="{{'Admin.addUser' | translate}}" [disabled]="!addUserFrom.valid"></button>
+              <button pButton type="submit" class="dialog-button" (click)="onCancel()"
+                label="{{'ButtonLables.cancel' | translate}}"></button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8 align-card">
+          <span class="title m-b-10 p-offset-5">{{'Admin.addMultiUserTittle' | translate}}</span>
+          <div class="download col-md-4  p-offset-4 m-t-20 text-center">
+            <span class="table-title">Download the template <a href="#"
+                (click)="!!downloadAddUserTemplate()">here</a></span>
+            <img src="/assets/icons/file-download.svg" alt="">
+          </div>
+          <div class="upload col-md-6 p-offset-3 m-t-10">
+            <p-fileUpload #fileInput name="templateFile[]" accept=".xlsx,.xls" chooseLabel="Browse/Drag" customUpload="true"
+              (uploadHandler)="onTemplateUpload()">
+              <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+              </ng-template>
+            </p-fileUpload>
+          </div>
+          <div class="m-t-10">
+            <p-table #dt [value]="userListResult" #dt [value]="projects" [resizableColumns]="true"
+              columnResizeMode="expand" [scrollable]="true" scrollHeight="calc(50vh - 150px)"
+              class="form-group table  table-bordered table-sm" cellspacing="0" width="100%" height="100px"
+              [globalFilterFields]="['email']">
+              <ng-template pTemplate="caption">
+                <span style="position: absolute;right: 20px;top: -16px;">
+                  <i pTooltip="{{ 'PROJECTS.ProjectTootip.AdvanceSearch' | translate }}" tooltipPosition="bottom"
+                    (click)="onSearchFilters()"><img src="/assets/icons/Advancesearch.svg"></i>
+                </span>
+              </ng-template>
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col style="width:7%">
+                  <col style="width:20%">
+                  <col style="width:27%">
+                  <col style="width:13%">
+                  <col style="width:10%">
+                  <col style="width:22%">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th [pSortableColumn]="'id'">Id#
+                    <p-sortIcon [field]="id"></p-sortIcon>
+                  </th>
+                  <th [pSortableColumn]="'name'">Name
+                    <p-sortIcon [field]="name"></p-sortIcon>
+                  </th>
+                  <th [pSortableColumn]="'email'">Email
+                    <p-sortIcon [field]="email"></p-sortIcon>
+                  </th>
+                  <th [pSortableColumn]="'uid'">UID
+                    <p-sortIcon [field]="uid"></p-sortIcon>
+                  </th>
+                  <th [pSortableColumn]="'status'">Status
+                    <p-sortIcon [field]="status"></p-sortIcon>
+                  </th>
+                  <th [pSortableColumn]="'message'">Message
+                    <p-sortIcon [field]="message"></p-sortIcon>
+                  </th>
+                </tr>
+                <tr *ngIf="showSearch">
+                  <td>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'id', 'contains')"
+                      [value]="dt.filters['id'] ? dt.filters['id'].value.trim() : ''">
+                  </td>
+                  <td>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'name', 'contains')"
+                      [value]="dt.filters['name'] ? dt.filters['name'].value.trim() : ''">
+                  </td>
+                  <td>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'email', 'contains')"
+                      [value]="dt.filters['email'] ? dt.filters['email'].value.trim() : ''">
+                  </td>
+                  <td>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'uid', 'contains')"
+                      [value]="dt.filters['uid'] ? dt.filters['uid'].value.trim() : ''">
+                  </td>
+                  <td>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'status', 'contains')"
+                      [value]="dt.filters['status'] ? dt.filters['status'].value.trim() : ''">
+                  </td>
+                  <td>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'message', 'contains')"
+                      [value]="dt.filters['message'] ? dt.filters['message'].value.trim() : ''">
+                  </td>
+                </tr>
+
+              </ng-template>
+              <ng-template pTemplate="body" let-userList let-rowIndex="rowIndex">
+                <tr>
+                  <td>
+                    {{userList.id }}
+                  </td>
+                  <td>
+                    <text-ellipsis>{{userList.name}}</text-ellipsis>
+                  </td>
+                  <td>
+                    <text-ellipsis>{{userList.email }}</text-ellipsis>
+                  </td>
+                  <td>
+                    <text-ellipsis> {{userList.uid }}</text-ellipsis>
+                  </td>
+                  <td>
+                    {{ userList.status }}
+                  </td>
+                  <td>
+                    <text-ellipsis>{{userList.message}}</text-ellipsis>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="6" [ngStyle]="{'text-align': 'center'}">
+                    {{ 'Admin.AddMultipleUserEmptyMessage' | translate }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <div class="row  m-t-20">
+              <div class="col-md-4">
+                <span>Total Records Processed : {{totalRecordsProcessed}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="success">Successfully Inserted : {{totalRecordsPassed}}</span>
+              </div>
+              <div class="col-md-4">
+                <span class="mandatory">Records with error : {{totalRecordsFailed}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Users List">
+      <ng-template pTemplate="content">
+        <account-roles></account-roles>
+      </ng-template>
+    </p-tabPanel>
+  </p-tabView>
+</div>

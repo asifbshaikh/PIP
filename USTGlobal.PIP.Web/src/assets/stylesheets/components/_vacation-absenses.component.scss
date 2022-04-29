@@ -1,0 +1,23 @@
+#vacation-absenses {
+  .ui-widget .ui-inputtext {
+    width: 100%;
+  }
+  .ui-table-scrollable-body {
+    max-height: 30vh !important;
+  }
+  .ui-inputtext {
+    max-width: 200px !important;
+  }
+  .ui-table-unfrozen-view {
+    border-right: 1px solid #dee2e6;
+  }
+
+  #periodNote {
+    color: #c73e27;
+    font-weight: bold;
+  }
+
+  .ui-table .ui-table-thead > tr > th {
+    height: 39.2px;
+  }
+}

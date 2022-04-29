@@ -1,0 +1,64 @@
+#billing {
+  .billing-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .blend-color {
+    background-color: rgba(169, 169, 169, 0.09);
+  }
+  // .ui-table-unfrozen-view {
+  //   .ui-table-scrollable-header,
+  //   .ui-table-scrollable-body {
+  //     overflow-y: scroll;
+  //   }
+  // }
+  .ui-table-scrollable-header-box {
+    margin-right: 0px !important;
+  }
+  .ui-table-scrollable-body {
+    border-right: 0px solid #c8c8c8;
+  }
+  .green {
+    color: #12bd68;
+  }
+  .red {
+    color: #f55a41;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  .currnency-font {
+    font-size: 14px;
+  }
+  .currnency-value {
+    float: right;
+    padding: 0 2em;
+    font-size: 12px;
+  }
+  .tittle-header {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .ui-table .ui-table-thead > tr > th {
+    border: 1px solid #c8c8c8;
+    font-weight: 700;
+    color: #ffffff;
+    height: 38px;
+    font-size: 13px;
+    background-color: #3599a8;
+  }
+  table tr.highlight {
+    background-color: #eaeaea !important;
+  }
+  table {
+    width: auto !important;
+  }
+  th,
+  td {
+    min-width: 150px !important;
+  }
+  .ui-table-scrollable-wrapper {
+    width: 99% !important;
+  }
+}

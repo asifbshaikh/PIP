@@ -1,0 +1,152 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\workspace\\pip\\src\\USTGlobal.PIP.Infrastructure\\USTGlobal.PIP.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\USTGlobal.PIP.ApplicationCore.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\USTGlobal.PIP.ApplicationCore.csproj",
+        "projectName": "USTGlobal.PIP.ApplicationCore",
+        "projectPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\USTGlobal.PIP.ApplicationCore.csproj",
+        "packagesPath": "C:\\Users\\ashaikh2\\.nuget\\packages\\",
+        "outputPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ashaikh2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[4.5.3.2, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\workspace\\pip\\src\\USTGlobal.PIP.Infrastructure\\USTGlobal.PIP.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\workspace\\pip\\src\\USTGlobal.PIP.Infrastructure\\USTGlobal.PIP.Infrastructure.csproj",
+        "projectName": "USTGlobal.PIP.Infrastructure",
+        "projectPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.Infrastructure\\USTGlobal.PIP.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\ashaikh2\\.nuget\\packages\\",
+        "outputPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\ashaikh2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\USTGlobal.PIP.ApplicationCore.csproj": {
+                "projectPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\USTGlobal.PIP.ApplicationCore.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

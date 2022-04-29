@@ -1,0 +1,365 @@
+<div *ngIf="isDataAvailable" id="expenses-and-assets">
+  <form [formGroup]="form" (ngSubmit)="onSave(form.value)">
+    <div class="col-md-12">
+      <div style="margin-left: 3.5%;">
+        <!-- Direct expenses tables -->
+        <div class="pb-2">
+          <span class="expense-tittle">{{ 'ExpensesAndAssets.ExpensesAndAssetsTitle' | translate }}</span>
+          <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+        </div>
+
+        <p-table tableStyleClass="fixtable direct-exp" formArrayName="directExpenseDTO"
+          [frozenColumns]="directExpenseCols" [columns]="periodCols" [scrollable]="true" scrollHeight="30vh"
+          frozenWidth="860px" class="form-group table  table-bordered table-sm" cellspacing="0" width="100%"
+          [value]="form.get('directExpenseDTO')['controls']" [(selection)]="selectedDirectExpense"
+          (onRowUnselect)="onDirectExpenseRowUnselect()">
+
+          <ng-template pTemplate="frozencolgroup" let-columns>
+            <colgroup>
+              <col style="width:40px">
+              <col style="width:150px">
+              <col style="width:200px">
+              <col style="width:85px">
+              <col style="width:195px">
+              <col style="width:80px">
+              <col style="width:110px">
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <col *ngFor="let col of periodCols;let i = index" Style="width: 110px">
+            </colgroup>
+          </ng-template>
+
+          <ng-template pTemplate="frozenheader" let-columns>
+            <tr style="height: 39px;">
+              <th class="text-center">
+                <p-tableHeaderCheckbox *ngIf="numberOfDirectExpenseRows > 2" (click)="onCheckboxSelect()"
+                  [disabled]="disableOtherFormControls">
+                </p-tableHeaderCheckbox>
+              </th>
+              <th *ngFor="let col of directExpenseCols">
+                {{col.header}}
+                <span class="required" *ngIf="col.header == 'Description'">*</span>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th *ngFor="let col of periodCols">
+                <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="frozenbody" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+            <tr *ngIf="rowIndex === 0">
+              <td colspan=" 3" rowspan="2">
+                {{'ExpensesAndAssets.ExpensesIncurredMessage' | translate }}
+              </td>
+              <td></td>
+              <td style="height: 50px;">
+                {{rowData.value.description}}
+              </td>
+              <td></td>
+              <td>
+                {{rowData.value.totalExpense | number: '1.2-2' | negativeValue}}
+              </td>
+              <td *ngFor="let pCols of periodCols;let i = index">
+                {{rowData.value.directExpensePeriodDTO[i].expense | number: '1.2-2' | negativeValue}}
+              </td>
+            </tr>
+            <tr *ngIf="rowIndex === 1">
+              <td></td>
+              <td class="description">
+                {{rowData.value.description}}
+              </td>
+              <td></td>
+              <td>
+                {{rowData.value.totalExpense | number: '1.2-2' | negativeValue}}
+              </td>
+              <td *ngFor="let pCols of periodCols;let i = index">
+                {{rowData.value.directExpensePeriodDTO[i].expense | number: '1.2-2' | negativeValue}}
+              </td>
+            </tr>
+            <tr *ngIf="rowIndex > 1 && !rowData.value.isDeleted" [pSelectableRow]="rowData"
+              [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+              <td class="text-center">
+                <p-tableCheckbox [value]="rowData" [index]="rowIndex" (click)="onCheckboxSelect()"
+                  [disabled]="disableOtherFormControls">
+                </p-tableCheckbox>
+              </td>
+              <td>
+                <input pInputText formControlName="label" />
+              </td>
+              <td>
+                <p-dropdown appendTo="body" id="rowIndex" [options]="selectedMilestones"
+                  (onChange)="onMilestoneSelected(rowIndex, $event.value)" formControlName="selectedMilestoneItem">
+                </p-dropdown>
+              </td>
+              <td class="text-center">
+                <p-inputSwitch formControlName="isReimbursable"></p-inputSwitch>
+              </td>
+              <td>
+                <input class="description" pInputText formControlName="description"
+                  pipRestrictInput="notAllowSpaceInBeginning" />
+              </td>
+              <td class="percent">
+                <input pInputText formControlName="percentRevenue" type="text"
+                  (change)="onPercentRevenueChange(rowIndex, $event.target.value)"
+                  pipRestrictInput="decimalPrecisionTwoWithNaturalNumbers" class="input-percent" /><span
+                  style="margin: 2px;">%</span>
+              </td>
+
+              <td>
+                {{  rowData.value.totalExpense | number: '1.2-2' | negativeValue}}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="columns"
+            let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="rowData.value" [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex"
+              *ngIf="rowIndex === 0">
+              <td *ngFor="let pCols of periodCols;let i = index" style="height: 50px;;">
+                {{rowData.value.directExpensePeriodDTO[i].expense | number: '1.2-2' | negativeValue}}
+              </td>
+            </tr>
+            <tr *ngIf="rowIndex === 1">
+              <td *ngFor="let pCols of periodCols;let i = index">
+                {{rowData.value.directExpensePeriodDTO[i].expense | number: '1.2-2' | negativeValue}}
+              </td>
+            </tr>
+            <tr *ngIf="rowIndex > 1 && !rowData.value.isDeleted" [pSelectableRow]="rowData"
+              [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+              <td *ngFor="let pCol of periodCols;let i = index">
+                <div formArrayName="directExpensePeriodDTO">
+                  <div [formGroupName]="i">
+                    <input #periodinput id="{{rowIndex.toString() + 'a' + i.toString()}}" class="periods" pInputText
+                      type="text" formControlName="expense" pipRestrictInput="negativeDecimalPrecisionTwo" [value]=" rowData.value.percentRevenue ?
+                      (rowData.value.directExpensePeriodDTO[i].expense | number: '1.2-2' | negativeValue) :
+                      rowData.value.directExpensePeriodDTO[i].expense"
+                      (click)="onCellClick(false, rowData, $event, rowIndex)"
+                      (focus)="onCellClick(false, rowData, $event, rowIndex)"
+                      (focusout)="onExpenseChange(rowIndex);displayMonthlyTotals();"
+                      [attr.disabled]="rowData.value.percentRevenue > 0 ? true : null">
+                    <p-contextMenu *ngIf="isCellActive" appendTo="body" [target]="periodinput"
+                      [model]="contextMenuItems">
+                    </p-contextMenu>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template class="scrollable-footer" pTemplate="footer" let-columns *ngIf='periodCols.length > 0'>
+            <tr *ngIf='columns[0].field == "periods"'>
+              <td *ngFor="let pCol of periodCols; let i = index">
+                {{ monthlyAssetCost[i] | number:'1.2-2' | negativeValue}}
+              </td>
+            </tr>
+            <tr *ngIf='columns[0].field == "periods"'>
+              <td class="footer-summary" *ngFor="let pCol of periodCols; let i = index">
+                {{monthlyTotals[i] | number:'1.2-2' | negativeValue}}
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="summary" *ngIf='periodCols.length > 0'>
+            <tr class="bottom-border" [ngStyle]="{'margin-top': '-7px' }"
+              style="position: absolute;margin-left: -13px;">
+              <td class="footer-summary" style="width: 750px;text-align: left;">
+                <span>{{ 'ExpensesAndAssets.USTAssetsTitle' | translate }}</span>
+              </td>
+              <td class="footer-summary text-left" style="min-width: 110px;">
+                {{ totalAssetCost | number:'1.2-2' | negativeValue}}
+              </td>
+            </tr>
+            <tr>
+              <td class="footer-summary text-left"
+                style="left: 0px;position: absolute;width: 750px;margin-top: 22px;height: 31px;"
+                [ngStyle]="{'margin-top':periodCols.length > 5 ? '22px' : '21px' }">
+                <span>{{'ExpensesAndAssets.SubTotalExpenseTitle' | translate }}</span>
+              </td>
+              <td class="footer-summary text-left"
+                style="min-width: 110px;left: 750px;position: absolute; height: 31px;"
+                [ngStyle]="{'margin-top':periodCols.length > 5 ? '22px' : '21px' }">
+                {{totalDirectExpenseCost | number:'1.2-2' | negativeValue}}
+              </td>
+            </tr>
+            <tr>
+              <td [attr.colspan]="colSpanSize - 1" style="position: absolute;border: none;margin-top: 50px;">
+                <button pButton type="button" class="first pull-left ui-button-rounded ui-button-info" label="Add row"
+                  (click)="onDirectExpensesAddRow()" [disabled]="disableOtherFormControls || isSaveClicked"></button>
+                <button *ngIf="selExpenseRow.length > 0" pButton
+                  class="first pull-left ui-button-rounded ui-button-danger" type="button" label="Delete row"
+                  (click)="onDirectExpensesSelectedRowDelete()" [disabled]="isSaveClicked"></button>
+                <button *ngIf="selExpenseRow.length > 0" pButton type="button"
+                  class="first pull-left ui-button-rounded ui-button-info" label="Copy Selected"
+                  (click)="onDirectExpensesCopySelected()" [disabled]="isSaveClicked"></button>
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+                {{ 'GridEmptyMsg' | translate }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+
+        <!-- Hardware and Software grid table -->
+        <div class="pb-2 p-t-30" class="asset-tittle p-b-20" style="margin-top: 70px;">
+          <span class="table-title">{{'ExpensesAndAssets.AssetPlanning' | translate}}</span>
+        </div>
+        <div class="m-t-20">
+          <div class="pb-2">
+            <span class="sub-header">{{ 'ExpensesAndAssets.AdditionalSoftwareOrHardwareTitle' | translate }}</span>
+          </div>
+          <p-table id="additional-sw-hw" tableStyleClass="fixtable basic-asset" [responsive]="true"
+            [resizableColumns]="true" formArrayName="assetDTO" [scrollable]="true" scrollHeight="12vh"
+            class="form-group table  table-bordered table-sm" cellspacing="0" width="100%" columnResizeMode="expand"
+            [columns]="additionalAssetsCols" class="form-group" [value]="form.get('assetDTO')['controls']"
+            [(selection)]="selectedAdditionalAssets" (onRowUnselect)="onAdditionalAssetRowUnselect()">
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col style="width:5%">
+                <col style="width:55%">
+                <col style="width: 15%;">
+                <col style="width: 15%;">
+                <col style="width: 15%;">
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th class="text-center">
+                  <p-tableHeaderCheckbox *ngIf="numberOfAssetRows > 7" (click)="onCheckboxSelect()"
+                    [disabled]="disableOtherFormControls">
+                  </p-tableHeaderCheckbox>
+                </th>
+                <th *ngFor="let col of additionalAssetsCols">
+                  {{col.header}}
+                  <span class="required" *ngIf="col.header == 'Description'">*</span>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+              <tr *ngIf="rowData.value.basicAssetId === null && !rowData.value.isDeleted" [pSelectableRow]="rowData"
+                [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+                <td class="text-center">
+                  <p-tableCheckbox [value]="rowData" [index]="rowIndex" (click)="onCheckboxSelect()"
+                    [disabled]="disableOtherFormControls">
+                  </p-tableCheckbox>
+                </td>
+                <td class="desc-col discription">
+                  <input class="discription" pInputText formControlName="description"
+                    pipRestrictInput="notAllowSpaceInBeginning" />
+                </td>
+                <td class="cost">
+                  <input pInputText pipRestrictInput="decimalPrecisionTwo" formControlName="costToProject"
+                    (keyup)="onAssetChange(rowIndex);displayTotalAssetCost();displayMonthlyAssetCost()" />
+                </td>
+                <td class="count">
+                  <input pInputText pipRestrictInput="numeric" formControlName="count"
+                    (keyup)="onAssetChange(rowIndex);displayTotalAssetCost();displayMonthlyAssetCost();" />
+                </td>
+                <td class="amount">
+                  {{rowData.value.amount}}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <tr class="table-footer">
+                <td colspan="12">
+                  <span>{{ 'ExpensesAndAssets.AssetMaxDayCharge' | translate }} :
+                    {{ assetMaxDayCharge * currencyFactor | number:'1.2-2'}}</span>
+                  <span class="pull-right">{{ 'ExpensesAndAssets.TotalAssetCost' | translate }} :
+                    {{ totalAssetCost | number:'1.2-2'}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="12">
+                  <button pButton type="button" class="first pull-left ui-button-rounded ui-button-info" label="Add row"
+                    (click)="onAdditionalAssetAddRow()" [disabled]="disableOtherFormControls || isSaveClicked"></button>
+                  <button pButton type="button" *ngIf="selAssetsRow.length > 0"
+                    class="first pull-left ui-button-rounded ui-button-danger" label="Delete row"
+                    (click)="onAdditionalAssetsSelectedRowDelete()" [disabled]="isSaveClicked"></button>
+                  <button pButton type="button" *ngIf="selAssetsRow.length > 0"
+                    class="first pull-left ui-button-rounded ui-button-info" label="Copy Selected"
+                    (click)="onAdditionalAssetsCopySelected()" [disabled]="isSaveClicked"></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+                  {{ 'GridEmptyMsg' | translate }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <div class="pb-2 m-t-20">
+            <span class="sub-header">{{'ExpensesAndAssets.BasicAssetsTitle' | translate}}</span>
+          </div>
+
+          <p-table tableStyleClass="fixtable m-b-20 basic-asset" [responsive]="true" [resizableColumns]="true"
+            columnResizeMode="expand" class="form-group" [columns]="basicAssetscols"
+            [value]="form.get('assetDTO')['controls']" width="100%" formArrayName="assetDTO">
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col style="width:60%">
+                <col style="width: 15%;">
+                <col style="width: 15%;">
+                <col style="width: 15%;">
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of basicAssetscols">
+                  {{col.header}}
+                  <span class="required w-100" *ngIf="col.header == 'Description'">*</span>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+              <tr *ngIf="rowData.value.basicAssetId !== null" [formGroupName]="rowIndex">
+                <td>
+                  {{rowData.value.description}}
+                </td>
+                <td>
+                  {{rowData.value.costToProject | number:'1.2-2'}}
+                </td>
+                <td class="count">
+                  <input pInputText formControlName="count" pipRestrictInput="numeric"
+                    (change)="onAssetChange(rowIndex);displayTotalAssetCost();displayMonthlyAssetCost();" />
+                </td>
+                <td class="amount">
+                  {{rowData.value.amount | number:'1.2-2'}}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+                  {{ 'GridEmptyMsg' | translate }}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- save and exit buttons -->
+
+    <div class="p-grid">
+      <hr class="bottom-line">
+      <div class="p-sm-12 btns-strip">
+        <button [disabled]="!form.valid || isSaveClicked" pButton class="ui-button-rounded ui-button-success"
+          type="submit" label="Save">
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,158 @@
+#project-table {
+  .ui-widget .ui-inputtext {
+    height: 28px;
+  }
+  .ui-table-scrollable-view {
+    margin-left: 2px;
+  }
+
+  .ui-button.ui-button-rounded {
+    border-radius: 0px;
+  }
+  .ui-paginator-right-content {
+    padding-right: 5px;
+  }
+  .ui-table-caption {
+    padding: 0px;
+  }
+  .project-name:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .project-name {
+    color: #00a9ee;
+  }
+  .project-header {
+    font-size: $font-size;
+    font-weight: 600;
+    margin-left: 10px;
+    padding-top: 5px;
+    padding-right: 15px;
+  }
+  .ui-widget {
+    font-size: $font-size !important;
+  }
+
+  .ui-table-capion {
+    background-color: #fff;
+  }
+  .pi-color {
+    color: #00a9ee !important;
+    opacity: 1;
+  }
+  input {
+    background: #fcfcfc 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    height: 28px;
+  }
+  .ui-inputtext {
+    font-size: 12px;
+    color: #111;
+    font-weight: 400;
+  }
+
+  .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #fcfcfc;
+  }
+  .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background-color: #fcfcfc;
+    color: #111111;
+  }
+  .ui-table .ui-sortable-column.ui-state-highlight {
+    background-color: #c8c8c8;
+  }
+  .ui-paginator-bottom {
+    position: fixed;
+    bottom: 2px;
+    width: calc(100% - 60px);
+  }
+
+  .ui-paginator .ui-paginator-next,
+  .ui-paginator .ui-paginator-last,
+  .ui-paginator .ui-paginator-prev,
+  .ui-paginator .ui-paginator-first {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    margin-right: 5px;
+    height: 24px;
+  }
+  .ui-paginator .ui-paginator-pages .ui-paginator-page {
+    vertical-align: middle;
+    height: 24px;
+  }
+  .tabs {
+    padding-bottom: 0em !important;
+  }
+  #clear-filter {
+    border-radius: 15px !important;
+  }
+  .header-icon {
+    cursor: pointer;
+  }
+  .ui-table-scrollable-view {
+    min-height: calc(100vh - 180px) !important;
+  }
+  .ui-dialog .ui-dialog-titlebar {
+    border: 1px solid #ffffff !important;
+    background-color: #ffffff !important;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: 0 none;
+  }
+  .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    margin: 0;
+    color: #c73e27 !important;
+    float: none;
+    font-size: 16px;
+  }
+  .ui-dialog .ui-dialog-content {
+    background-color: #ffffff;
+    color: #333333;
+    padding: 0.571em 1em;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+  .cancel-button {
+    background-color: #ffff;
+    color: #007ad9;
+    width: 40%;
+  }
+  .delete-button {
+    background-color: #00a9ee;
+    border: 1px solid;
+    width: 40%;
+    margin: 0px 40px;
+  }
+  .ui-table .ui-table-thead > tr > th {
+    border: 1px solid #c8c8c8 !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    height: 32px !important;
+    font-size: 13px !important;
+    background-color: #3599a8 !important;
+  }
+  .ui-table .ui-sortable-column .ui-sortable-column-icon {
+    color: #ffffff;
+  }
+  .ui-dropdown {
+    min-width: 10.5em !important;
+  }
+}
+.ui-menu .ui-menuitem-link .ui-menuitem-text {
+  color: #00a9ee !important;
+}
+.ui-menu .ui-menuitem-link .ui-menuitem-icon {
+  color: #00a9ee !important;
+}
+.ui-dropdown {
+  background: #fcfcfc 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  opacity: 1;
+  height: 30px;
+}
+.project-table {
+  & .ui-dropdown {
+    min-width: 100px !important;
+  }
+}

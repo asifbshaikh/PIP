@@ -1,0 +1,111 @@
+#project-header {
+  max-height: calc(100vh - 200px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  .ui-dropdown {
+    width: 100%;
+    height: auto;
+    font-size: $font-size;
+    color: #111;
+    background: #fcfcfc;
+    border-radius: 4px;
+  }
+
+  .p-grid {
+    margin-top: 0.5em;
+  }
+
+  .p-lg-3 {
+    padding: 0.5rem !important;
+  }
+
+  .ui-inputtext {
+    font-size: $font-size;
+    color: #111;
+    background: #fcfcfc;
+    border-radius: 4px;
+  }
+
+  .disable-input {
+    opacity: 1;
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+
+  .disable {
+    pointer-events: none;
+    opacity: 1;
+  }
+  .no-cursor {
+    cursor: not-allowed;
+  }
+
+  .grey-bg {
+    background-color: #e9ecef;
+    height: 30px;
+  }
+
+  .m-l-5 {
+    margin-left: 5%;
+  }
+
+  .accountName-tooltip {
+    float: right;
+    margin: 5px -22px;
+  }
+
+  .ui-dropdown-label {
+    max-width: 90%;
+  }
+
+  .approver-comments {
+    width: 100%;
+    height: 10vh;
+    background-color: #e9ecef;
+    border-radius: 3px;
+  }
+  .dummy-project-id {
+    width: 100%;
+    background: #e9ecef;
+    height: 29.6px;
+    border: 1px solid #a6a6a6;
+    border-radius: 4px;
+    padding: 5px;
+  }
+  .radio-btns {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.form-control {
+  width: 100%;
+  padding: 0px 0px;
+  border: 1px solid #fff;
+}
+body .ui-toast .ui-toast-message.ui-toast-message-info {
+  background-color: #00a9ee;
+  border: 0 none;
+  color: #ffffff;
+  font-size: 13px;
+  word-spacing: 6px;
+  letter-spacing: 1px;
+}
+body .ui-toast .ui-toast-message.ui-toast-message-info .ui-toast-close-icon {
+  color: #ffffff;
+}
+.ui-toast .ui-toast-message-text-content {
+  padding: 0 0 0 0;
+  margin-left: 2.5em;
+}
+
+.ui-toast .ui-toast-summary {
+  font-weight: bold;
+  padding: 0 0 0 0;
+  display: block;
+}
+
+#form-control-dropdown {
+  height: auto;
+  padding: 0px 0px;
+}

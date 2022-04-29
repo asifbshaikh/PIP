@@ -1,0 +1,31 @@
+#project-margin {
+    .ui-steps .ui-steps-item {
+        width: none;
+    }
+    & .ui-steps.steps-custom {
+        margin-bottom: 30px;
+    }
+    & .ui-steps.steps-custom .ui-steps-item .ui-menuitem-link {
+        height: 10px;
+        padding: 0 1em;
+    }
+    & .ui-steps.steps-custom .ui-steps-item .ui-steps-number {
+        background-color: #0081c2;
+        color: #ffffff;
+        display: inline-block;
+        width: 36px;
+        border-radius: 50%;
+        margin-top: -14px;
+        margin-bottom: 10px;
+    }
+    & .ui-state-highlight {
+        border: none;
+    }
+    & .ui-steps-item {
+        border: none;
+    }
+    .ui-steps .ui-steps-item.ui-state-highlight .ui-steps-title {
+        font-weight: 700;
+        color: $red-color;
+    }
+}

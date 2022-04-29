@@ -1,0 +1,48 @@
+<nav id="sidebar" [class.collapsed]="collapsed">
+	<span class="divider"></span>
+	<ul class="navigation">
+		<li>
+			<a (click)="onNavigate()" class="tab" [ngClass]="{'active': isThisTabActive('/dashboard')}"
+				[routerLink]=" !isDirty ? ['/dashboard'] : null"
+				pTooltip="{{ 'SHARED.NAVMENU.AboutTool' | translate }}"><i> <img src="/assets/icons/dashboard.svg">
+				</i><span>{{ 'SHARED.NAVMENU.AboutTool' | translate }}</span></a>
+		</li>
+		<li *ngIf="hasAccountLevelAccess || hasSharePipAccess">
+			<a (click)="onNavigate()" class="tab" [ngClass]="{'active': isThisTabActive('/projects')}"
+				[routerLink]="!isDirty ? ['/projects'] : null" pTooltip="{{ 'SHARED.NAVMENU.MyPips' | translate }}"><i>
+					<img src="/assets/icons/file.svg"></i><span
+					class="text-center m-l-5">{{ 'SHARED.NAVMENU.MyPips' | translate }}</span></a>
+		</li>
+
+		<!-- Dummy pip sheet-->
+
+		<li *ngIf="hasAccountLevelAccess || hasDummyPipAccess">
+			<a (click)="onNavigate()" class="tab" [ngClass]="{'active': isThisTabActive('/samples')}"
+				[routerLink]="!isDirty ? ['/samples'] : null"
+				pTooltip="{{ 'SHARED.NAVMENU.DummyPips' | translate }}"><i>
+					<img src="/assets/icons/dummyPip.svg"></i><span
+					class="text-center m-l-5">{{ 'SHARED.NAVMENU.DummyPips' | translate }}</span></a>
+		</li>
+		<li *ngIf="checkRole.isAdmin || checkRole.isFinanaceApprover">
+			<a (click)="onNavigate()" class="tab" [ngClass]="{'active': isThisTabActive('/administration')}"
+				[routerLink]="!isDirty ? ['/administration'] : null"
+				pTooltip="{{ 'SHARED.NAVMENU.Admin' | translate }}"><i> <img
+						src="/assets/icons/man-in-suit-and-tie.svg"></i><span>{{ 'SHARED.NAVMENU.Admin' | translate }}</span></a>
+		</li>
+		<li *ngIf="checkRole.isFinanaceApprover || checkRole.isReviewer">
+			<a (click)="onNavigate()" class="tab" [ngClass]="{'active': isThisTabActive('/approver')}"
+				[routerLink]="!isDirty ? ['/approver'] : null"
+				pTooltip="{{ 'SHARED.NAVMENU.Approver' | translate }}"><i> <img
+						src="/assets/icons/approverIcon.svg"></i><span>{{ 'SHARED.NAVMENU.Approver' | translate }}</span></a>
+		</li>
+		<li *ngIf="checkRole.isFinanaceApprover || hasAccountLevelEditorAccess">
+			<a (click)="onNavigate()" class="tab" [ngClass]="{'active': isThisTabActive('/reports')}"
+				[routerLink]="!isDirty ? ['/reports'] : null" pTooltip="{{ 'SHARED.NAVMENU.Report' | translate }}"><i>
+					<img src="/assets/icons/report.svg"></i><span>{{ 'SHARED.NAVMENU.Report' | translate }}</span></a>
+		</li>
+	</ul>
+	<div class="expandBtn">
+		<span id="sidebarCollapse"><i class="fa fa-caret-square-o-left" [class.fa-caret-square-o-left]="!collapsed"
+				[class.fa-caret-square-o-right]="collapsed" (click)="onExpandCollapse()"></i></span>
+	</div>
+</nav>

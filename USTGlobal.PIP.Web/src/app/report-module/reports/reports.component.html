@@ -1,0 +1,298 @@
+<form id="reports" [formGroup]="reportForm" *ngIf="reportForm && Report">
+  <p-panel header="Reports">
+    <div class="header">
+      <span class="title">{{ 'SHARED.NAVMENU.Report' | translate }}</span>
+    </div>
+    <div class="content row">
+      <div id="sidebar" class="navmenu col-md-4">
+        <ul class="navigation m-t-30">
+          <li class="nav-item active" (click)="onMenuChange(1)">
+            <a class="nav-link" [ngClass]="{'active': menu == 1}"><span
+                class="text-center m-l-5">{{ Report.Navmenu.CustomReport}}</span>
+              <i class="info-icon" pTooltip="{{ Report.Tooltip.CustomReportTooltip }}" tooltipPosition="right"><img src="/assets/icons/info.svg"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="onMenuChange(2)" [ngClass]="{'active': menu == 2}"> <span
+                class="text-center m-l-5">{{ Report.Navmenu.SummaryView }}</span>
+              <i class="info-icon" pTooltip="{{ Report.Tooltip.SummaryViewTooltip }}" tooltipPosition="right"><img src="/assets/icons/info.svg"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="onMenuChange(3)" [ngClass]="{'active': menu == 3}"> <span
+                class="text-center m-l-5">{{ Report.Navmenu.DetailedLevel }}</span>
+              <i class="info-icon" pTooltip="{{ Report.Tooltip.DetailedLevelTooltip }}" tooltipPosition="right"><img src="/assets/icons/info.svg"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="onMenuChange(4)" [ngClass]="{'active': menu == 4}"> <span
+                class="text-center m-l-5">{{ Report.Navmenu.ResourceLevel }}</span>
+              <i class="info-icon"  pTooltip="{{ Report.Tooltip.ResourceLevelTooltip }}" tooltipPosition="right"><img src="/assets/icons/info.svg"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="body col-md-8 m-t-30">
+        <div *ngIf="menu === 1" id="customReport" class="custom-reports">
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Account }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-multiSelect [options]="accountDropdownItems" formControlName="account"
+                (onChange)="onAccountChange($event.value)">
+              </p-multiSelect>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Project }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-multiSelect [options]="projectListDropdownItems" formControlName="project"
+                (onChange)="onProjectSelect($event.value)">
+              </p-multiSelect>
+              <br><span [class.required]="noProjectsError">{{noProjectsError}}</span>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Kpi }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-multiSelect [options]="kPIListDropdownItems" formControlName="kpi"
+                (onChange)="onKpiSelect($event.value)">
+              </p-multiSelect>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Currency }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left m-t-5">
+              <p-radioButton name="groupname" value="true" formControlName="currency" label="{{ Report.Usd }}">
+              </p-radioButton>
+              <p-radioButton name="groupname" value="false" formControlName="currency" label="{{ Report.PipCurrency }}">
+              </p-radioButton>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.StartDate }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-calendar keepInvalid="true" (onInput)="validateStartDate($event.target.value)"
+                (onSelect)="onStartDateSelect($event)" formControlName="startDate" view="month" [showIcon]="true"
+                dateFormat="mm-yy" [yearNavigator]="true" yearRange="2018:2050" [showOnFocus]="false"
+                [pTooltip]='dateToolTip' placeholder="MM-YYYY">
+              </p-calendar>
+              <br><span [class.required]="startDateValidationMsg">{{startDateValidationMsg}}</span>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.EndDate }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-calendar keepInvalid="true" (onInput)="validateEndDate($event.target.value )"
+                (onSelect)="onEndDateSelect($event)" formControlName="endDate" view="month" [showIcon]="true"
+                dateFormat="mm-yy" [yearNavigator]="true" yearRange="2018:2050" [showOnFocus]="false"
+                [pTooltip]='dateToolTip' placeholder="MM-YYYY">
+              </p-calendar>
+              <br> <span [class.required]="endDateValidationMsg"> {{endDateValidationMsg}}</span>
+            </div>
+          </div>
+          <div class="row m-t-30 p-offset-3">
+            <button pButton type="button" label="{{Report.GanerateReport}}" class="ui-button-rounded"
+              (click)="generateProjectReport()" [disabled]="!reportForm.valid"></button>
+          </div>
+        </div>
+        <div *ngIf="menu === 2" id="customReport" class="custom-reports">
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Account }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-multiSelect [options]="accountDropdownItems" formControlName="account"
+                (onChange)="onAccountChange($event.value)">
+              </p-multiSelect>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Project }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-multiSelect [options]="projectListDropdownItems" formControlName="project"
+                (onChange)="onProjectSelect($event.value)">
+              </p-multiSelect>
+              <br><span [class.required]="noProjectsError">{{noProjectsError}}</span>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Currency }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left m-t-5">
+              <p-radioButton name="groupname" value="true" formControlName="currency" label="{{ Report.Usd }}">
+              </p-radioButton>
+              <p-radioButton name="groupname" value="false" formControlName="currency" label="{{ Report.PipCurrency }}">
+              </p-radioButton>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.StartDate }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-calendar keepInvalid="true" (onInput)="validateStartDate($event.target.value)"
+                (onSelect)="onStartDateSelect($event)" formControlName="startDate" view="month" [showIcon]="true"
+                dateFormat="mm-yy" [yearNavigator]="true" yearRange="2018:2050" [showOnFocus]="false"
+                [pTooltip]='dateToolTip' placeholder="MM-YYYY">
+              </p-calendar>
+              <br><span [class.required]="startDateValidationMsg">{{startDateValidationMsg}}</span>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.EndDate }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-calendar keepInvalid="true" (onInput)="validateEndDate($event.target.value )"
+                (onSelect)="onEndDateSelect($event)" formControlName="endDate" view="month" [showIcon]="true"
+                dateFormat="mm-yy" [yearNavigator]="true" yearRange="2018:2050" [showOnFocus]="false"
+                [pTooltip]='dateToolTip' placeholder="MM-YYYY">
+              </p-calendar>
+              <br> <span [class.required]="endDateValidationMsg"> {{endDateValidationMsg}}</span>
+            </div>
+          </div>
+          <div class="row m-t-30 p-offset-3">
+            <button pButton type="button" label="{{Report.GanerateReport}}" class="ui-button-rounded"
+              [disabled]="!reportForm.valid" (click)="generateProjectReport()"></button>
+          </div>
+        </div>
+        <div *ngIf="menu === 3" id="customReport" class="custom-reports">
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Account }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-dropdown [options]="accountDropdownItems" filter="true" formControlName="account"
+                (onChange)="onAccountChange([$event.value])">
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Project }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-multiSelect [options]="projectListDropdownItems" formControlName="project"
+                (onChange)="onProjectSelect($event.value)">
+              </p-multiSelect>
+              <br><span [class.required]="noProjectsError">{{noProjectsError}}</span>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Currency }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left m-t-5">
+              <p-radioButton name="groupname" value="true" formControlName="currency" label="{{ Report.Usd }}">
+              </p-radioButton>
+              <p-radioButton name="groupname" value="false" formControlName="currency" label="{{ Report.PipCurrency }}">
+              </p-radioButton>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.StartDate }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-calendar keepInvalid="true" (onInput)="validateStartDate($event.target.value)"
+                (onSelect)="onStartDateSelect($event)" formControlName="startDate" view="month" [showIcon]="true"
+                dateFormat="mm-yy" [yearNavigator]="true" yearRange="2018:2050" [showOnFocus]="false"
+                [pTooltip]='dateToolTip' placeholder="MM-YYYY">
+              </p-calendar>
+              <br><span [class.required]="startDateValidationMsg">{{startDateValidationMsg}}</span>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.EndDate }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-calendar keepInvalid="true" (onInput)="validateEndDate($event.target.value )"
+                (onSelect)="onEndDateSelect($event)" formControlName="endDate" view="month" [showIcon]="true"
+                dateFormat="mm-yy" [yearNavigator]="true" yearRange="2018:2050" [showOnFocus]="false"
+                [pTooltip]='dateToolTip' placeholder="MM-YYYY">
+              </p-calendar>
+              <br> <span [class.required]="endDateValidationMsg"> {{endDateValidationMsg}}</span>
+            </div>
+          </div>
+          <div class="row m-t-30 p-offset-3">
+            <button pButton type="button" label="{{Report.GanerateReport}}" class="ui-button-rounded"
+              (click)="generateProjectReport()" [disabled]="!reportForm.valid"></button>
+          </div>
+        </div>
+        <div *ngIf="menu === 4" id="customReport" class="custom-reports">
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Account }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-dropdown [options]="accountDropdownItems" filter="true" formControlName="account"
+                (onChange)="onAccountChange([$event.value])">
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Project }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left">
+              <p-dropdown [options]="projectListDropdownItems" filter="true" formControlName="project"
+                placeholder="--- select ---" (onChange)="onProjectSelect([$event.value])">
+              </p-dropdown>
+              <br><span [class.required]="noProjectsError">{{noProjectsError}}</span>
+            </div>
+          </div>
+          <div class="row m-b-10">
+            <div class="col-md-3 text-right">
+              <span class="table-title">{{ Report.Currency }}</span>
+              <span class="mandatory">*</span>
+            </div>
+            <div class="col-md-8 text-left m-t-5">
+              <p-radioButton name="groupname" value="true" formControlName="currency" label="{{ Report.Usd }}">
+              </p-radioButton>
+              <p-radioButton name="groupname" value="false" formControlName="currency" label="{{ Report.PipCurrency }}">
+              </p-radioButton>
+            </div>
+          </div>
+          <div class="row m-t-30 p-offset-3">
+            <button pButton type="button" label="{{Report.GanerateReport}}" class="ui-button-rounded"
+              [disabled]="!reportForm.valid" (click)="generateProjectReport()"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-panel>
+</form>

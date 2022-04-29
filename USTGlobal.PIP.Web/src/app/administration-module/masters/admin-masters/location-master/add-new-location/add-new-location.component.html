@@ -1,0 +1,161 @@
+<form [formGroup]="newLocationForm" id="location-dialog">
+  <div *ngIf='location || status === 4 '>
+    <p-dialog header="{{status === 4 ? 'Create New' : location.locationName }}" [(visible)]="display"
+      [style]="{width: '800px'}" (onHide)="onDialogClose()" modal="true">
+      <div *ngIf="status >= 0 && status !== 2 || status === 2 && location.startDate === null || isNewVersion">
+        <div class="p-grid">
+          <div class="p-lg-8"></div>
+          <div class="p-lg-2"><label class="label"><b>{{'AddNewLocation.status' | translate}}</b></label></div>
+          <div class="p-lg-2" *ngIf="status === 0"><span>{{statusFlag[0].label}}</span></div>
+          <div class="p-lg-2" *ngIf="status === 1" class="approval-pending"><span>{{statusFlag[1].label}}</span></div>
+          <div class="p-lg-2" *ngIf="status === 2" class="approved"><span>{{statusFlag[2].label}}</span></div>
+          <div class="p-lg-2" *ngIf="status === 3"><span class="rejected">{{statusFlag[3].label}}</span></div>
+          <div class="p-lg-2" *ngIf="status === 4"><span>{{statusFlag[4].label}}</span></div>
+          <div class="p-lg-2"><label class="label-align">{{'AddNewLocation.location' | translate}}<span
+                class="mandatory">*</span></label></div>
+          <div class="p-lg-3 textbox-align"><input formControlName="locationName" class="textbox-width" type="text"
+              pInputText>
+          </div>
+          <div class="p-lg-2"><label class="label-align">{{'AddNewLocation.hrsPerMonth' | translate}}<span
+                class="mandatory">*</span></label></div>
+          <div class="p-lg-3 textbox-align"><input formControlName="hoursPerMonth" class="textbox-width" type="text"
+              pipRestrictInput="numeric" pInputText></div>
+          <div class="p-lg-2"></div>
+          <div class="p-lg-2"><label class="label-align">{{'AddNewLocation.hrsPerDay' | translate}}<span
+                class="mandatory">*</span></label></div>
+          <div class="p-lg-3 textbox-align"><input formControlName="hoursPerDay" class="textbox-width" type="text"
+              pInputText pipRestrictInput="numeric">
+          </div>
+          <div class="p-lg-2"><label class="label-align">{{'AddNewLocation.comment' | translate}}</label></div>
+          <div class="p-lg-3 textbox-align"><input formControlName="comment" class="textbox-width" type="text"
+              pInputText>
+          </div>
+          <div *ngIf="status === 3" class="p-lg-12"><label>
+              <b>{{'AddNewLocation.commentFromApprover' | translate}}</b></label></div>
+          <div *ngIf="status === 3" class="p-lg-12"><label>This represents the comment wriiten by the approver while
+              rejecting this version.
+              All this text/content is written for testing purpose and will be implemented when the approval flow for
+              masters will be done. </label>
+          </div>
+          <div class="p-lg-12 discard-button" *ngIf="status === 3">
+            <button pButton type=" submit" label="{{'ButtonLables.discardVersion' | translate}}"
+              (click)=onDiscardVersion()></button>
+          </div>
+
+          <!-- SET START DATE -->
+          <div class="p-lg-12 discard-button"
+            *ngIf="status === 2 && location.startDate ===null || status === 2 && showStartDate">
+            <button *ngIf="isDate !== true" pButton type=" submit" label="{{'ButtonLables.setDate' | translate}}"
+              (click)=showDate()></button>
+            <div *ngIf="isDate === true">
+              <label>{{'AddNewLocation.startDate' | translate}}</label>
+              <p-calendar appendTo="body" [minDate]="minimumDate" formControlName="startDate" dateFormat="mm-dd-yy"
+                [monthNavigator]="true" [yearNavigator]="true" yearRange="2001:2050" placeholder="mm-dd-yyyy" [minDate]="minDate" [maxDate]="maxDate"
+                (onSelect)="onSetDate()" [showIcon]="true">
+              </p-calendar>
+              <i class="pi pi-check check" [ngClass]="{'disable' : iconEnable === false}" (click)="onSubmit()"></i>
+              <i></i>
+              <i class="pi pi-times times" (click)=onClose()></i>
+            </div>
+          </div>
+
+
+
+
+          <div class=" p-lg-8" *ngIf="status === 0 || status === 4"></div>
+          <div class="p-lg-2" *ngIf="status === 0 || status === 4"><button class="dialog-button" pButton type="submit"
+              label="{{'ButtonLables.save' | translate}}" (click)=onSave($event)></button>
+          </div>
+          <div class="p-lg-2" *ngIf="status === 0 || status === 4"><button class="dialog-button" pButton type="submit"
+              label="{{'ButtonLables.submit' | translate}}" (click)=onSubmit()
+              [disabled]="!newLocationForm.valid"></button>
+          </div>
+
+        </div>
+      </div>
+      <div class="p-grid" *ngIf="isActive === true">
+        <div class="p-lg-4" *ngIf="status === 2"></div>
+        <div *ngIf="status === 2 && !isNewVersion" class="p-lg-4">
+          <button class="dialog-button" pButton type="submit" label="{{'ButtonLables.newVersion' | translate}}"
+            (click)=createNewVersion()></button>
+        </div>
+        <div class="p-lg-4" *ngIf="status === 2"></div>
+        <div class="p-lg-12"><label class="version-font">{{'AddNewLocation.activeVersion' | translate}}</label></div>
+        <div class="p-lg-12">
+          <p-table [columns]="cols" [value]="[0]">
+            <ng-template pTemplate="header">
+              <tr>
+                <th *ngFor="let col of cols">
+                  {{ col.header}}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+              <tr *ngIf="location">
+                <td>
+                  {{location.locationName}}
+                </td>
+                <td>
+                  {{location.hoursPerDay}}
+                </td>
+                <td>
+                  {{location.hoursPerMonth}}
+                </td>
+                <td style="text-align: center;">
+                  <label *ngIf="isActive === true" class="active-label">{{'AddNewLocation.active' | translate}}</label>
+                  <label *ngIf="isActive === false"
+                    class="in-active-label">{{'AddNewLocation.inactive' | translate}}</label>
+                </td>
+                <td>
+                  {{location.startDate | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                  {{location.endDate}}
+                </td>
+                <td>
+                  {{location.comments}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div *ngIf="pastLocationVersions.length > 0">
+          <div class="p-lg-12"><label class="version-font">{{'AddNewLocation.pastVersion' | translate}}</label></div>
+          <div class="p-lg-12">
+            <p-table [columns]="cols" [value]="pastLocationVersions">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th *ngFor="let col of pastVersionCols">
+                    {{ col.header}}
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <tr *ngIf="pastLocationVersions">
+                  <td>
+                    {{rowData.locationName}}
+                  </td>
+                  <td>
+                    {{rowData.hoursPerDay}}
+                  </td>
+                  <td>
+                    {{rowData.hoursPerMonth}}
+                  </td>
+                  <td>
+                    {{rowData.startDate | date:'MM/dd/yyyy'}}
+                  </td>
+                  <td>
+                    {{rowData.endDate | date:'MM/dd/yyyy'}}
+                  </td>
+                  <td>
+                    {{rowData.comments}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </p-dialog>
+  </div>
+</form>

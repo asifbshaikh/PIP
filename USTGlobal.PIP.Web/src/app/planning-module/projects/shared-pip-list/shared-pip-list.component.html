@@ -1,0 +1,75 @@
+﻿
+<form [formGroup]="sharePipListForm" id="sharepip-list">
+  <p-table #dt class="form-group p-b-20" [columns]="cols" [value]="sharePipListForm.get('sharePipListData')['controls']"
+    formArrayName="sharePipListData" width="auto" sortField="sharedWithUserName" [sortOrder]="1"
+    [globalFilterFields]="['sharedWithUserName', 'uid', 'version','access']" scrollHeight="calc(100vh - 200px)"
+    [scrollable]="true" [paginator]="true" [rows]="20" [rowsPerPageOptions]="[20,30,40]">
+    <ng-template pTemplate="caption">
+      <span style="position: absolute;right: 20px;top: -16px;">
+        <i pTooltip="{{ 'PROJECTS.ProjectTootip.AdvanceSearch' | translate }}" tooltipPosition="bottom"
+          (click)="onSearchFilters()"><img src="/assets/icons/Advancesearch.svg"></i>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th [pSortableColumn]="'sharedWithUserName'"> {{cols[0].header}}
+          <p-sortIcon (click)="sortByUserName()"></p-sortIcon>
+        </th>
+        <th> {{cols[1].header}}</th>
+        <th> {{cols[2].header}}</th>
+        <th> {{cols[3].header}}</th>
+        <th> {{cols[4].header}}</th>
+        <th> {{cols[5].header}}</th>
+      </tr>
+      <tr *ngIf="showSearch" style="background: #DCE6EA;">
+        <td>
+          <input pInputText type="text" (keyup)="userNameFilter($event.target.value)">
+        </td>
+        <td>
+          <input pInputText type="text" (keyup)="uIdFilter($event.target.value)">
+        </td>
+        <td>
+          <input pInputText type="text" (keyup)="versionFilter($event.target.value)">
+        </td>
+        <td class="drop-down">
+          <p-dropdown appendTo="body" #st [options]="shareRolesFilter" (onChange)="roleFilter($event.value.id)"></p-dropdown>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+      <tr [formGroupName]="rowIndex">
+        <td>{{rowData.value.sharedWithUserName  }}</td>
+        <td>{{rowData.value.sharedWithUId}}</td>
+        <td>{{rowData.value.versionName}}</td>
+        <td class="drop-down">
+          <p-dropdown [options]="shareRoles" formControlName="selectedShareRole" (onChange)="onRoleDropdownChange(rowData)" appendTo="body">
+          </p-dropdown>
+        </td>
+        <td>
+          <input pInputText type="text" class="form-control comment-textbox" formControlName="shareComments" (keyup)="onRoleDropdownChange(rowData)">
+          <!-- {{rowData.value.shareComments}} -->
+        </td>
+        <td>
+          <i pTooltip="Edit" tooltipPosition="bottom" class="header-icon m-r-10" [ngClass]="{'disabled': rowData.value.disableEdit}"
+            (click)="onEditClicked(rowData, rowIndex)"><img src="/assets/icons/Edit.svg"></i>
+
+          <i pTooltip="Save" tooltipPosition="bottom" class="header-icon m-r-10" [ngClass]="{'disabled': rowData.value.disableSave}"
+            (click)="onSaveClick(rowData, rowIndex)"><img src="/assets/icons/Save.svg"></i>
+
+          <i pTooltip="Delete" tooltipPosition="bottom" class="header-icon m-r-10" [ngClass]="{'disabled': rowData.value.disableDelete}"
+            (click)="onDeleteClick(rowData, rowIndex)"><img src="/assets/icons/Delete.svg"></i>
+          <p-confirmDialog class="p-b-20" id="project-summary" header="{{'Admin.DeleteSharePipAccess' | translate}}"
+            [(visible)]="showDeleteDialog" [(visible)]="showDeleteDialog" key="isDeleteRole" modal="true"
+            [closable]="false" [draggable]="false">
+            <p-footer>
+              <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                (click)="showDeleteDialog = false"></button>
+              <button type="button" label="{{'Admin.delete' | translate}}" pButton class="delete-button"
+                (click)="deleteSharePipAccess(); showDeleteDialog = false;"></button>
+            </p-footer>
+          </p-confirmDialog>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</form>

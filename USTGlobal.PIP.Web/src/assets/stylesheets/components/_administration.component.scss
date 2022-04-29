@@ -1,0 +1,32 @@
+#admin {
+  margin-top: 6%;
+  margin-left: 12%;
+  .icons {
+    margin-top: 2em;
+    height: 9em;
+    text-align: center;
+  }
+  .customClass {
+    margin-left: 0%;
+    height: 18em;
+    width: 20em !important;
+    border-radius: 5%;
+  }
+  .admin-header {
+    font-size: 21px;
+  }
+  .admin-icon {
+    padding-bottom: 1em;
+    cursor: pointer;
+    outline: none;
+  }
+  .disable:hover {
+    cursor: not-allowed;
+  }
+  .disable:active {
+    pointer-events: none;
+  }
+  .disable {
+    opacity: 0.5;
+  }
+}

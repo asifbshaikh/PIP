@@ -1,0 +1,40 @@
+﻿<div id="login" class="login-main" *ngIf="showLogin && !isUserLoggedIn">
+    <div>
+        <div class="login-pg-container">
+            <div class="login-base-container">
+                <h1 class="login-title">{{'PUBLIC.Login.title' | translate }}</h1>
+                <!-- <h4 class="login-desc">{{'PUBLIC.Login.desc' | translate }}</h4> -->
+                <div class="login-form">
+                    <button type="button" class="btn btn-default" id="loadButton" (click)="login()"
+                        focusIndex="3">{{'PUBLIC.Login.loginButton' | translate }}<span
+                            *ngIf="model.isAuthInitiated == true"> ... <i class='fa fa-spinner fa-spin'>
+                            </i></span></button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+<p-dialog [(visible)]="displayAccessDenied" [modal]="true" id="access-denied">
+    <p-header>
+        <h4 class="modal-title">{{'PUBLIC.AccessDenied.title' | translate }}</h4>
+    </p-header>
+    <p>
+        {{'PUBLIC.AccessDenied.message' | translate }}
+    </p>
+    <p-footer>
+        <button type="button" class="btn btn-primary" (click)="closeAccessDeniedDialog()">{{'PUBLIC.AccessDenied.button' | translate }}</button>
+    </p-footer>
+</p-dialog>
+<p-dialog [(visible)]="displayIsActive" [modal]="true" id="access-denied">
+    <p-header>
+        <h4 class="modal-title">{{'PUBLIC.InActiveUser.title' | translate }}</h4>
+    </p-header>
+    <p>
+        {{'PUBLIC.InActiveUser.message' | translate }}
+    </p>
+    <p-footer>
+        <button type="button" class="btn btn-primary" (click)="closeIsActiveDialog()">{{'PUBLIC.InActiveUser.button' | translate }}</button>
+    </p-footer>
+</p-dialog>

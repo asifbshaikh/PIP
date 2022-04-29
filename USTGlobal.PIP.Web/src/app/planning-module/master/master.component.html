@@ -1,0 +1,114 @@
+<div style="padding-left: 10px">
+  <div>
+    <!-- <label id="lblSelectMasters"> Select Masters</label> -->
+    <p-multiSelect [options]="masters" [filter]="false" (onChange)="onMasterSelected($event.value)">
+      <p-header>
+        Select All
+      </p-header>
+    </p-multiSelect>
+
+
+  </div>
+  <!-- This template can be used for simply on condition  if isEdit flag is false -->
+
+
+
+  <div *ngIf="selectedMasters?.length > 0">
+
+    <p-table *ngFor="let master of selectedMasterData; let i = index" [columns]="master.cols" [value]="master.data"
+      dataKey="Id" editMode="row" [style]=" {'padding-top': '30px'}">
+      <div *ngIf="master.isView">
+
+        <div *ngIf="!master.isEdit">
+          <ng-template pTemplate="caption">
+            {{master.masterName}}
+            <div style="text-align: right">
+              <button id={{master.masterId}} pButton type="button" icon="pi pi-pencil"
+                (click)="onMasterEditClicked($event)" [disabled]="isEditEnabled"></button>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-data let-columns="columns">
+            <tr>
+              <td *ngFor="let col of columns">
+                {{data[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+
+        </div>
+
+        <div *ngIf="master.isEdit">
+
+          <ng-template pTemplate="caption">
+            {{master.masterName}}
+            <div style="text-align: right">
+
+              <button id={{master.masterId}} pButton type="button" label="Ok" (click)="onMasterEditComplete($event)"
+                class="ui-button-rounded ui-button-warning"></button>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-columns="columns" let-rowData let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="rowData">
+              <td *ngFor="let col of columns">
+                <p-cellEditor *ngIf="col.type === 'text'">
+                  <ng-template pTemplate="input">
+                    <input pInputText type="text" [(ngModel)]="rowData[col.field]" name="text">
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{rowData[col.field]}}
+                  </ng-template>
+                </p-cellEditor>
+
+                <p-cellEditor *ngIf="col.type === 'nil'">
+                  <ng-template pTemplate="input">
+                    {{rowData[col.field]}}
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{rowData[col.field]}}
+                  </ng-template>
+                </p-cellEditor>
+
+                <p-cellEditor *ngIf="col.type === 'dropdown'">
+                  <ng-template pTemplate="input">
+                    <p-dropdown [options]="locations"></p-dropdown>
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{rowData[col.field]}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+
+              <td style="text-align:center">
+                <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil"
+                  class="ui-button-info" (click)="onRowEditInit(rowData)"></button>
+                <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check"
+                  class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(rowData)"></button>
+                <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times"
+                  class="ui-button-danger" (click)="onRowEditCancel(rowData, ri)"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </div>
+
+      </div>
+    </p-table>
+  </div>
+</div>

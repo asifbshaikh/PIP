@@ -1,0 +1,237 @@
+<div *ngIf="isDataAvailable" id="labor-pricing" [formGroup]="laborPricingForm">
+  <!-- set margin -->
+  <span class="tbl-title">{{'LaborPricing.SetMarginTitle' | translate}}</span>
+  <span [ngClass]="{'error': message.type === 'error', 'success': message.type === 'success'}"
+    class="p-offset-4 pull-center p-l-10">
+    {{message.text}}
+  </span>
+  <div class="set-margin-container row m-t-10 col-sm-12">
+    <div class="col-sm-3 row pt-1">
+      {{'LaborPricing.SetMarginLabels.0' | translate}}
+      <div class="col-sm-5">
+        <p-inputSwitch formControlName="isSetMargin" (onChange)="onSetMarginSwitch();calculateOnSwitch()">
+        </p-inputSwitch>
+      </div>
+    </div>
+    <div class="col-sm-4 row">
+      <span class="pt-1"> {{'LaborPricing.SetMarginLabels.1' | translate}}</span>
+      <div class="col-sm-6">
+        <p-dropdown appendTo="body" [disabled]="!laborPricingForm.controls.isSetMargin.value" [options]="whichMargins"
+          (onChange)="onWhichSetMarginChange($event.value)" formControlName="which" class="form-control">
+        </p-dropdown>
+      </div>
+    </div>
+
+    <div class="col-sm-4 row">
+      <span class="pt-1"> {{'LaborPricing.SetMarginLabels.2' | translate}}</span>
+      <div class="col-sm-5">
+        <input pInputText type="text" formControlName="marginPercent" pipRestrictInput="decimalPrecisionTwo"
+          (keyup)="marginPercentValidationMsg()" (focusout)="onMarginPercentChange()">
+      </div>
+    </div>
+  </div>
+
+  <p-table tableStyleClass="fixtable" formArrayName="laborPricing" scrollHeight="calc(100vh - 433px)"
+    [frozenColumns]="frozenCols" [columns]="laborPricingCols" [scrollable]="true"
+    class="form-group table table-bordered table-sm p-b-0" cellspacing="0" frozenWidth="428px" width="100%"
+    [value]="laborPricingForm.get('laborPricing')['controls']">
+    <ng-template pTemplate="caption">
+      <span>{{'LaborPricing.LaborPricingTitle' | translate}}</span>
+    </ng-template>
+    <ng-template pTemplate="frozencolgroup" let-columns>
+      <colgroup>
+        <col style="width:40px">
+        <col style="width:60px">
+        <col style="width:80px">
+        <col style="width:120px">
+        <col style="width:140px">
+      </colgroup>
+    </ng-template>
+
+    <ng-template pTemplate="colgroup" let-columns>
+      <col style="width:130px">
+      <col style="width:130px">
+      <col style="width:165px">
+      <col style="width:165px">
+      <col style="width:100px">
+      <col style="width:120px">
+      <col style="width:120px">
+      <col style="width:120px">
+      <col style="width:132px">
+      <col style="width:132px">
+      <col style="width:132px">
+      <col *ngFor="let pCol of periodCols;" style="width: 110px;">
+    </ng-template>
+
+    <ng-template pTemplate="frozenheader" let-columns>
+      <tr style="height: 45.5px;">
+        <th *ngFor="let col of columns">
+          {{col.header}}
+          <br>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th>
+          <label>{{columns[0].header}}</label>
+        </th>
+        <th>
+          <label>{{columns[1].header}}</label>
+        </th>
+        <th>
+          <label>{{columns[2].header}}</label>
+        </th>
+        <th>
+          <label pTooltip="{{'LaborPricing.ColumnHeaderPopUpMessages.Rate' | translate }}"
+            tooltipPosition="top">{{columns[3].header}}</label>
+        </th>
+        <th>
+          <label pTooltip="{{'LaborPricing.ColumnHeaderPopUpMessages.Cost' | translate }}"
+            tooltipPosition="top">{{columns[4].header}}</label>
+        </th>
+
+        <th>
+          <label style="display: contents;">{{columns[5].header}}</label>
+        </th>
+        <th>
+          <label style="display: contents;">{{columns[6].header}}</label>
+          <i pTooltip="{{'LaborPricing.ColumnHeaderPopUpMessages.RatePerHour' | translate }}" tooltipPosition="top"
+            class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+        </th>
+        <th>
+          <label style="display: contents;">{{columns[7].header}}</label>
+          <i pTooltip="{{'LaborPricing.ColumnHeaderPopUpMessages.Yr1CostPerHour' | translate }}" tooltipPosition="top"
+            class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+        </th>
+        <th>
+          <label>{{columns[8].header}}</label>
+          <i pTooltip="{{'LaborPricing.ColumnHeaderPopUpMessages.PercentMargin' | translate }}" tooltipPosition="top"
+            class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+        </th>
+        <th>
+          <label>{{columns[9].header}}</label>
+        </th>
+        <th>
+          <label>{{columns[10].header}}</label>
+        </th>
+        <th *ngFor="let col of periodCols">
+          <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- body -->
+    <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+      <tr>
+        <td style="height: 42px;">
+          {{rowIndex + 1}}
+        </td>
+        <td style="height: 42px;">
+          <text-ellipsis>{{rowData.value.alias}}</text-ellipsis>
+        </td>
+        <td>
+          <text-ellipsis>{{rowData.value.optionalPhase}}</text-ellipsis>
+        </td>
+        <td>
+          <text-ellipsis>{{rowData.value.location}}</text-ellipsis>
+        </td>
+        <td>
+          <text-ellipsis>{{rowData.value.ustRole}}</text-ellipsis>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+      <tr [formGroupName]="rowIndex">
+        <td>
+          <text-ellipsis>{{rowData.value.serviceLine}}</text-ellipsis>
+        </td>
+        <td>
+          <text-ellipsis>{{rowData.value.gradeClientRole}}</text-ellipsis>
+        </td>
+        <td>
+          <p-dropdown appendTo="body" [options]="utilization" formControlName="utilizationType"
+            (onChange)="onUtilizationchange(rowData, rowIndex)"></p-dropdown>
+        </td>
+        <td>
+          <p-dropdown appendTo="body" [options]="nonBillableCategory" formControlName="nonBillableCategory">
+          </p-dropdown>
+        </td>
+        <td>
+          <input class="amt-input"
+            [ngClass]="(rowData.value.rate === '' || rowData.value.rate === null || +rowData.value.rate === +rowData.value.ratePerHour) ? null : (+rowData.value.rate > +rowData.value.ratePerHour ? 'overridden-lower' : 'overridden-higher')"
+            *ngIf="this.laborPricingForm.controls.laborPricing.controls[rowIndex].controls.utilizationType.value.id && !this.laborPricingForm.controls.isSetMargin.value"
+            pInputText formControlName="rate" pipRestrictInput="decimalPrecisionTwo"
+            (focusout)="showRatePerHr(rowData.value, rowIndex)" />
+        </td>
+        <td>
+          <input class="amt-input"
+            [ngClass]="(rowData.value.cost === '' || rowData.value.cost === null || +rowData.value.cost === +rowData.value.yearCostPerHour ) ? null : (+rowData.value.cost > +rowData.value.yearCostPerHour ? 'overridden-higher' : 'overridden-lower')"
+            pInputText formControlName="cost" pipRestrictInput="decimalPrecisionTwo"
+            (focusout)="onAppliedCostChange(rowData.value, rowIndex, true)" />
+        </td>
+        <td>
+          {{ rowData.value.ratePerHour | number:'1.2-2' | negativeValue}}
+        </td>
+        <td>
+          {{ rowData.value.yearCostPerHour | number:'1.2-2' | negativeValue }}
+        </td>
+        <td>
+          {{ rowData.value.percentageMargin | number:'1.2-2' | negativeValue}}
+        </td>
+        <td>
+          {{ rowData.value.cappedCost   | number:'1.2-2' | negativeValue }}
+
+        </td>
+        <td>
+          {{ rowData.value.totalRevenue  | number:'1.2-2' | negativeValue}}
+        </td>
+        <td *ngFor="let pCol of periodCols;let i = index">
+          {{rowData.value.periods[i]?.revenue + rowData.value.periods[i]?.priceAdjustment | number:'1.2-2' | negativeValue}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+          {{ 'LaborPricing.LaborPricingEmptyMessage' | translate }}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template class="scrollable-footer" pTemplate="footer" let-columns>
+      <tr *ngIf='columns[0].field == "serviceLine"'>
+        <td colspan="8"></td>
+        <td>
+          {{totalOfMarginPercent | number:'1.2-2' |  negativeValue}}
+        </td>
+        <td>
+          {{totalOfCappedCost  | number:'1.2-2' | negativeValue}}
+        </td>
+        <td>
+          {{totalOfTotalRevenue |  number:'1.2-2' | negativeValue}}
+        </td>
+        <td *ngFor="let pCols of periodCols;let i = index">
+          {{totalRevenue[i] | number:'1.2-2' | negativeValue}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-columns>
+      <tr class="bottom-border" [ngStyle]="{'margin-top':periodCols.length > 0 ? '-8px' : '-25px' }"
+        style="position: absolute;margin-left: -13px;">
+        <td class="footer-summary" style="height: 32px;width: 428px;">
+          <span class="pull-left">
+            {{'LaborPricing.TotalLaborRevenue' | translate}}
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div class="p-grid">
+    <hr class="bottom-line">
+    <div class="p-sm-12 btns-strip">
+      <button pButton [disabled]="!laborPricingForm.valid" class="ui-button-rounded ui-button-success" label="Save"
+        (click)="onSave()"></button>
+    </div>
+  </div>
+</div>

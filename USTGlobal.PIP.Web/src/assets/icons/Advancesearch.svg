@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <g id="fd" transform="translate(-1209 -59)">
+    <rect id="Rectangle_1589" data-name="Rectangle 1589" width="28" height="28" rx="4" transform="translate(1209 59)" fill="#00a9ee"/>
+    <g id="zoom-2" transform="translate(1211.166 66.399)">
+      <line id="Line_26" data-name="Line 26" x1="2.665" y1="2.665" transform="translate(11.77 11.77)" fill="none" stroke="#fff" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1.5"/>
+      <circle id="Ellipse_18" data-name="Ellipse 18" cx="5.297" cy="5.297" r="5.297" transform="translate(2 2)" fill="none" stroke="#fff" stroke-linecap="square" stroke-miterlimit="10" stroke-width="1.5"/>
+    </g>
+    <path id="Path_323" data-name="Path 323" d="M2608.633,4829.39v8.385" transform="translate(-1379.326 -4765.891)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+    <path id="Path_324" data-name="Path 324" d="M0,0V8.384" transform="translate(1233.5 67.693) rotate(90)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+  </g>
+</svg>

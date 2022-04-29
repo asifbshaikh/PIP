@@ -1,0 +1,106 @@
+#resource-planning {
+  .ui-dropdown {
+    min-width: 90px !important;
+  }
+
+  .ui-table-scrollable-body {
+    max-height: calc(100vh - 380px) !important;
+  }
+  .ui-table-summary {
+    background-color: #f4f4f4 !important;
+    color: #1d1a1a;
+    border: 1px solid #c5c5c5;
+    padding: 0.571em 1em;
+    text-align: center;
+    padding-bottom: 56px;
+  }
+  .ui-dropdown {
+    display: grid !important;
+  }
+
+  .ui-table-wrapper {
+    width: auto;
+    overflow-x: scroll;
+    max-width: 99%;
+    word-wrap: break-word;
+  }
+  .ui-paginator {
+    background-color: #fff;
+    border: none;
+  }
+
+  .contractor-flag {
+    color: #00a9ee;
+    font-size: $font-size;
+  }
+  .ui-table .ui-table-tfoot > tr > td {
+    background: #eeeeee 0% 0% no-repeat padding-box;
+    color: #666666;
+    font-weight: 700;
+  }
+  .ui-table-scrollable-footer-box {
+    margin-top: 7px !important;
+  }
+  .ui-table-scrollable-footer {
+    .ui-table-scrollable-footer-box {
+      margin-right: 0px !important;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+  }
+  .footer-summary {
+    border: 1px solid #c8c8c8;
+    background: #eeeeee 0% 0% no-repeat padding-box;
+  }
+  .scrollable-part > .ui-table-scrollable-body {
+    margin-bottom: 7px !important;
+  }
+  .alias-textbox {
+    height: 29px;
+    margin: 0 0px 5px;
+  }
+  .ui-table-summary {
+    & .ui-widget-header {
+      margin-bottom: 30px;
+      border: 1px solid #c8c8c8;
+    }
+  }
+
+  #periodNote {
+    color: #c73e27;
+    font-weight: bold;
+  }
+
+  .ui-table-unfrozen-view {
+    .ui-table-scrollable-header,
+    .ui-table-scrollable-body {
+      overflow-y: scroll;
+    }
+  }
+  body .ui-table .ui-table-tbody > tr > td {
+    padding: 0.5em 0.3em !important;
+  }
+
+  .markup {
+    & .ui-dropdown-label {
+      width: 65px !important;
+    }
+    .ui-dropdown {
+      display: inline-block !important;
+    }
+    white-space: nowrap;
+  }
+  .ui-table-unfrozen-view {
+    .ui-table-scrollable-header,
+    .ui-table-scrollable-body {
+      overflow-y: scroll;
+    }
+  }
+  .ui-table-unfrozen-view .ui-table-scrollable-body {
+    overflow-x: scroll;
+    overflow-y: scroll;
+  }
+  .ui-dropdown-label {
+    width: 75% !important;
+  }
+}

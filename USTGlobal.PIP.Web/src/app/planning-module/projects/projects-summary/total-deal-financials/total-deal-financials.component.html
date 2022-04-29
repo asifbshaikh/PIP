@@ -1,0 +1,247 @@
+<form id="total-deal-Financials" [formGroup]="totalDealFinancialsForm">
+  <div>
+    <div style="padding-bottom: 1em;">
+      <span class="header">{{ 'ProjectSummary.totalDealFinancialHeaders.totalDealFinancial'| translate}}
+      </span>
+    </div>
+    <p-table tableStyleClass="fixtable" [resizableColumns]="true" [scrollable]="true" frozenWidth="315px"
+      scrollHeight="calc(100vh - 250px)" class="form-group table  table-bordered table-sm" cellspacing="0"
+      [value]="totalDealFinancialsForm.get('totalDealFinancialDTO')['controls']" formArrayName="totalDealFinancialDTO"
+      [style]="{'padding':'0px'}" rowHover="true">
+      <ng-template pTemplate="frozencolgroup" let-columns>
+        <colgroup>
+          <col style="width:180px">
+          <col style="width:135px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngIf="currencySymbol !== 'USD'" style="width:110px">
+          <col *ngFor="let col of periodCols" style="width:110px">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="frozenheader" let-columns>
+        <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <th class="empty-header">
+          </th>
+          <th class="currency-header bold top-header-lable">
+            {{ 'ProjectSummary.USD'| translate}}
+          </th>
+        </tr>
+        <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <th style="height: 39px;">
+            <text-ellipsis>{{ 'ProjectSummary.totalDealFinancialHeaders.totalDealFinancial'| translate}}</text-ellipsis>
+          </th>
+          <th>
+            {{ 'ProjectSummary.totalDealFinancialHeaders.total'| translate}}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <th *ngIf="currencySymbol !== 'USD'" class="currency-header bold top-header-lable">
+            {{currencySymbol}}
+          </th>
+          <th class="currency-header bold top-header-lable" *ngFor="let period of periodCols">
+            {{currencySymbol}}
+          </th>
+        </tr>
+        <tr (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <th *ngIf="currencySymbol !== 'USD'">
+            {{ 'ProjectSummary.totalDealFinancialHeaders.total'| translate}}
+          </th>
+          <th *ngFor="let period of periodCols" style="height: 39px;">
+            <span class="pre-format"> {{period.header}}
+            </span>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-rowIndex='rowIndex'>
+        <tr [formGroupName]="rowIndex" class="bold" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}"
+          *ngIf="rowIndex === 0 || rowIndex === 4 || rowIndex === 5 || rowIndex === 9 || rowIndex === 13 || rowIndex === 14 || rowIndex === 15 || rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 22">
+          <td>
+            <span (click)="onExpandCollapse(rowIndex)">
+              <i *ngIf="rowIndex === 0"
+                [ngClass]="totalClientPrice ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"
+                class="pointer"></i>
+              <i *ngIf="rowIndex === 5"
+                [ngClass]="netRevenue ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"
+                class="pointer"></i>
+              <i *ngIf="rowIndex === 9"
+                [ngClass]="totalProjectCost ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"
+                class="pointer"></i>
+               {{rowData.value.totalFinLabel}} 
+            </span>
+          </td>
+          <td [ngClass]="{'red': rowData.value.totalUSD < 0}">
+            <span>
+              {{rowData.value.totalUSD | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="totalClientPrice && rowIndex < 4 && rowIndex > 0" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalFinLabel < 0}" class="group">
+            <span>
+              {{rowData.value.totalFinLabel}}
+            </span>
+          </td>
+          <td>
+            <span [ngClass]="{'red': rowData.value.totalUSD < 0}">
+              {{rowData.value.totalUSD | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="netRevenue && rowIndex < 9 && rowIndex > 5" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalFinLabel < 0}" class="group">
+            <span>
+              {{rowData.value.totalFinLabel}}
+            </span>
+          </td>
+          <td [ngClass]="{'red': rowData.value.totalUSD < 0}">
+            <span>
+              {{rowData.value.totalUSD | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="totalProjectCost && rowIndex < 13 && rowIndex > 9" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalFinLabel < 0}" class="group">
+            <span>
+              {{rowData.value.totalFinLabel}}
+            </span>
+          </td>
+          <td [ngClass]="{'red': rowData.value.totalUSD < 0}" (mouseover)="highlightRow(rowIndex)"
+            [ngClass]="{'highlight' : rowIndex == selectedRow}">
+            <span>
+              {{rowData.value.totalUSD | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="rowIndex === 16 || rowIndex === 21" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalFinLabel < 0}">
+            <span>
+              {{rowData.value.totalFinLabel}}
+            </span>
+          </td>
+          <td [ngClass]="{'red': rowData.value.totalUSD < 0}">
+            <span>
+              {{rowData.value.totalUSD | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="rowIndex === 19" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalFinLabel < 0}">
+            <span *ngIf="rowIndex === 19">
+              <text-ellipsis> {{rowData.value.totalFinLabel}} </text-ellipsis>
+            </span>
+          </td>
+          <td [ngClass]="{'red': rowData.value.totalFinLabel < 0}">
+            <span>
+              {{rowData.value.totalUSD | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+        </tr>
+
+     </ng-template>
+      <ng-template pTemplate="body" let-rowData let-rowIndex='rowIndex'>
+        <tr [formGroupName]="rowIndex" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}"
+          *ngIf="rowIndex === 0 || rowIndex === 4 || rowIndex === 5 || rowIndex === 9 || rowIndex === 13 || rowIndex === 14 || rowIndex === 15 || rowIndex === 17 || rowIndex === 18 || rowIndex === 20 || rowIndex === 22">
+          <td *ngIf="currencySymbol !== 'USD'" [ngClass]="{'red': rowData.value.totalLocal < 0}">
+            <span class="bold">
+              {{rowData.value.totalLocal | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+          <td *ngFor="let period of periodCols; let i = index">
+            <div class="bold" formArrayName="totalDealFinancialsYearList">
+              <span [formGroupName]="i" [ngClass]="{'red': rowData.value.totalDealFinancialsYearList[i].amount < 0}">
+                {{rowData.value.totalDealFinancialsYearList[i].amount | number: '1.2-2' | negativeValue}}
+                {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr [formGroupName]="rowIndex" *ngIf="totalClientPrice && rowIndex < 4 && rowIndex > 0"
+          (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalLocal < 0}" *ngIf="currencySymbol !== 'USD'">
+            <span>
+              {{rowData.value.totalLocal | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+          <td *ngFor="let period of periodCols; let i = index">
+            <div formArrayName="totalDealFinancialsYearList">
+              <span [formGroupName]="i" [ngClass]="{'red': rowData.value.totalDealFinancialsYearList[i].amount < 0}">
+                {{rowData.value.totalDealFinancialsYearList[i].amount | number: '1.2-2' | negativeValue}}
+                {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr [formGroupName]="rowIndex" *ngIf="netRevenue && rowIndex < 9 && rowIndex > 5"
+          (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalLocal < 0}" *ngIf="currencySymbol !== 'USD'">
+            <span>
+              {{rowData.value.totalLocal | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+          <td *ngFor="let period of periodCols; let i = index">
+            <div formArrayName="totalDealFinancialsYearList">
+              <span [formGroupName]="i" [ngClass]="{'red': rowData.value.totalDealFinancialsYearList[i].amount < 0}">
+                {{rowData.value.totalDealFinancialsYearList[i].amount | number: '1.2-2' | negativeValue}}
+                {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr [formGroupName]="rowIndex" *ngIf="totalProjectCost && rowIndex < 13 && rowIndex > 9"
+          (mouseover)="highlightRow(rowIndex)" [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td [ngClass]="{'red': rowData.value.totalLocal < 0}" *ngIf="currencySymbol !== 'USD'">
+            <span>
+              {{rowData.value.totalLocal | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+          <td *ngFor="let period of periodCols; let i = index">
+            <div formArrayName="totalDealFinancialsYearList">
+              <span [formGroupName]="i" [ngClass]="{'red': rowData.value.totalDealFinancialsYearList[i].amount < 0}">
+                {{rowData.value.totalDealFinancialsYearList[i].amount | number: '1.2-2' | negativeValue}}
+                {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+              </span>
+            </div>
+          </td>
+        </tr>
+        <tr [formGroupName]="rowIndex" *ngIf="rowIndex === 16 || rowIndex === 21 || rowIndex === 19" (mouseover)="highlightRow(rowIndex)"
+          [ngClass]="{'highlight' : rowIndex == selectedRow}">
+          <td *ngIf="currencySymbol !== 'USD'" [ngClass]="{'red': rowData.value.totalLocal < 0}">
+            <span>
+              {{rowData.value.totalLocal | number: '1.2-2' | negativeValue}}
+              {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+            </span>
+          </td>
+          <td *ngFor="let period of periodCols; let i = index">
+            <div formArrayName="totalDealFinancialsYearList">
+              <span [formGroupName]="i" [ngClass]="{'red': rowData.value.totalDealFinancialsYearList[i].amount < 0}">
+                {{rowData.value.totalDealFinancialsYearList[i].amount | number: '1.2-2' | negativeValue}}
+                {{(rowIndex === 14 || rowIndex === 15 || rowIndex === 18 || rowIndex === 19 ||rowIndex === 20 ||rowIndex === 21 ||rowIndex === 22 ) ? '%' : '' }}
+              </span>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</form>

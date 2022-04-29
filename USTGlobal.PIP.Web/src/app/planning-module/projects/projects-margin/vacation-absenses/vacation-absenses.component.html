@@ -1,0 +1,131 @@
+<div *ngIf="isDataAvailable" id="vacation-absenses">
+  <div class="col-md-12" *ngIf="!isMarginSet">
+    <form [formGroup]="vacationAbsensesForm">
+      <p-table #dt [value]="[0]" [frozenColumns]="translationData.VacationAbsencesColumns" [columns]="periodCols"
+        [scrollable]="true" scrollHeight="35vh" class="form-group table  table-bordered table-sm" cellspacing="0"
+        width="100%" frozenWidth="562px" left="520px">
+
+        <ng-template pTemplate="caption">
+          <span class="table-title">{{'VacationAbsences.VacationAbsencesTitle' | translate}}</span>
+          <span [ngClass]="{'error': message.type === 'error', 'blue-success': message.type === 'success'}">
+            {{ message.text }}
+          </span>
+          <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+        </ng-template>
+        <ng-template pTemplate="frozencolgroup" let-columns>
+          <colgroup>
+            <col style="width:120px">
+            <col style="width:100px">
+            <col style="width:110px">
+            <col style="width:100px">
+            <col style="width:132px">
+            <col style="width:140px">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+            <col *ngFor="let col of periodCols" style="width:100px">
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="frozenheader" let-columns>
+          <tr>
+            <th>
+              {{columns[1].header}}
+              <i pTooltip="{{vacationAbsensesTooltip.percent | translate }}" tooltipPosition="top"
+                class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+            </th>
+            <th>
+              {{columns[2].header}}
+              <i pTooltip="{{vacationAbsensesTooltip.amount | translate }}" tooltipPosition="top" class="info-icon"><img
+                  src="/assets/icons/ic_info_outline_48px.svg"></i>
+            </th>
+            <th>
+              {{columns[3].header}}
+            </th>
+            <th>
+              {{columns[4].header}}
+            </th>
+            <th>
+              {{columns[5].header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of periodCols">
+              <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+            </th>
+          </tr>
+        </ng-template>
+
+        <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-columns="columns">
+          <tr>
+            <td>
+              <input pInputText type="text" formControlName="percent" (keyup)="onPercentChange()"
+                pipRestrictInput="decimalPrecisionTwo" style="width: 70%;">%
+            </td>
+            <td>
+              <input pInputText formControlName="amount" (keyup)="onAmountChange()" type="text"
+                pipRestrictInput="decimalPrecisionTwo">
+            </td>
+            <td>
+              {{ (vacationAbsensesForm.value.lostRevenue * -1) | number:'1.2-2' | negativeValue}}
+            </td>
+            <td>
+              <p-inputSwitch (onChange)="onOverrideChange()" formControlName="isOverride"></p-inputSwitch>
+            </td>
+            <td>
+              {{ (vacationAbsensesForm.value.totalLostRevenue  * -1) | number:'1.2-2' | negativeValue }}
+            </td>
+          </tr>
+          <tr *ngIf="vacationAbsensesForm.value.isOverride">
+            <td style="background: #eeeeee;" colspan="6">
+              <div class="row p-offset-5">
+                <span>
+                  {{ 'VacationAbsences.overrideDifferenceLabel' | translate }} :
+                  {{ overrideDifference | number:'1.2-2' }}
+                </span>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template class="scrollable-part" pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+          <ng-template [ngIf]="vacationAbsensesForm.get('isOverride').value">
+            <td
+              *ngFor="let lostRevenue of vacationAbsensesForm.get('periodsLostRevenueList')['controls']; let i = index"
+              formArrayName="periodsLostRevenueList">
+              <div [formGroupName]="i">
+                <input id="{{i}}" pInputText formControlName="lostRevenue" (keyup)="onPeriodValueChange()"
+                  (focusout)="onCellClick(false,$event)" (click)="onCellClick(false,$event)"
+                  pipRestrictInput="decimalPrecisionTwo" type="text" #period>
+                <p-contextMenu [target]="period" appendTo="body" [model]="contextMenuItems">
+                </p-contextMenu>
+              </div>
+            </td>
+          </ng-template>
+          <ng-template [ngIf]="!vacationAbsensesForm.get('isOverride').value">
+            <td *ngFor="let periodLostRevenue of vacationAbsensesForm.value.periodsLostRevenueList;"
+              style="height: 42px; padding-top: 10px;">
+              <div>{{ periodLostRevenue.lostRevenue * (-1) | number:'1.2-2' | negativeValue }}</div>
+            </td>
+          </ng-template>
+        </ng-template>
+      </p-table>
+    </form>
+  </div>
+  <div class="p-grid" *ngIf="!isMarginSet">
+    <hr class="bottom-line">
+    <div class="p-sm-12 btns-strip">
+      <button pButton [disabled]="!vacationAbsensesForm.valid || !isValid || isSaveClicked"
+        [disabled]="!vacationAbsensesForm.valid || !isValid" label="Save" class="ui-button-rounded ui-button-success"
+        (click)="saveVacationAbsence()">
+      </button>
+    </div>
+  </div>
+  <div class="col-md-12" *ngIf="isMarginSet">
+    <div class="pb-2" style="margin-top: 10em;">
+      <span class="table-title"
+        style="margin: 30%;">{{ 'VacationAbsences.vacationAbsenceSetMarginYesMessage' | translate }}</span>
+    </div>
+  </div>
+</div>

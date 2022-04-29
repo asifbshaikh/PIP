@@ -1,0 +1,42 @@
+[
+    {
+        "label": "Service Portfolio Group",
+        "value": {
+            "id": 1,
+            "name": "Service Portfolio Group",
+            "code": "ServicePortfolioGroup"
+        }
+    },
+    {
+        "label": "Service Line",
+        "value": {
+            "id": 2,
+            "name": "Service Line",
+            "code": "ServiceLine"
+        }
+    },
+    {
+        "label": "Locations",
+        "value": {
+            "id": 3,
+            "name": "Locations",
+            "code": "Locations"
+        }
+    },
+    {
+        "label": "Holidays",
+        "value": {
+            "id": 6,
+            "name": "Holidays",
+            "code": "HOL"
+        }
+    },
+    {
+        "label": "Paris",
+        "value": {
+            "id": 5,
+            "name": "Paris",
+            "code": "PRS"
+        }
+    }
+]

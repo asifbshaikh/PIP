@@ -1,0 +1,54 @@
+#pl-forecast {
+  .ui-table-scrollable-header-box {
+    margin-right: 0px !important;
+  }
+  .ui-table .ui-table-thead > tr > th {
+    border: 1px solid #c8c8c8;
+    font-weight: 700;
+    color: #ffffff;
+    height: 28px;
+    font-size: 13px;
+    background-color: #3599a8;
+  }
+  .green {
+    color: #12bd68;
+  }
+  .red {
+    color: #f55a41;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  .currency-font {
+    font-size: 14px;
+  }
+  .currency-value {
+    float: right;
+    padding: 0 2em;
+    font-size: 12px;
+  }
+  .tittle-header {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .arrow {
+    cursor: pointer;
+  }
+  .group {
+    padding-left: 30px;
+  }
+  table tr.highlight {
+    background-color: #eaeaea !important;
+  }
+  th,
+  td {
+    min-width: 150px !important;
+  }
+  table {
+    width: auto !important;
+  }
+  .ui-table-scrollable-view {
+    width: fit-content !important;
+    max-width: calc(100% - 310px) !important;
+   }
+}

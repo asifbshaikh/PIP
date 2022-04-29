@@ -1,0 +1,129 @@
+#total-client-price {
+  .ui-table table {
+    overflow-y: scroll !important;
+  }
+  .colorRed {
+    & .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+      background-color: #f55a41 !important;
+    }
+  }
+  .postionInfo {
+    position: absolute;
+    top: 2px;
+    right: -22px;
+    z-index: 0;
+  }
+  .positionIcon {
+    position: relative;
+    margin-right: 22px;
+    z-index: 0;
+  }
+  input {
+    background: #fcfcfc;
+    border: solid 1px #dddddd;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 106px;
+  }
+  .orCOlor {
+    color: #999999;
+  }
+  .table {
+    & tr {
+      &:nth-child(odd) {
+        background-color: #fcfcfc;
+      }
+      &:first-child {
+        background-color: #fff;
+      }
+      &:last-child {
+        border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+      }
+    }
+    & td,
+    & th {
+      padding: 10px;
+      vertical-align: middle;
+      color: #111;
+      text-align: left;
+    }
+    & td {
+      &:last-child {
+        border-right: solid 1px rgba(0, 0, 0, 0.12);
+      }
+      min-width: 250px;
+      border-right: solid 1px rgba(0, 0, 0, 0.12);
+      &.content_center {
+        text-align: center !important;
+        width: 160px;
+        input {
+          min-width: 100%;
+        }
+      }
+      &.wdth460 {
+        min-width: 430px;
+      }
+      &.wdth360 {
+        min-width: 370px;
+      }
+    }
+    .horizontalsection {
+      background: #eeeeee;
+      text-align: left;
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
+      left: 0;
+      border-left: solid 1px rgba(0, 0, 0, 0.12);
+      min-width: 205px;
+      z-index: 10;
+      font-weight: bold;
+      & span {
+        display: block;
+        font-weight: normal;
+        margin-left: 0;
+      }
+    }
+    & .tableHead {
+      background: #eeeeee;
+      border: solid 1px rgba(0, 0, 0, 0.12);
+      text-align: center;
+      &:nth-child(1) {
+        border-radius: 5px 0 0 0;
+      }
+    }
+    .totalVal {
+      text-align: right;
+      min-width: calc(45% - 30px);
+    }
+    .totalValTitle {
+      text-align: left;
+      min-width: calc(55% - 8px);
+    }
+  }
+  .ui-table-wrapper {
+    overflow: auto !important;
+  }
+  .inactive-label {
+    background-color: #e9ecef;
+    height: 32px;
+    border: 1px solid #a6a6a6 !important;
+    border-radius: 4px;
+    width: 20%;
+  }
+  .inactive-label-advance {
+    background-color: #e9ecef;
+    height: 32px;
+    border: 1px solid #a6a6a6 !important;
+    border-radius: 4px;
+    width: 20%;
+  }
+
+  #periodNote {
+    color: #c73e27;
+    font-weight: bold;
+  }
+  .p-md-4 {
+    padding: 0.2rem!important;
+  }
+}

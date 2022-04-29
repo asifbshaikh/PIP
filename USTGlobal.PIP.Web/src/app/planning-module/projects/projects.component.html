@@ -1,0 +1,115 @@
+<p-confirmDialog class="p-b-30" id="project-summary" [style]="{width: '25vw'}"></p-confirmDialog>
+
+<p-table *ngIf="isDataAvailable" id="project-table" #dt [value]="projects" [paginator]="true" [rows]="20"
+  [rowsPerPageOptions]="[20,30,40]" [resizableColumns]="true" columnResizeMode="expand" [scrollable]="true"
+  scrollHeight="calc(100vh - 205px)" class="form-group table  table-bordered table-sm" cellspacing="0" width="100%"
+  [globalFilterFields]="['sfProjectId', 'projectName', 'accountName', 'pipSheetStatus', 'serviceLine', 'deliveryType', 'billingType']">
+  <ng-template pTemplate="colgroup" let-columns>
+    <colgroup>
+      <col style="width:160px">
+      <col style="width:210px">
+      <col style="width:210px">
+      <col *ngIf="!isDummy" style="width:140px">
+      <col style="width:190px">
+      <col style="width:190px">
+      <col style="width:190px">
+    </colgroup>
+  </ng-template>
+  <ng-template pTemplate="caption">
+    <div class="p-t-5" style="text-align: right; color: black;background: #DCE6EA;">
+      <span class="project-header first pull-left">Projects</span>
+      <button pButton id="clear-filter" class="ui-button-rounded ui-button-info" label="Clear Filters"
+        (click)="onClearFilters()"></button>&nbsp;
+      <input type="text" class="global-filter" pInputText placeholder="Search"
+        (input)="dt.filterGlobal($event.target.value.trim(), 'contains')"
+        style="height : 31px; width:auto; margin:0 10px 4px 0">
+      <i pTooltip="{{ 'PROJECTS.ProjectTootip.AdvanceSearch' | translate }}" tooltipPosition="bottom"
+        class="header-icon m-r-10" (click)="onSearchFilters($event)"><img src="/assets/icons/Advancesearch.svg"></i>
+      <i pTooltip="{{ 'PROJECTS.ProjectTootip.Refresh' | translate }}" tooltipPosition="bottom"
+        class="header-icon m-r-10" (click)="onRefreshClick()"><img src="/assets/icons/Refresh.svg"></i>
+      <button pButton id="clear-filter" *ngIf="(isEditor)"
+        pTooltip="{{ isDummy  ? 'Create Dummy PIP':'PROJECTS.ProjectTootip.CreateProject' | translate }}"
+        tooltipPosition="bottom" class="ui-button-rounded ui-button-success"
+        label=" {{ isDummy  ? 'Create Dummy PIP' :  'Create PIP' }} "
+        routerLink="{{isDummy?'/samples/0/0/0/1/Staff':'/projects/0/0/0/1/Staff'}}"></button>
+    </div>
+  </ng-template>
+
+
+  <ng-template pTemplate="header">
+    <tr>
+    <tr>
+      <th [pSortableColumn]="'sfProjectId'">Project ID
+        <p-sortIcon [field]="sfProjectId"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'projectName'">
+        Project Name
+        <p-sortIcon [field]="projectName"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'accountName'">
+        Account Name
+        <p-sortIcon></p-sortIcon>
+      </th>
+      <th *ngIf="!isDummy" [pSortableColumn]="'pipSheetStatus'">
+        Status
+        <p-sortIcon></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'serviceLine'">Service Line <p-sortIcon></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'deliveryType'">Delivery Type <p-sortIcon></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'billingType'">Billing Type <p-sortIcon></p-sortIcon>
+      </th>
+    </tr>
+    <tr *ngIf="showSearch">
+      <td>
+        <input pInputText type="text" (input)="dt.filter($event.target.value, 'sfProjectId', 'contains')"
+          [value]="dt.filters['sfProjectId'] ? dt.filters['sfProjectId'].value.trim() : ''">
+      </td>
+      <td>
+        <input pInputText type="text" (input)="dt.filter($event.target.value, 'projectName', 'contains')"
+          [value]="dt.filters['projectName'] ? dt.filters['projectName'].value.trim() : ''">
+      </td>
+      <td>
+        <input pInputText type="text" (input)="dt.filter($event.target.value, 'accountName', 'contains')"
+          [value]="dt.filters['accountName'] ? dt.filters['accountName'].value.trim() : ''">
+      </td>
+      <td *ngIf="!isDummy">
+        <p-dropdown appendTo="body" #st [options]="status" [style]="{'width':'100%'}"
+          (onChange)="dt.filter($event.value.name, 'pipSheetStatus', 'equals')"></p-dropdown>
+      </td>
+      <td>
+        <p-dropdown appendTo="body" #sl [options]="serviceLines" [style]="{'width':'100%'}"
+          (onChange)="dt.filter($event.value.name, 'serviceLine', 'equals')"></p-dropdown>
+      </td>
+      <td>
+        <p-dropdown appendTo="body" #dtype [options]="deliveryTypes" [style]="{'width':'100%'}"
+          (onChange)="dt.filter($event.value.name, 'deliveryType', 'equals')"></p-dropdown>
+      </td>
+      <td>
+        <p-dropdown appendTo="body" #bt [options]="billingType" [style]="{'width':'100%'}"
+          (onChange)="dt.filter($event.value.name, 'billingType', 'equals')"></p-dropdown>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-project let-i="rowIndex">
+    <tr>
+      <td class="project-name">
+        <a
+          (click)="navigateToVersionGrid(project.projectId)">
+          {{project.sfProjectId}}
+        </a>
+      </td>
+        <td><text-ellipsis>{{project.projectName}}</text-ellipsis></td>
+      <td><text-ellipsis>{{project.accountName}}</text-ellipsis></td>
+      <td *ngIf="!isDummy">{{project.pipSheetStatus}}</td>
+      <td><text-ellipsis>{{project.serviceLine}}</text-ellipsis></td>
+      <td><text-ellipsis>{{project.deliveryType}}</text-ellipsis></td>
+      <td><text-ellipsis>{{project.billingType}}</text-ellipsis></td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="paginatorright" style="text-align: right" let-state>
+    {{(state.page * state.rows) + 1}}-{{state.rows * (state.page + 1)}} of {{state.totalRecords}} items
+  </ng-template>
+</p-table>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="29" height="28" viewBox="0 0 29 28">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="29" height="28" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_160" data-name="Group 160" transform="translate(-1304 -60)">
+    <g id="Secondary_Button" data-name="Secondary Button" transform="translate(1304 60)" clip-path="url(#clip-path)">
+      <g id="Rectangle_36" data-name="Rectangle 36" transform="translate(0.145)" fill="#fff" stroke="#ccc" stroke-width="1">
+        <rect width="28" height="28" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="27" height="27" rx="3.5" fill="none"/>
+      </g>
+    </g>
+    <path id="Subtraction_1" data-name="Subtraction 1" d="M-1304.414-4749.355H-1315V-4764h6.528v4.058h4.058v10.586Zm-6.136-4.7v2.6h1.3v-2.6h2.6v-1.3h-2.6v-2.6h-1.3v2.6h-2.6v1.3Zm5.607-6.948h-2.47v-2.47l2.468,2.469Z" transform="translate(2628.149 4830.452)" fill="#00a9ee"/>
+  </g>
+</svg>

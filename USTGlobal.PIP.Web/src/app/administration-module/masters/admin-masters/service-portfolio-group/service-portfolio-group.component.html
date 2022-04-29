@@ -1,0 +1,69 @@
+<form [formGroup]="servicePortfolioForm" id="masters">
+    <div class="dependent-table-fix">
+      <p-table class="form-group mb-10" [columns]="cols"
+        [value]="servicePortfolioForm.get('servicePortfolioDTO')['controls']" formArrayName="servicePortfolioDTO">
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let col of cols">
+              {{ col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr [formGroupName]="rowIndex">
+            <td>
+              {{rowData.value.portfolioName}}
+            </td>
+            <td>
+              <p-inputSwitch></p-inputSwitch>
+            </td>
+            <td>
+              {{'Masters.startDate' | translate}}
+            </td>
+            <td>
+              {{rowData.value.endDate}}
+            </td>
+            <td>
+              {{rowData.value.comments}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div >
+      <p-table class="form-group mb-10 dependent-table-fix" [columns]="columns" 
+        [value]="servicePortfolioForm.get('serviceLineDTO')['controls']" formArrayName="serviceLineDTO">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns">
+              {{ col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr [formGroupName]="rowIndex" *ngIf="rowData.value.isPortfolioId === true" aria-colspan="5">
+            <td colspan="5" class="dynamic-headers">
+              {{rowData.value.portfolioName}}
+            </td>
+          </tr>
+          <tr [formGroupName]="rowIndex">
+            <td>
+              {{rowData.value.serviceLineName}}
+            </td>
+            <td>
+              <p-inputSwitch></p-inputSwitch>
+            </td>
+            <td>
+              {{'Masters.startDate' | translate}}
+            </td>
+            <td>
+              {{rowData.value.endDate}}
+            </td>
+            <td>
+              {{rowData.value.comments}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+</form>

@@ -1,0 +1,97 @@
+<form id="billing">
+    <div>
+        <div style="padding-bottom: 1em;">
+            <span class="tittle-header">{{ 'ProjectSummary.billingDetails'| translate}}</span>
+            <span style="margin-left: 2%;">Values in:
+                <b class="green currnency-font">{{currencySymbol}}</b></span>
+        </div> 
+        <p-table tableStyleClass="fixtable" [resizableColumns]="true" [scrollable]="true" frozenWidth="310px" [resizableColumns]="true"
+            scrollHeight="calc(100vh - 350px)" class="form-group table  table-bordered table-sm" cellspacing="0"
+            width="auto" [value]="billingScheduleData.cashFlowParentDTO" [columns]="periodCols"
+            [style]="{'padding':'0px'}">
+            <ng-template pTemplate="frozencolgroup" let-columns>
+                <colgroup>
+                    <col style="width:200px">
+                    <col style="width:110px">
+                </colgroup>
+            </ng-template>
+            <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                    <col *ngFor="let col of periodCols" [style.width]="col.width">
+                </colgroup>
+            </ng-template>
+            <ng-template pTemplate="frozenheader" let-columns>
+                <tr>
+                    <th style="height: 39px;" pResizableColumn>
+                        {{ 'ProjectSummary.billingDetails'| translate}}
+                    </th>
+                    <th>
+                        {{'ProjectSummary.projectTotals'| translate}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <ng-container *ngFor="let period of pPeriod; let i = index;">
+                        <th style="width: 150px;">
+                            <span class="pre-format">{{'Total\n' + period.year}}
+                                <span (click)="onExpandCollapseColumn(period.year, i)">
+                                    <i [ngClass]="yearList[i].collapse ? 'fa fa-minus-circle' : 'fa fa-plus-circle'"
+                                        class="pointer p-l-5"></i>
+                                </span>
+                            </span>
+                        </th>
+                        <ng-container *ngFor="let period of periodCols">
+                            <th 
+                                *ngIf="!period.header.includes(check_year) && yearList[i].collapse && period.header.includes(yearList[i].year)"  style="width: 150px;">
+                                <span class="pre-format">{{period.header}}</span>
+                            </th>
+                        </ng-container>
+                    </ng-container>
+                </tr>
+            </ng-template>
+
+            <ng-template appendTo="body" pTemplate="frozenbody" let-rowData let-rowIndex="rowIndex">
+                <tr>
+                    <td *ngIf="rowIndex ===1">
+                        {{'TotalClientPrice.totalInvoiced' | translate}}
+                    </td>
+                    <td *ngIf="rowIndex ===2">
+                        {{'TotalClientPrice.projectCost' | translate}}
+                    </td>
+                    <td *ngIf="rowIndex ===3">
+                        {{'TotalClientPrice.netCashFlow' | translate}}
+                    </td>
+                    <td *ngIf="rowIndex ===4">
+                        <span class="table-title">{{'TotalClientPrice.cumulativeCashFlow' | translate}}</span>
+                    </td>
+                    <td *ngIf="rowIndex >0" [ngClass]="{'red': rowData.totalPrice < 0}">
+                        <span *ngIf="rowIndex !==4">
+                            {{rowData.totalPrice | number: '1.2-2' | negativeValue}}
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                <tr *ngIf="rowIndex > 0">
+                    <ng-container *ngFor="let yearPrice of rowData.cashFlowDTO;let i = index;">
+                        <td style="width: 150px;">
+                            <span
+                                [ngClass]="{'green': rowIndex === 4 && yearPrice.sumOfYearPrice >= 0 ,'red': yearPrice.sumOfYearPrice < 0}" >
+                                {{yearPrice.sumOfYearPrice | number: '1.2-2' | negativeValue}}
+                            </span>
+                        </td>
+                        <ng-container *ngFor="let period of yearPrice.clientPricePeriodDTO">
+                            <td *ngIf="yearList[i].collapse && period.year === yearList[i].year" style="width: 150px;">
+                                <span
+                                    [ngClass]="{'green': rowIndex === 4 && period.price >= 0 ,'red': period.price < 0}" [style.width]="period.width">
+                                    {{period.price | number: '1.2-2' | negativeValue}}
+                                </span>
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</form>

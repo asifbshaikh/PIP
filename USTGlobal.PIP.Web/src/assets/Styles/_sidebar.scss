@@ -1,0 +1,199 @@
+#wrapper{
+  display: flex;
+}
+
+#sidebar{
+ background-color: $darkBlue;
+ background:  $theme;// linear-gradient(180deg, #0072C0 15%, $darkBlue 100%);
+ height: 93.4vh;
+ min-width: 170px;
+//  text-align: center;
+//  .header{
+//    text-align: center;
+//    img{
+//      margin: 20px 0;
+//    }
+//    .logoSmall{
+//      width: 28px;
+//      display: none;
+//    }
+//  }
+}
+ .divider{
+   display: block;
+   border-bottom: 1px solid rgba(255,255,255,0.10);
+   margin: 0 auto;
+ }
+
+.userArea{
+  padding: 16px 0;
+  max-width: 160px;
+  margin: 0 auto;
+  .userPicture{
+    margin: 0 auto;
+    border-radius: 100%;
+    max-width: 54px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    border: 2px solid $babyBlue;
+    -webkit-box-shadow: 0px 1px 10px 0px rgba(43,52,70,0.3);
+    -moz-box-shadow: 0px 1px 10px 0px rgba(43,52,70,0.3);
+    box-shadow: 0px 1px 10px 0px rgba(43,52,70,0.3);
+    &:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+    img {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      -ms-transform:translateY(-50%);
+      width: 100%;
+    }
+  }
+  .userName{
+    color: $white;
+    font-size: 0.88em;
+    text-align: center;
+    margin-top: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .accountMenu{
+    color: $white;
+    opacity: 0.5;
+    font-size: 1.2em;
+    text-align: center;
+    margin: 6px auto;
+    display: block;
+    &:hover, &.active{
+      opacity: 1;
+      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+    }
+    .menu{
+      left: 31px;
+      .item{
+        color: $darkBlue;
+        &:hover{
+          color: $darkBlue;
+        }
+      }
+    }
+  }
+}
+
+ul.navigation{
+  list-style-type: none;
+  padding: 0;
+  li{
+    a{
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      padding:11px 10px;
+      color: $white;
+      display: block;
+      border-left:3px solid transparent;
+      &:hover, &.active{
+        background-color: rgba(0,32,74, 0.4);
+      }
+      &.active{
+        border-color: $brightGreen;
+        color: $brightGreen;
+        svg{
+          fill: $brightGreen;
+        }
+      }
+      i{
+        margin-right: 12px;
+          padding-left: inherit !important;
+        svg{
+          fill:$white;
+          vertical-align: middle;
+          margin-top: -5px;
+        }
+      }
+      span{
+        visibility: visible;
+        opacity: 1;
+        -webkit-transition: width 2s; 
+         transition: width 2s;
+     }
+    }
+  } 
+  .divider{
+    margin: 12px auto;
+  }
+}
+.expandBtn{
+  color: $white;
+  font-size: 1em;
+  text-align: left;
+  position: absolute;
+  bottom: 12px;
+ 
+  i{
+    cursor: pointer;
+    padding:20px;
+    opacity: 0.5;
+    &:hover{
+      opacity: 1;
+      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+      transform: scale(1.2, 1.2);
+      -webkit-transition: width 2s; 
+      transition: width 2s;
+    }
+  }
+}
+
+#sidebar.collapsed {
+    min-width: 60px;
+      ul.navigation{
+      li {
+        a{
+          padding: 11px 8px;
+        }
+        span{
+          visibility: hidden;
+          opacity: 0;
+          position: absolute;
+          -webkit-transition: width 2s; 
+            transition: width 2s;
+      }
+      }
+    }
+    .expandBtn{
+      width:64px;
+    }
+    .divider{
+      width: 20px;
+      display: block;
+    }
+    .userPicture{
+      transform: scale(0.8, 0.8);
+      -webkit-transition: width 2s; 
+            transition: width 2s;
+    }
+    .logoSmall{
+      display: block;
+      margin: 20px auto;
+    }
+    .logoLarge{
+      display: none;
+    }
+    .userArea{
+      padding: 16px 4px;
+      .userName{
+        font-size: 0.75em;
+      }
+    }
+    .userArea .accountMenu{
+      position: relative;
+      left: 0;
+    }
+}

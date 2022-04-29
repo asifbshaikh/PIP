@@ -1,0 +1,51 @@
+<div id="admin">
+  <div class="row">
+    <p-card class="pull-right text-center m-l-30"
+      [ngClass]="{'disable' : !checkRole.isFinanaceApprover && !checkRole.isAdmin}" styleClass="customClass"
+      [style]="{width: '25em'}">
+      <div class="p-20 admin-icon" routerLink="/administration/defineFinancePoc"> <img class="center icons"
+          src="/assets/icons/DefinePOC.svg" alt="masters"></div>
+      <span class="admin-header">{{'Admin.FinancePOCTittle' |translate}}</span>
+    </p-card>
+    <p-card class="pull-right text-center m-l-30"
+      [ngClass]="{'disable' :!checkRole.isFinanaceApprover && !checkRole.isAdmin}" styleClass="customClass"
+      [style]="{width: '25em'}">
+      <div class="p-20 admin-icon" routerLink="/administration/userroles"> <img class="center icons"
+          src="/assets/icons/rolesAndPermission.svg" alt="masters"></div>
+      <span class="admin-header">{{'Admin.roleAndPermission' |translate}}</span>
+    </p-card>
+    <p-card class="pull-right text-center m-l-30" styleClass="customClass" [style]="{width: '25em'}"
+      [ngClass]="{'disable' :!checkRole.isAdmin}">
+      <div class="p-20 admin-icon" routerLink="/administration/addNewUser"> <img class="center icons"
+          src="/assets/icons/AddUser.svg" alt="masters"></div>
+      <span class="admin-header">{{'Admin.addUser' |translate}}</span>
+    </p-card>
+    <p-card class="pull-right text-center m-l-30"
+    [ngClass]="{'disable' : !checkRole.isAdmin}" styleClass="customClass"
+    [style]="{width: '25em'}">
+    <div class="p-20 admin-icon" routerLink="/administration/pipCheckIn"> <img class="center icons"
+        src="/assets/icons/check-in.svg" alt="masters"></div>
+    <span class="admin-header">{{'Admin.PIPCheckInTitle' |translate}}</span>
+  </p-card>
+  </div>
+  <div class="row m-t-30">
+    <p-card class="pull-right text-center m-l-30" [ngClass]="{'disable' : !checkRole.isAdmin}" styleClass="customClass"
+      [style]="{width: '25em'}">
+      <div class="p-20 admin-icon" routerLink="/administration/masters">
+        <img class="center icons" src="/assets/icons/list.svg" alt="masters"></div>
+      <span class="admin-header">{{'Admin.masters' |translate}}</span>
+    </p-card>
+    <p-card class="pull-right text-center m-l-30" [ngClass]="{'disable' : !checkRole.isAdmin}" styleClass="customClass"
+      [style]="{width: '25em'}">
+      <div class="p-20 admin-icon" routerLink="/administration/defineAdmin"> <img class="center icons"
+          src="/assets/icons/admin.svg" alt="masters"></div>
+      <span class="admin-header">{{'Admin.defineAdmin' |translate}}</span>
+    </p-card>
+    <p-card [ngClass]="{'disable' : !checkRole.isAdmin}" class="pull-right text-center m-l-30" styleClass="customClass"
+      [style]="{width: '25em'}">
+      <div class="p-20 admin-icon" routerLink="/administration/defineReadOnly"> <img class="center icons"
+          src="/assets/icons/readonly.svg" alt="masters"></div>
+      <span class="admin-header">{{'Admin.defineReadOnly' |translate}}</span>
+    </p-card>
+  </div>
+</div>

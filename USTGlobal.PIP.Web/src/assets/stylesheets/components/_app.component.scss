@@ -1,0 +1,70 @@
+#session-timeout {
+    .ui-dialog-footer{
+        top: 0px;
+        border: none;
+        border-radius: 12px;
+        text-align: center;
+    }
+    .ui-dialog .ui-dialog-titlebar {
+        border: none;
+        background-color: #FFFFFF;
+        color: #C73E27;
+        font-weight: 700;
+        border-bottom: 0 none;
+        border-radius: 12px;
+        padding:0px;
+    }
+    
+    .ui-dialog .ui-dialog-content {
+        background-color: #ffffff;
+        color: #333333;
+        border:none;
+        padding: 18px 0 40px;
+    }
+    
+     .ui-dialog {
+        padding: 32px 30px 28px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: 0px 8px 20px #0000001F;
+        border-radius: 12px;
+        min-width: 460px;
+        min-height: 215px;
+    }
+ .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+        display: none;
+ }
+    
+}
+.btn-primary {
+    color: #fff !important;
+    background-color: #00A9EE !important;
+    border-radius: 6px;
+    min-width: 140px;
+    min-height: 40px;
+}
+.modal-title {
+    text-align: center;
+}
+.btn {
+    background: #FFFFFF;
+    border: 1px solid #00A9EE;
+    border-radius: 6px;
+    margin: 0 0 0 0;
+    &.leftBtn{
+        color: #00A9EE;
+        margin-right: 40px!important;
+        min-width: 140px;
+        min-height: 40px;
+    }
+    &.leftBtn{
+        &:hover,
+        &:focus{
+            box-shadow: none;
+        }
+    }
+}
+
+.sideMenuExpanded .ui-table .ui-paginator-bottom {
+    left: 185.5px !important;
+    width: calc(100% - 200.5px) !important;
+}

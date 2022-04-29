@@ -1,0 +1,34 @@
+<div *ngIf="isLoading" class="overlay">
+    <img id="spinnerImage" class="spinner" alt="Loading" src="assets/Images/loading-blue-bak.gif" />
+</div>
+<p-panel header="Project - Staff">
+    <div id="project-staff" class="stepBody jsFormContainer">
+        <pe-steps [(activeIndex)]="stepPageIndex" styleClass="steps-custom" *ngIf="stepLabels.length>0">
+            <pe-step [label]="stepLabels[0]">
+                <app-projects-header *ngIf="stepPageIndex === 0"></app-projects-header>
+            </pe-step>
+
+            <pe-step [label]="stepLabels[1]">
+                <app-projects-control *ngIf="stepPageIndex === 1"></app-projects-control>
+            </pe-step>
+
+            <pe-step [label]="stepLabels[2]">
+                <app-resource-planning *ngIf="stepPageIndex === 2"></app-resource-planning>
+            </pe-step>
+            <button *ngIf=" workflowFlag && checkRole ? (stepPageIndex === 0 && totalVersions < 5  && workflowFlag.isNotSubmitted
+        && checkRole.isEditor && !workflowFlag.isCheckedOut && workflowFlag.checkedInOutBy == loggedInUserId
+        && dashboardId == 1 && hasAccountLevelAccess) : null" type="button" class="version-button" pButton
+                (click)="onNewVersionButtonClick()"><i class="pi pi-plus" style="margin: 8px 2px 0px 0px;"></i><span
+                    style="position: relative;bottom: 2px;">{{'ButtonLables.newVersion' | translate}}</span></button>
+            <p-dialog header="{{'Admin.CreateVersion' | translate}}" [(visible)]="display" [style]="{width: '25vw'}"
+                modal="true" [closable]="false" [draggable]="false" style="text-align: center;">
+                <div style="padding: 1.5em;">
+                    <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                        (click)="display = false"></button>
+                    <button type="button" label="{{'ButtonLables.createVersion' | translate}}" pButton
+                        class="create-button" (click)="onNewVersionClick(); display = false;"></button>
+                </div>
+            </p-dialog>
+        </pe-steps>
+    </div>
+</p-panel>

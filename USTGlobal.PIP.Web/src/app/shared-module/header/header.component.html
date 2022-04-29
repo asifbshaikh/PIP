@@ -1,0 +1,9 @@
+﻿<div id="header">
+    <p-menu #menu [popup]="true" appendTo="body" [model]="items" [style]="{'z-index':'9999'}"></p-menu>
+    <button class="user-profile text-center pull-right m-t-10 button-height" data-toggle="dropdown" (click)="menu.toggle($event)">
+        {{userName}} <i class="pi pi-angle-down"></i>
+    </button>
+</div>
+<div class="clear-fix"></div>
+    <app-logout-confirmation (logoutConfirmation)="onLogoutConfirmation($event)" #logout></app-logout-confirmation>               
+<div class="clearfix"></div>

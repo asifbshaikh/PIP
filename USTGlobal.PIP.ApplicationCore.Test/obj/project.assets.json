@@ -1,0 +1,81 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v2.2": {
+      "USTGlobal.PIP.ApplicationCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/USTGlobal.PIP.ApplicationCore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/USTGlobal.PIP.ApplicationCore.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "USTGlobal.PIP.ApplicationCore/1.0.0": {
+      "type": "project",
+      "path": "../USTGlobal.PIP.ApplicationCore/USTGlobal.PIP.ApplicationCore.csproj",
+      "msbuildProject": "../USTGlobal.PIP.ApplicationCore/USTGlobal.PIP.ApplicationCore.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v2.2": [
+      "USTGlobal.PIP.ApplicationCore >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\ashaikh2\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore.Test\\USTGlobal.PIP.ApplicationCore.Test.csproj",
+      "projectName": "USTGlobal.PIP.ApplicationCore.Test",
+      "projectPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore.Test\\USTGlobal.PIP.ApplicationCore.Test.csproj",
+      "packagesPath": "C:\\Users\\ashaikh2\\.nuget\\packages\\",
+      "outputPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore.Test\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\ashaikh2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp2.2"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "projectReferences": {
+            "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\USTGlobal.PIP.ApplicationCore.csproj": {
+              "projectPath": "D:\\workspace\\pip\\src\\USTGlobal.PIP.ApplicationCore\\USTGlobal.PIP.ApplicationCore.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp2.2": {
+        "imports": [
+          "net461"
+        ],
+        "assetTargetFallback": true,
+        "warn": true
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+<div id="holiday">
+  <div class="dropdown">
+    <span class="holiday-heads">Location</span>
+    <p-dropdown [options]="locations" optionLabel="label" [(ngModel)]="selectedLocation"
+      (onChange)="onLocationChange($event.value.value.id)" (click)="paginate()"></p-dropdown>
+    <div style="float: right;">
+      <span class="holiday-heads">Year</span>
+      <p-dropdown [options]="years" optionLabel="label" [(ngModel)]="selectedYear"
+        (onChange)="onYearChange($event.value.value.name)" (click)="paginate()"></p-dropdown>
+    </div>
+  </div>
+  <form [formGroup]="holidaysForm">
+    <div>
+      <p-table #p class="form-group mb-10" [columns]="cols" [value]="holidaysForm.get('holidayDTO')['controls']"
+        formArrayName="holidayDTO" [paginator]="true" [rows]="15">
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let col of cols">
+              {{ col.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+          <tr [formGroupName]="rowIndex">
+            <td>
+              {{rowData.value.locationName}}
+            </td>
+            <td>
+              {{rowData.value.date | date:'MM/dd/yyyy'}}
+            </td>
+            <td>
+              <p-inputSwitch></p-inputSwitch>
+            </td>
+            <td>
+              {{'Masters.startDate' | translate}}
+            </td>
+            <td>
+              {{rowData.value.endDate}}
+            </td>
+            <td>
+              {{rowData.value.comments}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </form>
+</div>

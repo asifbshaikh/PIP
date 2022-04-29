@@ -1,0 +1,222 @@
+<form *ngIf="isDataAvailable" id="project-control" [formGroup]="projectControl">
+  <div class="row" id="project-controls">
+    <div class="col-sm-6 partition">
+      <div class="p-grid">
+        <div class="p-sm-3">
+          <div class="periods"> <label>Periods</label></div>
+          <div class="show-periods"> <label>{{ totalPeriods }}</label>
+          </div>
+        </div>
+        <div class="p-sm-9">
+          <div class="p-grid">
+            <div class="p-sm-4"> <label class="pull-right" for="start date">Start Date<span
+                  class="mandatory">*</span></label></div>
+            <div class="p-sm-8">
+              <p-calendar formControlName="startDate" class="dateInvalid" [showIcon]="true" dateFormat="mm-dd-yy"
+                keepInvalid="true" (onInput)="validateStartDate($event.target.value)" (onSelect)="onStartDateSelect($event)"
+                 appendTo="body" placeholder="MM-DD-YYYY" [showOnFocus]="false" [showIcon]="true"
+                 [monthNavigator]="true" [yearNavigator]="true" [keepInvalid]="true" yearRange="2018:2050"
+                 tooltipPosition="top" pTooltip={{dateToolTip}} [minDate]="minDate" [maxDate]="maxDate"
+                 [class.dateInvalid]="dateError || dateErrorFlag"></p-calendar>
+              <br><span [class.required]="startDateValidationMsg">{{startDateValidationMsg}}</span>
+            </div>
+            <div class="p-sm-4"><label class="pull-right" for="end date">End Date<span
+                  class="mandatory">*</span></label></div>
+            <div class="p-sm-8">
+              <p-calendar formControlName="endingDate" class="dateInvalid" [showIcon]="true" dateFormat="mm-dd-yy"
+              keepInvalid="true" (onInput)="validateEndDate($event.target.value)" (onSelect)="onEndDateSelect($event)"
+                 appendTo="body" placeholder="MM-DD-YYYY" [showOnFocus]="false" [showIcon]="true"
+                 [monthNavigator]="true" [yearNavigator]="true" [keepInvalid]="true" yearRange="2018:2050"
+                 tooltipPosition="top" pTooltip={{dateToolTip}} [minDate]="minDate" [maxDate]="maxDate"
+                 [class.dateInvalid]="dateError || dateErrorFlag"></p-calendar>
+              <br><span [class.required]="endDateValidationMsg"> {{endDateValidationMsg}}</span>
+            </div>
+            <div class="p-sm-4"> <label class="pull-right" for="holidays option">Holidays Option<span
+                  class="mandatory">*</span></label>
+            </div>
+            <div class="p-sm-6 select">
+              <p-dropdown [options]="holidaysOption" formControlName="holidaysOption" class="form-control"
+                [ngClass]="{'is-invalid': refPc.holidaysOption.dirty && refPc.holidaysOption.errors}"
+                (mouseover)="holidayOptionsError()" (mouseout)="holidayOptionsError()" tooltipPosition="top"
+                [pTooltip]='pShowToolTip'>
+              </p-dropdown>
+            </div>
+            <div class="p-sm-4"> <label class="pull-right" for="locations">Locations<span
+                  class="mandatory">*</span></label>
+            </div>
+            <div class="p-sm-6 select">
+              <p-multiSelect class="form-control location-form-control" defaultLabel="--- select ---"
+                [options]="locations" formControlName="locations" (onChange)="onLocationSelected($event.value)"
+                [filter]="true" [panelStyle]="{minWidth:'14em'}"
+                [ngClass]="{'is-invalid': refPc.locations.dirty && refPc.locations.errors}"
+                (mouseover)="locationsError()" (mouseout)="locationsError()" tooltipPosition="top"
+                [pTooltip]='pLocationShowToolTip'>
+                <p-header>
+                  Select All
+                </p-header>
+              </p-multiSelect>
+            </div>
+            <span class="location-tooltip">
+              <i class="p-sm-1 info-icon" pTooltip="{{'MESSAGES.Tooltip.LocationTooltipMessage.message' | translate }}"
+                tooltipPosition="top"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-grid" style="width: 93%">
+        <p-table [value]="projectControl.controls.selectedLocations.controls"
+          *ngIf="projectControl.controls.selectedLocations ? (projectControl.get('selectedLocations')['controls'].length > 0 ? true :false) :false"
+          [scrollable]="true" scrollHeight="calc(100vh - 500px)" formArrayName="selectedLocations">
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <col style="width:100px">
+              <col style="width:80px">
+              <col style="width:80px">
+              <col style="width:40px">
+            </colgroup>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th *ngFor="let col of cols">
+                {{col.header}}
+                <i *ngIf="col.field === 'defaultcodeperday' || col.field === 'defaultcodepermonth'"
+                  pTooltip="{{'ProjectControl.ProjectControlTooltip.DefaultHoursPerMonthPerDay' | translate }}"
+                  tooltipPosition="top" class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+              </th>
+              <th>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-i="rowIndex" let-projectControl.value.selectedLocations>
+            <tr [formGroupName]="i">
+              <td>
+                {{projectControl.value.selectedLocations[i].name}}
+              </td>
+              <td>
+                {{ selectedLocationsValues.codepermonth > 0 ? projectControl.value.selectedLocations[i].defaultCodePerMonth :
+                  projectControl.value.selectedLocations[i].defaultCodePerDay }}
+              </td>
+              <td>
+                <div *ngIf="selectedLocationsValues.codepermonth > 0; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>
+                  <input class="pip-project-control-grid-input" pInputText type="text"
+                    pipRestrictInput="decimalPrecisionTwo" formControlName="overrideCodePerMonth"
+                    (mouseover)="locationCodePerMonthError(projectControl.value.selectedLocations[i].overrideCodePerMonth)"
+                    (mouseout)="locationCodePerMonthError(projectControl.value.selectedLocations[i].overrideCodePerMonth)"
+                    tooltipPosition="right" [pTooltip]='pShowToolTip' (focusout)="setIsOverride($event, i)">
+                </ng-template>
+                <ng-template #elseBlock>
+                  <input class="pip-project-control-grid-input" pInputText type="text"
+                    pipRestrictInput="decimalPrecisionTwo" formControlName="overrideCodePerDay"
+                    (mouseover)="locationCodePerDayError(projectControl.value.selectedLocations[i].overrideCodePerDay)"
+                    (mouseout)="locationCodePerDayError(projectControl.value.selectedLocations[i].overrideCodePerDay)"
+                    tooltipPosition="right" [pTooltip]='pShowToolTip' (focusout)="setIsOverride($event, i)">
+                </ng-template>
+              </td>
+              <td class="text-center col70px">
+                <p-dialog header="{{'ProjectControl.DeleteDialogHeader' | translate}}" [(visible)]="display"
+                  [draggable]="false" [style]="{width: '25vw'}" modal="true" [closable]="false">
+                  <span
+                    class="dialog-text">{{'ProjectControl.DeleteDialogContent' | translate}}<br>{{'ProjectControl.DeleteDialogContentbr' | translate}}</span><br>
+                  <div style="padding: 1.5em;">
+                    <button type="button" label="{{'ButtonLables.cancel' | translate}}" pButton class="cancel-button"
+                      (click)="display = false"></button>
+                    <button type="button" label="{{'ButtonLables.delete' | translate}}" pButton class="delete-button"
+                      (click)="deleteLocation(); display = false;"></button>
+                  </div>
+                </p-dialog>
+                <button type="button" (click)="onDeleteClick(i,projectControl.value.selectedLocations[i].id);"
+                  [disabled]="disableOtherFormControls" class="pi pi-trash"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <!-- Milestones -->
+    <div *ngIf="showProjectMilestone()" formGroupName="milestone" class="col-sm-6" #dialog>
+      <div class="row">
+        <div class="col-sm-7" style="display: inherit">
+          <label class="p-l-20 p-r-10 p-t-5">Pick a Split Type </label>
+          <p-dropdown class="milestone-dropdown" [options]="projectMilestoneGroup" (onChange)="projectMilestoneGroupChange($event.value)"
+            formControlName="defaultGroup" placeholder="--- select ---"></p-dropdown>
+        </div>
+        <div *ngIf=" showMilestoneGrid() && milestoneGroupId === 1" class="col-sm-5 milestoneNote">
+          {{'MilestoneMonthPattern' | translate}}</div>
+      </div>
+      <div class=" milestone" *ngIf="showMilestoneGrid()">
+        <p-table [columns]="milestoneColumns" [value]="projectControl.controls.milestone.controls.milestones.controls"
+          [scrollable]="true" scrollHeight="calc(100vh - 300px)" formArrayName="milestones"
+          [(selection)]="selectedMilestones">
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <col style="width:40px">
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th>
+                <p-tableHeaderCheckbox #pHeaderCheckbox [disabled]="disableOtherFormControls"
+                  (click)="onSelectAllCheckbox()" class="m-l-5"></p-tableHeaderCheckbox>
+              </th>
+              <th>
+                {{columns[1].header}}
+              </th>
+              <th>
+                {{columns[2].header}}
+              </th>
+              <th *ngIf="milestoneGroupId === 1">
+                {{columns[3].header}}
+              </th>
+              <th *ngIf="milestoneGroupId === 1">
+                {{columns[4].header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowIndex="rowIndex" let-rowData>
+            <tr [pSelectableRow]="rowData.value" [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+              <td>
+                <p-tableCheckbox [value]="rowData" [index]="rowIndex" (click)="onCheckboxSelect(rowData.value)"
+                  [disabled]="disableOtherFormControls">
+                </p-tableCheckbox>
+              </td>
+              <td class="text-break">{{ rowData.value.originalValue }}</td>
+              <td [ngStyle]="{'padding': '.25em .5em'}">
+                <input class="pip-project-control-grid-input" pInputText type="text" formControlName="overrideValue"
+                  (change)="updateOverrideValue(rowData.value,rowIndex);onMilestoneOverride(rowData.value)"
+                  (keyup)="customOverrideKeyUp($event)" tooltipPosition="top"
+                  [pTooltip]='getOverrideValueError(rowData.controls.overrideValue)'>
+              </td>
+              <td [ngStyle]="{'padding': '.25em .5em'}" *ngIf="milestoneGroupId === 1">
+                <input class="pip-project-control-grid-input" pInputText type="text" formControlName="invoiceAmount"
+                  (change)="onInvoiceAmountOrMonthChange(rowData.value)" pipRestrictInput="decimalPrecisionTwo">
+              </td>
+              <td [ngStyle]="{'padding': '.25em .5em'}" *ngIf="milestoneGroupId === 1">
+                <input class="pip-project-control-grid-input uppercase" pInputText type="text"
+                  formControlName="milestoneMonth" (change)="onInvoiceAmountOrMonthChange(rowData.value)">
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="4" [ngStyle]="{'text-align': 'center'}">
+                No milestone for selected group.
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <a *ngIf="projectControl.controls.milestone.controls.milestones.controls.length < 15" class="add-row-button"
+          (click)="addMilestoneRow()">ADD ROW</a>
+      </div>
+    </div>
+  </div>
+  <div class="p-grid">
+    <hr class="bottom-line">
+    <div class="p-sm-12 btns-strip">
+      <button pButton type="button" (click)="onSaveClick()" [disabled]="!projectControl.valid"
+        class="ui-button-rounded ui-button-success" label="Save"></button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,33 @@
+<form *ngIf="isDataAvailable" [formGroup]="capitalChargeForm" id="capital-charges" (ngSubmit)="onSave(capitalChargeForm.value)">
+  <div class="p-grid">
+
+    <div class="p-lg-5 "></div>
+    <div class="p-lg-3 text-align"><label>{{'CapitalCharges.totalCostBeforeCapCharges'| translate}}</label></div>
+    <div class="p-lg-4"><input type="text" pInputText class="input-box-readOnly" [value]="capitalChargeForm.value.totalCostBeforeCap | number:'1.2-2' | negativeValue" [readonly]=true></div>
+    <div class="p-lg-6 ">{{'CapitalCharges.finanDeptChargeBasedTermsOfPayment'| translate}}</div>
+    <div class="p-lg-6"></div>
+
+    <div class="p-lg-2 text-align"> {{'CapitalCharges.paymentLag'| translate}}</div>
+    <div class="p-lg-3">
+      <input pInputText type="text" formControlName="paymentLag" class="input-box-readOnly"
+        placeholder="Enter number of days till payment" pipRestrictInput="numeric" (keyup)="onCalculations()" [readonly]=true><i
+        pTooltip="{{ translationData.paymentLagTooltip }}" class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i>
+    </div>
+    <div class="p-lg-3 text-align">{{'CapitalCharges.capitalCharge'| translate}}</div>
+    <div class="p-lg-3"> <input type="text" pInputText class="input-box-readOnly" [value]="capitalChargeForm.value.capitalCharge | number:'1.2-2' | negativeValue" [readonly]=true>
+      <i pTooltip="{{ translationData.capitalChargeTooltip }}" class="info-icon"><img src="/assets/icons/ic_info_outline_48px.svg"></i></div>
+
+    <div class="p-lg-5"></div>
+    <div class="p-lg-3 text-align total-project-cost">{{'CapitalCharges.totalProjectCost'| translate}}</div>
+    <div class="p-lg-4">
+        <input type="text" pInputText [value]="capitalChargeForm.value.totalCostBeforeCap + capitalChargeForm.value.capitalCharge  | number:'1.2-2' | negativeValue"
+        class="input-box-readOnly" [readonly]=true>
+    </div>
+  </div>
+  <div class="p-grid">
+    <hr class="bottom-line">
+    <div class="p-sm-12 btns-strip">
+        <button [disabled]="true" pButton class="ui-button-rounded ui-button-success" type="submit" label="Save"> </button>
+    </div>
+  </div>
+</form>

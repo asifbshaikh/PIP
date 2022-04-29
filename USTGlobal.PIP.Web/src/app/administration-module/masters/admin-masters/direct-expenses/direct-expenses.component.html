@@ -1,0 +1,33 @@
+<form [formGroup]="directExpensesForm" id="masters">
+  <div>
+      <p-table class="form-group mb-10" [columns]="cols" [value]="directExpensesForm.get('defaultLabelDTO')['controls']"
+          formArrayName="defaultLabelDTO">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th *ngFor="let col of cols">
+                      {{ col.header}}
+                  </th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+              <tr [formGroupName]="rowIndex">
+                  <td>
+                      {{rowData.value.name}}
+                  </td>
+                  <td>
+                      <p-inputSwitch></p-inputSwitch>
+                  </td>
+                  <td>
+                      {{'Masters.startDate' | translate}}
+                  </td>
+                  <td>
+                      {{rowData.value.endDate}}
+                  </td>
+                  <td>
+                      {{rowData.value.comments}}
+                  </td>
+              </tr>
+          </ng-template>
+      </p-table>
+  </div>
+</form>

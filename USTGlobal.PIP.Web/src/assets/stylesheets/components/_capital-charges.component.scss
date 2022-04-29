@@ -1,0 +1,37 @@
+#capital-charges {
+
+  .text-align {
+    text-align: right;
+  }
+
+  .input-box {
+    text-align: left;
+    width: 90%;
+  }
+
+  .p-lg-2 {
+    padding: 1.5rem !important;
+  }
+
+  .p-lg-3 {
+    padding: 1.4rem !important;
+  }
+
+  .total-project-cost {
+    color: #C73E27;
+    font-weight: 600;
+  }
+
+  .input-box-readOnly {
+    opacity: 1;
+    background-color: #FCFCFC;
+    cursor: not-allowed;
+    border-radius: 4px;
+  }
+
+  .ui-inputtext:enabled:focus:not(.ui-state-error) {
+    border-color: #a6a6a6 !important;
+    outline: 0 none !important;
+    box-shadow: none !important;
+  }
+}

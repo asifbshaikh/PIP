@@ -1,0 +1,66 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+}
+#login-pg {
+  height: 100vh !important;
+  background-size :cover;
+  background-position: center center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  -webkit-filter: blur(4px); /* Safari 6.0 - 9.0 */
+  filter: blur(4px);
+}
+main{
+  margin-top: 50px;
+}
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/**
+ * Basic styles for links
+ */
+a {
+  color: $brand-color;
+  text-decoration: none;
+
+  @include on-event {
+    color: $text-color;
+    text-decoration: underline;
+  }
+
+  .ui-button {
+    margin-right: 5px !important;
+    margin-left: 5px !important;
+  }
+  .fixtable {
+    table-layout: auto !important;
+    white-space: nowrap !important;
+}
+}
+
+#clear-filter {
+  border-radius: 15px !important;
+}
+.ui-panel .ui-panel-footer {
+  padding: 0 !important;
+  border: none !important;
+ }

@@ -1,0 +1,16 @@
+#master {
+    .ui-card-body {
+        background-color: #DCE6EA !important;
+    }
+    .ui-table .ui-table-thead > tr > th {
+        border: 1px solid #c8c8c8;
+        font-weight: 700;
+        color: #ffffff;
+        height: 32px;
+        font-size: 13px;
+        background-color: #3599a8;
+      }
+      .ui-table .ui-sortable-column .ui-sortable-column-icon {
+        color: #ffffff;
+      }
+}

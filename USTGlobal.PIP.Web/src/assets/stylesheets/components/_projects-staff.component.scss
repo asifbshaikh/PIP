@@ -1,0 +1,73 @@
+#project-staff {
+    .ui-steps .ui-steps-item {
+        width: none;
+    }
+    & .ui-steps.steps-custom {
+        margin-bottom: 30px;
+    }
+    & .ui-steps.steps-custom .ui-steps-item .ui-menuitem-link {
+        height: 10px;
+        padding: 0 1em;
+    }
+    & .ui-steps.steps-custom .ui-steps-item .ui-steps-number {
+        background-color: #0081c2;
+        color: #ffffff;
+        display: inline-block;
+        width: 36px;
+        border-radius: 50%;
+        font-size: $font-size;
+        margin-bottom: 10px;
+    }
+    & .ui-steps-item {
+        border: none;
+    }
+    & .ui-widget-content {
+        border: none;
+    }
+    .ui-steps .ui-steps-item.ui-state-highlight .ui-steps-title {
+        font-weight: 700;
+        color: $red-color;
+    }
+    .version-button {
+        height: 30px;
+        position: absolute;
+        left: 88%;
+        width: 10%;
+        bottom: calc(100vh - 138px);
+        background-color: #00a9ee;
+        border-radius: 15px;
+        border: none;
+        color: white;
+        font-weight: 600;
+    }
+    .ui-dialog .ui-dialog-titlebar {
+        border: 1px solid #ffffff;
+        background-color: #ffffff !important;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+    .ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+        margin: 0;
+        color: #c73e27 !important;
+        float: none;
+        font-size: 16px;
+    }
+    .ui-dialog .ui-dialog-content {
+        background-color: #ffffff;
+        color: #333333;
+        padding: 0.571em 1em;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+    .cancel-button {
+        background-color: #ffff;
+        color: #007ad9;
+        width: 40%;
+    }
+    .create-button {
+        background-color: #00a9ee;
+        border: 1px solid;
+        width: 40%;
+        margin: 0px 40px;
+    }
+}

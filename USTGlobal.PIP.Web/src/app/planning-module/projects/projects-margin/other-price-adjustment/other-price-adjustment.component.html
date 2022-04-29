@@ -1,0 +1,238 @@
+<div *ngIf="isDataAvailable" id="other-price-adjustment">
+
+    <!-- change above id based on the tab  -->
+    <form [formGroup]="otherPriceAdjustmentForm" (ngSubmit)="onSave(otherPriceAdjustmentForm.value)">
+        <div class="mt-2">
+            <div class="col-md-12">
+                <div class="col-sm-3 row pt-1">
+                    {{'OtherPriceAdjustment.SetMontlyFeeAdjustment' | translate}}
+                    <div class="col-sm-5">
+                        <p-inputSwitch formControlName="isMonthlyFeeAdjustment" (onChange)="onSwitchChange()">
+                        </p-inputSwitch>
+                    </div>
+                </div>
+                <p-table tableStyleClass="fixtable" [scrollable]="true" scrollHeight="calc(100vh - 430px)"
+                    class="form-group table  table-bordered table-sm" cellspacing="0" width="100%"
+                    [value]="otherPriceAdjustmentForm.get('otherPriceAdjustmentParent')['controls']"
+                    formArrayName="otherPriceAdjustmentParent" frozenWidth="510px" [columns]="periodCols"
+                    [frozenColumns]="otherPriceAdjustmentCols" [(selection)]="selectedOtherPriceAdjustment"
+                    (onRowUnselect)="onRowUnselect()">
+                    <ng-template pTemplate="caption">
+                        <span
+                            class="table-title">{{'OtherPriceAdjustment.OtherPriceAdjustmentTitle' | translate}}</span>
+                        <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+                    </ng-template>
+                    <ng-template pTemplate="frozencolgroup" let-columns>
+                        <colgroup>
+                            <col style="width:40px">
+                            <col style="width:180px">
+                            <col style="width:180px">
+                            <col style="width:110px">
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                            <col *ngFor="let col of periodCols" style="width:110px">
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="frozenheader" let-columns>
+                        <tr style="height: 39px;">
+                            <th class="text-center"
+                                *ngIf="!otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value">
+                                <p-tableHeaderCheckbox *ngIf="numberOfOPARows > 1" [disabled]="disableOtherFormControls"
+                                    (click)="onCheckboxSelect()">
+                                </p-tableHeaderCheckbox>
+                            </th>
+                            <th [attr.colspan]="otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value === true && col.field == 'milestone' ? '2' : '1'"
+                                *ngFor="let col of otherPriceAdjustmentCols">
+                                <div *ngIf="col.field == 'milestone'; then thenBlock else elseBlock"></div>
+                                <ng-template #thenBlock>
+                                    {{col.header}}
+                                    <span class="required" *ngIf="col.header == 'Description'">*</span>
+                                    <i
+                                        pTooltip="{{'OtherPriceAdjustment.OtherPriceAdjustmentMilestoneTooltip' | translate}}"><img
+                                            src="/assets/icons/ic_info_outline_48px.svg"></i>
+                                </ng-template>
+                                <ng-template #elseBlock>
+                                    {{col.header}}
+                                    <span class="required" *ngIf="col.header == 'Description'">*</span>
+                                </ng-template>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of periodCols">
+                                <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="frozenbody" let-rowData let-rowIndex="rowIndex">
+                        <tr *ngIf="rowIndex === 0">
+                            <td class="grey-bg text-center" colspan="3">
+                                <span class="table-title">{{ 'OtherPriceAdjustment.FeeBeforeAdjustment' | translate }}
+                                </span>
+                            </td>
+                            <td style="text-align:left" class="grey-bg">
+                                {{ rowData.value.totalRevenue | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="rowIndex === 1 && otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value"
+                            [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+                            <td colspan="2">
+                                <p-dropdown id="rowIndex" appendTo="body" [style]="{'width':'50%'}"
+                                    [options]="selectedMilestones"
+                                    (onChange)="onOtherPriceAdjustmentMilestoneSelected(rowIndex, $event.value)"
+                                    formControlName="selectedMilestoneItem">
+                                </p-dropdown>
+                            </td>
+                            <td style="text-align:left">
+                                {{rowData.value.description}}
+                            </td>
+                            <td>
+                                {{ rowData.value.totalRevenue | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="rowIndex === 2 && otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value"
+                            [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+                            <td colspan="2"></td>
+                            <td style="text-align:left">
+                                {{rowData.value.description}}
+                            </td>
+                            <td>
+                                {{ rowData.value.totalRevenue | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="!rowData.value.isDeleted && rowIndex !== 0 && !otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value"
+                            [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+                            <td class="text-center">
+                                <p-tableCheckbox [value]="rowData" [index]="rowIndex" (click)="onCheckboxSelect()"
+                                    [disabled]="disableOtherFormControls"></p-tableCheckbox>
+                            </td>
+                            <td>
+                                <p-dropdown id="rowIndex" appendTo="body" [style]="{'width':'50%'}"
+                                    [options]="selectedMilestones"
+                                    (onChange)="onOtherPriceAdjustmentMilestoneSelected(rowIndex, $event.value)"
+                                    formControlName="selectedMilestoneItem">
+                                </p-dropdown>
+                            </td>
+                            <td>
+                                <input pInputText formControlName="description" type="text"
+                                    pipRestrictInput="notAllowSpaceInBeginning" />
+                            </td>
+                            <td>
+                                {{ rowData.value.totalRevenue | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template class="scrollable-part" pTemplate="body" let-rowData let-rowIndex="rowIndex">
+                        <tr *ngIf="rowIndex === 0" class="grey-bg">
+                            <td *ngFor="let pCol of periodCols;let i = index">
+                                {{ rowData.value.otherPriceAdjustmentPeriodDetail[i].revenue | number:'1.2-2' | negativeValue }}
+                            </td>
+                        </tr>
+                        <tr *ngIf="rowIndex === 1 && otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value">
+                            <td *ngFor="let pCol of periodCols;let i = index">
+                                {{ rowData.value.otherPriceAdjustmentPeriodDetail[i].revenue | number:'1.2-2' | negativeValue }}
+                            </td>
+                        </tr>
+                        <tr *ngIf="rowIndex === 2 && otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value"
+                            [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+                            <td *ngFor="let pCol of periodCols;let i = index">
+                                <div formArrayName="otherPriceAdjustmentPeriodDetail">
+                                    <div [formGroupName]="i">
+                                        <input #periodInput id="{{rowIndex.toString() + '-' + i.toString()}}" pInputText
+                                            type="text" formControlName="revenue" (focusout)="onSetMonthlyFeeChange(i)"
+                                            (click)="onCellClick(false, $event,rowData,rowIndex)"
+                                            (focusout)="onCellClick(false,$event, rowData, rowIndex)"
+                                            pipRestrictInput="negativeDecimalPrecisionTwo">
+                                        <p-contextMenu [target]="periodInput" appendTo="body"
+                                            [model]="contextMenuItems"></p-contextMenu>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!rowData.value.isDeleted && rowIndex !== 0 && !otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value"
+                            [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [formGroupName]="rowIndex">
+                            <td *ngFor="let pCol of periodCols;let i = index">
+                                <div formArrayName="otherPriceAdjustmentPeriodDetail">
+                                    <div [formGroupName]="i">
+                                        <input #periodInput id="{{rowIndex.toString() + '-' + i.toString()}}" pInputText
+                                            type="text" formControlName="revenue" (focusout)="onCostChange()"
+                                            (click)="onCellClick(false, $event,rowData,rowIndex)"
+                                            (focusout)="onCellClick(false,$event, rowData, rowIndex)"
+                                            pipRestrictInput="negativeDecimalPrecisionTwo">
+                                        <p-contextMenu [target]="periodInput" appendTo="body"
+                                            [model]="contextMenuItems"></p-contextMenu>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template class="scrollable-footer" pTemplate="footer" let-columns>
+
+                        <tr *ngIf='columns[0] && columns[0].field == "periods"'>
+                            <td *ngFor="let pCol of periodCols;let i = index" style="height: 32px;">
+                                {{periodsTotal[i] | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                        <tr *ngIf='columns[0] && columns[0].field == "periods"'>
+                            <td *ngFor="let pCol of periodCols;let i = index" style="height: 32px;">
+                                {{adjustedRevenuePeriodsTotal[i] | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary" let-columns>
+                        <tr class="bottom-border" [ngStyle]="{'margin-top': '-9px' }"
+                            style="position: absolute;margin-left: -13px;">
+                            <td class="footer-summary text-center" style="width: 401px;height: 32px;">
+                                <span class="pull-center">{{ 'OtherPriceAdjustment.FeeAfterAdjustment' | translate }}
+                                </span>
+                            </td>
+                            <td class="footer-summary text-left" style="min-width: 110px">
+                                {{totalFeeAfterAdjustment | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                        <tr class="bottom-border" [ngStyle]="{'margin-top': '23px' }"
+                            style="position: absolute;margin-left: -13px;">
+                            <td class="footer-summary text-right" style="width: 401px; height: 32px;">
+                                <span>{{ translationData.TotalAdjustedRevenue }}</span>
+                            </td>
+                            <td class="footer-summary text-left" style="min-width: 110px">
+                                {{totalAdjustedRevenue | number:'1.2-2' | negativeValue}}
+                            </td>
+                        </tr>
+                        <tr *ngIf="!otherPriceAdjustmentForm.get('isMonthlyFeeAdjustment').value"
+                            style="margin-top: 60px;position: absolute;">
+                            <td style="border: none" [attr.colspan]="colSpanSize">
+                                <button pButton type="button" class="first pull-left ui-button-rounded ui-button-info"
+                                    label="Add row" [disabled]="disableOtherFormControls || isSaveClicked"
+                                    (click)="onAddOtherPriceAdjustmentRow()"></button>
+                                <button *ngIf="selRow.length > 0" pButton type="button"
+                                    class="first pull-left ui-button-rounded ui-button-danger" label="Delete row"
+                                    (click)="onDeleteOtherPriceAdjustmentRow()" [disabled]="isSaveClicked"></button>
+                                <button *ngIf="selRow.length > 0" pButton type="button"
+                                    class="first pull-left ui-button-rounded ui-button-rounded" label="Copy Selected"
+                                    (click)="onOtherPriceAdjustmentCopySelected()" [disabled]="isSaveClicked"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="8" [ngStyle]="{'text-align': 'center'}">
+                                {{ 'GridEmptyMsg' | translate }}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="p-grid">
+            <hr class="bottom-line">
+            <div class="p-sm-12 btns-strip">
+                <button pButton [disabled]="!otherPriceAdjustmentForm.valid || isSaveClicked"
+                    class="ui-button-rounded ui-button-success" type="submit" label="Save"> </button>
+            </div>
+        </div>
+    </form>
+</div>

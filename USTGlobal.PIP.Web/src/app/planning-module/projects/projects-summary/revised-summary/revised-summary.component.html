@@ -1,0 +1,196 @@
+<div *ngIf="isLoading" class="overlay">
+    <img id="spinnerImage" class="spinner" alt="Loading" src="assets/Images/loading-blue-bak.gif" />
+</div>
+<p-panel id="revised-summary" *ngIf="isDataAvailable">
+    <div class="tables" *ngIf="isCurrencyId">
+        <!-- <app-gpm-omitting (gpmLoad)='displayGpm($event)'></app-gpm-omitting> -->
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="total-deal-financials">
+                    <app-total-deal-financials></app-total-deal-financials>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="location">
+                    <app-location-wise-details></app-location-wise-details>
+                </div>
+                <div class="performance">
+                    <app-performance-indicators></app-performance-indicators>
+                </div>
+            </div>
+        </div>
+        <div class="cash-flow row m-b-20">
+            <div class="col-md-12">
+                <app-billing (billingload)='displayBilling($event)'></app-billing>
+            </div>
+        </div>
+        <div class="row pl-forcast m-b-20">
+            <div class="col-md-12">
+                <app-pl-forecast (forecastload)='displayForecast($event)'></app-pl-forecast>
+            </div>
+        </div>
+    </div>
+    <!-- </p-panel> -->
+
+
+
+
+    <!-- <p-panel *ngIf="isDataAvailable" id="project-summary" header="Project - Summary">
+  <div class="tables">
+      <div class="row">
+          <div class="m-b-20 col-sm-12 col-md-6">
+              <app-gpm-omitting (gpmLoad)='displayGpm($event)'></app-gpm-omitting>
+          </div>
+          <div class="m-b-20 col-sm-12 col-md-6">
+              <app-summary (summaryLoad)='displaySummary($event)'></app-summary>
+          </div>
+      </div>
+      <div class="row">
+          <div class="m-b-20 col-sm-12 col-md-6">
+              <app-effort-summary (effortSummaryLoad)='displayEffortSummary($event)'></app-effort-summary>
+          </div>
+          <div class="m-b-20 col-sm-12 col-md-6">
+              <app-investment-view (investmentLoad)='displayInvestment($event)'></app-investment-view>
+          </div>
+      </div>
+      <div class="m-b-20">
+          <app-billing (billingload)='displayBilling($event)'></app-billing>
+      </div>
+      <div class="m-b-20">
+          <app-pl-forecast (forecastload)='displayForecast($event)'></app-pl-forecast>
+      </div>
+      <div class="m-b-40">
+          <app-yoy-comparison (yoyload)='displayYOY($event)'></app-yoy-comparison>
+      </div>
+  </div>
+ -->
+    <!-- *ngIf="(showInvestment && showGpm && showYoy && showForecast && showBilling && showEffortSummary && showSummary)" -->
+    <div class="p-grid">
+        <hr class="bottom-line">
+        <div class="p-sm-12 summary-btns-strip btn-margin">
+
+            <div *ngIf="!isDummy">
+                <button *ngIf="checkRole && workflowFlag ? (workflowFlag.isNotSubmitted && !workflowFlag.isCheckedOut
+                 && loggedInUserId === workflowFlag.checkedInOutBy && checkRole.isEditor && dashboardId === 1) && hasAccountLevelAccess || 
+                 (workflowFlag.isNotSubmitted && workflowFlag.isCheckedOut && checkRole.isEditor && dashboardId === 1) && hasAccountLevelAccess ||
+                 (workflowFlag.isNotSubmitted && !workflowFlag.isCheckedOut && loggedInUserId === workflowFlag.checkedInOutBy
+                 && checkRole.isEditor && pipSheetId > 0 && dashboardId === 1) && hasAccountLevelAccess : null" pButton
+                    type="button" class="submit-btn ui-button-rounded ui-button-info m-l-30" label="SUBMIT"
+                    (click)="confirmSubmit()">
+                </button>
+            </div>
+            <button *ngIf="checkRole && workflowFlag ? (workflowFlag.isApprovalPending && workflowFlag.isApproversApprovalPending
+                 && checkRole.isFinanaceApprover && dashboardId === 2 ) : null" pButton type="button"
+                class="ui-button-rounded ui-button-success m-t-30" label="APPROVE" (click)="confirmApprove()"
+                style="height: 28px;">
+            </button>
+            <button *ngIf="checkRole && workflowFlag ? (workflowFlag.isApprovalPending && workflowFlag.isApproversApprovalPending
+                && (checkRole.isFinanaceApprover || checkRole.isReviewer) && dashboardId === 2 ) : null" pButton
+                type="button" class="ui-button-rounded ui-button-danger" label="RESEND" (click)="confirmResend()"
+                style="height: 28px;">
+            </button>
+            <button *ngIf="checkRole && workflowFlag ? (workflowFlag.isApproved && workflowFlag.isApproverApproved
+                && checkRole.isFinanaceApprover && dashboardId === 2) : null" pButton type="button"
+                class="ui-button-rounded ui-button-warning m-t-30" label="SEND FOR REVISION" (click)="confirmRevise()">
+            </button>
+            <button *ngIf="!isDummy" pButton type="button" label="Copy Link" ngxClipboard [cbContent]="pipURL"
+                class="copy-btn ui-button-rounded ui-button-info" (click)="onCopyButtonClick()">
+            </button>
+        </div>
+    </div>
+
+
+
+    <div>
+
+        <p-confirmDialog *ngIf="!approveClick && !resendClick && !reviseClick" #cd class="p-b-20" id="project-summary"
+            header="Do you really want to Submit this sheet?">
+            <p-footer *ngIf="!submitted">
+                <textarea pInputTextarea [(ngModel)]="comments" maxlength="256" (keyup)="validateComments($event)"
+                    style="width: 100%; height: 150px;margin-bottom: 30px;" placeholder="Comment here..."
+                    required></textarea>
+                <br>
+                <p-checkbox label="Check In" [(ngModel)]="isCheckedIn" binary="true"></p-checkbox>
+                <span>
+                    <i class="p-sm-1 info-icon"
+                        pTooltip="{{'MESSAGES.Tooltip.CheckInTooltipMessage.message' | translate }}"
+                        tooltipPosition="top" tooltipZIndex="100000000"><img
+                            src="/assets/icons/ic_info_outline_48px.svg"></i>
+                </span><br><br>
+                <button pButton type="button" label="CANCEL" class="ui-button-secondary" (click)="cd.reject()"></button>
+                <button pButton type="button" [disabled]="!isCheckedIn" label="YES,SUBMIT" class="ui-button-info"
+                    (click)="cd.accept();submitConfirm()" [disabled]="!isValid"></button>
+            </p-footer>
+            <p-footer *ngIf="submitted">
+                <button pTooltip="Copy Link" tooltipPosition="bottom" ngxClipboard [cbContent]=href><i><img
+                            src="/assets/icons/link.svg"> </i>
+                </button> <span class="summary-link ">{{href}}</span>
+                <br><br>
+                <span> You can also go to the notifications and the link again later. Please take note that the
+                    notifications expire after 60 days!</span>
+                <br><br> <br><button pButton type="button" label="OKAY" class="ui-button-secondary"
+                    (click)="cd.accept()"></button>
+            </p-footer>
+        </p-confirmDialog>
+        <p-confirmDialog *ngIf="!submitClick && !resendClick && !reviseClick" #cda class="p-b-20" id="project-summary"
+            header="Do you really want to Approve this sheet?">
+            <p-footer *ngIf="!alreadyApproved">
+                <textarea pInputTextarea [(ngModel)]="approverComments" maxlength="256"
+                    (keyup)="validateComments($event)" style="width: 100%; height: 150px;margin-bottom: 30px;"
+                    placeholder="Comment here..." required></textarea>
+                <br>
+                <button pButton type="button" label="NO, CANCEL" class="ui-button-secondary"
+                    (click)="cda.reject()"></button>
+                <button pButton type="button" label="YES, APPROVE" class="ui-button-success" (click)="cda.accept();"
+                    [disabled]="!isValid"></button>
+            </p-footer>
+        </p-confirmDialog>
+        <p-dialog header="{{ repeatedActionMessage }}" [(visible)]="alreadyApproved" [style]="{width: '24vw'}"
+            modal="true" [closable]="false" style="text-align: center;">
+            <div style="padding: 1.5em;">
+                <button pButton type="button" label="{{'ButtonLables.ok' | translate}}" class="ui-button-secondary"
+                    (click)="onButtonClickUpdateWfStatus()"></button>
+            </div>
+        </p-dialog>
+        <p-confirmDialog *ngIf="!submitClick && !approveClick && !reviseClick" #cdr class="p-b-20" id="project-summary"
+            header="Do you really want to Resend this sheet?">
+            <p-footer *ngIf="!alreadyResend">
+                <textarea pInputTextarea [(ngModel)]="resendComments" maxlength="256" (keyup)="validateComments($event)"
+                    style="width: 100%; height: 150px;margin-bottom: 30px;" placeholder="Comment here..."
+                    required></textarea>
+                <br>
+                <button pButton type="button" label="NO, CANCEL" class="ui-button-secondary"
+                    (click)="cdr.reject()"></button>
+                <button pButton type="button" label="YES, RESEND" class="ui-button-danger" (click)="cdr.accept()"
+                    [disabled]="!isValid"></button>
+            </p-footer>
+        </p-confirmDialog>
+        <p-dialog header="{{ repeatedActionMessage }}" [(visible)]="alreadyResend" [style]="{width: '24vw'}"
+            modal="true" [closable]="false" style="text-align: center;">
+            <div style="padding: 1.5em;">
+                <button pButton type="button" label="{{'ButtonLables.ok' | translate}}" class="ui-button-secondary"
+                    (click)="onButtonClickUpdateWfStatus()"></button>
+            </div>
+        </p-dialog>
+        <p-confirmDialog *ngIf="!submitClick && !approveClick && !resendClick" #cdrs class="p-b-20" id="project-summary"
+            header="Do you really want to Revise this sheet?">
+            <p-footer *ngIf="!alreadyRevise">
+                <textarea pInputTextarea [(ngModel)]="resendComments" maxlength="256" (keyup)="validateComments($event)"
+                    style="width: 100%; height: 150px;margin-bottom: 30px;" placeholder="Comment here..."
+                    required></textarea>
+                <br>
+                <button pButton type="button" label="NO, CANCEL" class="ui-button-secondary"
+                    (click)="cdrs.reject()"></button>
+                <button pButton type="button" label="YES, REVISE" class="ui-button-warning" (click)="cdrs.accept()"
+                    [disabled]="!isValid"></button>
+            </p-footer>
+        </p-confirmDialog>
+        <p-dialog header="{{ repeatedActionMessage }}" [(visible)]="alreadyRevise" [style]="{width: '24vw'}"
+            modal="true" [closable]="false" style="text-align: center;">
+            <div style="padding: 1.5em;">
+                <button pButton type="button" label="{{'ButtonLables.ok' | translate}}" class="ui-button-secondary"
+                    (click)="onButtonClickUpdateWfStatus()"></button>
+            </div>
+        </p-dialog>
+    </div>
+</p-panel>

@@ -1,0 +1,62 @@
+#reports {
+    .title {
+        font-weight: bold;
+        font-size: 30px;
+        margin-left: 45%;
+    }
+    .navmenu {
+        background-color: #3599a8 !important;
+        height: 60vh;
+    }
+    .content {
+        border: 1px solid #c8c8c8;
+        margin: 3em 11em;
+        border-radius: 4px;
+        box-shadow: 0px 8px 20px #0000001f;
+    }
+    .nav-link {
+        color: white;
+        cursor: pointer;
+    }
+    .header {
+        margin-top: 3%;
+    }
+    .ui-radiobutton-label {
+        margin-right: 20px;
+    }
+    .col-md-3 {
+        padding-top: 7px;
+    }
+    .ui-radiobutton-box {
+        margin-top: -2px;
+    }
+    .custom-reports {
+        margin: 2em 0em 0em 7em;
+    }
+    .navmenu {
+        & ul {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+    }
+    .ui-multiselect-label {
+        width: 180px !important;
+        max-height: 40px;
+        overflow-y: scroll;
+    }
+    .ui-dropdown-label {
+        width: calc(100% - 20px);
+    }
+    .ui-multiselect-items-wrapper {
+        padding: 0.2em 20px !important;
+    }
+    .ui-multiselect-items {
+        max-width: 300px !important;
+    }
+    .ui-dropdown {
+        width: 180px;
+    }
+    .ui-multiselect {
+        min-height: 28px !important;
+    }
+}

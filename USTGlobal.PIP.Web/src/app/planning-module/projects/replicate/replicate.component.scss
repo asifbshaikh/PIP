@@ -1,0 +1,33 @@
+#replicate {
+    .header {
+        font-size: 16px;
+        color: #00a9ee;
+        font-weight: 700;
+    }
+    .inactive {
+        padding: 7px;
+        background-color: #e9ecef;
+        width: 40%;
+        border-radius: 4px;
+        height: 32px;
+    }
+    .active {
+        width: 28%;
+        text-align: right;
+        margin-right: 10px;
+    }
+    .p-id {
+        width: 71%;
+    }
+    .ui-inputtext {
+        width: 170px !important;
+    }
+    .dummy-project-id {
+        width: 170px;
+        height: 30px;
+        float: left;
+        border-radius: 3px;
+        padding: 5px;
+        background-color: #e9ecef;
+    }
+}

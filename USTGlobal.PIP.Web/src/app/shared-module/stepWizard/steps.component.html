@@ -1,0 +1,42 @@
+<div id="steper" class="p-grid">
+    <div #arrowL id="arrowL" (click)="scrollToLeft()" class="p-t-20">
+        <i *ngIf="items.length > 7" class="pi pi-chevron-left" style="font-size: 2em"></i>
+    </div>
+
+    <div id="list-container" #stepsContainer>
+        <div class='list'>
+            <div class='item'>
+                <p-steps [model]="items" [(activeIndex)]="activeIndex" [readonly]="false"
+                    (click)="setElementTab($event)">
+                </p-steps>
+            </div>
+        </div>
+    </div>
+    <div #arrowR id="arrowR" (click)="scrollToRight()" class="p-t-20 pull-right">
+        <i *ngIf="items.length > 7" class="pi pi-chevron-right" style="font-size: 2em"></i>
+    </div>
+
+</div>
+<hr class="m-b-5 mt-2">
+<ng-content></ng-content>
+
+<p-dialog [(visible)]="displayModal" header="Exit" [modal]="true" id="logout-dialog">
+    <!-- <p-header>
+        <h4 class="modal-title">Exit</h4>
+    </p-header> -->
+    <p>There are unsaved changes, are you sure you still want to exit ?</p>
+    <p-footer>
+        <button type="button" class="btn btn-default leftBtn" (click)="displayModal=false">No</button>
+        <button type="button" class="btn btn-primary" (click)="onExitClick()">Yes</button>
+    </p-footer>
+</p-dialog>
+<div class="steps-btn">
+    <button pButton type="button" [ngClass]="{'hide' : (items[0].label === 'Revised Summary')}"
+        (click)="previous($event)" class="ui-button-rounded ui-button-info" label="Previous">
+    </button>
+    <button pButton type="button" [ngClass]="{'hide' : (items[0].label === 'Revised Summary')}" (click)="next($event)"
+        class="ui-button-rounded ui-button-info" label="Next"></button>
+    <button pButton type="button" label="Exit" class="exit-btn ui-button-rounded ui-button-danger"
+        (click)="checkConfirmation()">
+    </button>
+</div>

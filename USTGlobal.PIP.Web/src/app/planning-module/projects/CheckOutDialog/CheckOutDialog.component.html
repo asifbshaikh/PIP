@@ -1,0 +1,14 @@
+<div id="display-checkOut">
+  <p>
+    PIP version is checked out by '{{ this.dialogData.checkedInOutByName }}'. Your
+    access limited to Read Only.
+  </p>
+  <br />
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="navigateToReadOnlyProject()"
+  >
+    {{ "PROJECTS.DisplayCheckOut.button" | translate }}
+  </button>
+</div>

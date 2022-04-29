@@ -1,0 +1,39 @@
+#pip-check-in {
+  .title {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .ui-card {
+    height: calc(100vh - 80px);
+    margin: 1em;
+  }
+  .ui-table .ui-table-thead > tr > th {
+    border: 1px solid #c8c8c8;
+    font-weight: 700;
+    color: #ffffff;
+    height: 32px;
+    font-size: 13px;
+    background-color: #3599a8;
+  }
+  .ui-table-caption {
+    font-size: 17px;
+    color: $theme;
+    padding: 0.571em 0em !important;
+  }
+  .vl {
+    border-right: 1px solid #dee2e6!important;
+    height: 500px;
+  }
+  .ui-inputtext {
+    width: 80%;
+  }
+  .ui-dropdown {
+    width: 100%;
+  }
+  .check-in-btn {
+    position: absolute;
+    margin-top: 2%;
+    bottom: 70px;
+    margin-left: 34%;
+  }
+}

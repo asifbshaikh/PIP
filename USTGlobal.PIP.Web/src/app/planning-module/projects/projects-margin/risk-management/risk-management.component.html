@@ -1,0 +1,135 @@
+<div *ngIf="isDataAvailable">
+  <div class="pb-2 text-right error">
+    <span>
+      {{ message }}
+    </span>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSave(form.getRawValue())" id="risk-management">
+    <table class="table" border-color="fff" cellpadding="5" cellspacing="0" border-collapse="0">
+      <tr class="table-header">
+        <td class="horizontalsection sticky-header-section"></td>
+        <th class="p-b-zero" colspan="4" style="border: none;">
+          <span id="periodNote" class="pull-right">{{'AutoPopulatePeriodsMsg' | translate}}</span>
+        </th>
+        <th *ngFor="let col of periodCols; let i = index" class="tableHead">
+          <span [ngClass]="{'pre-format': col.field == 'periods'}">{{col.header}}</span>
+        </th>
+      </tr>
+      <tr>
+        <td class="horizontalsection">{{'RiskManagement.directCost' | translate}}</td>
+        <td class="wdth460">{{'RiskManagement.overhead' | translate}}
+          {{form.value.calculatedValue.stdOverheadAmount | number:'1.2-2' | negativeValue }}
+        </td>
+        <td style="min-width: 200px;"><span>{{'RiskManagement.ustExpenses' | translate}}</span>
+          <span class="positionIcon">
+            {{form.value.calculatedValue.totalDirectExpense | number:'1.2-2' | negativeValue }}
+            <i pTooltip="{{'RiskManagement.USTExpenseTooltip' | translate}}" class="info-icon"><img
+                src="/assets/icons/ic_info_outline_48px.svg"></i></span>
+        </td>
+        <td style="min-width: 300px;" class="wdth360"><span
+            class="totalValTitle">{{'RiskManagement.costSubTotal' | translate}}</span>
+          <span
+            class="totalVal positionIcon">{{form.value.riskManagement.riskCostSubTotal | number:'1.2-2' | negativeValue }}
+            <i pTooltip="{{'RiskManagement.TotalSubCostTooltip' | translate}}" class="info-icon"><img
+                src="/assets/icons/ic_info_outline_48px.svg"></i></span>
+        </td>
+        <td></td>
+        <td style="min-width: 110px" *ngFor="let pCols of periodCols; let i = index"> </td>
+      </tr>
+      <tr>
+        <td class="horizontalsection" rowspan="2">{{'RiskManagement.costContingency' | translate}}<span>
+            {{'RiskManagement.executionRisk' | translate}}</span></td>
+        <td>{{'RiskManagement.automaticForFixedBid' | translate}}
+          {{form.value.riskManagement.fixedBidPercent | number:'1.2-2' | negativeValue }}%
+        </td>
+        <td>
+          {{form.value.riskManagement.fixBidRiskAmount | number:'1.2-2' | negativeValue }}
+        </td>
+        <td>
+          <span class="totalValTitle">{{'RiskManagement.totalAssessedPercent' | translate}}</span>
+          <span
+            class="totalVal">{{form.value.riskManagement.totalAssessedPercent | number:'1.2-2' | negativeValue }}%</span>
+        </td>
+        <td formGroupName="riskManagement">
+          <span>{{'RiskManagement.override' | translate}}</span> <span>
+            <p-inputSwitch class="info-icon" (onChange)="isOverrideChanged()" formControlName="isOverride">
+            </p-inputSwitch>
+
+          </span>
+        </td>
+        <td *ngFor="let pCols of periodCols; let i = index" class="content_center"> </td>
+      </tr>
+      <tr formGroupName="riskManagement">
+        <td style="min-width: 420px;">
+          <span class="positionIcon">
+            {{'RiskManagement.amount' | translate}}
+            <input *ngIf="!form.value.riskManagement.costContingencyPercent" id="amount" #amount pInputText type="text"
+              formControlName="costContingencyRisk" (keyup)="onAmountChange(amount.value)"
+              pipRestrictInput="decimalPrecisionTwo">
+
+            <input *ngIf="form.value.riskManagement.costContingencyPercent" disabled id="amount" #amount pInputText
+              type="text">
+          </span>
+          <span></span>
+          <span class="orCOlor p-l-5 p-r-5">or</span>
+          <span>
+            {{'RiskManagement.percent' | translate}}
+            <input #percent pInputText type="text" formControlName="costContingencyPercent"
+              (keyup)="onPercentChange(percent.value)" pipRestrictInput="decimalPrecisionTwo">
+          </span>
+        </td>
+        <td>
+          {{costContingencyRiskAmount | number:'1.2-2' | negativeValue }}
+
+        </td>
+        <td>
+          <span class="totalValTitle">{{'RiskManagement.totalAssessedRiskOverrun' | translate}}</span>
+          <span
+            class="totalVal">{{form.value.riskManagement.totalAssesedRiskOverrun | number:'1.2-2' | negativeValue }}</span>
+        </td>
+        <td></td>
+        <td *ngFor="let pCols of periodCols; let i = index" class="content_center">
+          <div formArrayName="riskManagementPeriodDetail">
+            <div [formGroupName]="i">
+              <input #periodInput id="{{i}}" pInputText type="text" (keyup)="onOverrideValidate()"
+                (click)="onCellClick(false, $event,rowData,rowIndex)"
+                (focusout)="onCellClick(false,$event, rowData, rowIndex)" formControlName="riskAmount"
+                pipRestrictInput="decimalPrecisionTwo">
+              <p-contextMenu [target]="periodInput" appendTo="body" [model]="contextMenuItems"></p-contextMenu>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr formGroupName="riskManagement" class="bottom-row">
+        <td class="horizontalsection">{{'RiskManagement.feesAtRisk' | translate}}</td>
+        <td>{{'RiskManagement.percent' | translate}}
+          <input class="m-r-10" #feesAtRisk pInputText type="text" formControlName="feesAtRisk"
+            pipRestrictInput="decimalPrecisionTwo" [pTooltip]='pShowToolTip'
+            (keyup)="onFeesAtRiskPercentChange(feesAtRisk.value)">
+        </td>
+        <td></td>
+        <td>{{feesAtRiski159 | number: '1.2-2' | negativeValue }}</td>
+        <td></td>
+        <td *ngFor="let pCols of periodCols; let i = index" class="content_center"> </td>
+      </tr>
+      <tr *ngIf="form.value.riskManagement.isOverride">
+        <td style="background: #eeeeee;" colspan="5">
+          <div class="row p-offset-5">
+            <span>
+              {{ 'RiskManagement.overrideDifferenceLabel' | translate }} :
+              {{ overrideDifference | number:'1.2-2'  | negativeValue }}
+            </span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div class="p-grid">
+      <hr class="bottom-line">
+      <div class="p-sm-12 btns-strip">
+        <button pButton [disabled]="!form.valid || !isValid" class="ui-button-rounded ui-button-success" type="submit"
+          label="Save">
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
